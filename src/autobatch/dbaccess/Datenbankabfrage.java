@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class Datenbankabfrage {
 
-    public void holeStudenten() {
+    public void getStudent() {
         Connection con = null;
 
         String url = "jdbc:mysql://3.69.96.96:3306/";
@@ -24,10 +24,10 @@ public class Datenbankabfrage {
             Statement stmt = con.createStatement();
             ResultSet rs;
 
-            rs = stmt.executeQuery("SELECT Matrikelnummer, Nachname, Vorname, Passwort From studenten");
+            rs = stmt.executeQuery("SELECT MNR, Nachname, Vorname, Passwort From studenten");
 
             while (rs.next()) {
-                int mnr = rs.getInt("Matrikelnummer");
+                int mnr = rs.getInt("MNR");
                 String nachname = rs.getString("Nachname");
                 String vorname = rs.getString("Vorname");
                 String password = rs.getString("Passwort");

@@ -1,49 +1,52 @@
 package autobatch.gui;
 
-import java.awt.EventQueue;
-
+import java.awt.CardLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import autobatch.dbaccess.Datenbankabfrage;
 
 public class Main {
 
-	private JFrame frame;
+    private JFrame frame;
+    private LoginPanel loginFrame;
+    private StudentenPanel studentenFrame;
+    private JPanel cards;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Main window = new Main();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    public static void main(String[] args) {
+        Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
+        datenbankabfrage.getStudent();
 
-	/**
-	 * Create the application.
-	 */
-	public Main() {
-		initialize();
-	}
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Main main = new Main();
+                    main.frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
-        datenbankabfrage.holeStudenten();
-        
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+    public Main() {
+        frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        cards = new JPanel(new CardLayout());
+        loginFrame = new LoginPanel(this);
+        studentenFrame = new StudentenPanel();
+
+        cards.add(loginFrame, "Login");
+        cards.add(studentenFrame, "Studenten");
+
+        frame.setContentPane(cards);
+        frame.pack();
+    }
+
+    public void switchToStudentPanel() {
+        CardLayout cl = (CardLayout) cards.getLayout();
+        cl.show(cards, "Studenten");
+    }
 }
