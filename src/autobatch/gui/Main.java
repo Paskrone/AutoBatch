@@ -1,8 +1,11 @@
-package package1;
+package autobatch.gui;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+import autobatch.dbaccess.Datenbankabfrage;
 
 public class Main {
 
@@ -37,6 +40,7 @@ public class Main {
 	private void initialize() {
 		Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
         datenbankabfrage.holeStudenten();
+        
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
