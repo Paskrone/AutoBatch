@@ -30,11 +30,12 @@ public class LoginActionListener implements ActionListener {
         String password = new String(passwordChars);
 
         Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
-        boolean checkData = datenbankabfrage.searchStudentsByUsernameAndPassword(username, password);
+        boolean checkData = datenbankabfrage.searchAllTablesByUsernameAndPassword(username, password);
         if (checkData) {
             main.switchToStudentPanel();
         } else {
             lbl_error.setVisible(true);
         }
     }
+
 }

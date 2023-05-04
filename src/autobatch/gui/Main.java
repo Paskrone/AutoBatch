@@ -10,8 +10,8 @@ import autobatch.dbaccess.Datenbankabfrage;
 public class Main {
 
     private JFrame frame;
-    private LoginPanel loginFrame;
-    private StudentenPanel studentenFrame;
+    private LoginPanel loginPanel;
+    private StudentenPanel studentenPanel;
     private JPanel cards;
 
     public static void main(String[] args) {
@@ -35,11 +35,11 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         cards = new JPanel(new CardLayout());
-        loginFrame = new LoginPanel(this);
-        studentenFrame = new StudentenPanel();
+        loginPanel = new LoginPanel(this);
+        studentenPanel = new StudentenPanel(this);
 
-        cards.add(loginFrame, "Login");
-        cards.add(studentenFrame, "Studenten");
+        cards.add(loginPanel, "Login");
+        cards.add(studentenPanel, "Studenten");
 
         frame.setContentPane(cards);
         frame.pack();
