@@ -5,18 +5,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import autobatch.dbaccess.Datenbankabfrage;
-
 public class Main {
-
+	
     private JFrame frame;
     private LoginPanel loginPanel;
     private StudentenPanel studentenPanel;
     private JPanel cards;
 
     public static void main(String[] args) {
-        Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
-        datenbankabfrage.getStudent();
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
