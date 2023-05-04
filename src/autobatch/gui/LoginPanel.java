@@ -12,7 +12,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import autobatch.businesslogic.LoginActionListener;
+import autobatch.businesslogic.RegistrationActionListener;
 import autobatch.dbaccess.Datenbankabfrage;
+import autobatch.navigation.PanelSwitcher;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -21,12 +24,12 @@ import javax.swing.JPasswordField;
 
 public class LoginPanel extends JPanel {
 
-	private Main main;
+	private PanelSwitcher panelSwitcher;
 	private JTextField tf_username;
 	private JPasswordField tf_password;
 
-	public LoginPanel(Main main) {
-		this.main = main;	
+	public LoginPanel(PanelSwitcher panelSwitcher) {
+		this.panelSwitcher = panelSwitcher;	
 		
 		setPreferredSize(new Dimension(1000, 500));
 		
@@ -59,14 +62,16 @@ public class LoginPanel extends JPanel {
 		btn_Login.setBackground(new Color(85, 133, 212));
 		
 		//Login Daten werden hier überprüft
-		btn_Login.addActionListener(new LoginActionListener(main, tf_username, tf_password, lbl_error));
+		btn_Login.addActionListener(new LoginActionListener(panelSwitcher, tf_username, tf_password, lbl_error));
 		
 		JLabel lblNewLabel_1 = new JLabel("Du hast noch keinen Account?");
 		
-		JButton btn_register = new JButton("Registrieren");
-		btn_register.setBackground(new Color(85, 133, 212));
-		btn_register.setForeground(new Color(0, 0, 0));
+		JButton btn_registration = new JButton("Registrieren");
+		btn_registration.setBackground(new Color(85, 133, 212));
+		btn_registration.setForeground(new Color(0, 0, 0));
 		
+		//Nutzer wird auf die Registrierungsseite weitergeleitet
+		btn_registration.addActionListener(new RegistrationActionListener(panelSwitcher));
 		
 		GroupLayout gl_contentPane = new GroupLayout(this);
 		gl_contentPane.setHorizontalGroup(
@@ -87,7 +92,7 @@ public class LoginPanel extends JPanel {
 												.addComponent(lblPasswort, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
 											.addComponent(btn_Login, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
 											.addComponent(tf_password))
-										.addComponent(btn_register, Alignment.LEADING))
+										.addComponent(btn_registration, Alignment.LEADING))
 									.addGap(375))))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(130)
@@ -117,7 +122,7 @@ public class LoginPanel extends JPanel {
 					.addGap(36)
 					.addComponent(lblNewLabel_1)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btn_register)
+					.addComponent(btn_registration)
 					.addContainerGap(196, Short.MAX_VALUE))
 		);
 		this.setLayout(gl_contentPane);

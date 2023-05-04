@@ -44,7 +44,7 @@ public class Datenbankabfrage {
                 String password = rs.getString("Passwort");
                 String username = rs.getString("Benutzername");
                 String email = rs.getString("email");
-                String phonenumber = rs.getString("Telefonnumer");
+                String phonenumber = rs.getString("Telefonnummer");
                 String studiengang = rs.getString("Studiengang");
                 String studiendekan = rs.getString("studiendekan");
                 String betreuer = rs.getString("betreuer");
@@ -60,6 +60,75 @@ public class Datenbankabfrage {
         }
 
         return students;
+    }
+    
+    public List<Studiendekan> getStudiendekane() {
+        List<Studiendekan> studiendekans = new ArrayList<>();
+        Connection con = null;
+
+        try {
+            Class.forName(driver);
+            con = DriverManager.getConnection(url + dbName, userName, pw);
+            System.out.println("Connected to database");
+
+            Statement stmt = con.createStatement();
+            ResultSet rs;
+
+            rs = stmt.executeQuery("SELECT email, Nachname, Vorname, Benutzername, Passwort, Studiengang FROM studiendekan");
+
+            while (rs.next()) {
+                String email = rs.getString("email");
+                String nachname = rs.getString("Nachname");
+                String vorname = rs.getString("Vorname");
+                String username = rs.getString("Benutzername");
+                String password = rs.getString("Passwort");
+                String studiengang = rs.getString("Studiengang");
+                Studiendekan studiendekan = new Studiendekan(email, nachname, vorname, username, password, studiengang);
+                studiendekans.add(studiendekan);
+            }
+
+            con.close();
+            System.out.println("Disconnected from database");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return studiendekans;
+    }
+
+    public List<Betreuer> getBetreuer() {
+        List<Betreuer> betreuer = new ArrayList<>();
+        Connection con = null;
+
+        try {
+            Class.forName(driver);
+            con = DriverManager.getConnection(url + dbName, userName, pw);
+            System.out.println("Connected to database");
+
+            Statement stmt = con.createStatement();
+            ResultSet rs;
+
+            rs = stmt.executeQuery("SELECT email, Nachname, Vorname, Benutzername, Passwort FROM betreuer");
+
+            while (rs.next()) {
+                String email = rs.getString("email");
+                String nachname = rs.getString("Nachname");
+                String vorname = rs.getString("Vorname");
+                String username = rs.getString("Benutzername");
+                String password = rs.getString("Passwort");
+                Betreuer betreuerobj = new Betreuer(email, nachname, vorname, username, password);
+                betreuer.add(betreuerobj);
+            }
+
+            con.close();
+            System.out.println("Disconnected from database");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return betreuer;
     }
 
     

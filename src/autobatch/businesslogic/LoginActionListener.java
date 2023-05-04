@@ -9,15 +9,16 @@ import javax.swing.JTextField;
 
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.gui.Main;
+import autobatch.navigation.PanelSwitcher;
 
 public class LoginActionListener implements ActionListener {
-    private Main main;
     private JTextField tf_username;
     private JPasswordField tf_password;
     private JLabel lbl_error;
+    private PanelSwitcher panelSwitcher;
 
-    public LoginActionListener(Main main, JTextField tf_username, JPasswordField tf_password, JLabel lbl_error) {
-        this.main = main;
+    public LoginActionListener(PanelSwitcher panelSwitcher, JTextField tf_username, JPasswordField tf_password, JLabel lbl_error) {
+        this.panelSwitcher = panelSwitcher;
         this.tf_username = tf_username;
         this.tf_password = tf_password;
         this.lbl_error = lbl_error;
@@ -32,7 +33,7 @@ public class LoginActionListener implements ActionListener {
         Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
         boolean checkData = datenbankabfrage.searchAllTablesByUsernameAndPassword(username, password);
         if (checkData) {
-            main.switchToStudentPanel();
+            panelSwitcher.switchToPanel("Studenten");
         } else {
             lbl_error.setVisible(true);
         }

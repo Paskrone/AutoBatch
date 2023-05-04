@@ -5,12 +5,14 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import autobatch.navigation.PanelSwitcher;
+
 public class StudentenPanel extends JPanel {
 
-	Main main;
+	private PanelSwitcher panelSwitcher;
 	
-    public StudentenPanel(Main main) {
-    	this.main = main;
+    public StudentenPanel(PanelSwitcher panelSwitcher) {
+    	this.panelSwitcher = panelSwitcher;
     	setPreferredSize(new Dimension(1000, 500));
         setBorder(new EmptyBorder(5, 5, 5, 5));
     }

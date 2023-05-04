@@ -5,12 +5,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import autobatch.navigation.PanelManager;
+import autobatch.navigation.PanelSwitcher;
+
 public class Main {
 	
     private JFrame frame;
-    private LoginPanel loginPanel;
-    private StudentenPanel studentenPanel;
     private JPanel cards;
+    private PanelSwitcher panelSwitcher;
+    private PanelManager panelManager;
 
     public static void main(String[] args) {
 
@@ -29,20 +32,13 @@ public class Main {
     public Main() {
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
         cards = new JPanel(new CardLayout());
-        loginPanel = new LoginPanel(this);
-        studentenPanel = new StudentenPanel(this);
-
-        cards.add(loginPanel, "Login");
-        cards.add(studentenPanel, "Studenten");
+        panelSwitcher = new PanelSwitcher(cards);
+        panelManager = new PanelManager(panelSwitcher, cards);
 
         frame.setContentPane(cards);
         frame.pack();
     }
 
-    public void switchToStudentPanel() {
-        CardLayout cl = (CardLayout) cards.getLayout();
-        cl.show(cards, "Studenten");
-    }
 }
