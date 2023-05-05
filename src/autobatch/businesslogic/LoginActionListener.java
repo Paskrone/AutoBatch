@@ -8,7 +8,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import autobatch.dbaccess.Datenbankabfrage;
-import autobatch.gui.Main;
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 
 public class LoginActionListener implements ActionListener {
@@ -16,13 +16,15 @@ public class LoginActionListener implements ActionListener {
 	private JPasswordField tf_password;
 	private JLabel lbl_error;
 	private PanelSwitcher panelSwitcher;
+	private PanelManager panelManager;
 
-	public LoginActionListener(PanelSwitcher panelSwitcher, JTextField tf_username, JPasswordField tf_password,
+	public LoginActionListener(PanelSwitcher panelSwitcher, PanelManager panelManager, JTextField tf_username, JPasswordField tf_password,
 			JLabel lbl_error) {
 		this.panelSwitcher = panelSwitcher;
 		this.tf_username = tf_username;
 		this.tf_password = tf_password;
 		this.lbl_error = lbl_error;
+		this.panelManager = panelManager;
 	}
 
 	@Override
@@ -43,6 +45,7 @@ public class LoginActionListener implements ActionListener {
 			tf_password.setText("");
 			tf_username.setText("");
 
+			panelManager.initializeStudentPanels();
 			panelSwitcher.switchToPanel("Studenten");
 		} else {
 			lbl_error.setVisible(true);
