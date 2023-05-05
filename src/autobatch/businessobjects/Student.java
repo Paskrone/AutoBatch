@@ -28,6 +28,56 @@ public class Student {
 		this.studiendekan = studiendekan;
 		this.betreuer = betreuer;
 	}
+
+
+	public int getMnr() {
+		return mnr;
+	}
+
+
+	public String getVorname() {
+		return vorname;
+	}
+
+
+	public String getNachname() {
+		return nachname;
+	}
+
+
+	public String getPasswort() {
+		return passwort;
+	}
+
+
+	public String getBenutzername() {
+		return benutzername;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public String getTelefonnummer() {
+		return telefonnummer;
+	}
+
+
+	public String getStudiengang() {
+		return studiengang;
+	}
+
+
+	public String getStudiendekan() {
+		return studiendekan;
+	}
+
+
+	public String getBetreuer() {
+		return betreuer;
+	}
 	
 	
 	

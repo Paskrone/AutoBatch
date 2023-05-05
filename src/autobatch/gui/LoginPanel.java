@@ -8,12 +8,10 @@ import java.awt.Dimension;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
 
 import autobatch.businesslogic.LoginActionListener;
 import autobatch.businesslogic.RegistrationActionListener;
-import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelSwitcher;
 
 import javax.swing.GroupLayout;

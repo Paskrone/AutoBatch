@@ -2,7 +2,9 @@ package autobatch.dbaccess;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -174,6 +176,51 @@ public class Datenbankabfrage {
             conn.close();
             return false;
         } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    // Sucht in der DB nach einen username und gibt true zurück, falls einer existiert
+    public boolean isUsernameTaken(String username) {
+        String query = "SELECT 1 FROM (SELECT Benutzername FROM studenten UNION SELECT Benutzername FROM betreuer UNION SELECT Benutzername FROM studiendekan) AS all_users WHERE Benutzername = ?";
+        try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, username);
+            ResultSet resultSet = stmt.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    //Student in der Datenbank anlegen
+    public boolean registerStudent(Student student) {
+        if (isUsernameTaken(student.getBenutzername())) {
+            return false;
+        }
+
+        String query = "INSERT INTO studenten (MNR, Nachname, Vorname, Passwort, Benutzername, email, Telefonnummer, Studiengang, studiendekan, betreuer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        System.out.println(query);
+        try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+        	stmt.setLong(1, student.getMnr());
+            stmt.setString(2, student.getNachname());
+            stmt.setString(3, student.getVorname());
+            stmt.setString(4, student.getPasswort());
+            stmt.setString(5, student.getBenutzername());
+            stmt.setString(6, student.getEmail());
+            stmt.setString(7, student.getTelefonnummer());
+            stmt.setString(8, student.getStudiengang());
+            stmt.setString(9, student.getStudiendekan());
+            stmt.setString(10, student.getBetreuer());
+            
+            
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
