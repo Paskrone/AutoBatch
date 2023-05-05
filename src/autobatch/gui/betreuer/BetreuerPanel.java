@@ -1,4 +1,4 @@
-package autobatch.gui;
+package autobatch.gui.betreuer;
 
 import javax.swing.JPanel;
 

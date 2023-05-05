@@ -24,6 +24,9 @@ public class Datenbankabfrage {
     private String driver = "com.mysql.cj.jdbc.Driver";
     private String userName = "db4";
     private String pw = "!db4.hfts23?";
+    
+    
+    public static Student aktuellerStudent;
 
     public List<Student> getStudents() {
         List<Student> students = new ArrayList<>();
@@ -37,7 +40,7 @@ public class Datenbankabfrage {
             Statement stmt = con.createStatement();
             ResultSet rs;
 
-            rs = stmt.executeQuery("SELECT MNR, Nachname, Vorname, email, Telefonnumer, Studiengang, studiendekan, betreuer, Benutzername, Passwort From studenten");
+            rs = stmt.executeQuery("SELECT MNR, Nachname, Vorname, email, Telefonnummer, Studiengang, studiendekan, betreuer, Benutzername, Passwort From studenten");
 
             while (rs.next()) {
                 int mnr = rs.getInt("MNR");
@@ -63,6 +66,23 @@ public class Datenbankabfrage {
 
         return students;
     }
+    
+	public Student getStudent(String name) {
+		Student s = null;
+		List<Student> sl = this.getStudents();
+		System.out.println(sl);
+		for (Student student : sl) {
+			if (student.getBenutzername().equals(name)) {
+				s = new Student(student.getMnr(), student.getVorname(), student.getNachname(), student.getPasswort(),
+						student.getBenutzername(), student.getEmail(), student.getTelefonnummer(),
+						student.getStudiengang(), student.getStudiendekan(), student.getBetreuer());
+
+			}
+
+		}
+
+		return s;
+	}
     
     public List<Studiendekan> getStudiendekane() {
         List<Studiendekan> studiendekans = new ArrayList<>();
