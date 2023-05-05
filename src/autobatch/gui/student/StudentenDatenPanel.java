@@ -13,22 +13,16 @@ import javax.swing.border.EmptyBorder;
 import autobatch.businesslogic.AbmeldenActionListener;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelSwitcher;
+import autobatch.session.SessionManager;
+
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 public class StudentenDatenPanel extends JPanel{
 	
 	private PanelSwitcher panelSwitcher;
-	private JTextField textFieldName;
-	private JTextField txtHierEinfgen;
-	private JTextField textFieldTelefon;
 	
 	public StudentenDatenPanel(PanelSwitcher panelSwitcher) {
-		
-		
-		
-		this.panelSwitcher = panelSwitcher;
-    	setPreferredSize(new Dimension(1000, 500));
-        setBorder(new EmptyBorder(5, 5, 5, 5));
         
         this.panelSwitcher = panelSwitcher;
     	setPreferredSize(new Dimension(1000, 500));
@@ -37,7 +31,7 @@ public class StudentenDatenPanel extends JPanel{
         JLabel jLabelHead = new JLabel("AutoBatch | Student");
         
         JButton btn_abmelden = new JButton("abmelden");
-        //abmelden
+        //Abmelden
 		btn_abmelden.addActionListener(new AbmeldenActionListener(panelSwitcher));
         
         JButton btnIP = new JButton("IP");
@@ -52,44 +46,51 @@ public class StudentenDatenPanel extends JPanel{
         
         JLabel lblMatrikelnummer = new JLabel("Matrikelnummer:");
         
-        JLabel lblName = new JLabel("Name:");
+        JLabel lblVorname = new JLabel("Vorname:");
         
         JLabel lblAdresse = new JLabel("Adresse:");
         
-        JLabel lblSemester = new JLabel("Semester:");
+        JLabel lblstudiengang = new JLabel("Studiengang:");
         
         JLabel lblMail = new JLabel("Email:");
         
         JLabel lblTelefon = new JLabel("Telefon:");
         
-        textFieldName = new JTextField();
-        textFieldName.setText("hier einfügen!");
-        if (Datenbankabfrage.aktuellerStudent != null) {
-            textFieldName.setText(Datenbankabfrage.aktuellerStudent.getNachname());
-		} else {
-            textFieldName.setText("funkt nicht");
+        JLabel lbl_mnr = new JLabel("hier einfügen!");
+        
+        JLabel lbl_studiengang = new JLabel("hier einfügen!");
+        
+        JLabel lbl_email = new JLabel("hier einfügen!");
+        
+        JLabel lbl_adresse = new JLabel("hier einfügen!");
+        
+        JLabel lbl_telefonnummer = new JLabel("hier einfügen!");
+        
+        JLabel lbl_vorname = new JLabel("hier einfügen!");
 
-		}
-        
 		
-        textFieldName.setColumns(10);
+        if (SessionManager.getInstance().getAktuellerStudent() != null) {
+        	int mnr = SessionManager.getInstance().getAktuellerStudent().getMnr();
+        	String mnrString = "" + mnr;
+            lbl_vorname.setText(SessionManager.getInstance().getAktuellerStudent().getVorname() + " " + SessionManager.getInstance().getAktuellerStudent().getNachname());
+            lbl_email.setText(SessionManager.getInstance().getAktuellerStudent().getEmail());
+        } else {
+            System.out.println("error");
+        }
         
-        JLabel lblMNRInput = new JLabel("hier einfügen!");
+        JLabel lblnachname = new JLabel("Nachname:");
         
-        JLabel lblSemsterIn = new JLabel("hier einfügen!");
+        JLabel lbl_nachname = new JLabel("hier einfügen!");
         
-        txtHierEinfgen = new JTextField();
-        txtHierEinfgen.setText("hier einfügen!");
-        txtHierEinfgen.setColumns(10);
+        JLabel lblBenutzername = new JLabel("Benutzername:");
         
-        JLabel lblMailInput = new JLabel("hier einfügen!");
+        JLabel lbl_benutzername = new JLabel("hier einfügen!");
         
-        textFieldTelefon = new JTextField();
-        textFieldTelefon.setText("(optional)");
-        textFieldTelefon.setColumns(10);
-		
-		//test
-
+        JLabel lblPasswort = new JLabel("Passwort:");
+        
+        JLabel lbl_passwort = new JLabel("hier einfügen!");
+        
+        
         
         GroupLayout groupLayout = new GroupLayout(this);
         groupLayout.setHorizontalGroup(
@@ -98,7 +99,7 @@ public class StudentenDatenPanel extends JPanel{
         			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
         				.addGroup(groupLayout.createSequentialGroup()
         					.addComponent(jLabelHead)
-        					.addPreferredGap(ComponentPlacement.RELATED, 754, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED, 759, Short.MAX_VALUE)
         					.addComponent(btn_abmelden))
         				.addGroup(groupLayout.createSequentialGroup()
         					.addComponent(btnIP)
@@ -112,30 +113,33 @@ public class StudentenDatenPanel extends JPanel{
         					.addComponent(btnDaten))
         				.addGroup(groupLayout.createSequentialGroup()
         					.addContainerGap()
-        					.addComponent(lblName))
-        				.addGroup(groupLayout.createSequentialGroup()
-        					.addContainerGap()
-        					.addComponent(lblSemester))
-        				.addGroup(groupLayout.createSequentialGroup()
-        					.addContainerGap()
-        					.addComponent(lblAdresse))
-        				.addGroup(groupLayout.createSequentialGroup()
-        					.addContainerGap()
         					.addComponent(lblMail))
-        				.addGroup(groupLayout.createSequentialGroup()
+        				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
         					.addContainerGap()
         					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(lblMatrikelnummer)
-        						.addComponent(lblTelefon))
-        					.addGap(18)
+        						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+        								.addGroup(Alignment.LEADING, groupLayout.createParallelGroup(Alignment.LEADING)
+        									.addComponent(lblTelefon)
+        									.addComponent(lblAdresse)
+        									.addComponent(lblVorname)
+        									.addComponent(lblMatrikelnummer)
+        									.addComponent(lblnachname, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
+        								.addComponent(lblstudiengang, Alignment.LEADING))
+        							.addComponent(lblBenutzername, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE))
+        						.addComponent(lblPasswort, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE))
+        					.addGap(23)
         					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(textFieldTelefon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblMNRInput)
-        						.addComponent(lblSemsterIn)
-        						.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(txtHierEinfgen, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblMailInput))
-        					.addGap(723)))
+        						.addComponent(lbl_benutzername, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lbl_mnr)
+        						.addComponent(lbl_nachname, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lbl_vorname, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lbl_adresse, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lbl_studiengang)
+        						.addComponent(lbl_email)
+        						.addComponent(lbl_telefonnummer, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lbl_passwort, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE))
+        					.addGap(766)))
         			.addContainerGap())
         );
         groupLayout.setVerticalGroup(
@@ -153,29 +157,41 @@ public class StudentenDatenPanel extends JPanel{
         				.addComponent(btnDaten))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(lblName)
-        				.addComponent(textFieldName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(lblVorname)
+        				.addComponent(lbl_vorname))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(lblMNRInput)
-        				.addComponent(lblMatrikelnummer))
+        				.addComponent(lblnachname)
+        				.addComponent(lbl_nachname))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(lblSemester)
-        				.addComponent(lblSemsterIn))
+        				.addComponent(lblstudiengang)
+        				.addComponent(lbl_studiengang))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(lblAdresse)
-        				.addComponent(txtHierEinfgen, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(lbl_adresse))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(lblMail)
-        				.addComponent(lblMailInput))
+        				.addComponent(lbl_email))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(lblTelefon)
-        				.addComponent(textFieldTelefon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addContainerGap(262, Short.MAX_VALUE))
+        				.addComponent(lbl_telefonnummer))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(lblMatrikelnummer)
+        				.addComponent(lbl_mnr))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(lblBenutzername)
+        				.addComponent(lbl_benutzername))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(lblPasswort)
+        				.addComponent(lbl_passwort))
+        			.addContainerGap(216, Short.MAX_VALUE))
         );
         setLayout(groupLayout);
     }

@@ -7,9 +7,11 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
+import autobatch.session.SessionManager;
 
 public class LoginActionListener implements ActionListener {
 	private JTextField tf_username;
@@ -38,8 +40,8 @@ public class LoginActionListener implements ActionListener {
 		if (checkData) {
 			
 			//Student speichern
-			Datenbankabfrage.aktuellerStudent = datenbankabfrage.getStudent(username);
-			System.out.println(Datenbankabfrage.aktuellerStudent.getNachname());
+			Student aktuellerStudent = datenbankabfrage.getStudent(username);
+	        SessionManager.getInstance().setAktuellerStudent(aktuellerStudent);
 
 			// Textfields leeren
 			tf_password.setText("");

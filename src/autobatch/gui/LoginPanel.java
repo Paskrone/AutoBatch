@@ -130,8 +130,5 @@ public class LoginPanel extends JPanel {
 		);
 		this.setLayout(gl_contentPane);
 	}
-	private void onSuccessfulLogin() {
-        panelManager.initializeStudentPanels();
-        panelSwitcher.switchToPanel("Studenten");
-    }
+	
 }

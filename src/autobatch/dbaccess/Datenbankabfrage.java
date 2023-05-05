@@ -25,8 +25,6 @@ public class Datenbankabfrage {
     private String userName = "db4";
     private String pw = "!db4.hfts23?";
     
-    
-    public static Student aktuellerStudent;
 
     public List<Student> getStudents() {
         List<Student> students = new ArrayList<>();
