@@ -194,6 +194,37 @@ public class Datenbankabfrage {
             return false;
         }
     }
+    
+    //Student in der Datenbank anlegen
+    public boolean registerStudent(Student student) {
+        if (isUsernameTaken(student.getBenutzername())) {
+            return false;
+        }
+
+        String query = "INSERT INTO studenten (MNR, Nachname, Vorname, Passwort, Benutzername, email, Telefonnummer, Studiengang, studiendekan, betreuer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        System.out.println(query);
+        try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+        	stmt.setLong(1, student.getMnr());
+            stmt.setString(2, student.getNachname());
+            stmt.setString(3, student.getVorname());
+            stmt.setString(4, student.getPasswort());
+            stmt.setString(5, student.getBenutzername());
+            stmt.setString(6, student.getEmail());
+            stmt.setString(7, student.getTelefonnummer());
+            stmt.setString(8, student.getStudiengang());
+            stmt.setString(9, student.getStudiendekan());
+            stmt.setString(10, student.getBetreuer());
+            
+            
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
     

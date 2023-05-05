@@ -11,6 +11,7 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import autobatch.businesslogic.CreateAccountActionListener;
 import autobatch.navigation.PanelSwitcher;
 
 import javax.swing.JButton;
@@ -27,6 +28,7 @@ public class RegistrationPanel extends JPanel {
 	private JTextField tf_Studiengang;
 	private JTextField tf_benutzername;
 	private JPasswordField tf_Passwort;
+	private JLabel lbl_registrationAnzeige;
 
 	public RegistrationPanel(PanelSwitcher panelSwitcher) {
 		
@@ -87,12 +89,20 @@ public class RegistrationPanel extends JPanel {
 		btn_createAccount.setBackground(new Color(92, 160, 255));
 		
 		tf_Passwort = new JPasswordField();
+		
+		JLabel lbl_registrationAnzeige = new JLabel("New label");
+		lbl_registrationAnzeige.setVisible(false);
+		
+		btn_createAccount.addActionListener(new CreateAccountActionListener
+				(panelSwitcher, tf_Mnr, tf_vorname, tf_nachname, tf_Email, tf_telefonnummer, tf_Studiengang, tf_benutzername, tf_Passwort, lbl_registrationAnzeige));
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(52)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lbl_registrationAnzeige)
 						.addComponent(btn_createAccount)
 						.addComponent(lblNewLabel)
 						.addGroup(groupLayout.createSequentialGroup()
@@ -156,7 +166,9 @@ public class RegistrationPanel extends JPanel {
 						.addComponent(tf_Passwort, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addComponent(btn_createAccount)
-					.addContainerGap(147, Short.MAX_VALUE))
+					.addGap(18)
+					.addComponent(lbl_registrationAnzeige)
+					.addContainerGap(113, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 		
