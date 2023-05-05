@@ -2,7 +2,9 @@ package autobatch.dbaccess;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -174,6 +176,20 @@ public class Datenbankabfrage {
             conn.close();
             return false;
         } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    // Sucht in der DB nach einen username und gibt true zurück, falls einer existiert
+    public boolean isUsernameTaken(String username) {
+        String query = "SELECT 1 FROM (SELECT Benutzername FROM studenten UNION SELECT Benutzername FROM betreuer UNION SELECT Benutzername FROM studiendekan) AS all_users WHERE Benutzername = ?";
+        try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, username);
+            ResultSet resultSet = stmt.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }

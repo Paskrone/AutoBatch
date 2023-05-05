@@ -14,18 +14,19 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import autobatch.navigation.PanelSwitcher;
 
 import javax.swing.JButton;
+import javax.swing.JPasswordField;
 
 public class RegistrationPanel extends JPanel {
 	
 	private PanelSwitcher panelSwitcher;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+	private JTextField tf_Mnr;
+	private JTextField tf_vorname;
+	private JTextField tf_nachname;
+	private JTextField tf_Email;
+	private JTextField tf_telefonnummer;
+	private JTextField tf_Studiengang;
+	private JTextField tf_benutzername;
+	private JPasswordField tf_Passwort;
 
 	public RegistrationPanel(PanelSwitcher panelSwitcher) {
 		
@@ -40,81 +41,80 @@ public class RegistrationPanel extends JPanel {
 		JLabel lblNewLabel_1 = new JLabel("Matrikelnummer:");
 		lblNewLabel_1.setFont(new Font("Poppins", Font.PLAIN, 13));
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		tf_Mnr = new JTextField();
+		tf_Mnr.setColumns(10);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Vorname:");
 		lblNewLabel_1_1.setFont(new Font("Poppins", Font.PLAIN, 13));
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		tf_vorname = new JTextField();
+		tf_vorname.setColumns(10);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Nachname:");
 		lblNewLabel_1_1_1.setFont(new Font("Poppins", Font.PLAIN, 13));
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		tf_nachname = new JTextField();
+		tf_nachname.setColumns(10);
 		
 		JLabel lblNewLabel_1_1_2 = new JLabel("E-Mail:");
 		lblNewLabel_1_1_2.setFont(new Font("Poppins", Font.PLAIN, 13));
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
+		tf_Email = new JTextField();
+		tf_Email.setColumns(10);
 		
 		JLabel lblNewLabel_1_1_2_1 = new JLabel("Telefonnummer:");
 		lblNewLabel_1_1_2_1.setFont(new Font("Poppins", Font.PLAIN, 13));
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
+		tf_telefonnummer = new JTextField();
+		tf_telefonnummer.setColumns(10);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Studiengang:");
 		lblNewLabel_1_2.setFont(new Font("Poppins", Font.PLAIN, 13));
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
+		tf_Studiengang = new JTextField();
+		tf_Studiengang.setColumns(10);
 		
 		JLabel lblNewLabel_1_1_2_2 = new JLabel("Benutzername:");
 		lblNewLabel_1_1_2_2.setFont(new Font("Poppins", Font.PLAIN, 13));
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
+		tf_benutzername = new JTextField();
+		tf_benutzername.setColumns(10);
 		
 		JLabel lblNewLabel_1_1_2_2_1 = new JLabel("Passwort:");
 		lblNewLabel_1_1_2_2_1.setFont(new Font("Poppins", Font.PLAIN, 13));
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
+		JButton btn_createAccount = new JButton("Account erstellen");
+		btn_createAccount.setBackground(new Color(92, 160, 255));
 		
-		JButton btn_AccountErstellen = new JButton("Account erstellen");
-		btn_AccountErstellen.setBackground(new Color(92, 160, 255));
+		tf_Passwort = new JPasswordField();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(52)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btn_AccountErstellen)
+						.addComponent(btn_createAccount)
 						.addComponent(lblNewLabel)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
+								.addComponent(tf_vorname, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblNewLabel_1_1_2, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
+								.addComponent(tf_Email, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblNewLabel_1)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
+								.addComponent(tf_Mnr, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblNewLabel_1_1_2_2, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE))
+								.addComponent(tf_benutzername, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE))
 							.addGap(22)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(textField_7, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(lblNewLabel_1_1_2_2_1, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
+								.addComponent(tf_Studiengang, GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
 								.addComponent(lblNewLabel_1_2, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
+								.addComponent(tf_telefonnummer, GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
 								.addComponent(lblNewLabel_1_1_2_1, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))))
+								.addComponent(tf_nachname, GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+								.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+								.addComponent(tf_Passwort))))
 					.addContainerGap(172, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
@@ -128,34 +128,34 @@ public class RegistrationPanel extends JPanel {
 						.addComponent(lblNewLabel_1_2, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tf_Mnr, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_Studiengang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tf_vorname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_nachname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_1_1_2, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_1_1_2_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tf_Email, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_telefonnummer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_1_1_2_2, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_1_1_2_2_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tf_benutzername, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_Passwort, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
-					.addComponent(btn_AccountErstellen)
+					.addComponent(btn_createAccount)
 					.addContainerGap(147, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
