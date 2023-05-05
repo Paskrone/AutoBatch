@@ -48,8 +48,10 @@ public class LoginPanel extends JPanel {
 		
 		tf_username = new JTextField();
 		tf_username.setColumns(10);
+		tf_username.setText("");
 		
 		tf_password = new JPasswordField();
+		tf_password.setText("");
 		
 		JLabel lbl_error = new JLabel("Ihr Benutzername oder Passwort ist falsch. Bitte erneut versuchen.");
 		lbl_error.setHorizontalAlignment(SwingConstants.CENTER);
