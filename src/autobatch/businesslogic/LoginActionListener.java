@@ -33,9 +33,14 @@ public class LoginActionListener implements ActionListener {
         Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
         boolean checkData = datenbankabfrage.searchAllTablesByUsernameAndPassword(username, password);
         if (checkData) {
+        	//Textfields leeren
+            tf_password.setText("");
+            tf_username.setText("");
+            
             panelSwitcher.switchToPanel("Studenten");
         } else {
             lbl_error.setVisible(true);
+            tf_password.setText("");
         }
     }
 
