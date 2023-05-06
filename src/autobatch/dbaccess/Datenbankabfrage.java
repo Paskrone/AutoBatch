@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import autobatch.businessobjects.Benutzer;
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
 import autobatch.businessobjects.Studiendekan;
@@ -24,7 +25,77 @@ public class Datenbankabfrage {
     private String driver = "com.mysql.cj.jdbc.Driver";
     private String userName = "db4";
     private String pw = "!db4.hfts23?";
+    
 
+    
+    
+    //Gibt ein Benutzerobjekt (Student, Betreuer oder Studiendekan) zurück, basierend auf dem übergebenen Benutzernamen.
+    //Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie anhand eines übergebenen usernames.
+    
+    public Benutzer getBenutzer(String username) {
+        Student student = getStudent(username);
+        if (student != null) {
+            return student;
+        }
+
+        Betreuer betreuer = getBetreuer(username);
+        if (betreuer != null) {
+            return betreuer;
+        }
+
+        Studiendekan studiendekan = getStudiendekan(username);
+        if (studiendekan != null) {
+            return studiendekan;
+        }
+
+        return null;
+    }
+    
+    //Gibt ein Betreuerobjekt zurück, das auf den übergebenen Benutzernamen basiert.
+    //Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie anhand eines übergebenen usernames.
+    
+    public Betreuer getBetreuer(String username) {
+        List<Betreuer> betreuerList = getBetreuer();
+        for (Betreuer betreuer : betreuerList) {
+            if (betreuer.getBenutzername().equals(username)) {
+                return betreuer;
+            }
+        }
+        return null;
+    }
+
+    //Gibt ein Studiendekanobjekt zurück, das auf den übergebenen Benutzernamen basiert.
+    //Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie anhand eines übergebenen usernames.
+    
+    public Studiendekan getStudiendekan(String username) {
+        List<Studiendekan> studiendekaneList = getStudiendekane();
+        for (Studiendekan studiendekan : studiendekaneList) {
+            if (studiendekan.getBenutzername().equals(username)) {
+                return studiendekan;
+            }
+        }
+        return null;
+    }
+    
+    public Student getStudent(String name) {
+		Student s = null;
+		List<Student> sl = this.getStudents();
+		System.out.println(sl);
+		for (Student student : sl) {
+			if (student.getBenutzername().equals(name)) {
+				s = new Student(student.getMnr(), student.getVorname(), student.getNachname(), student.getPasswort(),
+						student.getBenutzername(), student.getEmail(), student.getTelefonnummer(),
+						student.getStudiengang(), student.getStudiendekan(), student.getBetreuer());
+
+			}
+
+		}
+
+		return s;
+	}
+    
+    //Gibt ALLE Studenten zurück, die in der DB existieren.
+    
     public List<Student> getStudents() {
         List<Student> students = new ArrayList<>();
         Connection con = null;
@@ -37,7 +108,7 @@ public class Datenbankabfrage {
             Statement stmt = con.createStatement();
             ResultSet rs;
 
-            rs = stmt.executeQuery("SELECT MNR, Nachname, Vorname, email, Telefonnumer, Studiengang, studiendekan, betreuer, Benutzername, Passwort From studenten");
+            rs = stmt.executeQuery("SELECT MNR, Nachname, Vorname, email, Telefonnummer, Studiengang, studiendekan, betreuer, Benutzername, Passwort From studenten");
 
             while (rs.next()) {
                 int mnr = rs.getInt("MNR");
@@ -63,6 +134,8 @@ public class Datenbankabfrage {
 
         return students;
     }
+    
+    //Gibt ALLE Studiendekane zurück, die in der DB existieren.
     
     public List<Studiendekan> getStudiendekane() {
         List<Studiendekan> studiendekans = new ArrayList<>();
@@ -99,6 +172,9 @@ public class Datenbankabfrage {
         return studiendekans;
     }
 
+    
+    //Gibt ALLE Betreuer zurück, die in der DB existieren.
+    
     public List<Betreuer> getBetreuer() {
         List<Betreuer> betreuer = new ArrayList<>();
         Connection con = null;

@@ -14,9 +14,12 @@ public class Main {
     private JFrame frame;
     private JPanel cards;
     private PanelSwitcher panelSwitcher;
-    private PanelManager panelManager;
+    public static PanelManager panelManager;
 
     public static void main(String[] args) {
+    	
+		Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
+		datenbankabfrage.getStudents();
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

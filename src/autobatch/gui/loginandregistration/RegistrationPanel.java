@@ -1,4 +1,4 @@
-package autobatch.gui;
+package autobatch.gui.loginandregistration;
 
 import java.awt.Dimension;
 

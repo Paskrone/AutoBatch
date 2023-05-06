@@ -1,4 +1,4 @@
-package autobatch.gui;
+package autobatch.gui.loginandregistration;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -12,6 +12,7 @@ import javax.swing.JButton;
 
 import autobatch.businesslogic.LoginActionListener;
 import autobatch.businesslogic.RegistrationActionListener;
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 
 import javax.swing.GroupLayout;
@@ -23,11 +24,13 @@ import javax.swing.JPasswordField;
 public class LoginPanel extends JPanel {
 
 	private PanelSwitcher panelSwitcher;
+	private PanelManager panelManager;
 	private JTextField tf_username;
 	private JPasswordField tf_password;
 
-	public LoginPanel(PanelSwitcher panelSwitcher) {
+	public LoginPanel(PanelSwitcher panelSwitcher, PanelManager panelManager) {
 		this.panelSwitcher = panelSwitcher;	
+		this.panelManager = panelManager;
 		
 		setPreferredSize(new Dimension(1000, 500));
 		
@@ -62,7 +65,7 @@ public class LoginPanel extends JPanel {
 		btn_Login.setBackground(new Color(85, 133, 212));
 		
 		//Login Daten werden hier überprüft
-		btn_Login.addActionListener(new LoginActionListener(panelSwitcher, tf_username, tf_password, lbl_error));
+		btn_Login.addActionListener(new LoginActionListener(panelSwitcher, panelManager, tf_username, tf_password, lbl_error));
 		
 		JLabel lblNewLabel_1 = new JLabel("Du hast noch keinen Account?");
 		
@@ -127,4 +130,5 @@ public class LoginPanel extends JPanel {
 		);
 		this.setLayout(gl_contentPane);
 	}
+	
 }

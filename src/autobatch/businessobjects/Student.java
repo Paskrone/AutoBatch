@@ -1,6 +1,6 @@
 package autobatch.businessobjects;
 
-public class Student {
+public class Student extends Benutzer{
 
 	private int mnr;
 	private String vorname;
@@ -28,6 +28,7 @@ public class Student {
 		this.studiendekan = studiendekan;
 		this.betreuer = betreuer;
 	}
+	
 
 
 	public int getMnr() {

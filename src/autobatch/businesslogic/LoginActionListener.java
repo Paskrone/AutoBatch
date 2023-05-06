@@ -7,41 +7,68 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import autobatch.businessobjects.Benutzer;
+import autobatch.businessobjects.Betreuer;
+import autobatch.businessobjects.Student;
+import autobatch.businessobjects.Studiendekan;
 import autobatch.dbaccess.Datenbankabfrage;
-import autobatch.gui.Main;
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
+import autobatch.session.SessionManager;
 
 public class LoginActionListener implements ActionListener {
-    private JTextField tf_username;
-    private JPasswordField tf_password;
-    private JLabel lbl_error;
-    private PanelSwitcher panelSwitcher;
+	private JTextField tf_username;
+	private JPasswordField tf_password;
+	private JLabel lbl_error;
+	private PanelSwitcher panelSwitcher;
+	private PanelManager panelManager;
 
-    public LoginActionListener(PanelSwitcher panelSwitcher, JTextField tf_username, JPasswordField tf_password, JLabel lbl_error) {
-        this.panelSwitcher = panelSwitcher;
-        this.tf_username = tf_username;
-        this.tf_password = tf_password;
-        this.lbl_error = lbl_error;
-    }
+	public LoginActionListener(PanelSwitcher panelSwitcher, PanelManager panelManager, JTextField tf_username, JPasswordField tf_password,
+			JLabel lbl_error) {
+		this.panelSwitcher = panelSwitcher;
+		this.tf_username = tf_username;
+		this.tf_password = tf_password;
+		this.lbl_error = lbl_error;
+		this.panelManager = panelManager;
+	}
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String username = tf_username.getText();
-        char[] passwordChars = tf_password.getPassword();
-        String password = new String(passwordChars);
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String username = tf_username.getText();
+		char[] passwordChars = tf_password.getPassword();
+		String password = new String(passwordChars);
 
-        Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
-        boolean checkData = datenbankabfrage.searchAllTablesByUsernameAndPassword(username, password);
-        if (checkData) {
-        	//Textfields leeren
-            tf_password.setText("");
-            tf_username.setText("");
-            
-            panelSwitcher.switchToPanel("Studenten");
-        } else {
-            lbl_error.setVisible(true);
-            tf_password.setText("");
-        }
-    }
+		Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
+		boolean checkData = datenbankabfrage.searchAllTablesByUsernameAndPassword(username, password);
+		if (checkData) {
+			
+			//Benutzer speichern
+			Benutzer aktuellerBenutzer = datenbankabfrage.getBenutzer(username);
+	        SessionManager.getInstance().setAktuellerBenutzer(aktuellerBenutzer);
+
+			// Textfields leeren
+			tf_password.setText("");
+			tf_username.setText("");
+
+			
+			if (aktuellerBenutzer instanceof Student) {
+				
+                panelManager.initializeStudentPanels();
+                panelSwitcher.switchToPanel("Studenten");
+            } else if (aktuellerBenutzer instanceof Betreuer) {
+            	
+                panelManager.initializeBetreuerPanels();
+                panelSwitcher.switchToPanel("Betreuer");
+            } else if (aktuellerBenutzer instanceof Studiendekan) {
+            	
+                panelManager.initializeStudiendekanPanels();
+                panelSwitcher.switchToPanel("Studiendekane");
+            }
+			
+		} else {
+			lbl_error.setVisible(true);
+			tf_password.setText("");
+		}
+	}
 
 }
