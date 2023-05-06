@@ -2,10 +2,17 @@ package autobatch.navigation;
 
 import javax.swing.JPanel;
 
-import autobatch.gui.LoginPanel;
-import autobatch.gui.RegistrationPanel;
+import autobatch.businessobjects.Benutzer;
+import autobatch.businessobjects.Betreuer;
+import autobatch.businessobjects.Student;
+import autobatch.businessobjects.Studiendekan;
+import autobatch.gui.betreuer.BetreuerPanel;
+import autobatch.gui.loginandregistration.LoginPanel;
+import autobatch.gui.loginandregistration.RegistrationPanel;
 import autobatch.gui.student.StudentenDatenPanel;
 import autobatch.gui.student.StudentenPanel;
+import autobatch.gui.studiendekan.StudiendekanPanel;
+import autobatch.session.SessionManager;
 
 public class PanelManager {
 	private PanelSwitcher panelSwitcher;
@@ -13,6 +20,8 @@ public class PanelManager {
     private StudentenPanel studentenPanel;
     private RegistrationPanel registrationPanel;
     private StudentenDatenPanel studentenDatenPanel;
+    private StudiendekanPanel studiendekanPanel;
+    private BetreuerPanel betreuerPanel;
     
     private JPanel cards;
 
@@ -20,12 +29,6 @@ public class PanelManager {
         this.panelSwitcher = panelSwitcher;
         this.cards = cards;
         initializeLoginAndRegistrationPanels();
-    }
-
-    private void initializePanels() {
-        
-        registrationPanel = new RegistrationPanel(panelSwitcher);
-        studentenDatenPanel = new StudentenDatenPanel(panelSwitcher);
     }
     
     private void initializeLoginAndRegistrationPanels() {
@@ -37,29 +40,40 @@ public class PanelManager {
     
     //Panels für den Student
     public void initializeStudentPanels() {
-        studentenPanel = new StudentenPanel(panelSwitcher);
-        studentenDatenPanel = new StudentenDatenPanel(panelSwitcher);
+    	Benutzer currentUser = SessionManager.getInstance().getAktuellerBenutzer();
+        if (currentUser instanceof Student) {
+        	
+            Student currentStudent = (Student) currentUser;
+            studentenPanel = new StudentenPanel(panelSwitcher);
+            studentenDatenPanel = new StudentenDatenPanel(panelSwitcher, currentStudent);
 
-        cards.add(studentenPanel, "Studenten");
-        cards.add(studentenDatenPanel, "Studenten_Daten");
+            cards.add(studentenPanel, "Studenten");
+            cards.add(studentenDatenPanel, "Studenten_Daten");
+        }
     }
     
     //Panels für den Studiendekan
     public void initializeStudiendekanPanels() {
-        studentenPanel = new StudentenPanel(panelSwitcher);
-        studentenDatenPanel = new StudentenDatenPanel(panelSwitcher);
+    	Benutzer currentUser = SessionManager.getInstance().getAktuellerBenutzer();
+        if (currentUser instanceof Studiendekan) {
+        	
+            Studiendekan currentStudiendekan = (Studiendekan) currentUser;
+            studiendekanPanel = new StudiendekanPanel(panelSwitcher, currentStudiendekan);
 
-        cards.add(studentenPanel, "Studenten");
-        cards.add(studentenDatenPanel, "Studenten_Daten");
+            cards.add(studiendekanPanel, "Studiendekane");
+        }
     }
     
     //Panels für den Betreuer
     public void initializeBetreuerPanels() {
-        studentenPanel = new StudentenPanel(panelSwitcher);
-        studentenDatenPanel = new StudentenDatenPanel(panelSwitcher);
+    	Benutzer currentUser = SessionManager.getInstance().getAktuellerBenutzer();
+        if (currentUser instanceof Betreuer) {
+        	
+            Betreuer currentBetreuer = (Betreuer) currentUser;
+            betreuerPanel = new BetreuerPanel(panelSwitcher, currentBetreuer);
 
-        cards.add(studentenPanel, "Studenten");
-        cards.add(studentenDatenPanel, "Studenten_Daten");
+            cards.add(betreuerPanel, "Betreuer");
+        }
     }
 
     

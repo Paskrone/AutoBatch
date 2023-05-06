@@ -1,11 +1,12 @@
 package autobatch.session;
 
+import autobatch.businessobjects.Benutzer;
 import autobatch.businessobjects.Student;
 
 public class SessionManager {
 	
     private static SessionManager instance;
-    private Student aktuellerStudent;
+    private Benutzer aktuellerBenutzer;
 
     private SessionManager() {
     }
@@ -17,12 +18,12 @@ public class SessionManager {
         return instance;
     }
 
-    public void setAktuellerStudent(Student student) {
-        this.aktuellerStudent = student;
+    public void setAktuellerBenutzer(Benutzer aktuellerBenutzer) {
+        this.aktuellerBenutzer = aktuellerBenutzer;
     }
 
-    public Student getAktuellerStudent() {
-        return aktuellerStudent;
+    public Benutzer getAktuellerBenutzer() {
+        return aktuellerBenutzer;
     }
 }
 

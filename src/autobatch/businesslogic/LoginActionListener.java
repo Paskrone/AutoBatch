@@ -7,7 +7,10 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import autobatch.businessobjects.Benutzer;
+import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
+import autobatch.businessobjects.Studiendekan;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
@@ -39,16 +42,29 @@ public class LoginActionListener implements ActionListener {
 		boolean checkData = datenbankabfrage.searchAllTablesByUsernameAndPassword(username, password);
 		if (checkData) {
 			
-			//Student speichern
-			Student aktuellerStudent = datenbankabfrage.getStudent(username);
-	        SessionManager.getInstance().setAktuellerStudent(aktuellerStudent);
+			//Benutzer speichern
+			Benutzer aktuellerBenutzer = datenbankabfrage.getBenutzer(username);
+	        SessionManager.getInstance().setAktuellerBenutzer(aktuellerBenutzer);
 
 			// Textfields leeren
 			tf_password.setText("");
 			tf_username.setText("");
 
-			panelManager.initializeStudentPanels();
-			panelSwitcher.switchToPanel("Studenten");
+			
+			if (aktuellerBenutzer instanceof Student) {
+				
+                panelManager.initializeStudentPanels();
+                panelSwitcher.switchToPanel("Studenten");
+            } else if (aktuellerBenutzer instanceof Betreuer) {
+            	
+                panelManager.initializeBetreuerPanels();
+                panelSwitcher.switchToPanel("Betreuer");
+            } else if (aktuellerBenutzer instanceof Studiendekan) {
+            	
+                panelManager.initializeStudiendekanPanels();
+                panelSwitcher.switchToPanel("Studiendekane");
+            }
+			
 		} else {
 			lbl_error.setVisible(true);
 			tf_password.setText("");

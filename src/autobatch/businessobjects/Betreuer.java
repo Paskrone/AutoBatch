@@ -1,6 +1,6 @@
 package autobatch.businessobjects;
 
-public class Betreuer {
+public class Betreuer extends Benutzer{
 	
 	private String vorname;
 	private String nachname;
@@ -55,7 +55,6 @@ public class Betreuer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 	
 
 }

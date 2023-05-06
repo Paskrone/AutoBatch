@@ -1,4 +1,4 @@
-package autobatch.gui;
+package autobatch.gui.loginandregistration;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;

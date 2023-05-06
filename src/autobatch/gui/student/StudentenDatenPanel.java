@@ -11,6 +11,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import autobatch.businesslogic.AbmeldenActionListener;
+import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelSwitcher;
 import autobatch.session.SessionManager;
@@ -18,13 +19,17 @@ import autobatch.session.SessionManager;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
+
 public class StudentenDatenPanel extends JPanel{
 	
 	private PanelSwitcher panelSwitcher;
+	private Student student;
 	
-	public StudentenDatenPanel(PanelSwitcher panelSwitcher) {
+	public StudentenDatenPanel(PanelSwitcher panelSwitcher, Student student) {
         
         this.panelSwitcher = panelSwitcher;
+        this.student = student;
+        
     	setPreferredSize(new Dimension(1000, 500));
         setBorder(new EmptyBorder(5, 5, 5, 5));
         
@@ -69,11 +74,12 @@ public class StudentenDatenPanel extends JPanel{
         JLabel lbl_vorname = new JLabel("hier einfügen!");
 
 		
-        if (SessionManager.getInstance().getAktuellerStudent() != null) {
-        	int mnr = SessionManager.getInstance().getAktuellerStudent().getMnr();
-        	String mnrString = "" + mnr;
-            lbl_vorname.setText(SessionManager.getInstance().getAktuellerStudent().getVorname() + " " + SessionManager.getInstance().getAktuellerStudent().getNachname());
-            lbl_email.setText(SessionManager.getInstance().getAktuellerStudent().getEmail());
+        if (student != null) {
+            int mnr = student.getMnr();
+            String mnrString = "" + mnr;
+            lbl_mnr.setText(mnrString);
+            lbl_vorname.setText(student.getVorname() + " " + student.getNachname());
+            lbl_email.setText(student.getEmail());
         } else {
             System.out.println("error");
         }

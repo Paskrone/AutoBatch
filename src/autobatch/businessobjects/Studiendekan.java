@@ -1,6 +1,6 @@
 package autobatch.businessobjects;
 
-public class Studiendekan {
+public class Studiendekan extends Benutzer{
 
 	private String vorname;
 	private String nachname;
