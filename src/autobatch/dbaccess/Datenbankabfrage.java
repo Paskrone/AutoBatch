@@ -85,7 +85,7 @@ public class Datenbankabfrage {
 			if (student.getBenutzername().equals(name)) {
 				s = new Student(student.getMnr(), student.getVorname(), student.getNachname(), student.getPasswort(),
 						student.getBenutzername(), student.getEmail(), student.getTelefonnummer(),
-						student.getStudiengang(), student.getStudiendekan(), student.getBetreuer());
+						student.getStudiengang(), student.getOrt(), student.getStrasse(), student.getPostleizahl(), student.getStudiendekan(), student.getBetreuer());
 
 			}
 
@@ -108,7 +108,7 @@ public class Datenbankabfrage {
             Statement stmt = con.createStatement();
             ResultSet rs;
 
-            rs = stmt.executeQuery("SELECT MNR, Nachname, Vorname, email, Telefonnummer, Studiengang, studiendekan, betreuer, Benutzername, Passwort From studenten");
+            rs = stmt.executeQuery("SELECT MNR, Nachname, Vorname, email, Telefonnummer, Studiengang, studiendekan, betreuer, Benutzername, Passwort, ort, postleizahl, strasse From studenten");
 
             while (rs.next()) {
                 int mnr = rs.getInt("MNR");
@@ -117,11 +117,14 @@ public class Datenbankabfrage {
                 String password = rs.getString("Passwort");
                 String username = rs.getString("Benutzername");
                 String email = rs.getString("email");
-                String phonenumber = rs.getString("Telefonnummer");
+                int telefonnummer = rs.getInt("Telefonnummer");
                 String studiengang = rs.getString("Studiengang");
+                String ort = rs.getString("ort");
+                int postleizahl = rs.getInt("postleizahl");
+                String strasse = rs.getString("strasse");
                 String studiendekan = rs.getString("studiendekan");
                 String betreuer = rs.getString("betreuer");
-                Student student = new Student(mnr, vorname, nachname, password, username, email, phonenumber, studiengang, studiendekan, betreuer);
+                Student student = new Student(mnr, vorname, nachname, password, username, email, telefonnummer, studiengang, ort, strasse, postleizahl, studiendekan, betreuer);
                 students.add(student);
             }
 
@@ -287,10 +290,13 @@ public class Datenbankabfrage {
             stmt.setString(4, student.getPasswort());
             stmt.setString(5, student.getBenutzername());
             stmt.setString(6, student.getEmail());
-            stmt.setString(7, student.getTelefonnummer());
+            stmt.setLong(7, student.getTelefonnummer());
             stmt.setString(8, student.getStudiengang());
-            stmt.setString(9, student.getStudiendekan());
-            stmt.setString(10, student.getBetreuer());
+            stmt.setString(9, student.getOrt());
+            stmt.setString(10, student.getStrasse());
+            stmt.setLong(11, student.getPostleizahl());
+            stmt.setString(12, student.getStudiendekan());
+            stmt.setString(13, student.getBetreuer());
             
             
 
