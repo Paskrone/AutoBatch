@@ -6,15 +6,24 @@ import autobatch.businessobjects.Benutzer;
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
 import autobatch.businessobjects.Studiendekan;
+import autobatch.gui.betreuer.BetreuerAnfragenPanel;
+import autobatch.gui.betreuer.BetreuerDatenPanel;
 import autobatch.gui.betreuer.BetreuerPanel;
+import autobatch.gui.betreuer.BetreuerStudentenPanel;
 import autobatch.gui.loginandregistration.LoginPanel;
 import autobatch.gui.loginandregistration.RegistrationPanel;
+import autobatch.gui.student.StudentNavigationBar;
+import autobatch.gui.student.StudentenAbgabenPanel;
+import autobatch.gui.student.StudentenBetreuerPanel;
 import autobatch.gui.student.StudentenDatenPanel;
+import autobatch.gui.student.StudentenFormularePanel;
+import autobatch.gui.student.StudentenIpPanel;
 import autobatch.gui.student.StudentenPanel;
 import autobatch.gui.studiendekan.StudiendekanPanel;
 import autobatch.session.SessionManager;
 
 public class PanelManager {
+	
 	private PanelSwitcher panelSwitcher;
     private LoginPanel loginPanel;
     private StudentenPanel studentenPanel;
@@ -22,7 +31,13 @@ public class PanelManager {
     private StudentenDatenPanel studentenDatenPanel;
     private StudiendekanPanel studiendekanPanel;
     private BetreuerPanel betreuerPanel;
-    
+    private StudentenIpPanel studentenIpPanel;
+    private StudentenBetreuerPanel studentenBetreuerPanel;
+    private StudentenAbgabenPanel studentenAbgabenPanel;
+    private StudentenFormularePanel studentenFormularePanel;
+    private BetreuerAnfragenPanel betreuerAnfragenPanel;
+    private BetreuerDatenPanel betreuerDatenPanel;
+    private BetreuerStudentenPanel betreuerStudentenPanel;
     private JPanel cards;
 
     public PanelManager(PanelSwitcher panelSwitcher, JPanel cards) {
@@ -44,11 +59,19 @@ public class PanelManager {
         if (currentUser instanceof Student) {
         	
             Student currentStudent = (Student) currentUser;
-            studentenPanel = new StudentenPanel(panelSwitcher);
+			studentenPanel = new StudentenPanel(panelSwitcher, currentStudent);
             studentenDatenPanel = new StudentenDatenPanel(panelSwitcher, currentStudent);
+            studentenIpPanel = new StudentenIpPanel(panelSwitcher, currentStudent);
+            studentenBetreuerPanel = new StudentenBetreuerPanel(panelSwitcher, currentStudent);
+            studentenAbgabenPanel = new StudentenAbgabenPanel(panelSwitcher, currentStudent);
+            studentenFormularePanel = new StudentenFormularePanel(panelSwitcher, currentStudent);
 
             cards.add(studentenPanel, "Studenten");
             cards.add(studentenDatenPanel, "Studenten_Daten");
+            cards.add(studentenIpPanel, "Studenten_Ip");
+            cards.add(studentenBetreuerPanel,"Studenten_Betreuer");
+            cards.add(studentenAbgabenPanel, "Studenten_Abgaben");
+            cards.add(studentenFormularePanel, "Studenten_Formulare");
         }
     }
     
@@ -71,8 +94,14 @@ public class PanelManager {
         	
             Betreuer currentBetreuer = (Betreuer) currentUser;
             betreuerPanel = new BetreuerPanel(panelSwitcher, currentBetreuer);
+            betreuerAnfragenPanel = new BetreuerAnfragenPanel(panelSwitcher, currentBetreuer);
+            betreuerDatenPanel = new BetreuerDatenPanel(panelSwitcher, currentBetreuer);
+            betreuerStudentenPanel = new BetreuerStudentenPanel(panelSwitcher, currentBetreuer);
 
             cards.add(betreuerPanel, "Betreuer");
+            cards.add(betreuerAnfragenPanel, "Betreuer_Anfragen");
+            cards.add(betreuerDatenPanel, "Betreuer_Daten");
+            cards.add(betreuerStudentenPanel, "Betreuer_Studenten");
         }
     }
 

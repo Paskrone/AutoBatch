@@ -17,9 +17,6 @@ public class Main {
     public static PanelManager panelManager;
 
     public static void main(String[] args) {
-    	
-		Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
-		datenbankabfrage.getStudents();
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

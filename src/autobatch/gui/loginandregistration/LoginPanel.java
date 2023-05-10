@@ -9,9 +9,8 @@ import java.awt.Dimension;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-
-import autobatch.businesslogic.LoginActionListener;
-import autobatch.businesslogic.RegistrationActionListener;
+import autobatch.businesslogic.actionlistener.LoginActionListener;
+import autobatch.businesslogic.actionlistener.RegistrationActionListener;
 import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 
