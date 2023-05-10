@@ -56,7 +56,7 @@ public class Datenbankabfrage {
 	// anhand eines übergebenen usernames.
 
 	public Betreuer getBetreuer(String username) {
-		List<Betreuer> betreuerList = getBetreuer();
+		List<Betreuer> betreuerList = getAllBetreuer();
 		for (Betreuer betreuer : betreuerList) {
 			if (betreuer.getBenutzername().equals(username)) {
 				return betreuer;
@@ -184,7 +184,7 @@ public class Datenbankabfrage {
 
 	// Gibt ALLE Betreuer zurück, die in der DB existieren.
 
-	public List<Betreuer> getBetreuer() {
+	public List<Betreuer> getAllBetreuer() {
 		List<Betreuer> betreuer = new ArrayList<>();
 		Connection con = null;
 
@@ -204,7 +204,7 @@ public class Datenbankabfrage {
 				String vorname = rs.getString("Vorname");
 				String username = rs.getString("Benutzername");
 				String password = rs.getString("Passwort");
-				Betreuer betreuerobj = new Betreuer(email, nachname, vorname, username, password);
+				Betreuer betreuerobj = new Betreuer(vorname, nachname, password, username, email);
 				betreuer.add(betreuerobj);
 			}
 
