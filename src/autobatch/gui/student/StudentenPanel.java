@@ -1,7 +1,6 @@
 package autobatch.gui.student;
 
 import java.awt.Dimension;
-import java.awt.Image;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -33,7 +32,6 @@ public class StudentenPanel extends JPanel {
        
         //AutoBath Logo anzeigen
         ImageIcon imageIcon = new ImageIcon("/Users/pascalgrcic/git/AutoBatch/images/autobatchlogo_klein.png");
-        Image image = imageIcon.getImage();
         JLabel lbl_image = new JLabel(imageIcon);
         
         GroupLayout groupLayout = new GroupLayout(this);
