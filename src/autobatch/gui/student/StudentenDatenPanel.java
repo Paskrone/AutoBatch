@@ -10,7 +10,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
-import autobatch.businesslogic.AbmeldenActionListener;
+import autobatch.businesslogic.actionlistener.AbmeldenActionListener;
 import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelSwitcher;
@@ -33,21 +33,7 @@ public class StudentenDatenPanel extends JPanel{
     	setPreferredSize(new Dimension(1000, 500));
         setBorder(new EmptyBorder(5, 5, 5, 5));
         
-        JLabel jLabelHead = new JLabel("AutoBatch | Student");
-        
-        JButton btn_abmelden = new JButton("abmelden");
-        //Abmelden
-		btn_abmelden.addActionListener(new AbmeldenActionListener(panelSwitcher));
-        
-        JButton btnIP = new JButton("IP");
-        
-        JButton btnBetreuer = new JButton("Betreuer");
-        
-        JButton btnAbgaben = new JButton("Abgaben");
-        
-        JButton btnFormulare = new JButton("Formulare");
-        
-        JButton btnDaten = new JButton("Daten");
+        StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher);
         
         JLabel lblMatrikelnummer = new JLabel("Matrikelnummer:");
         
@@ -102,66 +88,45 @@ public class StudentenDatenPanel extends JPanel{
         groupLayout.setHorizontalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
         		.addGroup(groupLayout.createSequentialGroup()
+        			.addContainerGap()
         			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
         				.addGroup(groupLayout.createSequentialGroup()
-        					.addComponent(jLabelHead)
-        					.addPreferredGap(ComponentPlacement.RELATED, 759, Short.MAX_VALUE)
-        					.addComponent(btn_abmelden))
-        				.addGroup(groupLayout.createSequentialGroup()
-        					.addComponent(btnIP)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(btnBetreuer)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(btnAbgaben)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(btnFormulare)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(btnDaten))
-        				.addGroup(groupLayout.createSequentialGroup()
-        					.addContainerGap()
-        					.addComponent(lblMail))
-        				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-        					.addContainerGap()
         					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
         						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-        							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-        								.addGroup(Alignment.LEADING, groupLayout.createParallelGroup(Alignment.LEADING)
+        							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
         									.addComponent(lblTelefon)
         									.addComponent(lblAdresse)
         									.addComponent(lblVorname)
         									.addComponent(lblMatrikelnummer)
         									.addComponent(lblnachname, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
-        								.addComponent(lblstudiengang, Alignment.LEADING))
+        								.addComponent(lblstudiengang))
         							.addComponent(lblBenutzername, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE))
         						.addComponent(lblPasswort, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE))
-        					.addGap(23)
-        					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(lbl_benutzername, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lbl_mnr)
-        						.addComponent(lbl_nachname, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lbl_vorname, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lbl_adresse, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lbl_studiengang)
-        						.addComponent(lbl_email)
-        						.addComponent(lbl_telefonnummer, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lbl_passwort, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE))
-        					.addGap(766)))
-        			.addContainerGap())
+        					.addGap(23))
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addComponent(lblMail)
+        					.addPreferredGap(ComponentPlacement.RELATED)))
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(lbl_benutzername, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lbl_mnr)
+        				.addComponent(lbl_nachname, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lbl_vorname, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lbl_adresse, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lbl_studiengang)
+        				.addComponent(lbl_email)
+        				.addComponent(lbl_telefonnummer, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lbl_passwort, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE))
+        			.addGap(767))
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addComponent(studentNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(12, Short.MAX_VALUE))
         );
         groupLayout.setVerticalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
         		.addGroup(groupLayout.createSequentialGroup()
-        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(jLabelHead)
-        				.addComponent(btn_abmelden))
-        			.addGap(18)
-        			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(btnIP)
-        				.addComponent(btnBetreuer)
-        				.addComponent(btnAbgaben)
-        				.addComponent(btnFormulare)
-        				.addComponent(btnDaten))
-        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(studentNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(32)
         			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(lblVorname)
         				.addComponent(lbl_vorname))
@@ -179,8 +144,8 @@ public class StudentenDatenPanel extends JPanel{
         				.addComponent(lbl_adresse))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(lblMail)
-        				.addComponent(lbl_email))
+        				.addComponent(lbl_email)
+        				.addComponent(lblMail))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(lblTelefon)

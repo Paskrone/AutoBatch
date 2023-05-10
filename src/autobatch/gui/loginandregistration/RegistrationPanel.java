@@ -11,7 +11,7 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import autobatch.businesslogic.CreateAccountActionListener;
+import autobatch.businesslogic.actionlistener.CreateAccountActionListener;
 import autobatch.navigation.PanelSwitcher;
 
 import javax.swing.JButton;
