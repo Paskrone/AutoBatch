@@ -1,6 +1,6 @@
 package autobatch.gui.student;
 
-import java.awt.Dimension;
+import java.awt.Dimension; 
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -10,9 +10,9 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
-import autobatch.businesslogic.AbmeldenActionListener;
-import autobatch.businesslogic.DatenSpeichernActionListener;
-import autobatch.businesslogic.StudentenDatenActionListener;
+import autobatch.businesslogic.actionlistener.AbmeldenActionListener;
+import autobatch.businesslogic.actionlistener.StudentenDatenActionListener;
+import autobatch.businesslogic.actionlistener.DatenSpeichernActionListener;
 import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelSwitcher;
