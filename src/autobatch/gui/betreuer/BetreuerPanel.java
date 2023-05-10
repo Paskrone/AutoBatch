@@ -8,7 +8,10 @@ import javax.swing.border.EmptyBorder;
 import autobatch.businessobjects.Betreuer;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JLabel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class BetreuerPanel extends JPanel {
 
@@ -23,18 +26,28 @@ public class BetreuerPanel extends JPanel {
         
         BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelSwitcher);
         
+        //AutoBath Logo anzeigen
+        ImageIcon imageIcon = new ImageIcon("/Users/pascalgrcic/git/AutoBatch/images/autobatchlogo_klein.png");
+        JLabel lbl_Image = new JLabel(imageIcon);
+        
         GroupLayout groupLayout = new GroupLayout(this);
         groupLayout.setHorizontalGroup(
-        	groupLayout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-        			.addComponent(betreuerNavigationBar, GroupLayout.DEFAULT_SIZE, 1027, Short.MAX_VALUE)
+        	groupLayout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(betreuerNavigationBar, GroupLayout.DEFAULT_SIZE, 1133, Short.MAX_VALUE)
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addGap(139)
+        					.addComponent(lbl_Image)))
         			.addContainerGap())
         );
         groupLayout.setVerticalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
         		.addGroup(groupLayout.createSequentialGroup()
         			.addComponent(betreuerNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(440, Short.MAX_VALUE))
+        			.addPreferredGap(ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+        			.addComponent(lbl_Image)
+        			.addGap(69))
         );
         setLayout(groupLayout);
 		
@@ -42,5 +55,4 @@ public class BetreuerPanel extends JPanel {
 		
 		
 	}
-
 }

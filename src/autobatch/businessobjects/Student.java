@@ -8,14 +8,17 @@ public class Student extends Benutzer{
 	private String passwort;
 	private String benutzername;
 	private String email;
-	private String telefonnummer;
+	private int telefonnummer;
 	private String studiengang;
+	private String ort;
+	private String strasse;
+	private int postleizahl;
 	private String studiendekan;
 	private String betreuer;
 	
 	
 	public Student(int mnr, String vorname, String nachname, String passwort, String benutzername, String email,
-			String telefonnummer, String studiengang, String studiendekan, String betreuer) {
+			int telefonnummer, String studiengang, String ort, String strasse, int postleizahl, String studiendekan, String betreuer) {
 		super();
 		this.mnr = mnr;
 		this.vorname = vorname;
@@ -25,10 +28,49 @@ public class Student extends Benutzer{
 		this.email = email;
 		this.telefonnummer = telefonnummer;
 		this.studiengang = studiengang;
+		this.ort = ort;
+		this.strasse = strasse;
+		this.postleizahl = postleizahl;
 		this.studiendekan = studiendekan;
 		this.betreuer = betreuer;
 	}
 	
+
+
+	public String getOrt() {
+		return ort;
+	}
+
+
+
+	public void setOrt(String ort) {
+		this.ort = ort;
+	}
+
+
+
+	public String getStrasse() {
+		return strasse;
+	}
+
+
+
+	public void setStrasse(String strasse) {
+		this.strasse = strasse;
+	}
+
+
+
+	public int getPostleizahl() {
+		return postleizahl;
+	}
+
+
+
+	public void setPostleizahl(int postleizahl) {
+		this.postleizahl = postleizahl;
+	}
+
 
 
 	public int getMnr() {
@@ -61,7 +103,7 @@ public class Student extends Benutzer{
 	}
 
 
-	public String getTelefonnummer() {
+	public int getTelefonnummer() {
 		return telefonnummer;
 	}
 
@@ -79,6 +121,7 @@ public class Student extends Benutzer{
 	public String getBetreuer() {
 		return betreuer;
 	}
+	
 	
 	
 	
