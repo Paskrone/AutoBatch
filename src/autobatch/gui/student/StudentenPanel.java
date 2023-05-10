@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import autobatch.businesslogic.actionlistener.AbmeldenActionListener;
 import autobatch.businesslogic.actionlistener.LoginActionListener;
 import autobatch.businesslogic.actionlistener.StudentenDatenActionListener;
+import autobatch.businessobjects.Student;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -20,8 +21,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class StudentenPanel extends JPanel {
 
 	private PanelSwitcher panelSwitcher;
+	private Student student;
 	
-    public StudentenPanel(PanelSwitcher panelSwitcher) {
+    public StudentenPanel(PanelSwitcher panelSwitcher, Student student) {
+    	this.student = student;
     	this.panelSwitcher = panelSwitcher;
     	setPreferredSize(new Dimension(1000, 500));
         setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -6,7 +6,10 @@ import autobatch.businessobjects.Benutzer;
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
 import autobatch.businessobjects.Studiendekan;
+import autobatch.gui.betreuer.BetreuerAnfragenPanel;
+import autobatch.gui.betreuer.BetreuerDatenPanel;
 import autobatch.gui.betreuer.BetreuerPanel;
+import autobatch.gui.betreuer.BetreuerStudentenPanel;
 import autobatch.gui.loginandregistration.LoginPanel;
 import autobatch.gui.loginandregistration.RegistrationPanel;
 import autobatch.gui.student.StudentNavigationBar;
@@ -20,6 +23,7 @@ import autobatch.gui.studiendekan.StudiendekanPanel;
 import autobatch.session.SessionManager;
 
 public class PanelManager {
+	
 	private PanelSwitcher panelSwitcher;
     private LoginPanel loginPanel;
     private StudentenPanel studentenPanel;
@@ -31,7 +35,9 @@ public class PanelManager {
     private StudentenBetreuerPanel studentenBetreuerPanel;
     private StudentenAbgabenPanel studentenAbgabenPanel;
     private StudentenFormularePanel studentenFormularePanel;
-    
+    private BetreuerAnfragenPanel betreuerAnfragenPanel;
+    private BetreuerDatenPanel betreuerDatenPanel;
+    private BetreuerStudentenPanel betreuerStudentenPanel;
     private JPanel cards;
 
     public PanelManager(PanelSwitcher panelSwitcher, JPanel cards) {
@@ -53,7 +59,7 @@ public class PanelManager {
         if (currentUser instanceof Student) {
         	
             Student currentStudent = (Student) currentUser;
-			studentenPanel = new StudentenPanel(panelSwitcher);
+			studentenPanel = new StudentenPanel(panelSwitcher, currentStudent);
             studentenDatenPanel = new StudentenDatenPanel(panelSwitcher, currentStudent);
             studentenIpPanel = new StudentenIpPanel(panelSwitcher, currentStudent);
             studentenBetreuerPanel = new StudentenBetreuerPanel(panelSwitcher, currentStudent);
@@ -88,8 +94,14 @@ public class PanelManager {
         	
             Betreuer currentBetreuer = (Betreuer) currentUser;
             betreuerPanel = new BetreuerPanel(panelSwitcher, currentBetreuer);
+            betreuerAnfragenPanel = new BetreuerAnfragenPanel(panelSwitcher, currentBetreuer);
+            betreuerDatenPanel = new BetreuerDatenPanel(panelSwitcher, currentBetreuer);
+            betreuerStudentenPanel = new BetreuerStudentenPanel(panelSwitcher, currentBetreuer);
 
             cards.add(betreuerPanel, "Betreuer");
+            cards.add(betreuerAnfragenPanel, "Betreuer_Anfragen");
+            cards.add(betreuerDatenPanel, "Betreuer_Daten");
+            cards.add(betreuerStudentenPanel, "Betreuer_Studenten");
         }
     }
 
