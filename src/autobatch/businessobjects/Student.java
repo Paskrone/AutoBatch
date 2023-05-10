@@ -122,9 +122,6 @@ public class Student extends Benutzer{
 		return betreuer;
 	}
 	
-	public String getAdresse() {
-		return this.strasse + ", " + this.postleizahl + " " +this.ort;
-	}
 	
 	
 	

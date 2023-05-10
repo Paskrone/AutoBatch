@@ -11,6 +11,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import autobatch.businesslogic.AbmeldenActionListener;
+import autobatch.businesslogic.DatenSpeichernActionListener;
+import autobatch.businesslogic.StudentenDatenActionListener;
 import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelSwitcher;
@@ -23,6 +25,10 @@ public class StudentenDatenPanel extends JPanel {
 
 	private PanelSwitcher panelSwitcher;
 	private Student student;
+	private JTextField tf_ort;
+	private JTextField tf_telefon;
+	private JTextField tf_postleizahl;
+	private JTextField tf_strasse;
 
 	public StudentenDatenPanel(PanelSwitcher panelSwitcher, Student student) {
 
@@ -52,7 +58,7 @@ public class StudentenDatenPanel extends JPanel {
 
 		JLabel lblVorname = new JLabel("Vorname:");
 
-		JLabel lblAdresse = new JLabel("Adresse:");
+		JLabel lblOrt = new JLabel("Wohnort:");
 
 		JLabel lblstudiengang = new JLabel("Studiengang:");
 
@@ -65,10 +71,6 @@ public class StudentenDatenPanel extends JPanel {
 		JLabel lbl_studiengang = new JLabel("hier einfügen!");
 
 		JLabel lbl_email = new JLabel("hier einfügen!");
-
-		JLabel lbl_adresse = new JLabel("hier einfügen!");
-
-		JLabel lbl_telefonnummer = new JLabel("hier einfügen!");
 
 		JLabel lbl_vorname = new JLabel("hier einfügen!");
 
@@ -84,17 +86,37 @@ public class StudentenDatenPanel extends JPanel {
 
 		JLabel lbl_passwort = new JLabel("hier einfügen!");
 
+		tf_ort = new JTextField();
+		tf_ort.setColumns(10);
+
+		tf_telefon = new JTextField();
+		tf_telefon.setColumns(10);
+
+		tf_postleizahl = new JTextField();
+		tf_postleizahl.setColumns(10);
+
+		JLabel lblStrasse = new JLabel("Straße:");
+
+		tf_strasse = new JTextField();
+		tf_strasse.setColumns(10);
+
 		if (student != null) {
 
 			lbl_vorname.setText(student.getVorname());
 			lbl_nachname.setText(student.getNachname());
 			lbl_studiengang.setText(student.getStudiengang());
 			if (student.getOrt() != null) {
-				lbl_adresse.setText(student.getAdresse());
+				tf_ort.setText(student.getOrt());
+			}
+			if (student.getPostleizahl() != 0) {
+				tf_postleizahl.setText(student.getPostleizahl() + "");
+			}
+			if (student.getStrasse() != null) {
+				tf_strasse.setText(student.getStrasse());
 			}
 			lbl_email.setText(student.getEmail());
 			if (student.getTelefonnummer() != 0) {
-				lbl_telefonnummer.setText(student.getTelefonnummer() + "");
+				tf_telefon.setText(student.getTelefonnummer() + "");
 			}
 			lbl_mnr.setText(student.getMnr() + "");
 			lbl_benutzername.setText(student.getBenutzername());
@@ -104,109 +126,125 @@ public class StudentenDatenPanel extends JPanel {
 			System.out.println("error");
 		}
 
+		JButton btnDatenSpeichern = new JButton("Speichern");
+		btnDatenSpeichern.addActionListener(new DatenSpeichernActionListener(student, panelSwitcher, tf_ort,
+				tf_postleizahl, tf_strasse, tf_telefon));
+
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout
-				.setHorizontalGroup(
-						groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-												.addGroup(groupLayout.createSequentialGroup().addComponent(jLabelHead)
-														.addPreferredGap(ComponentPlacement.RELATED, 759,
-																Short.MAX_VALUE)
-														.addComponent(btn_abmelden))
-												.addGroup(groupLayout.createSequentialGroup().addComponent(btnIP)
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(btnBetreuer)
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(btnAbgaben)
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(btnFormulare)
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(btnDaten))
-												.addGroup(
-														groupLayout
-																.createSequentialGroup().addContainerGap()
-																.addComponent(lblMail))
-												.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-														.addContainerGap()
-														.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+						.createSequentialGroup().addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(Alignment.TRAILING,
+										groupLayout.createSequentialGroup().addComponent(jLabelHead)
+												.addPreferredGap(ComponentPlacement.RELATED, 931, Short.MAX_VALUE)
+												.addComponent(btn_abmelden))
+								.addGroup(
+										groupLayout.createSequentialGroup().addComponent(btnIP)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnBetreuer)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnAbgaben)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnFormulare)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnDaten)))
+						.addContainerGap()).addGroup(
+								groupLayout.createSequentialGroup().addContainerGap()
+										.addGroup(groupLayout
+												.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+														.createSequentialGroup().addGroup(groupLayout
+																.createParallelGroup(Alignment.LEADING).addComponent(
+																		lblTelefon)
+																.addComponent(lblMatrikelnummer)
+																.addComponent(lblBenutzername,
+																		GroupLayout.PREFERRED_SIZE, 107,
+																		GroupLayout.PREFERRED_SIZE)
+																.addComponent(lblPasswort, GroupLayout.PREFERRED_SIZE,
+																		107, GroupLayout.PREFERRED_SIZE))
+														.addGap(23))
+												.addGroup(groupLayout
+														.createSequentialGroup().addComponent(lblMail)
+														.addPreferredGap(ComponentPlacement.RELATED))
+												.addGroup(groupLayout.createSequentialGroup().addGroup(groupLayout
+														.createParallelGroup(Alignment.LEADING)
+														.addGroup(groupLayout.createSequentialGroup()
 																.addGroup(groupLayout
 																		.createParallelGroup(Alignment.LEADING)
 																		.addGroup(groupLayout
-																				.createParallelGroup(Alignment.TRAILING)
-																				.addGroup(Alignment.LEADING, groupLayout
-																						.createParallelGroup(
-																								Alignment.LEADING)
-																						.addComponent(lblTelefon)
-																						.addComponent(lblAdresse)
-																						.addComponent(lblVorname)
-																						.addComponent(lblMatrikelnummer)
-																						.addComponent(lblnachname,
-																								GroupLayout.DEFAULT_SIZE,
-																								107, Short.MAX_VALUE))
-																				.addComponent(lblstudiengang,
-																						Alignment.LEADING))
-																		.addComponent(
-																				lblBenutzername,
-																				GroupLayout.PREFERRED_SIZE, 107,
-																				GroupLayout.PREFERRED_SIZE))
-																.addComponent(lblPasswort, GroupLayout.PREFERRED_SIZE,
-																		107, GroupLayout.PREFERRED_SIZE))
-														.addGap(23)
-														.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-																.addComponent(lbl_benutzername,
-																		GroupLayout.PREFERRED_SIZE, 87,
-																		GroupLayout.PREFERRED_SIZE)
-																.addComponent(lbl_mnr)
-																.addComponent(lbl_nachname, GroupLayout.PREFERRED_SIZE,
-																		87, GroupLayout.PREFERRED_SIZE)
-																.addComponent(lbl_vorname, GroupLayout.PREFERRED_SIZE,
-																		87, GroupLayout.PREFERRED_SIZE)
-																.addComponent(lbl_adresse, GroupLayout.PREFERRED_SIZE,
-																		87, GroupLayout.PREFERRED_SIZE)
-																.addComponent(lbl_studiengang).addComponent(lbl_email)
-																.addComponent(lbl_telefonnummer,
-																		GroupLayout.PREFERRED_SIZE, 87,
-																		GroupLayout.PREFERRED_SIZE)
-																.addComponent(lbl_passwort, GroupLayout.PREFERRED_SIZE,
-																		87, GroupLayout.PREFERRED_SIZE))
-														.addGap(766)))
-										.addContainerGap()));
+																				.createParallelGroup(Alignment.LEADING)
+																				.addComponent(lblOrt)
+																				.addComponent(lblVorname)
+																				.addComponent(lblnachname,
+																						GroupLayout.DEFAULT_SIZE, 82,
+																						Short.MAX_VALUE))
+																		.addComponent(lblstudiengang))
+																.addGap(23))
+														.addGroup(
+																groupLayout
+																		.createSequentialGroup()
+																		.addComponent(lblStrasse).addGap(62)))
+														.addGap(25)))
+										.addGroup(groupLayout
+												.createParallelGroup(Alignment.LEADING, false)
+												.addGroup(groupLayout.createSequentialGroup()
+														.addComponent(tf_postleizahl, GroupLayout.PREFERRED_SIZE, 67,
+																GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(tf_ort, GroupLayout.PREFERRED_SIZE, 185,
+																GroupLayout.PREFERRED_SIZE))
+												.addComponent(lbl_nachname, GroupLayout.PREFERRED_SIZE, 87,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(lbl_vorname, GroupLayout.PREFERRED_SIZE, 87,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(lbl_studiengang)
+												.addComponent(lbl_benutzername, GroupLayout.PREFERRED_SIZE, 87,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(lbl_mnr).addComponent(lbl_email)
+												.addComponent(lbl_passwort, GroupLayout.PREFERRED_SIZE, 87,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(tf_telefon, GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addComponent(tf_strasse))
+										.addGap(767))
+						.addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(btnDatenSpeichern)
+								.addContainerGap(1038, Short.MAX_VALUE)));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
 				.createSequentialGroup()
 				.addGroup(groupLayout
 						.createParallelGroup(Alignment.LEADING).addComponent(jLabelHead).addComponent(btn_abmelden))
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(btnIP)
+						.addComponent(btnBetreuer).addComponent(btnAbgaben).addComponent(btnFormulare)
+						.addComponent(btnDaten))
 				.addGap(18)
-				.addGroup(groupLayout
-						.createParallelGroup(Alignment.BASELINE).addComponent(btnIP).addComponent(btnBetreuer)
-						.addComponent(btnAbgaben).addComponent(btnFormulare).addComponent(btnDaten))
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING, groupLayout
+						.createSequentialGroup().addComponent(lblVorname).addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(lblnachname).addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(lblstudiengang).addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblOrt)
+								.addComponent(tf_postleizahl, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(tf_ort, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblStrasse)
+								.addComponent(tf_strasse, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addComponent(lbl_vorname)
+								.addPreferredGap(ComponentPlacement.RELATED).addComponent(lbl_nachname)
+								.addPreferredGap(ComponentPlacement.RELATED).addComponent(lbl_studiengang).addGap(64)))
 				.addPreferredGap(ComponentPlacement.RELATED)
 				.addGroup(groupLayout
-						.createParallelGroup(Alignment.BASELINE).addComponent(lblVorname).addComponent(lbl_vorname))
+						.createParallelGroup(Alignment.BASELINE).addComponent(lbl_email).addComponent(lblMail))
 				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(groupLayout
-						.createParallelGroup(Alignment.BASELINE).addComponent(lblnachname).addComponent(lbl_nachname))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblstudiengang)
-						.addComponent(lbl_studiengang))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(groupLayout
-						.createParallelGroup(Alignment.BASELINE).addComponent(lblAdresse).addComponent(lbl_adresse))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(groupLayout
-						.createParallelGroup(Alignment.BASELINE).addComponent(lblMail).addComponent(lbl_email))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblTelefon)
-						.addComponent(lbl_telefonnummer))
+				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblTelefon).addComponent(
+						tf_telefon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 				.addPreferredGap(ComponentPlacement.RELATED)
 				.addGroup(groupLayout
 						.createParallelGroup(Alignment.BASELINE).addComponent(lblMatrikelnummer).addComponent(lbl_mnr))
 				.addPreferredGap(ComponentPlacement.RELATED)
 				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblBenutzername)
 						.addComponent(lbl_benutzername))
-				.addPreferredGap(ComponentPlacement.RELATED).addGroup(groupLayout
-						.createParallelGroup(Alignment.BASELINE).addComponent(lblPasswort).addComponent(lbl_passwort))
-				.addContainerGap(216, Short.MAX_VALUE)));
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblPasswort)
+						.addComponent(lbl_passwort))
+				.addGap(65).addComponent(btnDatenSpeichern).addContainerGap(70, Short.MAX_VALUE)));
 		setLayout(groupLayout);
 	}
 }
