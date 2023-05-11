@@ -22,7 +22,7 @@ public class CreateAccountActionListener implements ActionListener{
 	private JTextField tf_telefonnummer;
 	private JTextField tf_Studiengang;
 	private JTextField tf_Ort;
-	private JTextField tf_Postleizahl;
+	private JTextField tf_Postleitzahl;
 	private JTextField tf_Strasse;
 	private JTextField tf_benutzername;
 	private JPasswordField tf_Passwort;	
@@ -41,7 +41,7 @@ public class CreateAccountActionListener implements ActionListener{
 		this.tf_telefonnummer = tf_telefonnummer;
 		this.tf_Studiengang = tf_Studiengang;
 		this.tf_Ort = tf_Ort;
-		this.tf_Postleizahl = tf_Postleizahl;
+		this.tf_Postleitzahl = tf_Postleizahl;
 		this.tf_Strasse = tf_Strasse;
 		this.tf_benutzername = tf_benutzername;
 		this.tf_Passwort = tf_Passwort;
@@ -59,7 +59,7 @@ public class CreateAccountActionListener implements ActionListener{
         
         int telefonnummer = Integer.parseInt(tf_telefonnummer.getText());
         
-        int postleizahl = Integer.parseInt(tf_Postleizahl.getText());
+        int postleizahl = Integer.parseInt(tf_Postleitzahl.getText());
         
 		Datenbankabfrage dbaccess = new Datenbankabfrage();
 		if(dbaccess.registerStudent(new Student(mnrInt, tf_vorname.getText(), tf_nachname.getText(), password,

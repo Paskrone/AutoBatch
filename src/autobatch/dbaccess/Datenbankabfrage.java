@@ -288,7 +288,7 @@ public class Datenbankabfrage {
 			return false;
 		}
 
-		String query = "INSERT INTO studenten (MNR, Nachname, Vorname, Passwort, Benutzername, email, Telefonnummer, Studiengang, ort, strasse, postleizahl, studiendekan, betreuer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO studenten (MNR, Nachname, Vorname, Passwort, Benutzername, email, Telefonnummer, Studiengang, ort, strasse, postleizahl, studiendekan, betreuer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
 		System.out.println(query);
 		try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);
 				PreparedStatement stmt = conn.prepareStatement(query)) {
