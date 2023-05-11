@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import autobatch.businesslogic.actionlistener.CreateAccountActionListener;
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 
 import javax.swing.JButton;
@@ -20,6 +21,7 @@ import javax.swing.JPasswordField;
 public class RegistrationPanel extends JPanel {
 
 	private PanelSwitcher panelSwitcher;
+	private PanelManager panelManager;
 	private JTextField tf_Mnr;
 	private JTextField tf_vorname;
 	private JTextField tf_nachname;
@@ -33,7 +35,7 @@ public class RegistrationPanel extends JPanel {
 	private JTextField tf_Postleizahl;
 	private JTextField tf_Strasse;
 
-	public RegistrationPanel(PanelSwitcher panelSwitcher) {
+	public RegistrationPanel(PanelSwitcher panelSwitcher, PanelManager panelManager) {
 
 		this.panelSwitcher = panelSwitcher;
 
@@ -111,7 +113,7 @@ public class RegistrationPanel extends JPanel {
 		tf_Strasse = new JTextField();
 		tf_Strasse.setColumns(10);
 
-		btn_createAccount.addActionListener(new CreateAccountActionListener(panelSwitcher, tf_Mnr, tf_vorname,
+		btn_createAccount.addActionListener(new CreateAccountActionListener(panelSwitcher, panelManager, tf_Mnr, tf_vorname,
 				tf_nachname, tf_Email, tf_telefonnummer, tf_Studiengang, tf_Ort, tf_Postleizahl, tf_Strasse,
 				tf_benutzername, tf_Passwort, lbl_registrationAnzeige));
 

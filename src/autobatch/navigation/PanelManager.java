@@ -48,7 +48,7 @@ public class PanelManager {
     
     private void initializeLoginAndRegistrationPanels() {
         loginPanel = new LoginPanel(panelSwitcher, this);
-        registrationPanel = new RegistrationPanel(panelSwitcher);
+        registrationPanel = new RegistrationPanel(panelSwitcher, this);
         cards.add(loginPanel, "Login");
         cards.add(registrationPanel, "Registrieren");
     }
