@@ -35,10 +35,7 @@ public class AuswahlSelectionListener implements ListSelectionListener {
 			int selectedRow = table.getSelectedRow();
 			if (selectedRow != -1) { // Überprüfen Sie, ob eine Zeile ausgewählt wurde
 				// Holen Sie sich die Daten aus der ausgewählten Zeile
-				Object lastName = table.getValueAt(selectedRow, 0);
 				Object mail = table.getValueAt(selectedRow, 1);
-				// Machen Sie hier Ihre Aktion mit den ausgewählten Daten
-				System.out.println("Selected: " + lastName + ", mail " + mail);
 
 				panelSwitcher.storeData("1", mail);
 				
