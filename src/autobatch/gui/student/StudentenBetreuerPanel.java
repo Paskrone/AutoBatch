@@ -8,8 +8,11 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import autobatch.businesslogic.listselectionlistener.AuswahlSelectionListener;
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
@@ -47,6 +50,9 @@ public class StudentenBetreuerPanel extends JPanel {
         };
         
         JTable table = new JTable(model);
+        
+        table.getSelectionModel().addListSelectionListener(new AuswahlSelectionListener(panelSwitcher, table));
+        
         JScrollPane scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
         
