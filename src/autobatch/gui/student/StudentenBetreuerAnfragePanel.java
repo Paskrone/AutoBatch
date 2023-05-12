@@ -20,31 +20,31 @@ public class StudentenBetreuerAnfragePanel extends JPanel {
 
 	private PanelSwitcher panelSwitcher;
 	private Student student;
-	
-    public StudentenBetreuerAnfragePanel(PanelSwitcher panelSwitcher, Student student) {
-    	this.student = student;
-    	this.panelSwitcher = panelSwitcher;
-    	setPreferredSize(new Dimension(1000, 500));
-        setBorder(new EmptyBorder(5, 5, 5, 5));
 
-        StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher);
-       
-        
-        GroupLayout groupLayout = new GroupLayout(this);
-        groupLayout.setHorizontalGroup(
-        	groupLayout.createParallelGroup(Alignment.LEADING)
-        		.addComponent(studentNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        		.addGroup(groupLayout.createSequentialGroup()
-        			.addGap(129))
-        );
-        groupLayout.setVerticalGroup(
-        	groupLayout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(groupLayout.createSequentialGroup()
-        			.addComponent(studentNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addGap(64)
-        			.addContainerGap(77, Short.MAX_VALUE))
-        );
-        setLayout(groupLayout);
-    }
-	
+	public StudentenBetreuerAnfragePanel(PanelSwitcher panelSwitcher, Student student) {
+		this.student = student;
+		this.panelSwitcher = panelSwitcher;
+		setPreferredSize(new Dimension(1000, 500));
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher);
+
+		System.out.println(panelSwitcher.getData("1"));
+
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setText(panelSwitcher.getData("1") + "");
+
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(studentNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						GroupLayout.PREFERRED_SIZE)
+				.addGroup(groupLayout.createSequentialGroup().addGap(249).addComponent(lblNewLabel)));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+						.addComponent(studentNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addGap(122).addComponent(lblNewLabel).addContainerGap(302, Short.MAX_VALUE)));
+		setLayout(groupLayout);
+	}
+
 }

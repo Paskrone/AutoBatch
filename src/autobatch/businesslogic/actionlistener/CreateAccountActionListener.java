@@ -79,7 +79,7 @@ public class CreateAccountActionListener implements ActionListener {
 				Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
 				Benutzer aktuellerBenutzer = datenbankabfrage.getBenutzer(tf_benutzername.getText());
 		        SessionManager.getInstance().setAktuellerBenutzer(aktuellerBenutzer);
-				panelManager.initializeStudentPanels();
+				panelManager.initializePanels();
 				panelSwitcher.switchToPanel("Studenten");
 				
 			} else {

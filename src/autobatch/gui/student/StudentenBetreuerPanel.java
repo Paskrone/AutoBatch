@@ -16,15 +16,19 @@ import autobatch.businesslogic.listselectionlistener.AuswahlSelectionListener;
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.JTable;
 
 public class StudentenBetreuerPanel extends JPanel {
 
+	private PanelManager panelManager;
+	
 	private PanelSwitcher panelSwitcher;
 	private Student student;
 
-	public StudentenBetreuerPanel(PanelSwitcher panelSwitcher, Student student) {
+	public StudentenBetreuerPanel(PanelSwitcher panelSwitcher, PanelManager panelManager, Student student) {
+		this.panelManager = panelManager;
 		
 		this.panelSwitcher = panelSwitcher;
         this.student = student;
@@ -51,7 +55,7 @@ public class StudentenBetreuerPanel extends JPanel {
         
         JTable table = new JTable(model);
         
-        table.getSelectionModel().addListSelectionListener(new AuswahlSelectionListener(panelSwitcher, table));
+        table.getSelectionModel().addListSelectionListener(new AuswahlSelectionListener(panelSwitcher, panelManager, student, table));
         
         JScrollPane scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);

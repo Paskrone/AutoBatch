@@ -26,7 +26,7 @@ import autobatch.session.SessionManager;
 public class PanelManager {
 
 	private PanelSwitcher panelSwitcher;
-	
+
 	private LoginPanel loginPanel;
 	private RegistrationPanel registrationPanel;
 
@@ -61,7 +61,7 @@ public class PanelManager {
 	}
 
 	// Panels für den Student
-	public void initializeStudentPanels() {
+	public void initializePanels() {
 		Benutzer currentUser = SessionManager.getInstance().getAktuellerBenutzer();
 		if (currentUser instanceof Student) {
 
@@ -69,7 +69,7 @@ public class PanelManager {
 			studentenPanel = new StudentenPanel(panelSwitcher, currentStudent);
 			studentenDatenPanel = new StudentenDatenPanel(panelSwitcher, currentStudent);
 			studentenIpPanel = new StudentenIpPanel(panelSwitcher, currentStudent);
-			studentenBetreuerPanel = new StudentenBetreuerPanel(panelSwitcher, currentStudent);
+			studentenBetreuerPanel = new StudentenBetreuerPanel(panelSwitcher, this, currentStudent);
 			studentenBetreuerAnfragePanel = new StudentenBetreuerAnfragePanel(panelSwitcher, currentStudent);
 			studentenAbgabenPanel = new StudentenAbgabenPanel(panelSwitcher, currentStudent);
 			studentenFormularePanel = new StudentenFormularePanel(panelSwitcher, currentStudent);
@@ -81,25 +81,19 @@ public class PanelManager {
 			cards.add(studentenBetreuerAnfragePanel, "Studenten_Betreuer_Anfrage");
 			cards.add(studentenAbgabenPanel, "Studenten_Abgaben");
 			cards.add(studentenFormularePanel, "Studenten_Formulare");
-		}
-	}
 
-	// Panels für den Studiendekan
-	public void initializeStudiendekanPanels() {
-		Benutzer currentUser = SessionManager.getInstance().getAktuellerBenutzer();
-		if (currentUser instanceof Studiendekan) {
+			this.panelSwitcher.switchToPanel("Studenten");
+
+		} else if (currentUser instanceof Studiendekan) {
 
 			Studiendekan currentStudiendekan = (Studiendekan) currentUser;
 			studiendekanPanel = new StudiendekanPanel(panelSwitcher, currentStudiendekan);
 
 			cards.add(studiendekanPanel, "Studiendekane");
-		}
-	}
 
-	// Panels für den Betreuer
-	public void initializeBetreuerPanels() {
-		Benutzer currentUser = SessionManager.getInstance().getAktuellerBenutzer();
-		if (currentUser instanceof Betreuer) {
+			this.panelSwitcher.switchToPanel("Studiendekane");
+
+		} else if (currentUser instanceof Betreuer) {
 
 			Betreuer currentBetreuer = (Betreuer) currentUser;
 			betreuerPanel = new BetreuerPanel(panelSwitcher, currentBetreuer);
@@ -111,7 +105,17 @@ public class PanelManager {
 			cards.add(betreuerAnfragenPanel, "Betreuer_Anfragen");
 			cards.add(betreuerDatenPanel, "Betreuer_Daten");
 			cards.add(betreuerStudentenPanel, "Betreuer_Studenten");
+
+			this.panelSwitcher.switchToPanel("Betreuer");
+
 		}
+	}
+
+
+	public void updatePanels(JPanel panel, String panelName) {
+
+		cards.add(panel, panelName);
+
 	}
 
 }

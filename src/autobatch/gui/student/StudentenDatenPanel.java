@@ -28,6 +28,7 @@ public class StudentenDatenPanel extends JPanel {
 	private JTextField tf_telefon;
 	private JTextField tf_postleizahl;
 	private JTextField tf_strasse;
+	private JTextField tf_passwort;
 
 	public StudentenDatenPanel(PanelSwitcher panelSwitcher, Student student) {
 
@@ -70,8 +71,6 @@ public class StudentenDatenPanel extends JPanel {
 
 		JLabel lblPasswort = new JLabel("Passwort:");
 
-		JLabel lbl_passwort = new JLabel("hier einfügen!");
-
 		tf_ort = new JTextField();
 		tf_ort.setColumns(10);
 
@@ -85,6 +84,9 @@ public class StudentenDatenPanel extends JPanel {
 
 		tf_strasse = new JTextField();
 		tf_strasse.setColumns(10);
+		
+		tf_passwort = new JTextField();
+		tf_passwort.setColumns(10);
 
 		if (student != null) {
 
@@ -106,7 +108,7 @@ public class StudentenDatenPanel extends JPanel {
 			}
 			lbl_mnr.setText(student.getMnr() + "");
 			lbl_benutzername.setText(student.getBenutzername());
-			lbl_passwort.setText(student.getPasswort());
+			tf_passwort.setText(student.getPasswort());
 
 		} else {
 			System.out.println("error");
@@ -117,6 +119,8 @@ public class StudentenDatenPanel extends JPanel {
 		JButton btnDatenSpeichern = new JButton("Speichern");
 		btnDatenSpeichern.addActionListener(new DatenSpeichernActionListener(student, panelSwitcher, tf_ort,
 				tf_postleizahl, tf_strasse, tf_telefon, lblPopUp));
+		
+		
 		
 
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -151,30 +155,31 @@ public class StudentenDatenPanel extends JPanel {
 											.addComponent(lblStrasse)
 											.addGap(62)))
 									.addGap(25)))
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(tf_postleizahl, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(tf_ort, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lbl_nachname, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lbl_vorname, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lbl_studiengang)
-								.addComponent(lbl_benutzername, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lbl_mnr)
-								.addComponent(lbl_email)
-								.addComponent(lbl_passwort, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-								.addComponent(tf_telefon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(tf_strasse))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+									.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(tf_postleizahl, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(tf_ort, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE))
+									.addComponent(lbl_nachname, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lbl_vorname, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lbl_studiengang)
+									.addComponent(lbl_benutzername, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lbl_mnr)
+									.addComponent(lbl_email)
+									.addComponent(tf_telefon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(tf_strasse))
+								.addComponent(tf_passwort, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(767))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(btnDatenSpeichern)
-							.addContainerGap(1050, Short.MAX_VALUE))
+							.addContainerGap(879, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblPopUp)
-							.addContainerGap(1041, Short.MAX_VALUE))))
+							.addContainerGap(870, Short.MAX_VALUE))))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(studentNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap(161, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -223,7 +228,7 @@ public class StudentenDatenPanel extends JPanel {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPasswort)
-						.addComponent(lbl_passwort))
+						.addComponent(tf_passwort, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(65)
 					.addComponent(btnDatenSpeichern)
 					.addGap(18)
