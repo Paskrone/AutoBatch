@@ -10,7 +10,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
-import autobatch.businesslogic.actionlistener.AbmeldenActionListener;
 import autobatch.businesslogic.actionlistener.StudentenDatenActionListener;
 import autobatch.businesslogic.actionlistener.DatenSpeichernActionListener;
 import autobatch.businessobjects.Student;
@@ -38,7 +37,8 @@ public class StudentenDatenPanel extends JPanel {
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-        StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher);
+		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher);
+		
 
 		JLabel lblMatrikelnummer = new JLabel("Matrikelnummer:");
 
@@ -118,7 +118,6 @@ public class StudentenDatenPanel extends JPanel {
 		btnDatenSpeichern.addActionListener(new DatenSpeichernActionListener(student, panelSwitcher, tf_ort,
 				tf_postleizahl, tf_strasse, tf_telefon, lblPopUp));
 		
-		StudentNavigationBar studentNavigationBar_1 = new StudentNavigationBar((PanelSwitcher) null);
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -174,13 +173,13 @@ public class StudentenDatenPanel extends JPanel {
 							.addComponent(lblPopUp)
 							.addContainerGap(1041, Short.MAX_VALUE))))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(studentNavigationBar_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(studentNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(studentNavigationBar_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(studentNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(32)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()

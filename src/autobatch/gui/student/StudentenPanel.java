@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import autobatch.businesslogic.actionlistener.AbmeldenActionListener;
 import autobatch.businesslogic.actionlistener.LoginActionListener;
 import autobatch.businesslogic.actionlistener.StudentenDatenActionListener;
 import autobatch.businessobjects.Student;

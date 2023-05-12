@@ -49,8 +49,8 @@ public class LoginActionListener implements ActionListener {
 			// Textfields leeren
 			tf_password.setText("");
 			tf_username.setText("");
+			lbl_error.setVisible(false);
 
-			
 			if (aktuellerBenutzer instanceof Student) {
 				
                 panelManager.initializeStudentPanels();
