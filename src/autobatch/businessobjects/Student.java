@@ -34,47 +34,15 @@ public class Student extends Benutzer{
 		this.studiendekan = studiendekan;
 		this.betreuer = betreuer;
 	}
-	
-
-
-	public String getOrt() {
-		return ort;
-	}
-
-
-
-	public void setOrt(String ort) {
-		this.ort = ort;
-	}
-
-
-
-	public String getStrasse() {
-		return strasse;
-	}
-
-
-
-	public void setStrasse(String strasse) {
-		this.strasse = strasse;
-	}
-
-
-
-	public int getPostleizahl() {
-		return postleizahl;
-	}
-
-
-
-	public void setPostleizahl(int postleizahl) {
-		this.postleizahl = postleizahl;
-	}
-
 
 
 	public int getMnr() {
 		return mnr;
+	}
+
+
+	public void setMnr(int mnr) {
+		this.mnr = mnr;
 	}
 
 
@@ -83,8 +51,18 @@ public class Student extends Benutzer{
 	}
 
 
+	public void setVorname(String vorname) {
+		this.vorname = vorname;
+	}
+
+
 	public String getNachname() {
 		return nachname;
+	}
+
+
+	public void setNachname(String nachname) {
+		this.nachname = nachname;
 	}
 
 
@@ -93,8 +71,18 @@ public class Student extends Benutzer{
 	}
 
 
+	public void setPasswort(String passwort) {
+		this.passwort = passwort;
+	}
+
+
 	public String getBenutzername() {
 		return benutzername;
+	}
+
+
+	public void setBenutzername(String benutzername) {
+		this.benutzername = benutzername;
 	}
 
 
@@ -103,8 +91,18 @@ public class Student extends Benutzer{
 	}
 
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
 	public int getTelefonnummer() {
 		return telefonnummer;
+	}
+
+
+	public void setTelefonnummer(int telefonnummer) {
+		this.telefonnummer = telefonnummer;
 	}
 
 
@@ -113,16 +111,59 @@ public class Student extends Benutzer{
 	}
 
 
+	public void setStudiengang(String studiengang) {
+		this.studiengang = studiengang;
+	}
+
+
+	public String getOrt() {
+		return ort;
+	}
+
+
+	public void setOrt(String ort) {
+		this.ort = ort;
+	}
+
+
+	public String getStrasse() {
+		return strasse;
+	}
+
+
+	public void setStrasse(String strasse) {
+		this.strasse = strasse;
+	}
+
+
+	public int getPostleizahl() {
+		return postleizahl;
+	}
+
+
+	public void setPostleizahl(int postleizahl) {
+		this.postleizahl = postleizahl;
+	}
+
+
 	public String getStudiendekan() {
 		return studiendekan;
+	}
+
+
+	public void setStudiendekan(String studiendekan) {
+		this.studiendekan = studiendekan;
 	}
 
 
 	public String getBetreuer() {
 		return betreuer;
 	}
-	
-	
-	
+
+
+	public void setBetreuer(String betreuer) {
+		this.betreuer = betreuer;
+	}
+
 	
 }

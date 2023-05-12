@@ -32,17 +32,17 @@ public class Datenbankabfrage {
 	// anhand eines übergebenen usernames.
 
 	public Benutzer getBenutzer(String username) {
-		Student student = getStudent(username);
+		Student student = getStudentByUsername(username);
 		if (student != null) {
 			return student;
 		}
 
-		Betreuer betreuer = getBetreuer(username);
+		Betreuer betreuer = getBetreuerByUsername(username);
 		if (betreuer != null) {
 			return betreuer;
 		}
 
-		Studiendekan studiendekan = getStudiendekan(username);
+		Studiendekan studiendekan = getStudiendekanByUsername(username);
 		if (studiendekan != null) {
 			return studiendekan;
 		}
@@ -55,7 +55,7 @@ public class Datenbankabfrage {
 	// Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie
 	// anhand eines übergebenen usernames.
 
-	public Betreuer getBetreuer(String username) {
+	public Betreuer getBetreuerByUsername(String username) {
 		List<Betreuer> betreuerList = getAllBetreuer();
 		for (Betreuer betreuer : betreuerList) {
 			if (betreuer.getBenutzername().equals(username)) {
@@ -64,14 +64,25 @@ public class Datenbankabfrage {
 		}
 		return null;
 	}
+	
+	public Betreuer getBetreuerByMail(String mail) {
+		List<Betreuer> betreuerList = getAllBetreuer();
+		for (Betreuer betreuer : betreuerList) {
+			if (betreuer.getEmail().equals(mail)) {
+				return betreuer;
+			}
+		}
+		return null;
+	}
+	
 
 	// Gibt ein Studiendekanobjekt zurück, das auf den übergebenen Benutzernamen
 	// basiert.
 	// Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie
 	// anhand eines übergebenen usernames.
 
-	public Studiendekan getStudiendekan(String username) {
-		List<Studiendekan> studiendekaneList = getStudiendekane();
+	public Studiendekan getStudiendekanByUsername(String username) {
+		List<Studiendekan> studiendekaneList = getAllStudiendekane();
 		for (Studiendekan studiendekan : studiendekaneList) {
 			if (studiendekan.getBenutzername().equals(username)) {
 				return studiendekan;
@@ -80,27 +91,20 @@ public class Datenbankabfrage {
 		return null;
 	}
 
-	public Student getStudent(String name) {
-		Student s = null;
-		List<Student> sl = this.getStudents();
-		System.out.println(sl);
+	public Student getStudentByUsername(String username) {
+		List<Student> sl = this.getAllStudents();
 		for (Student student : sl) {
-			if (student.getBenutzername().equals(name)) {
-				s = new Student(student.getMnr(), student.getVorname(), student.getNachname(), student.getPasswort(),
-						student.getBenutzername(), student.getEmail(), student.getTelefonnummer(),
-						student.getStudiengang(), student.getOrt(), student.getStrasse(), student.getPostleizahl(),
-						student.getStudiendekan(), student.getBetreuer());
-
+			if (student.getBenutzername().equals(username)) {
+				return student;
 			}
 
 		}
-
-		return s;
+		return null;
 	}
 
 	// Gibt ALLE Studenten zurück, die in der DB existieren.
 
-	public List<Student> getStudents() {
+	public List<Student> getAllStudents() {
 		List<Student> students = new ArrayList<>();
 		Connection con = null;
 
@@ -146,7 +150,7 @@ public class Datenbankabfrage {
 
 	// Gibt ALLE Studiendekane zurück, die in der DB existieren.
 
-	public List<Studiendekan> getStudiendekane() {
+	public List<Studiendekan> getAllStudiendekane() {
 		List<Studiendekan> studiendekans = new ArrayList<>();
 		Connection con = null;
 
@@ -314,7 +318,7 @@ public class Datenbankabfrage {
 		}
 	}
 
-	public void updateData(Student student, String ort, String strasse, int postleizahl, String telefon) {
+	public void updateData(Student student, String ort, String strasse, int postleizahl, int telefon, String passwort) {
 		if (ort != null) {
 			String query = "UPDATE studenten SET ort = '" + ort + "' WHERE (MNR = " + student.getMnr() + ")";
 			if (update(query)) {
@@ -337,14 +341,24 @@ public class Datenbankabfrage {
 			}
 		}
 
-		if (telefon != null) {
+		if (telefon != 0) {
 			String query = "UPDATE `studenten` SET `telefonnummer` = '" + telefon + "' WHERE (MNR = " + student.getMnr()
 					+ ")";
 
 			if (update(query)) {
-				student.setStrasse(telefon);
+				student.setTelefonnummer(telefon);
 			}
 		}
+		
+		if (passwort != null) {
+			String query = "UPDATE `studenten` SET `passwort` = '" + passwort + "' WHERE (MNR = " + student.getMnr()
+					+ ")";
+
+			if (update(query)) {
+				student.setPasswort(passwort);
+			}
+		}
+		
 
 	}
 
@@ -360,5 +374,6 @@ public class Datenbankabfrage {
 			return false;
 		}
 	}
+
 
 }

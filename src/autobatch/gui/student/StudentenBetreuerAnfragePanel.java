@@ -8,6 +8,9 @@ import javax.swing.border.EmptyBorder;
 import autobatch.businesslogic.actionlistener.LoginActionListener;
 import autobatch.businesslogic.actionlistener.StudentenDatenActionListener;
 import autobatch.businessobjects.Student;
+import autobatch.dbaccess.Datenbankabfrage;
+import autobatch.businessobjects.Betreuer;
+
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -15,15 +18,25 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JTextField;
 
 public class StudentenBetreuerAnfragePanel extends JPanel {
 
 	private PanelSwitcher panelSwitcher;
 	private Student student;
+	private JTextField tf_Unternehmen;
+	private JTextField tf_Thema;
+	private JTextField textField;
+	
+	private Betreuer betreuer;
 
 	public StudentenBetreuerAnfragePanel(PanelSwitcher panelSwitcher, Student student) {
 		this.student = student;
 		this.panelSwitcher = panelSwitcher;
+		
+		Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
+		this.betreuer = datenbankabfrage.getBetreuerByMail(panelSwitcher.getData("1") +"");
+		
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -33,18 +46,97 @@ public class StudentenBetreuerAnfragePanel extends JPanel {
 
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setText(panelSwitcher.getData("1") + "");
+		
+		
+		
+		JLabel lblUnternehmen = new JLabel("Unternehmen:");
+		
+		tf_Unternehmen = new JTextField();
+		tf_Unternehmen.setColumns(10);
+		
+		JLabel lblThema = new JLabel("Thema:");
+		
+		tf_Thema = new JTextField();
+		tf_Thema.setColumns(10);
+		
+		JLabel lblBeschreibung = new JLabel("Beschreibung:");
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		
+		JLabel lbl_Betreuer = new JLabel("Betreuer Informationen:");
+		
+		JLabel lbl_Name = new JLabel("Name:");
+		
+		JLabel lbl_NameIn = new JLabel(this.betreuer.getNachname());
+		
+		JLabel lbl_Email = new JLabel("Email:");
+		
+		JLabel lbl_EmailIn = new JLabel(this.betreuer.getEmail());
+		
 
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(studentNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-						GroupLayout.PREFERRED_SIZE)
-				.addGroup(groupLayout.createSequentialGroup().addGap(249).addComponent(lblNewLabel)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(studentNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 				.addGroup(groupLayout.createSequentialGroup()
-						.addComponent(studentNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(122).addComponent(lblNewLabel).addContainerGap(302, Short.MAX_VALUE)));
+					.addContainerGap()
+					.addComponent(lblBeschreibung)
+					.addContainerGap(906, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(textField)
+						.addComponent(tf_Thema)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblUnternehmen)
+								.addComponent(lblThema))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(tf_Unternehmen, GroupLayout.PREFERRED_SIZE, 289, GroupLayout.PREFERRED_SIZE)))
+					.addGap(171)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addComponent(lbl_Betreuer)
+							.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addComponent(lbl_Name)
+									.addComponent(lbl_Email))
+								.addGap(41)
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addComponent(lbl_NameIn)
+									.addComponent(lbl_EmailIn))
+								.addGap(0, 0, Short.MAX_VALUE))))
+					.addGap(292))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(studentNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(lbl_Betreuer)
+					.addGap(1)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblUnternehmen)
+						.addComponent(tf_Unternehmen, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lbl_Name)
+						.addComponent(lbl_NameIn))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblThema)
+						.addComponent(lbl_Email)
+						.addComponent(lbl_EmailIn))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(tf_Thema, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblBeschreibung)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNewLabel)
+					.addContainerGap(177, Short.MAX_VALUE))
+		);
 		setLayout(groupLayout);
 	}
-
 }

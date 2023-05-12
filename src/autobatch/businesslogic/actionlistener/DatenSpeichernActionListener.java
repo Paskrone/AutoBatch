@@ -20,11 +20,12 @@ public class DatenSpeichernActionListener implements ActionListener{
 	private JTextField tf_postleizahl;
 	private JTextField tf_strasse;
 	private JTextField tf_telefon;
+	private JTextField tf_passwort;
 	
 	private JLabel lblPopUp;
 
 	public DatenSpeichernActionListener(Student student, PanelSwitcher panelSwitcher, JTextField tf_ort, JTextField tf_postleizahl,
-			JTextField tf_strasse, JTextField tf_telefon, JLabel lblPopUp) {
+			JTextField tf_strasse, JTextField tf_telefon, JTextField tf_passwort, JLabel lblPopUp) {
 		super();
 		this.student = student;
 		this.panelSwitcher = panelSwitcher;
@@ -32,6 +33,8 @@ public class DatenSpeichernActionListener implements ActionListener{
 		this.tf_postleizahl = tf_postleizahl;
 		this.tf_strasse = tf_strasse;
 		this.tf_telefon = tf_telefon;
+		this.tf_passwort = tf_passwort;
+		
 		this.lblPopUp = lblPopUp;
 	}
 
@@ -40,10 +43,11 @@ public class DatenSpeichernActionListener implements ActionListener{
 		String ort = tf_ort.getText();
 		String strasse = tf_strasse.getText();
 		int postleizahl = Integer.parseInt(tf_postleizahl.getText());
-		String telefon = tf_telefon.getText();
+		int telefon = Integer.parseInt(tf_telefon.getText());
+		String passwort = tf_passwort.getText();
 		
 		Datenbankabfrage dbaccess = new Datenbankabfrage();
-		dbaccess.updateData(student, ort, strasse, postleizahl, telefon);
+		dbaccess.updateData(student, ort, strasse, postleizahl, telefon, passwort);
 		
 		lblPopUp.setVisible(true);
 

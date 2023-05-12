@@ -118,7 +118,7 @@ public class StudentenDatenPanel extends JPanel {
 
 		JButton btnDatenSpeichern = new JButton("Speichern");
 		btnDatenSpeichern.addActionListener(new DatenSpeichernActionListener(student, panelSwitcher, tf_ort,
-				tf_postleizahl, tf_strasse, tf_telefon, lblPopUp));
+				tf_postleizahl, tf_strasse, tf_telefon, tf_passwort, lblPopUp));
 		
 		
 		
