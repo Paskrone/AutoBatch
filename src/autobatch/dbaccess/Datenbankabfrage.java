@@ -13,6 +13,7 @@ import autobatch.businessobjects.Benutzer;
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
 import autobatch.businessobjects.Studiendekan;
+import autobatch.businessobjects.Thema;
 
 //Database connection for macos-terminal: source ~/.zshrc
 //export PATH="/usr/local/opt/mysql-client/bin:$PATH"
@@ -64,7 +65,7 @@ public class Datenbankabfrage {
 		}
 		return null;
 	}
-	
+
 	public Betreuer getBetreuerByMail(String mail) {
 		List<Betreuer> betreuerList = getAllBetreuer();
 		for (Betreuer betreuer : betreuerList) {
@@ -74,7 +75,6 @@ public class Datenbankabfrage {
 		}
 		return null;
 	}
-	
 
 	// Gibt ein Studiendekanobjekt zurück, das auf den übergebenen Benutzernamen
 	// basiert.
@@ -126,7 +126,7 @@ public class Datenbankabfrage {
 				String password = rs.getString("Passwort");
 				String username = rs.getString("Benutzername");
 				String email = rs.getString("email");
-				int telefonnummer = rs.getInt("Telefonnummer");
+				long telefonnummer = rs.getLong("Telefonnummer");
 				String studiengang = rs.getString("Studiengang");
 				String ort = rs.getString("ort");
 				int postleizahl = rs.getInt("postleizahl");
@@ -318,48 +318,107 @@ public class Datenbankabfrage {
 		}
 	}
 
-	public void updateData(Student student, String ort, String strasse, int postleizahl, int telefon, String passwort) {
-		if (ort != null) {
-			String query = "UPDATE studenten SET ort = '" + ort + "' WHERE (MNR = " + student.getMnr() + ")";
+	// Update Studenten Tabelle
+	public boolean updateDataStudentString(Student student, String arg, String spalte) {
+		if (arg != null) {
+			String query = "UPDATE `db4`.`studenten` SET `" + spalte + "` = '" + arg + "' WHERE (MNR = "
+					+ student.getMnr() + ")";
 			if (update(query)) {
-				student.setOrt(ort);
+				student.setOrt(arg);
+				return true;
 			}
 		}
-		if (strasse != null) {
-			String query = "UPDATE `db4`.`studenten` SET `strasse` = '" + strasse + "' WHERE (MNR = " + student.getMnr()
-					+ ")";
+		return false;
+	}
 
+	public boolean updateDataStudentInt(Student student, int arg, String spalte) {
+		if (arg != 0) {
+			String query = "UPDATE `db4`.`studenten` SET `" + spalte + "` = '" + arg + "' WHERE (MNR = "
+					+ student.getMnr() + ")";
 			if (update(query)) {
-				student.setStrasse(strasse);
+				return true;
 			}
 		}
-		if (postleizahl != 0) {
-			String query = "UPDATE studenten SET postleizahl = '" + postleizahl + "' WHERE (MNR = " + student.getMnr()
-					+ ")";
+		return false;
+	}
+
+	public boolean updateDataStudentLong(Student student, long arg, String spalte) {
+		if (arg != 0) {
+			String query = "UPDATE `db4`.`studenten` SET `" + spalte + "` = '" + arg + "' WHERE (MNR = "
+					+ student.getMnr() + ")";
 			if (update(query)) {
-				student.setPostleizahl(postleizahl);
+				return true;
 			}
 		}
+		return false;
+	}
 
-		if (telefon != 0) {
-			String query = "UPDATE `studenten` SET `telefonnummer` = '" + telefon + "' WHERE (MNR = " + student.getMnr()
-					+ ")";
+	// befülle Thema Tabelle
+
+	public boolean setDataThema(Student student, Betreuer betreuer, String thema, String unternehmen,
+			String beschreibung) {
+		if (student != null && betreuer != null && thema != null && unternehmen != null && beschreibung != null) {
+			int idThema = getAnzahlThemen();
+			
+			String query = "INSERT INTO `db4`.`thema` (`idThema`, `thema`, `unternehmen`, `beschreibung`, `student`, `betreuer`) VALUES ('"+idThema+"', '"
+					+ thema + "', '" + unternehmen + "', '" + beschreibung + "', '" + student.getMnr() + "', '"
+					+ betreuer.getEmail() + "')";
+			System.out.println("klappt");
 
 			if (update(query)) {
-				student.setTelefonnummer(telefon);
+				return true;
 			}
+		}
+		return false;
+	}
+	
+	
+	public List<Thema> getAllThemen() {
+		List<Thema> themen = new ArrayList<>();
+		Connection con = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url + dbName, userName, pw);
+			System.out.println("Connected to database");
+
+			Statement stmt = con.createStatement();
+			ResultSet rs;
+
+			rs = stmt.executeQuery("SELECT idThema, unternehmen, thema, beschreibung, student, betreuer FROM thema");
+
+			while (rs.next()) {
+				int idThema = rs.getInt("idThema");
+				String unternehmen = rs.getString("unternehmen");
+				String thema = rs.getString("thema");
+				String beschreibung = rs.getString("beschreibung");
+				int studentMNR = rs.getInt("student");
+				String betreuerMail = rs.getString("betreuer");
+				Thema t = new Thema(idThema, unternehmen, thema, beschreibung, studentMNR, betreuerMail);
+				themen.add(t);
+			}
+
+			con.close();
+			System.out.println("Disconnected from database");
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-		if (passwort != null) {
-			String query = "UPDATE `studenten` SET `passwort` = '" + passwort + "' WHERE (MNR = " + student.getMnr()
-					+ ")";
-
-			if (update(query)) {
-				student.setPasswort(passwort);
-			}
+		return themen;
+	}
+	
+	
+	public int getAnzahlThemen() {
+		
+		List<Thema> t = getAllThemen();
+		int c = 0;
+		
+		for (Thema thema : t) {
+			c++;
 		}
 		
-
+		return c;
 	}
 
 	private boolean update(String query) {
@@ -374,6 +433,5 @@ public class Datenbankabfrage {
 			return false;
 		}
 	}
-
 
 }

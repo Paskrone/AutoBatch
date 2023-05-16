@@ -8,7 +8,9 @@ public class Student extends Benutzer{
 	private String passwort;
 	private String benutzername;
 	private String email;
-	private int telefonnummer;
+	
+	private long telefonnummer;
+	
 	private String studiengang;
 	private String ort;
 	private String strasse;
@@ -18,7 +20,7 @@ public class Student extends Benutzer{
 	
 	
 	public Student(int mnr, String vorname, String nachname, String passwort, String benutzername, String email,
-			int telefonnummer, String studiengang, String ort, String strasse, int postleizahl, String studiendekan, String betreuer) {
+			long telefonnummer, String studiengang, String ort, String strasse, int postleizahl, String studiendekan, String betreuer) {
 		super();
 		this.mnr = mnr;
 		this.vorname = vorname;
@@ -96,12 +98,12 @@ public class Student extends Benutzer{
 	}
 
 
-	public int getTelefonnummer() {
+	public long getTelefonnummer() {
 		return telefonnummer;
 	}
 
 
-	public void setTelefonnummer(int telefonnummer) {
+	public void setTelefonnummer(long telefonnummer) {
 		this.telefonnummer = telefonnummer;
 	}
 

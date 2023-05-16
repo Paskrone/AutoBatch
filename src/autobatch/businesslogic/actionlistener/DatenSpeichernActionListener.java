@@ -12,7 +12,6 @@ import autobatch.navigation.PanelSwitcher;
 
 public class DatenSpeichernActionListener implements ActionListener{
 	
-	private PanelSwitcher panelSwitcher;
 	
 	private Student student;
 	
@@ -28,7 +27,6 @@ public class DatenSpeichernActionListener implements ActionListener{
 			JTextField tf_strasse, JTextField tf_telefon, JTextField tf_passwort, JLabel lblPopUp) {
 		super();
 		this.student = student;
-		this.panelSwitcher = panelSwitcher;
 		this.tf_ort = tf_ort;
 		this.tf_postleizahl = tf_postleizahl;
 		this.tf_strasse = tf_strasse;
@@ -42,13 +40,28 @@ public class DatenSpeichernActionListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String ort = tf_ort.getText();
 		String strasse = tf_strasse.getText();
-		int postleizahl = Integer.parseInt(tf_postleizahl.getText());
-		int telefon = Integer.parseInt(tf_telefon.getText());
+		int postleitzahl = Integer.parseInt(tf_postleizahl.getText());
+		long telefon = Long.parseLong(tf_telefon.getText());
 		String passwort = tf_passwort.getText();
 		
 		Datenbankabfrage dbaccess = new Datenbankabfrage();
-		dbaccess.updateData(student, ort, strasse, postleizahl, telefon, passwort);
+		if (dbaccess.updateDataStudentString(student, ort, "ort")) {
+			student.setOrt(ort);
+		}
+		if (dbaccess.updateDataStudentString(student, strasse, "strasse")) {
+			student.setStrasse(strasse);
+		}
+		if (dbaccess.updateDataStudentInt(student, postleitzahl, "postleizahl")) {
+			student.setPostleizahl(postleitzahl);
+		}
+		if (dbaccess.updateDataStudentLong(student, telefon, "telefonnummer")) {
+			student.setTelefonnummer(telefon);
+		}
+		if (dbaccess.updateDataStudentString(student, passwort, "passwort")) {
+			student.setPasswort(passwort);
+		}
 		
+
 		lblPopUp.setVisible(true);
 
 	}
