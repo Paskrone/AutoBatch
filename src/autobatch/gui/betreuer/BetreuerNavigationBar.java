@@ -11,6 +11,7 @@ import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class BetreuerNavigationBar extends JPanel {
 	
@@ -53,6 +54,17 @@ public class BetreuerNavigationBar extends JPanel {
 			}
 		});
 		
+		JLabel lbl_abmelden = new JLabel("abmelden");
+		lbl_abmelden.addMouseListener(new NavigationBarMouseListener() {
+
+			@Override
+			public void labelClicked() {
+
+				panelSwitcher.switchToPanel("Login");
+
+			}
+		});
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -63,20 +75,22 @@ public class BetreuerNavigationBar extends JPanel {
 					.addComponent(lbl_Anfragen, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
 					.addGap(58)
 					.addComponent(lbl_Daten, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(626, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 512, Short.MAX_VALUE)
+					.addComponent(lbl_abmelden)
+					.addGap(53))
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap(18, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lbl_Studenten)
 						.addComponent(lbl_Daten)
-						.addComponent(lbl_Anfragen))
+						.addComponent(lbl_Anfragen)
+						.addComponent(lbl_abmelden))
 					.addGap(16))
 		);
 		setLayout(groupLayout);
 		
 	}
-
 }

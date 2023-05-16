@@ -20,6 +20,8 @@ import autobatch.businessobjects.Thema;
 //mysql -u db4 -p'!db4.hfts23?' -h 3.69.96.96 -P 3306 db4
 
 public class Datenbankabfrage {
+	
+
 
 	private String url = "jdbc:mysql://3.69.96.96:3306/";
 	private String dbName = "db4";
@@ -101,6 +103,17 @@ public class Datenbankabfrage {
 		}
 		return null;
 	}
+	
+	public Student getStudentByMNR(int mnr) {
+		List<Student> sl = this.getAllStudents();
+		for (Student student : sl) {
+			if (student.getMnr() == mnr) {
+				return student;
+			}
+
+		}
+		return null;
+	}
 
 	// Gibt ALLE Studenten zurück, die in der DB existieren.
 
@@ -111,7 +124,6 @@ public class Datenbankabfrage {
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url + dbName, userName, pw);
-			System.out.println("Connected to database");
 
 			Statement stmt = con.createStatement();
 			ResultSet rs;
@@ -139,7 +151,6 @@ public class Datenbankabfrage {
 			}
 
 			con.close();
-			System.out.println("Disconnected from database");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -157,7 +168,6 @@ public class Datenbankabfrage {
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url + dbName, userName, pw);
-			System.out.println("Connected to database");
 
 			Statement stmt = con.createStatement();
 			ResultSet rs;
@@ -177,7 +187,6 @@ public class Datenbankabfrage {
 			}
 
 			con.close();
-			System.out.println("Disconnected from database");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -195,7 +204,6 @@ public class Datenbankabfrage {
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url + dbName, userName, pw);
-			System.out.println("Connected to database");
 
 			Statement stmt = con.createStatement();
 			ResultSet rs;
@@ -213,7 +221,6 @@ public class Datenbankabfrage {
 			}
 
 			con.close();
-			System.out.println("Disconnected from database");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -358,12 +365,11 @@ public class Datenbankabfrage {
 	public boolean setDataThema(Student student, Betreuer betreuer, String thema, String unternehmen,
 			String beschreibung) {
 		if (student != null && betreuer != null && thema != null && unternehmen != null && beschreibung != null) {
-			int idThema = getAnzahlThemen();
+			int idThema = getAllThemen().size();
 			
 			String query = "INSERT INTO `db4`.`thema` (`idThema`, `thema`, `unternehmen`, `beschreibung`, `student`, `betreuer`) VALUES ('"+idThema+"', '"
 					+ thema + "', '" + unternehmen + "', '" + beschreibung + "', '" + student.getMnr() + "', '"
 					+ betreuer.getEmail() + "')";
-			System.out.println("klappt");
 
 			if (update(query)) {
 				return true;
@@ -380,7 +386,6 @@ public class Datenbankabfrage {
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url + dbName, userName, pw);
-			System.out.println("Connected to database");
 
 			Statement stmt = con.createStatement();
 			ResultSet rs;
@@ -399,7 +404,6 @@ public class Datenbankabfrage {
 			}
 
 			con.close();
-			System.out.println("Disconnected from database");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -408,18 +412,16 @@ public class Datenbankabfrage {
 		return themen;
 	}
 	
-	
-	public int getAnzahlThemen() {
-		
+	public Thema getThemaByID(int idThema) {
 		List<Thema> t = getAllThemen();
-		int c = 0;
-		
 		for (Thema thema : t) {
-			c++;
+			if (thema.getIdThema()== idThema) {
+				return thema;
+			}
 		}
-		
-		return c;
+		return null;
 	}
+	
 
 	private boolean update(String query) {
 		try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);

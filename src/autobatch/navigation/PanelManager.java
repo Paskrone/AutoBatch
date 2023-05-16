@@ -12,9 +12,7 @@ import autobatch.gui.betreuer.BetreuerPanel;
 import autobatch.gui.betreuer.BetreuerStudentenPanel;
 import autobatch.gui.loginandregistration.LoginPanel;
 import autobatch.gui.loginandregistration.RegistrationPanel;
-import autobatch.gui.student.StudentNavigationBar;
 import autobatch.gui.student.StudentenAbgabenPanel;
-import autobatch.gui.student.StudentenBetreuerAnfragePanel;
 import autobatch.gui.student.StudentenBetreuerPanel;
 import autobatch.gui.student.StudentenDatenPanel;
 import autobatch.gui.student.StudentenFormularePanel;
@@ -34,7 +32,6 @@ public class PanelManager {
 	private StudentenDatenPanel studentenDatenPanel;
 	private StudentenIpPanel studentenIpPanel;
 	private StudentenBetreuerPanel studentenBetreuerPanel;
-	private StudentenBetreuerAnfragePanel studentenBetreuerAnfragePanel;
 	private StudentenAbgabenPanel studentenAbgabenPanel;
 	private StudentenFormularePanel studentenFormularePanel;
 
@@ -95,7 +92,7 @@ public class PanelManager {
 
 			Betreuer currentBetreuer = (Betreuer) currentUser;
 			betreuerPanel = new BetreuerPanel(panelSwitcher, currentBetreuer);
-			betreuerAnfragenPanel = new BetreuerAnfragenPanel(panelSwitcher, currentBetreuer);
+			betreuerAnfragenPanel = new BetreuerAnfragenPanel(panelSwitcher, this, currentBetreuer);
 			betreuerDatenPanel = new BetreuerDatenPanel(panelSwitcher, currentBetreuer);
 			betreuerStudentenPanel = new BetreuerStudentenPanel(panelSwitcher, currentBetreuer);
 

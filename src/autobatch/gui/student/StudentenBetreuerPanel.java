@@ -12,13 +12,14 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import autobatch.businesslogic.listselectionlistener.AuswahlSelectionListener;
+import autobatch.businesslogic.listselectionlistener.StudentAuswahlSelectionListener;
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.JTable;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class StudentenBetreuerPanel extends JPanel {
 
@@ -55,7 +56,7 @@ public class StudentenBetreuerPanel extends JPanel {
         
         JTable table = new JTable(model);
         
-        table.getSelectionModel().addListSelectionListener(new AuswahlSelectionListener(panelSwitcher, panelManager, student, table));
+        table.getSelectionModel().addListSelectionListener(new StudentAuswahlSelectionListener(panelSwitcher, panelManager, table));
         
         JScrollPane scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
@@ -66,14 +67,15 @@ public class StudentenBetreuerPanel extends JPanel {
         groupLayout.setHorizontalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
         		.addComponent(studentNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addComponent(scrollPane)
+        		.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 984, GroupLayout.PREFERRED_SIZE)
         );
         groupLayout.setVerticalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
         		.addGroup(groupLayout.createSequentialGroup()
         			.addComponent(studentNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(scrollPane)
-        			.addContainerGap(440, Short.MAX_VALUE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 360, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(74, Short.MAX_VALUE))
         );
         setLayout(groupLayout);
 	}

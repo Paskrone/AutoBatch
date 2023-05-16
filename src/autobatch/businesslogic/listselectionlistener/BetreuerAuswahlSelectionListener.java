@@ -5,29 +5,31 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import autobatch.businessobjects.Benutzer;
-import autobatch.businessobjects.Student;
-import autobatch.gui.student.StudentenBetreuerAnfragePanel;
+import autobatch.businessobjects.Betreuer;
+import autobatch.gui.betreuer.BetreuerAnfragen_1Panel;
 import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import autobatch.session.SessionManager;
 
-public class AuswahlSelectionListener implements ListSelectionListener {
-
+public class BetreuerAuswahlSelectionListener implements ListSelectionListener{
+	
 	private PanelSwitcher panelSwitcher;
 	private PanelManager panelManager;
 
-	private Student student;
-
 	private JTable table;
 
-	public AuswahlSelectionListener(PanelSwitcher panelSwitcher, PanelManager panelManager, Student student,
-			JTable table) {
+	
+	
+
+	public BetreuerAuswahlSelectionListener(PanelSwitcher panelSwitcher, PanelManager panelManager, JTable table) {
 		super();
-		this.panelManager = panelManager;
 		this.panelSwitcher = panelSwitcher;
+		this.panelManager = panelManager;
 		this.table = table;
 	}
+
+
+
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
@@ -35,18 +37,21 @@ public class AuswahlSelectionListener implements ListSelectionListener {
 			int selectedRow = table.getSelectedRow();
 			if (selectedRow != -1) { // Überprüfen Sie, ob eine Zeile ausgewählt wurde
 				// Holen Sie sich die Daten aus der ausgewählten Zeile
-				Object mail = table.getValueAt(selectedRow, 1);
+				Object mnr = table.getValueAt(selectedRow, 2);
 
-				panelSwitcher.storeData("1", mail);
-				
-				JPanel studentenBetreuerAnfragePanel = new StudentenBetreuerAnfragePanel(panelSwitcher, (Student) SessionManager.getInstance().getAktuellerBenutzer());
+				Object idThema = table.getValueAt(selectedRow, 3);
 
-				panelManager.updatePanels(studentenBetreuerAnfragePanel, "Studenten_Betreuer_Anfrage");
+				panelSwitcher.storeData("2", mnr);
+				panelSwitcher.storeData("3", idThema);
 
-				panelSwitcher.switchToPanel("Studenten_Betreuer_Anfrage");
+				JPanel betreuerAnfragen_1Panel = new BetreuerAnfragen_1Panel(panelSwitcher,
+						(Betreuer)SessionManager.getInstance().getAktuellerBenutzer());
+
+				panelManager.updatePanels(betreuerAnfragen_1Panel, "Betreuer_Anfragen_1");
+
+				panelSwitcher.switchToPanel("Betreuer_Anfragen_1");
 
 			}
 		}
 	}
-
 }

@@ -52,7 +52,6 @@ public class LoginActionListener implements ActionListener {
 			lbl_error.setVisible(false);
 
 			panelManager.initializePanels();
-			panelSwitcher.switchToPanel("Studenten");
 
 		} else {
 			lbl_error.setVisible(true);
