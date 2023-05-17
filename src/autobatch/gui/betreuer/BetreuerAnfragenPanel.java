@@ -52,7 +52,7 @@ public class BetreuerAnfragenPanel extends JPanel {
 		List<Student> studenten = new ArrayList<>();
 
 		for (Thema thema : t) {
-			if (thema.getBetreuerMail().equals(betreuer.getEmail())) {
+			if (!thema.getAngenommen() && thema.getBetreuerMail().equals(betreuer.getEmail())) {
 				System.out.println("klappt");
 				studenten.add(dbQuery.getStudentByMNR(thema.getStudentMNR()));
 				themen.add(thema);
@@ -85,11 +85,12 @@ public class BetreuerAnfragenPanel extends JPanel {
 		column.setPreferredWidth(0);
 
 		table.getSelectionModel()
-				.addListSelectionListener(new BetreuerAuswahlSelectionListener(panelSwitcher, panelManager, table));
+				.addListSelectionListener(new BetreuerAuswahlSelectionListener(panelSwitcher, panelManager, table, "Betreuer_Anfragen_1"));
 
 		JScrollPane scrollPane = new JScrollPane(table);
 
 		table.setFillsViewportHeight(true);
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -106,9 +107,6 @@ public class BetreuerAnfragenPanel extends JPanel {
 						.addGap(18)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 210, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(212, Short.MAX_VALUE)));
-
-		table = new JTable();
-		scrollPane.setRowHeaderView(table);
 		setLayout(groupLayout);
 
 	}

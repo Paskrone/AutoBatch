@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import autobatch.businesslogic.actionlistener.LoginActionListener;
-import autobatch.businesslogic.actionlistener.StudentenDatenActionListener;
 import autobatch.businessobjects.Student;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;

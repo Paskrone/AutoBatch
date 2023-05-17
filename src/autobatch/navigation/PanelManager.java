@@ -94,7 +94,7 @@ public class PanelManager {
 			betreuerPanel = new BetreuerPanel(panelSwitcher, currentBetreuer);
 			betreuerAnfragenPanel = new BetreuerAnfragenPanel(panelSwitcher, this, currentBetreuer);
 			betreuerDatenPanel = new BetreuerDatenPanel(panelSwitcher, currentBetreuer);
-			betreuerStudentenPanel = new BetreuerStudentenPanel(panelSwitcher, currentBetreuer);
+			betreuerStudentenPanel = new BetreuerStudentenPanel(panelSwitcher, this, currentBetreuer);
 
 			cards.add(betreuerPanel, "Betreuer");
 			cards.add(betreuerAnfragenPanel, "Betreuer_Anfragen");

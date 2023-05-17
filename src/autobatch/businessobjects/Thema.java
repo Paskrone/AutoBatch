@@ -7,17 +7,20 @@ public class Thema {
 	private String unternehmen;
 	private String thema;
 	private String beschreibung;
+	
+	private int angenommen;
 
 	private int studentMNR;
 	private String betreuerMail;
 
-	public Thema(int idThema, String unternehmen, String thema, String beschreibung, int studentMNR,
+	public Thema(int idThema, String unternehmen, String thema, String beschreibung, int angenommen, int studentMNR,
 			String betreuerMail) {
 		super();
 		this.idThema = idThema;
 		this.unternehmen = unternehmen;
 		this.thema = thema;
 		this.beschreibung = beschreibung;
+		this.angenommen = angenommen;
 		this.studentMNR = studentMNR;
 		this.betreuerMail = betreuerMail;
 
@@ -69,6 +72,14 @@ public class Thema {
 
 	public void setBetreuerMail(String betreuerMail) {
 		this.betreuerMail = betreuerMail;
+	}
+
+	public boolean getAngenommen() {
+		return angenommen == 1;
+	}
+
+	public void setAngenommen(int angenommen) {
+		this.angenommen = angenommen;
 	}
 
 }

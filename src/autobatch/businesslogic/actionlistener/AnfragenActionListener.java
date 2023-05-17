@@ -43,7 +43,9 @@ public class AnfragenActionListener implements ActionListener {
 		String beschreibung = tf_beschreibung.getText();
 
 		Datenbankabfrage dbaccess = new Datenbankabfrage();
-		if (!dbaccess.setDataThema(student, betreuer, thema, unternehmen, beschreibung)) {
+		
+		
+		if (dbaccess.deleteDataThema(student.getMnr()) && !dbaccess.setDataThema(student, betreuer, thema, unternehmen, beschreibung)) {
 			lbl_error.setVisible(true);
 		} else {
 			lblPopUp.setVisible(true);

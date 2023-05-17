@@ -20,8 +20,6 @@ import autobatch.businessobjects.Thema;
 //mysql -u db4 -p'!db4.hfts23?' -h 3.69.96.96 -P 3306 db4
 
 public class Datenbankabfrage {
-	
-
 
 	private String url = "jdbc:mysql://3.69.96.96:3306/";
 	private String dbName = "db4";
@@ -103,7 +101,7 @@ public class Datenbankabfrage {
 		}
 		return null;
 	}
-	
+
 	public Student getStudentByMNR(int mnr) {
 		List<Student> sl = this.getAllStudents();
 		for (Student student : sl) {
@@ -366,10 +364,10 @@ public class Datenbankabfrage {
 			String beschreibung) {
 		if (student != null && betreuer != null && thema != null && unternehmen != null && beschreibung != null) {
 			int idThema = getAllThemen().size();
-			
-			String query = "INSERT INTO `db4`.`thema` (`idThema`, `thema`, `unternehmen`, `beschreibung`, `student`, `betreuer`) VALUES ('"+idThema+"', '"
-					+ thema + "', '" + unternehmen + "', '" + beschreibung + "', '" + student.getMnr() + "', '"
-					+ betreuer.getEmail() + "')";
+
+			String query = "INSERT INTO `db4`.`thema` (`idThema`, `thema`, `unternehmen`, `beschreibung`, `angenommen`, `student`, `betreuer`) VALUES ('"
+					+ idThema + "', '" + thema + "', '" + unternehmen + "', '" + beschreibung + "', '0', '"
+					+ student.getMnr() + "', '" + betreuer.getEmail() + "')";
 
 			if (update(query)) {
 				return true;
@@ -377,8 +375,28 @@ public class Datenbankabfrage {
 		}
 		return false;
 	}
-	
-	
+
+	public boolean updateDataThemaInt(Thema thema, int arg, String spalte) {
+		if (arg != 0) {
+			String query = "UPDATE `db4`.`thema` SET `" + spalte + "` = '" + arg + "' WHERE (idThema = "
+					+ thema.getIdThema() + ")";
+			if (update(query)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean deleteDataThema(int studentMNR) {
+
+		String query = "DELETE FROM `db4`.`thema` WHERE (`student` = '" + studentMNR + "')";
+
+		if (update(query)) {
+			return true;
+		}
+		return false;
+	}
+
 	public List<Thema> getAllThemen() {
 		List<Thema> themen = new ArrayList<>();
 		Connection con = null;
@@ -390,16 +408,18 @@ public class Datenbankabfrage {
 			Statement stmt = con.createStatement();
 			ResultSet rs;
 
-			rs = stmt.executeQuery("SELECT idThema, unternehmen, thema, beschreibung, student, betreuer FROM thema");
+			rs = stmt.executeQuery(
+					"SELECT idThema, unternehmen, thema, beschreibung, angenommen, student, betreuer FROM thema");
 
 			while (rs.next()) {
 				int idThema = rs.getInt("idThema");
 				String unternehmen = rs.getString("unternehmen");
 				String thema = rs.getString("thema");
 				String beschreibung = rs.getString("beschreibung");
+				int angenommen = rs.getInt("angenommen");
 				int studentMNR = rs.getInt("student");
 				String betreuerMail = rs.getString("betreuer");
-				Thema t = new Thema(idThema, unternehmen, thema, beschreibung, studentMNR, betreuerMail);
+				Thema t = new Thema(idThema, unternehmen, thema, beschreibung, angenommen, studentMNR, betreuerMail);
 				themen.add(t);
 			}
 
@@ -408,20 +428,19 @@ public class Datenbankabfrage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return themen;
 	}
-	
+
 	public Thema getThemaByID(int idThema) {
 		List<Thema> t = getAllThemen();
 		for (Thema thema : t) {
-			if (thema.getIdThema()== idThema) {
+			if (thema.getIdThema() == idThema) {
 				return thema;
 			}
 		}
 		return null;
 	}
-	
 
 	private boolean update(String query) {
 		try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);

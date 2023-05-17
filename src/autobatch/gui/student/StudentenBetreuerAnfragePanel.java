@@ -7,8 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import autobatch.businesslogic.actionlistener.AnfragenActionListener;
-import autobatch.businesslogic.actionlistener.LoginActionListener;
-import autobatch.businesslogic.actionlistener.StudentenDatenActionListener;
 import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.businessobjects.Betreuer;
@@ -16,7 +14,6 @@ import autobatch.businessobjects.Betreuer;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
