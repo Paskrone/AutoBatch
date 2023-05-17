@@ -13,6 +13,7 @@ import autobatch.businessobjects.Benutzer;
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
 import autobatch.businessobjects.Studiendekan;
+import autobatch.businessobjects.Thema;
 
 //Database connection for macos-terminal: source ~/.zshrc
 //export PATH="/usr/local/opt/mysql-client/bin:$PATH"
@@ -32,17 +33,17 @@ public class Datenbankabfrage {
 	// anhand eines übergebenen usernames.
 
 	public Benutzer getBenutzer(String username) {
-		Student student = getStudent(username);
+		Student student = getStudentByUsername(username);
 		if (student != null) {
 			return student;
 		}
 
-		Betreuer betreuer = getBetreuer(username);
+		Betreuer betreuer = getBetreuerByUsername(username);
 		if (betreuer != null) {
 			return betreuer;
 		}
 
-		Studiendekan studiendekan = getStudiendekan(username);
+		Studiendekan studiendekan = getStudiendekanByUsername(username);
 		if (studiendekan != null) {
 			return studiendekan;
 		}
@@ -55,10 +56,20 @@ public class Datenbankabfrage {
 	// Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie
 	// anhand eines übergebenen usernames.
 
-	public Betreuer getBetreuer(String username) {
+	public Betreuer getBetreuerByUsername(String username) {
 		List<Betreuer> betreuerList = getAllBetreuer();
 		for (Betreuer betreuer : betreuerList) {
 			if (betreuer.getBenutzername().equals(username)) {
+				return betreuer;
+			}
+		}
+		return null;
+	}
+
+	public Betreuer getBetreuerByMail(String mail) {
+		List<Betreuer> betreuerList = getAllBetreuer();
+		for (Betreuer betreuer : betreuerList) {
+			if (betreuer.getEmail().equals(mail)) {
 				return betreuer;
 			}
 		}
@@ -70,8 +81,8 @@ public class Datenbankabfrage {
 	// Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie
 	// anhand eines übergebenen usernames.
 
-	public Studiendekan getStudiendekan(String username) {
-		List<Studiendekan> studiendekaneList = getStudiendekane();
+	public Studiendekan getStudiendekanByUsername(String username) {
+		List<Studiendekan> studiendekaneList = getAllStudiendekane();
 		for (Studiendekan studiendekan : studiendekaneList) {
 			if (studiendekan.getBenutzername().equals(username)) {
 				return studiendekan;
@@ -80,34 +91,37 @@ public class Datenbankabfrage {
 		return null;
 	}
 
-	public Student getStudent(String name) {
-		Student s = null;
-		List<Student> sl = this.getStudents();
-		System.out.println(sl);
+	public Student getStudentByUsername(String username) {
+		List<Student> sl = this.getAllStudents();
 		for (Student student : sl) {
-			if (student.getBenutzername().equals(name)) {
-				s = new Student(student.getMnr(), student.getVorname(), student.getNachname(), student.getPasswort(),
-						student.getBenutzername(), student.getEmail(), student.getTelefonnummer(),
-						student.getStudiengang(), student.getOrt(), student.getStrasse(), student.getPostleizahl(),
-						student.getStudiendekan(), student.getBetreuer());
-
+			if (student.getBenutzername().equals(username)) {
+				return student;
 			}
 
 		}
+		return null;
+	}
 
-		return s;
+	public Student getStudentByMNR(int mnr) {
+		List<Student> sl = this.getAllStudents();
+		for (Student student : sl) {
+			if (student.getMnr() == mnr) {
+				return student;
+			}
+
+		}
+		return null;
 	}
 
 	// Gibt ALLE Studenten zurück, die in der DB existieren.
 
-	public List<Student> getStudents() {
+	public List<Student> getAllStudents() {
 		List<Student> students = new ArrayList<>();
 		Connection con = null;
 
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url + dbName, userName, pw);
-			System.out.println("Connected to database");
 
 			Statement stmt = con.createStatement();
 			ResultSet rs;
@@ -122,7 +136,7 @@ public class Datenbankabfrage {
 				String password = rs.getString("Passwort");
 				String username = rs.getString("Benutzername");
 				String email = rs.getString("email");
-				int telefonnummer = rs.getInt("Telefonnummer");
+				long telefonnummer = rs.getLong("Telefonnummer");
 				String studiengang = rs.getString("Studiengang");
 				String ort = rs.getString("ort");
 				int postleizahl = rs.getInt("postleizahl");
@@ -135,7 +149,6 @@ public class Datenbankabfrage {
 			}
 
 			con.close();
-			System.out.println("Disconnected from database");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -146,14 +159,13 @@ public class Datenbankabfrage {
 
 	// Gibt ALLE Studiendekane zurück, die in der DB existieren.
 
-	public List<Studiendekan> getStudiendekane() {
+	public List<Studiendekan> getAllStudiendekane() {
 		List<Studiendekan> studiendekans = new ArrayList<>();
 		Connection con = null;
 
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url + dbName, userName, pw);
-			System.out.println("Connected to database");
 
 			Statement stmt = con.createStatement();
 			ResultSet rs;
@@ -173,7 +185,6 @@ public class Datenbankabfrage {
 			}
 
 			con.close();
-			System.out.println("Disconnected from database");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -191,7 +202,6 @@ public class Datenbankabfrage {
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url + dbName, userName, pw);
-			System.out.println("Connected to database");
 
 			Statement stmt = con.createStatement();
 			ResultSet rs;
@@ -209,7 +219,6 @@ public class Datenbankabfrage {
 			}
 
 			con.close();
-			System.out.println("Disconnected from database");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -288,7 +297,7 @@ public class Datenbankabfrage {
 			return false;
 		}
 
-		String query = "INSERT INTO studenten (MNR, Nachname, Vorname, Passwort, Benutzername, email, Telefonnummer, Studiengang, ort, strasse, postleizahl, studiendekan, betreuer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO studenten (MNR, Nachname, Vorname, Passwort, Benutzername, email, Telefonnummer, Studiengang, ort, strasse, postleizahl, studiendekan, betreuer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
 		System.out.println(query);
 		try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);
 				PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -314,38 +323,123 @@ public class Datenbankabfrage {
 		}
 	}
 
-	public void updateData(Student student, String ort, String strasse, int postleizahl, String telefon) {
-		if (ort != null) {
-			String query = "UPDATE studenten SET ort = '" + ort + "' WHERE (MNR = " + student.getMnr() + ")";
+	// Update Studenten Tabelle
+	public boolean updateDataStudentString(Student student, String arg, String spalte) {
+		if (arg != null) {
+			String query = "UPDATE `db4`.`studenten` SET `" + spalte + "` = '" + arg + "' WHERE (MNR = "
+					+ student.getMnr() + ")";
 			if (update(query)) {
-				student.setOrt(ort);
+				student.setOrt(arg);
+				return true;
 			}
 		}
-		if (strasse != null) {
-			String query = "UPDATE `db4`.`studenten` SET `strasse` = '" + strasse + "' WHERE (MNR = " + student.getMnr()
-					+ ")";
+		return false;
+	}
 
+	public boolean updateDataStudentInt(Student student, int arg, String spalte) {
+		if (arg != 0) {
+			String query = "UPDATE `db4`.`studenten` SET `" + spalte + "` = '" + arg + "' WHERE (MNR = "
+					+ student.getMnr() + ")";
 			if (update(query)) {
-				student.setStrasse(strasse);
+				return true;
 			}
 		}
-		if (postleizahl != 0) {
-			String query = "UPDATE studenten SET postleizahl = '" + postleizahl + "' WHERE (MNR = " + student.getMnr()
-					+ ")";
+		return false;
+	}
+
+	public boolean updateDataStudentLong(Student student, long arg, String spalte) {
+		if (arg != 0) {
+			String query = "UPDATE `db4`.`studenten` SET `" + spalte + "` = '" + arg + "' WHERE (MNR = "
+					+ student.getMnr() + ")";
 			if (update(query)) {
-				student.setPostleizahl(postleizahl);
+				return true;
 			}
 		}
+		return false;
+	}
 
-		if (telefon != null) {
-			String query = "UPDATE `studenten` SET `telefonnummer` = '" + telefon + "' WHERE (MNR = " + student.getMnr()
-					+ ")";
+	// befülle Thema Tabelle
+
+	public boolean setDataThema(Student student, Betreuer betreuer, String thema, String unternehmen,
+			String beschreibung) {
+		if (student != null && betreuer != null && thema != null && unternehmen != null && beschreibung != null) {
+			int idThema = getAllThemen().size();
+
+			String query = "INSERT INTO `db4`.`thema` (`idThema`, `thema`, `unternehmen`, `beschreibung`, `angenommen`, `student`, `betreuer`) VALUES ('"
+					+ idThema + "', '" + thema + "', '" + unternehmen + "', '" + beschreibung + "', '0', '"
+					+ student.getMnr() + "', '" + betreuer.getEmail() + "')";
 
 			if (update(query)) {
-				student.setStrasse(telefon);
+				return true;
 			}
 		}
+		return false;
+	}
 
+	public boolean updateDataThemaInt(Thema thema, int arg, String spalte) {
+		if (arg != 0) {
+			String query = "UPDATE `db4`.`thema` SET `" + spalte + "` = '" + arg + "' WHERE (idThema = "
+					+ thema.getIdThema() + ")";
+			if (update(query)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean deleteDataThema(int studentMNR) {
+
+		String query = "DELETE FROM `db4`.`thema` WHERE (`student` = '" + studentMNR + "')";
+
+		if (update(query)) {
+			return true;
+		}
+		return false;
+	}
+
+	public List<Thema> getAllThemen() {
+		List<Thema> themen = new ArrayList<>();
+		Connection con = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url + dbName, userName, pw);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs;
+
+			rs = stmt.executeQuery(
+					"SELECT idThema, unternehmen, thema, beschreibung, angenommen, student, betreuer FROM thema");
+
+			while (rs.next()) {
+				int idThema = rs.getInt("idThema");
+				String unternehmen = rs.getString("unternehmen");
+				String thema = rs.getString("thema");
+				String beschreibung = rs.getString("beschreibung");
+				int angenommen = rs.getInt("angenommen");
+				int studentMNR = rs.getInt("student");
+				String betreuerMail = rs.getString("betreuer");
+				Thema t = new Thema(idThema, unternehmen, thema, beschreibung, angenommen, studentMNR, betreuerMail);
+				themen.add(t);
+			}
+
+			con.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return themen;
+	}
+
+	public Thema getThemaByID(int idThema) {
+		List<Thema> t = getAllThemen();
+		for (Thema thema : t) {
+			if (thema.getIdThema() == idThema) {
+				return thema;
+			}
+		}
+		return null;
 	}
 
 	private boolean update(String query) {

@@ -23,8 +23,8 @@ public class LoginActionListener implements ActionListener {
 	private PanelSwitcher panelSwitcher;
 	private PanelManager panelManager;
 
-	public LoginActionListener(PanelSwitcher panelSwitcher, PanelManager panelManager, JTextField tf_username, JPasswordField tf_password,
-			JLabel lbl_error) {
+	public LoginActionListener(PanelSwitcher panelSwitcher, PanelManager panelManager, JTextField tf_username,
+			JPasswordField tf_password, JLabel lbl_error) {
 		this.panelSwitcher = panelSwitcher;
 		this.tf_username = tf_username;
 		this.tf_password = tf_password;
@@ -41,30 +41,18 @@ public class LoginActionListener implements ActionListener {
 		Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
 		boolean checkData = datenbankabfrage.searchAllTablesByUsernameAndPassword(username, password);
 		if (checkData) {
-			
-			//Benutzer speichern
+
+			// Benutzer speichern
 			Benutzer aktuellerBenutzer = datenbankabfrage.getBenutzer(username);
-	        SessionManager.getInstance().setAktuellerBenutzer(aktuellerBenutzer);
+			SessionManager.getInstance().setAktuellerBenutzer(aktuellerBenutzer);
 
 			// Textfields leeren
 			tf_password.setText("");
 			tf_username.setText("");
+			lbl_error.setVisible(false);
 
-			
-			if (aktuellerBenutzer instanceof Student) {
-				
-                panelManager.initializeStudentPanels();
-                panelSwitcher.switchToPanel("Studenten");
-            } else if (aktuellerBenutzer instanceof Betreuer) {
-            	
-                panelManager.initializeBetreuerPanels();
-                panelSwitcher.switchToPanel("Betreuer");
-            } else if (aktuellerBenutzer instanceof Studiendekan) {
-            	
-                panelManager.initializeStudiendekanPanels();
-                panelSwitcher.switchToPanel("Studiendekane");
-            }
-			
+			panelManager.initializePanels();
+
 		} else {
 			lbl_error.setVisible(true);
 			tf_password.setText("");

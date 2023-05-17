@@ -5,9 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import autobatch.businesslogic.actionlistener.AbmeldenActionListener;
 import autobatch.businesslogic.actionlistener.LoginActionListener;
-import autobatch.businesslogic.actionlistener.StudentenDatenActionListener;
 import autobatch.businessobjects.Student;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
@@ -31,7 +29,7 @@ public class StudentenPanel extends JPanel {
         StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher);
        
         //AutoBath Logo anzeigen
-        ImageIcon imageIcon = new ImageIcon("/Users/pascalgrcic/git/AutoBatch/images/autobatchlogo_klein.png");
+        ImageIcon imageIcon = new ImageIcon("/AutoBatch/src/images/autobatchlogo_klein.png");
         JLabel lbl_image = new JLabel(imageIcon);
         
         GroupLayout groupLayout = new GroupLayout(this);

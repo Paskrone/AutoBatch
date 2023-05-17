@@ -1,6 +1,5 @@
 package autobatch.gui.student;
 
-
 import javax.swing.JPanel;
 
 import java.awt.Dimension;
@@ -14,67 +13,79 @@ import autobatch.businesslogic.mouselistener.NavigationBarMouseListener;
 import autobatch.navigation.PanelSwitcher;
 
 public class StudentNavigationBar extends JPanel {
-	
+
 	private PanelSwitcher panelSwitcher;
-	
+
 	public StudentNavigationBar(PanelSwitcher panelSwitcher) {
-		
+
 		this.panelSwitcher = panelSwitcher;
 		setPreferredSize(new Dimension(1000, 50));
-		
+
 		JLabel lbl_Ip = new JLabel("IP");
 		lbl_Ip.addMouseListener(new NavigationBarMouseListener() {
 			@Override
 			public void labelClicked() {
-				
+
 				panelSwitcher.switchToPanel("Studenten_Ip");
-				
+
 			}
 		});
-		
+
 		JLabel lbl_betreuer = new JLabel("Betreuer");
 		lbl_betreuer.addMouseListener(new NavigationBarMouseListener() {
-			
+
 			@Override
 			public void labelClicked() {
-				
+
 				panelSwitcher.switchToPanel("Studenten_Betreuer");
-				
+
 			}
 		});
-		
+
 		JLabel lbl_abgaben = new JLabel("Abgaben");
 		lbl_abgaben.addMouseListener(new NavigationBarMouseListener() {
-			
+
 			@Override
 			public void labelClicked() {
-				
+
 				panelSwitcher.switchToPanel("Studenten_Abgaben");
-				
+
 			}
 		});
-		
+
 		JLabel lbl_formulare = new JLabel("Formulare");
 		lbl_formulare.addMouseListener(new NavigationBarMouseListener() {
-			
+
 			@Override
 			public void labelClicked() {
-				
+
 				panelSwitcher.switchToPanel("Studenten_Formulare");
-				
+
 			}
 		});
-		
+
 		JLabel lbl_daten = new JLabel("Daten");
 		lbl_daten.addMouseListener(new NavigationBarMouseListener() {
-			
+
 			@Override
 			public void labelClicked() {
-				
+
 				panelSwitcher.switchToPanel("Studenten_Daten");
-				
+
 			}
 		});
+
+		JLabel lbl_abmelden = new JLabel("abmelden");
+		lbl_abmelden.addMouseListener(new NavigationBarMouseListener() {
+
+			@Override
+			public void labelClicked() {
+
+				panelSwitcher.switchToPanel("Login");
+
+			}
+		});
+
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -89,24 +100,24 @@ public class StudentNavigationBar extends JPanel {
 					.addComponent(lbl_formulare)
 					.addGap(64)
 					.addComponent(lbl_daten)
-					.addContainerGap(453, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 360, Short.MAX_VALUE)
+					.addComponent(lbl_abmelden)
+					.addGap(32))
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap(19, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lbl_Ip)
 						.addComponent(lbl_betreuer)
 						.addComponent(lbl_formulare)
 						.addComponent(lbl_abgaben)
-						.addComponent(lbl_daten))
+						.addComponent(lbl_daten)
+						.addComponent(lbl_abmelden))
 					.addGap(15))
 		);
 		setLayout(groupLayout);
-		
-		
 
 	}
-
 }

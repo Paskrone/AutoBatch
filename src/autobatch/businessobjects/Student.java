@@ -8,7 +8,9 @@ public class Student extends Benutzer{
 	private String passwort;
 	private String benutzername;
 	private String email;
-	private int telefonnummer;
+	
+	private long telefonnummer;
+	
 	private String studiengang;
 	private String ort;
 	private String strasse;
@@ -18,7 +20,7 @@ public class Student extends Benutzer{
 	
 	
 	public Student(int mnr, String vorname, String nachname, String passwort, String benutzername, String email,
-			int telefonnummer, String studiengang, String ort, String strasse, int postleizahl, String studiendekan, String betreuer) {
+			long telefonnummer, String studiengang, String ort, String strasse, int postleizahl, String studiendekan, String betreuer) {
 		super();
 		this.mnr = mnr;
 		this.vorname = vorname;
@@ -34,47 +36,15 @@ public class Student extends Benutzer{
 		this.studiendekan = studiendekan;
 		this.betreuer = betreuer;
 	}
-	
-
-
-	public String getOrt() {
-		return ort;
-	}
-
-
-
-	public void setOrt(String ort) {
-		this.ort = ort;
-	}
-
-
-
-	public String getStrasse() {
-		return strasse;
-	}
-
-
-
-	public void setStrasse(String strasse) {
-		this.strasse = strasse;
-	}
-
-
-
-	public int getPostleizahl() {
-		return postleizahl;
-	}
-
-
-
-	public void setPostleizahl(int postleizahl) {
-		this.postleizahl = postleizahl;
-	}
-
 
 
 	public int getMnr() {
 		return mnr;
+	}
+
+
+	public void setMnr(int mnr) {
+		this.mnr = mnr;
 	}
 
 
@@ -83,8 +53,18 @@ public class Student extends Benutzer{
 	}
 
 
+	public void setVorname(String vorname) {
+		this.vorname = vorname;
+	}
+
+
 	public String getNachname() {
 		return nachname;
+	}
+
+
+	public void setNachname(String nachname) {
+		this.nachname = nachname;
 	}
 
 
@@ -93,8 +73,18 @@ public class Student extends Benutzer{
 	}
 
 
+	public void setPasswort(String passwort) {
+		this.passwort = passwort;
+	}
+
+
 	public String getBenutzername() {
 		return benutzername;
+	}
+
+
+	public void setBenutzername(String benutzername) {
+		this.benutzername = benutzername;
 	}
 
 
@@ -103,8 +93,18 @@ public class Student extends Benutzer{
 	}
 
 
-	public int getTelefonnummer() {
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public long getTelefonnummer() {
 		return telefonnummer;
+	}
+
+
+	public void setTelefonnummer(long telefonnummer) {
+		this.telefonnummer = telefonnummer;
 	}
 
 
@@ -113,16 +113,59 @@ public class Student extends Benutzer{
 	}
 
 
+	public void setStudiengang(String studiengang) {
+		this.studiengang = studiengang;
+	}
+
+
+	public String getOrt() {
+		return ort;
+	}
+
+
+	public void setOrt(String ort) {
+		this.ort = ort;
+	}
+
+
+	public String getStrasse() {
+		return strasse;
+	}
+
+
+	public void setStrasse(String strasse) {
+		this.strasse = strasse;
+	}
+
+
+	public int getPostleizahl() {
+		return postleizahl;
+	}
+
+
+	public void setPostleizahl(int postleizahl) {
+		this.postleizahl = postleizahl;
+	}
+
+
 	public String getStudiendekan() {
 		return studiendekan;
+	}
+
+
+	public void setStudiendekan(String studiendekan) {
+		this.studiendekan = studiendekan;
 	}
 
 
 	public String getBetreuer() {
 		return betreuer;
 	}
-	
-	
-	
+
+
+	public void setBetreuer(String betreuer) {
+		this.betreuer = betreuer;
+	}
+
 	
 }
