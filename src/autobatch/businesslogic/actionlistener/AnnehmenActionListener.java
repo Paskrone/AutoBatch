@@ -38,7 +38,6 @@ public class AnnehmenActionListener implements ActionListener {
 
 		datenbankabfrage.updateDataStudentInt(student, arbeit.getIdArbeit(), "arbeit");
 
-
 		lblPopUp.setVisible(true);
 
 	}

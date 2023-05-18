@@ -43,7 +43,7 @@ public class BetreuerAnfragenPanel extends JPanel {
 		BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelSwitcher);
 
 		// Erstelle eine neue Tabelle
-		String[] columnNames = { "Nachname", "Email", "Matrikelnr." , "idThema"};
+		String[] columnNames = { "Nachname", "Email", "Matrikelnr.", "idThema" };
 		Datenbankabfrage dbQuery = new Datenbankabfrage();
 
 		List<Arbeit> a = dbQuery.getAllArbeiten();
@@ -52,7 +52,8 @@ public class BetreuerAnfragenPanel extends JPanel {
 		List<Student> studenten = new ArrayList<>();
 
 		for (Arbeit arbeit : a) {
-			if (!arbeit.getAngenommen() && arbeit.getBetreuerMail() != null && arbeit.getBetreuerMail().equals(betreuer.getEmail())) {
+			if (!arbeit.getAngenommen() && arbeit.getBetreuerMail() != null
+					&& arbeit.getBetreuerMail().equals(betreuer.getEmail())) {
 				System.out.println("klappt");
 				studenten.add(dbQuery.getStudentByMNR(arbeit.getStudentMNR()));
 				arbeiten.add(arbeit);
@@ -75,22 +76,22 @@ public class BetreuerAnfragenPanel extends JPanel {
 				// Alle Zellen sind nicht editierbar
 			}
 		};
-		
+
 		JTable table = new JTable(model);
-		
+
 		TableColumnModel columnModel = table.getColumnModel();
 		TableColumn column = columnModel.getColumn(3);
 		column.setMinWidth(0);
 		column.setMaxWidth(0);
 		column.setPreferredWidth(0);
 
-		table.getSelectionModel()
-				.addListSelectionListener(new BetreuerAuswahlSelectionListener(panelSwitcher, panelManager, table, "Betreuer_Anfragen_1"));
+		table.getSelectionModel().addListSelectionListener(
+				new BetreuerAuswahlSelectionListener(panelSwitcher, panelManager, table, "Betreuer_Anfragen_1"));
 
 		JScrollPane scrollPane = new JScrollPane(table);
 
 		table.setFillsViewportHeight(true);
-		
+
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()

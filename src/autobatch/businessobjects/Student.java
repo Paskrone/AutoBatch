@@ -15,8 +15,10 @@ public class Student extends Benutzer{
 	private String ort;
 	private String strasse;
 	private int postleizahl;
+	
 	private String studiendekan;
 	private String betreuer;
+	private int arbeit;
 	
 	
 	public Student(int mnr, String vorname, String nachname, String passwort, String benutzername, String email,
@@ -35,6 +37,7 @@ public class Student extends Benutzer{
 		this.postleizahl = postleizahl;
 		this.studiendekan = studiendekan;
 		this.betreuer = betreuer;
+		this.arbeit = arbeit;
 	}
 
 
@@ -167,5 +170,16 @@ public class Student extends Benutzer{
 		this.betreuer = betreuer;
 	}
 
+
+	public int getArbeit() {
+		return arbeit;
+	}
+
+
+	public void setArbeit(int arbeit) {
+		this.arbeit = arbeit;
+	}
+
+	
 	
 }

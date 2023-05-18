@@ -127,7 +127,7 @@ public class Datenbankabfrage {
 			ResultSet rs;
 
 			rs = stmt.executeQuery(
-					"SELECT MNR, Nachname, Vorname, email, Telefonnummer, Studiengang, studiendekan, betreuer, Benutzername, Passwort, ort, postleizahl, strasse From studenten");
+					"SELECT MNR, Nachname, Vorname, email, Telefonnummer, Studiengang, studiendekan, betreuer, Benutzername, Passwort, ort, postleizahl, strasse, arbeit From studenten");
 
 			while (rs.next()) {
 				int mnr = rs.getInt("MNR");
@@ -143,8 +143,12 @@ public class Datenbankabfrage {
 				String strasse = rs.getString("strasse");
 				String studiendekan = rs.getString("studiendekan");
 				String betreuer = rs.getString("betreuer");
+				int arbeit = rs.getInt("arbeit");
+				
 				Student student = new Student(mnr, vorname, nachname, password, username, email, telefonnummer,
 						studiengang, ort, strasse, postleizahl, studiendekan, betreuer);
+				//arbeit mit Setter, da es ein int ist und sonst Probleme auftauchen da int nicht null sein kann
+				student.setArbeit(arbeit);
 				students.add(student);
 			}
 
@@ -297,7 +301,7 @@ public class Datenbankabfrage {
 			return false;
 		}
 
-		String query = "INSERT INTO studenten (MNR, Nachname, Vorname, Passwort, Benutzername, email, Telefonnummer, Studiengang, ort, strasse, postleizahl, studiendekan, betreuer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
+		String query = "INSERT INTO studenten (MNR, Nachname, Vorname, Passwort, Benutzername, email, Telefonnummer, Studiengang, ort, strasse, postleizahl, studiendekan, betreuer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		System.out.println(query);
 		try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);
 				PreparedStatement stmt = conn.prepareStatement(query)) {
