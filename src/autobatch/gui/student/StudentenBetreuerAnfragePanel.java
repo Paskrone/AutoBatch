@@ -39,7 +39,7 @@ public class StudentenBetreuerAnfragePanel extends JPanel {
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher);
+		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher, student);
 
 		System.out.println(panelSwitcher.getData("1"));
 

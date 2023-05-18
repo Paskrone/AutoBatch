@@ -19,10 +19,12 @@ import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.session.SessionManager;
 
 public class IPAnfragenActionListener implements ActionListener {
+	
 	private Thema thema;
 	private Student student;
 	private Betreuer betreuer;
 	private Long i;
+	
 	public IPAnfragenActionListener(Thema thema, Student student, Betreuer betreuer) {
 		super();
 		this.thema = thema;

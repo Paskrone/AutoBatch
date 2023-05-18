@@ -43,7 +43,7 @@ public class StudentenIpPanel extends JPanel {
     	setPreferredSize(new Dimension(1000, 500));
         setBorder(new EmptyBorder(5, 5, 5, 5));
         
-        StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher);
+        StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher, student);
         
         txtDatum = new JTextField();
         txtDatum.setColumns(10);

@@ -37,7 +37,7 @@ public class StudentenDatenPanel extends JPanel {
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher);
+		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher, student);
 		
 
 		JLabel lblMatrikelnummer = new JLabel("Matrikelnummer:");
