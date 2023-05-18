@@ -1,8 +1,8 @@
 package autobatch.businessobjects;
 
-public class Thema {
+public class Arbeit {
 
-	private int idThema;
+	private int idArbeit;
 
 	private String unternehmen;
 	private String thema;
@@ -13,10 +13,10 @@ public class Thema {
 	private int studentMNR;
 	private String betreuerMail;
 
-	public Thema(int idThema, String unternehmen, String thema, String beschreibung, int angenommen, int studentMNR,
+	public Arbeit(int idArbeit, String unternehmen, String thema, String beschreibung, int angenommen, int studentMNR,
 			String betreuerMail) {
 		super();
-		this.idThema = idThema;
+		this.idArbeit = idArbeit;
 		this.unternehmen = unternehmen;
 		this.thema = thema;
 		this.beschreibung = beschreibung;
@@ -26,12 +26,12 @@ public class Thema {
 
 	}
 
-	public int getIdThema() {
-		return idThema;
+	public int getIdArbeit() {
+		return idArbeit;
 	}
 
-	public void setIdThema(int idThema) {
-		this.idThema = idThema;
+	public void setIdArbeit(int idArbeit) {
+		this.idArbeit = idArbeit;
 	}
 
 	public String getUnternehmen() {

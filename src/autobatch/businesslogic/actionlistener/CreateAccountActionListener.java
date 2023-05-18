@@ -74,7 +74,6 @@ public class CreateAccountActionListener implements ActionListener {
 			if (dbaccess.registerStudent(new Student(mnrInt, tf_vorname.getText(), tf_nachname.getText(), password,
 					tf_benutzername.getText(), tf_Email.getText(), telefonnummer, tf_Studiengang.getText(),
 					tf_Ort.getText(), tf_Strasse.getText(), postleizahl, null, null))) {
-				System.out.println("hjesowdjojojidhd3whud3whub3dwhuhduw3hudw3hudhbudhubdhud");
 				//Benutzer speichern
 				Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
 				Benutzer aktuellerBenutzer = datenbankabfrage.getBenutzer(tf_benutzername.getText());

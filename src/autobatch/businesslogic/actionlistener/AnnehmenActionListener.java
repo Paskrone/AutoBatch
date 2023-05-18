@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
-import autobatch.businessobjects.Thema;
+import autobatch.businessobjects.Arbeit;
 import autobatch.dbaccess.Datenbankabfrage;
 
 public class AnnehmenActionListener implements ActionListener {
@@ -15,15 +15,15 @@ public class AnnehmenActionListener implements ActionListener {
 	private Student student;
 	private Betreuer betreuer;
 
-	private Thema thema;
+	private Arbeit arbeit;
 
 	private JLabel lblPopUp;
 
-	public AnnehmenActionListener(Student student, Betreuer betreuer, Thema thema, JLabel lblPopUp) {
+	public AnnehmenActionListener(Student student, Betreuer betreuer, Arbeit arbeit, JLabel lblPopUp) {
 		super();
 		this.student = student;
 		this.betreuer = betreuer;
-		this.thema = thema;
+		this.arbeit = arbeit;
 		this.lblPopUp = lblPopUp;
 	}
 
@@ -34,10 +34,9 @@ public class AnnehmenActionListener implements ActionListener {
 		
 		datenbankabfrage.updateDataStudentString(student, betreuer.getEmail(), "betreuer");
 
-		datenbankabfrage.updateDataThemaInt(thema, 1, "angenommen");
+		datenbankabfrage.updateDataArbeitInt(arbeit, 1, "angenommen");
 
-		datenbankabfrage.updateDataStudentInt(student, thema.getIdThema(), "thema");
-
+		datenbankabfrage.updateDataStudentInt(student, arbeit.getIdArbeit(), "arbeit");
 
 		lblPopUp.setVisible(true);
 

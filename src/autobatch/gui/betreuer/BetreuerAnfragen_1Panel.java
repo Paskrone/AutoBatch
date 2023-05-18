@@ -11,7 +11,7 @@ import autobatch.businesslogic.actionlistener.AnfragenActionListener;
 import autobatch.businesslogic.actionlistener.AnnehmenActionListener;
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
-import autobatch.businessobjects.Thema;
+import autobatch.businessobjects.Arbeit;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.gui.student.StudentNavigationBar;
 import autobatch.navigation.PanelSwitcher;
@@ -27,7 +27,7 @@ public class BetreuerAnfragen_1Panel extends JPanel {
 	private PanelSwitcher panelSwitcher;
 	private Student student;
 
-	private Thema thema;
+	private Arbeit arbeit;
 
 	private Betreuer betreuer;
 
@@ -39,7 +39,7 @@ public class BetreuerAnfragen_1Panel extends JPanel {
 		this.student = datenbankabfrage.getStudentByMNR(mnr);
 
 		int idThema = Integer.parseInt(panelSwitcher.getData("3") + "");
-		this.thema = datenbankabfrage.getThemaByID(idThema);
+		this.arbeit = datenbankabfrage.getArbeitByID(idThema);
 
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -50,20 +50,20 @@ public class BetreuerAnfragen_1Panel extends JPanel {
 
 		JLabel lblUnternehmen = new JLabel("Unternehmen:");
 
-		JLabel lblThema = new JLabel("Thema:");
+		JLabel lblThema = new JLabel("Arbeit:");
 
 		JLabel lblBeschreibung = new JLabel("Beschreibung:");
 
-		JLabel lblUnternehmenIN = new JLabel(thema.getUnternehmen());
+		JLabel lblUnternehmenIN = new JLabel(arbeit.getUnternehmen());
 
 		JLabel lblStudent = new JLabel("Student Informationen:");
 
-		JLabel lblThemaIN = new JLabel(thema.getThema());
+		JLabel lblThemaIN = new JLabel(arbeit.getThema());
 
 		JLabel lblBeschreibungIN = new JLabel("");
 
-		if (thema.getBeschreibung() != null) {
-			lblBeschreibungIN.setText(thema.getBeschreibung());
+		if (arbeit.getBeschreibung() != null) {
+			lblBeschreibungIN.setText(arbeit.getBeschreibung());
 		}
 
 		JLabel lblName = new JLabel("Name:");
@@ -76,7 +76,7 @@ public class BetreuerAnfragen_1Panel extends JPanel {
 		lblPopUp.setVisible(false);
 
 		JButton btnAnnehmen = new JButton("Annehmen");
-		btnAnnehmen.addActionListener(new AnnehmenActionListener(student, betreuer, thema, lblPopUp));
+		btnAnnehmen.addActionListener(new AnnehmenActionListener(student, betreuer, arbeit, lblPopUp));
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout

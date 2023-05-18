@@ -14,6 +14,7 @@ import autobatch.gui.loginandregistration.LoginPanel;
 import autobatch.gui.loginandregistration.RegistrationPanel;
 import autobatch.gui.student.StudentenAbgabenPanel;
 import autobatch.gui.student.StudentenBetreuerPanel;
+import autobatch.gui.student.StudentenBetreuer_1Panel;
 import autobatch.gui.student.StudentenDatenPanel;
 import autobatch.gui.student.StudentenFormularePanel;
 import autobatch.gui.student.StudentenIpPanel;
@@ -32,6 +33,7 @@ public class PanelManager {
 	private StudentenDatenPanel studentenDatenPanel;
 	private StudentenIpPanel studentenIpPanel;
 	private StudentenBetreuerPanel studentenBetreuerPanel;
+	private StudentenBetreuer_1Panel studentenBetreuer_1Panel;
 	private StudentenAbgabenPanel studentenAbgabenPanel;
 	private StudentenFormularePanel studentenFormularePanel;
 
@@ -67,6 +69,7 @@ public class PanelManager {
 			studentenDatenPanel = new StudentenDatenPanel(panelSwitcher, currentStudent);
 			studentenIpPanel = new StudentenIpPanel(panelSwitcher, currentStudent);
 			studentenBetreuerPanel = new StudentenBetreuerPanel(panelSwitcher, this, currentStudent);
+			studentenBetreuer_1Panel = new StudentenBetreuer_1Panel(panelSwitcher, currentStudent);
 			studentenAbgabenPanel = new StudentenAbgabenPanel(panelSwitcher, currentStudent);
 			studentenFormularePanel = new StudentenFormularePanel(panelSwitcher, currentStudent);
 
@@ -74,6 +77,7 @@ public class PanelManager {
 			cards.add(studentenDatenPanel, "Studenten_Daten");
 			cards.add(studentenIpPanel, "Studenten_Ip");
 			cards.add(studentenBetreuerPanel, "Studenten_Betreuer");
+			cards.add(studentenBetreuer_1Panel, "Studenten_Betreuer_1");
 			cards.add(studentenAbgabenPanel, "Studenten_Abgaben");
 			cards.add(studentenFormularePanel, "Studenten_Formulare");
 
@@ -105,7 +109,6 @@ public class PanelManager {
 
 		}
 	}
-
 
 	public void updatePanels(JPanel panel, String panelName) {
 

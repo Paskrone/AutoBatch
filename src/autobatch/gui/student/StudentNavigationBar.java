@@ -10,13 +10,15 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import autobatch.businesslogic.mouselistener.NavigationBarMouseListener;
+import autobatch.businessobjects.Student;
 import autobatch.navigation.PanelSwitcher;
 
 public class StudentNavigationBar extends JPanel {
 
 	private PanelSwitcher panelSwitcher;
+	private Student student;
 
-	public StudentNavigationBar(PanelSwitcher panelSwitcher) {
+	public StudentNavigationBar(PanelSwitcher panelSwitcher, Student student) {
 
 		this.panelSwitcher = panelSwitcher;
 		setPreferredSize(new Dimension(1000, 50));
@@ -36,8 +38,11 @@ public class StudentNavigationBar extends JPanel {
 
 			@Override
 			public void labelClicked() {
-
-				panelSwitcher.switchToPanel("Studenten_Betreuer");
+				if (student.getBetreuer() == null) {
+					panelSwitcher.switchToPanel("Studenten_Betreuer");
+				} else {
+					panelSwitcher.switchToPanel("Studenten_Betreuer_1");
+				}
 
 			}
 		});
@@ -87,36 +92,21 @@ public class StudentNavigationBar extends JPanel {
 		});
 
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(63)
-					.addComponent(lbl_Ip, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-					.addGap(54)
-					.addComponent(lbl_betreuer, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-					.addGap(37)
-					.addComponent(lbl_abgaben, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-					.addGap(47)
-					.addComponent(lbl_formulare)
-					.addGap(64)
-					.addComponent(lbl_daten)
-					.addPreferredGap(ComponentPlacement.RELATED, 360, Short.MAX_VALUE)
-					.addComponent(lbl_abmelden)
-					.addGap(32))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(19, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbl_Ip)
-						.addComponent(lbl_betreuer)
-						.addComponent(lbl_formulare)
-						.addComponent(lbl_abgaben)
-						.addComponent(lbl_daten)
-						.addComponent(lbl_abmelden))
-					.addGap(15))
-		);
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addGap(63)
+						.addComponent(lbl_Ip, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE).addGap(54)
+						.addComponent(lbl_betreuer, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+						.addGap(37)
+						.addComponent(lbl_abgaben, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+						.addGap(47).addComponent(lbl_formulare).addGap(64).addComponent(lbl_daten)
+						.addPreferredGap(ComponentPlacement.RELATED, 360, Short.MAX_VALUE).addComponent(lbl_abmelden)
+						.addGap(32)));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap(19, Short.MAX_VALUE)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lbl_Ip)
+								.addComponent(lbl_betreuer).addComponent(lbl_formulare).addComponent(lbl_abgaben)
+								.addComponent(lbl_daten).addComponent(lbl_abmelden))
+						.addGap(15)));
 		setLayout(groupLayout);
 
 	}

@@ -39,7 +39,7 @@ public class StudentenBetreuerAnfragePanel extends JPanel {
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher);
+		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher, student);
 
 		System.out.println(panelSwitcher.getData("1"));
 
@@ -48,7 +48,7 @@ public class StudentenBetreuerAnfragePanel extends JPanel {
 		tf_Unternehmen = new JTextField();
 		tf_Unternehmen.setColumns(10);
 
-		JLabel lblThema = new JLabel("Thema:");
+		JLabel lblThema = new JLabel("Arbeit:");
 
 		tf_Thema = new JTextField();
 		tf_Thema.setColumns(10);
