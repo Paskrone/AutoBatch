@@ -7,7 +7,7 @@ import javax.swing.border.EmptyBorder;
 
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
-import autobatch.businessobjects.Thema;
+import autobatch.businessobjects.Arbeit;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
@@ -33,7 +33,7 @@ public class BetreuerStudenten_1Panel extends JPanel {
 		Student student = datenbankabfrage.getStudentByMNR(mnr);
 
 		int idThema = Integer.parseInt(panelSwitcher.getData("3") + "");
-		Thema thema = datenbankabfrage.getThemaByID(idThema);
+		Arbeit arbeit = datenbankabfrage.getArbeitByID(idThema);
 
 		BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelSwitcher);
 
@@ -43,7 +43,7 @@ public class BetreuerStudenten_1Panel extends JPanel {
 
 		JLabel lblEmail = new JLabel("Email:");
 
-		JLabel lblThema = new JLabel("Thema:");
+		JLabel lblThema = new JLabel("Arbeit:");
 
 		JLabel lblIPAnfang = new JLabel("IP-Anfang:");
 
@@ -53,7 +53,7 @@ public class BetreuerStudenten_1Panel extends JPanel {
 
 		if (student != null) {
 			lblNameIn.setText(student.getVorname() + " " + student.getNachname());
-			lblThemaIN.setText(thema.getThema());
+			lblThemaIN.setText(arbeit.getThema());
 		}
 		
 

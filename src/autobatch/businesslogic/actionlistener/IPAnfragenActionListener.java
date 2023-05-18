@@ -14,23 +14,23 @@ import javax.swing.JOptionPane;
 import autobatch.businessobjects.Benutzer;
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
-import autobatch.businessobjects.Thema;
+import autobatch.businessobjects.Arbeit;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.session.SessionManager;
 
 public class IPAnfragenActionListener implements ActionListener {
 	
-	private Thema thema;
+	private Arbeit arbeit;
 	private Student student;
 	private Betreuer betreuer;
 	private Long i;
 	
-	public IPAnfragenActionListener(Thema thema, Student student, Betreuer betreuer) {
+	public IPAnfragenActionListener(Arbeit arbeit, Student student, Betreuer betreuer) {
 		super();
-		this.thema = thema;
+		this.arbeit = arbeit;
 		this.student = student;
 		this.betreuer = betreuer;
-		this.i=(long) thema.getIdThema();
+		this.i=(long) arbeit.getIdArbeit();
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class IPAnfragenActionListener implements ActionListener {
 		ResultSet rs;
 
 		rs = stmt.executeQuery(
-				"SELECT * From thema");
+				"SELECT * From arbeit");
 
 		while (rs.next()) {
 			if (rs.getLong(6)==((Student) currentUser).getMnr()) {
@@ -72,15 +72,15 @@ public class IPAnfragenActionListener implements ActionListener {
 	
 		if (pruefe) {
 			
-		String query = "INSERT INTO `db4`.`thema` (`idThema`, `thema`, `unternehmen`, `beschreibung`, `angenommen`, `student`, `betreuer`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO `db4`.`arbeit` (`idThema`, `arbeit`, `unternehmen`, `beschreibung`, `angenommen`, `student`, `betreuer`) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		System.out.println(query);
 		try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);
 				PreparedStatement stmt = conn.prepareStatement(query)) {
 			stmt.setLong(1, i);
-			stmt.setString(2, thema.getThema());
-			stmt.setString(3, thema.getUnternehmen());
-			stmt.setString(4, thema.getBeschreibung());
-			stmt.setBoolean(5, thema.getAngenommen());
+			stmt.setString(2, arbeit.getThema());
+			stmt.setString(3, arbeit.getUnternehmen());
+			stmt.setString(4, arbeit.getBeschreibung());
+			stmt.setBoolean(5, arbeit.getAngenommen());
 			stmt.setLong(6, ((Student) currentUser).getMnr());
 			stmt.setString(7,((Student) currentUser).getBetreuer());
 			

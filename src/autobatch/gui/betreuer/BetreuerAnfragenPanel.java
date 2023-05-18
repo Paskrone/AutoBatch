@@ -14,7 +14,7 @@ import autobatch.businesslogic.listselectionlistener.BetreuerAuswahlSelectionLis
 import autobatch.businesslogic.listselectionlistener.StudentAuswahlSelectionListener;
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
-import autobatch.businessobjects.Thema;
+import autobatch.businessobjects.Arbeit;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
@@ -46,16 +46,16 @@ public class BetreuerAnfragenPanel extends JPanel {
 		String[] columnNames = { "Nachname", "Email", "Matrikelnr." , "idThema"};
 		Datenbankabfrage dbQuery = new Datenbankabfrage();
 
-		List<Thema> t = dbQuery.getAllThemen();
-		List<Thema> themen = new ArrayList<>();
+		List<Arbeit> a = dbQuery.getAllArbeiten();
+		List<Arbeit> arbeiten = new ArrayList<>();
 
 		List<Student> studenten = new ArrayList<>();
 
-		for (Thema thema : t) {
-			if (!thema.getAngenommen() && thema.getBetreuerMail().equals(betreuer.getEmail())) {
+		for (Arbeit arbeit : a) {
+			if (!arbeit.getAngenommen() && arbeit.getBetreuerMail() != null && arbeit.getBetreuerMail().equals(betreuer.getEmail())) {
 				System.out.println("klappt");
-				studenten.add(dbQuery.getStudentByMNR(thema.getStudentMNR()));
-				themen.add(thema);
+				studenten.add(dbQuery.getStudentByMNR(arbeit.getStudentMNR()));
+				arbeiten.add(arbeit);
 			}
 		}
 		Object[][] data = new Object[studenten.size()][4];
@@ -63,7 +63,7 @@ public class BetreuerAnfragenPanel extends JPanel {
 			data[i][0] = studenten.get(i).getNachname();
 			data[i][1] = studenten.get(i).getEmail();
 			data[i][2] = studenten.get(i).getMnr();
-			data[i][3] = themen.get(i).getIdThema();
+			data[i][3] = arbeiten.get(i).getIdArbeit();
 
 		}
 

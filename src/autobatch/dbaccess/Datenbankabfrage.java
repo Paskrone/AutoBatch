@@ -13,7 +13,7 @@ import autobatch.businessobjects.Benutzer;
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
 import autobatch.businessobjects.Studiendekan;
-import autobatch.businessobjects.Thema;
+import autobatch.businessobjects.Arbeit;
 
 //Database connection for macos-terminal: source ~/.zshrc
 //export PATH="/usr/local/opt/mysql-client/bin:$PATH"
@@ -358,14 +358,14 @@ public class Datenbankabfrage {
 		return false;
 	}
 
-	// befülle Thema Tabelle
+	// befülle Arbeit Tabelle
 
-	public boolean setDataThema(Student student, Betreuer betreuer, String thema, String unternehmen,
+	public boolean setDataArbeit(Student student, Betreuer betreuer, String thema, String unternehmen,
 			String beschreibung) {
 		if (student != null && betreuer != null && thema != null && unternehmen != null && beschreibung != null) {
-			int idThema = getAllThemen().size();
+			int idThema = getAllArbeiten().size();
 
-			String query = "INSERT INTO `db4`.`thema` (`idThema`, `thema`, `unternehmen`, `beschreibung`, `angenommen`, `student`, `betreuer`) VALUES ('"
+			String query = "INSERT INTO `db4`.`arbeit` (`idArbeit`, `thema`, `unternehmen`, `beschreibung`, `angenommen`, `student`, `betreuer`) VALUES ('"
 					+ idThema + "', '" + thema + "', '" + unternehmen + "', '" + beschreibung + "', '0', '"
 					+ student.getMnr() + "', '" + betreuer.getEmail() + "')";
 
@@ -376,10 +376,10 @@ public class Datenbankabfrage {
 		return false;
 	}
 
-	public boolean updateDataThemaInt(Thema thema, int arg, String spalte) {
+	public boolean updateDataArbeitInt(Arbeit arbeit, int arg, String spalte) {
 		if (arg != 0) {
-			String query = "UPDATE `db4`.`thema` SET `" + spalte + "` = '" + arg + "' WHERE (idThema = "
-					+ thema.getIdThema() + ")";
+			String query = "UPDATE `db4`.`arbeit` SET `" + spalte + "` = '" + arg + "' WHERE (idArbeit = "
+					+ arbeit.getIdArbeit() + ")";
 			if (update(query)) {
 				return true;
 			}
@@ -387,9 +387,9 @@ public class Datenbankabfrage {
 		return false;
 	}
 
-	public boolean deleteDataThema(int studentMNR) {
+	public boolean deleteDataArbeit(int studentMNR) {
 
-		String query = "DELETE FROM `db4`.`thema` WHERE (`student` = '" + studentMNR + "')";
+		String query = "DELETE FROM `db4`.`arbeit` WHERE (`student` = '" + studentMNR + "')";
 
 		if (update(query)) {
 			return true;
@@ -397,8 +397,8 @@ public class Datenbankabfrage {
 		return false;
 	}
 
-	public List<Thema> getAllThemen() {
-		List<Thema> themen = new ArrayList<>();
+	public List<Arbeit> getAllArbeiten() {
+		List<Arbeit> arbeiten = new ArrayList<>();
 		Connection con = null;
 
 		try {
@@ -409,18 +409,18 @@ public class Datenbankabfrage {
 			ResultSet rs;
 
 			rs = stmt.executeQuery(
-					"SELECT idThema, unternehmen, thema, beschreibung, angenommen, student, betreuer FROM thema");
+					"SELECT idArbeit, unternehmen, thema, beschreibung, angenommen, student, betreuer FROM arbeit");
 
 			while (rs.next()) {
-				int idThema = rs.getInt("idThema");
+				int idArbeit = rs.getInt("idArbeit");
 				String unternehmen = rs.getString("unternehmen");
 				String thema = rs.getString("thema");
 				String beschreibung = rs.getString("beschreibung");
 				int angenommen = rs.getInt("angenommen");
 				int studentMNR = rs.getInt("student");
 				String betreuerMail = rs.getString("betreuer");
-				Thema t = new Thema(idThema, unternehmen, thema, beschreibung, angenommen, studentMNR, betreuerMail);
-				themen.add(t);
+				Arbeit t = new Arbeit(idArbeit, unternehmen, thema, beschreibung, angenommen, studentMNR, betreuerMail);
+				arbeiten.add(t);
 			}
 
 			con.close();
@@ -429,14 +429,14 @@ public class Datenbankabfrage {
 			e.printStackTrace();
 		}
 
-		return themen;
+		return arbeiten;
 	}
 
-	public Thema getThemaByID(int idThema) {
-		List<Thema> t = getAllThemen();
-		for (Thema thema : t) {
-			if (thema.getIdThema() == idThema) {
-				return thema;
+	public Arbeit getArbeitByID(int idArbeit) {
+		List<Arbeit> a = getAllArbeiten();
+		for (Arbeit arbeit : a) {
+			if (arbeit.getIdArbeit() == idArbeit) {
+				return arbeit;
 			}
 		}
 		return null;

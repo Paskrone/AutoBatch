@@ -8,7 +8,7 @@ import javax.swing.border.EmptyBorder;
 import autobatch.businesslogic.actionlistener.IPAnfragenActionListener;
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
-import autobatch.businessobjects.Thema;
+import autobatch.businessobjects.Arbeit;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -33,7 +33,7 @@ public class StudentenIpPanel extends JPanel {
 	private JTextField txtUN;
 	private JTextField txtBeschreibung;
 	private boolean pruefe;
-	private Thema thema =new Thema(0, "", "", "", 0, 0,"");
+	private Arbeit arbeit =new Arbeit(0, "", "", "", 0, 0,"");
 
 	public StudentenIpPanel(PanelSwitcher panelSwitcher, Student student) {
 		
@@ -60,7 +60,7 @@ public class StudentenIpPanel extends JPanel {
         JLabel lblDatum = new JLabel("Datum");
         lblDatum.setFont(new Font("Tahoma", Font.PLAIN, 20));
         
-        JLabel lblThema = new JLabel("Thema");
+        JLabel lblThema = new JLabel("Arbeit");
         lblThema.setFont(new Font("Tahoma", Font.PLAIN, 20));
         
         JLabel lblUnternehmen = new JLabel("Unternehmen");
@@ -83,11 +83,11 @@ public class StudentenIpPanel extends JPanel {
         		else {
 					pruefe=true;
 					 JFrame frame = new JFrame();
-					thema.setThema(txtThema.getText());
-					thema.setUnternehmen(txtUN.getText());
-					thema.setBeschreibung(txtBeschreibung.getText());
-					System.out.println(thema.getBeschreibung());
-					btnAnfragen.addActionListener(new IPAnfragenActionListener(thema, student, betreuer));
+					arbeit.setThema(txtThema.getText());
+					arbeit.setUnternehmen(txtUN.getText());
+					arbeit.setBeschreibung(txtBeschreibung.getText());
+					System.out.println(arbeit.getBeschreibung());
+					btnAnfragen.addActionListener(new IPAnfragenActionListener(arbeit, student, betreuer));
 					 JOptionPane.showMessageDialog(frame, "Sie können die Anfrage jetzt schicken",
 				               "Infomation", JOptionPane.INFORMATION_MESSAGE);
 					
