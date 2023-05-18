@@ -368,13 +368,16 @@ public class Datenbankabfrage {
 			String beschreibung) {
 		if (student != null && betreuer != null && thema != null && unternehmen != null && beschreibung != null) {
 			int idThema = getAllArbeiten().size();
-
+			
 			String query = "INSERT INTO `db4`.`arbeit` (`idArbeit`, `thema`, `unternehmen`, `beschreibung`, `angenommen`, `student`, `betreuer`) VALUES ('"
 					+ idThema + "', '" + thema + "', '" + unternehmen + "', '" + beschreibung + "', '0', '"
 					+ student.getMnr() + "', '" + betreuer.getEmail() + "')";
 
 			if (update(query)) {
+				System.out.println("insert");
+				
 				return true;
+			
 			}
 		}
 		return false;

@@ -6,8 +6,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import autobatch.businesslogic.actionlistener.IPAnfragenActionListener;
+import autobatch.businesslogic.actionlistener.SaveDataActionListener;
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
+import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.businessobjects.Arbeit;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
@@ -22,6 +24,7 @@ import javax.swing.JFrame;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class StudentenIpPanel extends JPanel {
 	
@@ -33,12 +36,15 @@ public class StudentenIpPanel extends JPanel {
 	private JTextField txtUN;
 	private JTextField txtBeschreibung;
 	private boolean pruefe;
-	private Arbeit arbeit =new Arbeit(0, "", "", "", 0, 0,"");
-
+	
 	public StudentenIpPanel(PanelSwitcher panelSwitcher, Student student) {
 		
 		this.panelSwitcher = panelSwitcher;
         this.student = student;
+        
+        Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
+		betreuer = datenbankabfrage.getBetreuerByMail(student.getBetreuer());
+		Arbeit arbeit = datenbankabfrage.getArbeitByID(student.getArbeit());
         
     	setPreferredSize(new Dimension(1000, 500));
         setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -69,31 +75,13 @@ public class StudentenIpPanel extends JPanel {
         JLabel lblBeschreibung = new JLabel("Beschreibung");
         lblBeschreibung.setFont(new Font("Tahoma", Font.PLAIN, 20));
         
-        JButton btnSave = new JButton("Daten Speichern");
+        
         JButton btnAnfragen = new JButton("Anfrage Schicken");       
         btnAnfragen.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        btnSave.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		if (txtUN.getText().equals("")&&txtDatum.getText().equals("")&&txtThema.getText().equals("")) {
-					pruefe=false;
-					 JFrame frame = new JFrame();
-					 JOptionPane.showMessageDialog(frame, "Füllen Sie die Textfelder aus",
-				               "Error", JOptionPane.ERROR_MESSAGE);
-				}
-        		else {
-					pruefe=true;
-					 JFrame frame = new JFrame();
-					arbeit.setThema(txtThema.getText());
-					arbeit.setUnternehmen(txtUN.getText());
-					arbeit.setBeschreibung(txtBeschreibung.getText());
-					System.out.println(arbeit.getBeschreibung());
-					btnAnfragen.addActionListener(new IPAnfragenActionListener(arbeit, student, betreuer));
-					 JOptionPane.showMessageDialog(frame, "Sie können die Anfrage jetzt schicken",
-				               "Infomation", JOptionPane.INFORMATION_MESSAGE);
-					
-				}
-        	}
-        });
+        
+        
+        JButton btnSave = new JButton("Daten Speichern");
+        btnSave.addActionListener(new SaveDataActionListener(txtUN,txtBeschreibung, txtThema, txtDatum, student, betreuer,arbeit,btnAnfragen));
         btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
         
         
@@ -114,15 +102,13 @@ public class StudentenIpPanel extends JPanel {
         				.addComponent(txtDatum, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE)
         				.addGroup(groupLayout.createSequentialGroup()
         					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-        							.addComponent(txtUN, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE)
-        							.addComponent(txtBeschreibung, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+        						.addComponent(txtUN, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(txtBeschreibung, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE)
         						.addComponent(txtThema, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
         					.addGap(179)
-        					.addComponent(btnSave))))
-        		.addGroup(groupLayout.createSequentialGroup()
-        			.addGap(544)
-        			.addComponent(btnAnfragen, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE))
+        					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(btnAnfragen, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE)))))
         );
         groupLayout.setVerticalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
@@ -134,22 +120,24 @@ public class StudentenIpPanel extends JPanel {
         				.addComponent(txtDatum, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
         			.addGap(26)
         			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(txtThema, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblThema, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
+        			.addGap(27)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(txtUN, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(lblUnternehmen, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
         				.addGroup(groupLayout.createSequentialGroup()
-        					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(txtThema, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblThema, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-        					.addGap(27)
-        					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(txtUN, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblUnternehmen, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
         					.addGap(36)
         					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
         						.addComponent(txtBeschreibung, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
         						.addComponent(lblBeschreibung, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)))
-        				.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
-        			.addGap(43)
-        			.addComponent(btnAnfragen, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap())
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addGap(109)
+        					.addComponent(btnAnfragen, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(68))
         );
         setLayout(groupLayout);
         
