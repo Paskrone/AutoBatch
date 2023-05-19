@@ -45,7 +45,7 @@ public class AnfragenActionListener implements ActionListener {
 		Datenbankabfrage dbaccess = new Datenbankabfrage();
 		
 		
-		if (dbaccess.deleteDataArbeit(student.getMnr()) && !dbaccess.setDataArbeit(student, betreuer, thema, unternehmen, beschreibung)) {
+		if (dbaccess.deleteDataArbeit(student.getMnr(), betreuer.getEmail()) && !dbaccess.setDataArbeit(student, betreuer, thema, unternehmen, beschreibung)) {
 			lbl_error.setVisible(true);
 		} else {
 			lblPopUp.setVisible(true);

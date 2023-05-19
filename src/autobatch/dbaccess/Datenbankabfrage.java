@@ -144,10 +144,11 @@ public class Datenbankabfrage {
 				String studiendekan = rs.getString("studiendekan");
 				String betreuer = rs.getString("betreuer");
 				int arbeit = rs.getInt("arbeit");
-				
+
 				Student student = new Student(mnr, vorname, nachname, password, username, email, telefonnummer,
 						studiengang, ort, strasse, postleizahl, studiendekan, betreuer);
-				//arbeit mit Setter, da es ein int ist und sonst Probleme auftauchen da int nicht null sein kann
+				// arbeit mit Setter, da es ein int ist und sonst Probleme auftauchen da int
+				// nicht null sein kann
 				student.setArbeit(arbeit);
 				students.add(student);
 			}
@@ -367,20 +368,58 @@ public class Datenbankabfrage {
 	public boolean setDataArbeit(Student student, Betreuer betreuer, String thema, String unternehmen,
 			String beschreibung) {
 		if (student != null && betreuer != null && thema != null && unternehmen != null && beschreibung != null) {
-			int idThema = getAllArbeiten().size();
-			
+			int idArbeit = getViableIdArbeit();
+
 			String query = "INSERT INTO `db4`.`arbeit` (`idArbeit`, `thema`, `unternehmen`, `beschreibung`, `angenommen`, `student`, `betreuer`) VALUES ('"
-					+ idThema + "', '" + thema + "', '" + unternehmen + "', '" + beschreibung + "', '0', '"
+					+ idArbeit + "', '" + thema + "', '" + unternehmen + "', '" + beschreibung + "', '0', '"
 					+ student.getMnr() + "', '" + betreuer.getEmail() + "')";
 
 			if (update(query)) {
 				System.out.println("insert");
-				
+
 				return true;
-			
+
 			}
 		}
 		return false;
+	}
+
+	public int getViableIdArbeit() {
+
+		List<Integer> ids = new ArrayList<>();
+		
+		int id = 0;
+		
+		Connection con = null;
+
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url + dbName, userName, pw);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs;
+
+			rs = stmt.executeQuery("SELECT idArbeit FROM arbeit");
+
+			while (rs.next()) {
+				int idArbeit = rs.getInt("idArbeit");
+				ids.add(idArbeit);
+			}
+
+			con.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		for (Integer integer : ids) {
+			if (id == integer) {
+				id++;
+			}
+		}
+		
+		return id;
+		
 	}
 
 	public boolean updateDataArbeitInt(Arbeit arbeit, int arg, String spalte) {
@@ -394,9 +433,9 @@ public class Datenbankabfrage {
 		return false;
 	}
 
-	public boolean deleteDataArbeit(int studentMNR) {
+	public boolean deleteDataArbeit(int studentMNR, String betreuerEmail) {
 
-		String query = "DELETE FROM `db4`.`arbeit` WHERE (`student` = '" + studentMNR + "')";
+		String query = "DELETE FROM `db4`.`arbeit` WHERE (`student` = '" + studentMNR + "' && `betreuer` = '" + betreuerEmail + "')";
 
 		if (update(query)) {
 			return true;
