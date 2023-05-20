@@ -14,6 +14,7 @@ import autobatch.businessobjects.Student;
 import autobatch.businessobjects.Arbeit;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.gui.student.StudentNavigationBar;
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -25,13 +26,15 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class BetreuerAnfragen_1Panel extends JPanel {
 
 	private PanelSwitcher panelSwitcher;
+	private PanelManager panelManager;
+	
 	private Student student;
 
 	private Arbeit arbeit;
 
 	private Betreuer betreuer;
 
-	public BetreuerAnfragen_1Panel(PanelSwitcher panelSwitcher, Betreuer betreuer) {
+	public BetreuerAnfragen_1Panel(PanelSwitcher panelSwitcher, PanelManager panelManager, Betreuer betreuer) {
 		this.panelSwitcher = panelSwitcher;
 
 		Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
@@ -76,7 +79,7 @@ public class BetreuerAnfragen_1Panel extends JPanel {
 		lblPopUp.setVisible(false);
 
 		JButton btnAnnehmen = new JButton("Annehmen");
-		btnAnnehmen.addActionListener(new AnnehmenActionListener(student, betreuer, arbeit, lblPopUp));
+		btnAnnehmen.addActionListener(new AnnehmenActionListener(panelSwitcher, panelManager, student, betreuer, arbeit, lblPopUp));
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
