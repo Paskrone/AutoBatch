@@ -27,7 +27,7 @@ public class BetreuerPanel extends JPanel {
         BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelSwitcher);
         
         //AutoBath Logo anzeigen
-        ImageIcon imageIcon = new ImageIcon("/Users/pascalgrcic/git/AutoBatch/images/autobatchlogo_klein.png");
+        ImageIcon imageIcon = new ImageIcon("src/images/autobatchlogo_klein.png");
         JLabel lbl_Image = new JLabel(imageIcon);
         
         GroupLayout groupLayout = new GroupLayout(this);

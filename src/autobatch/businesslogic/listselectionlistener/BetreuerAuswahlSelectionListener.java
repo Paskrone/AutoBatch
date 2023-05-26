@@ -45,13 +45,13 @@ public class BetreuerAuswahlSelectionListener implements ListSelectionListener {
 				panelSwitcher.storeData("3", idThema);
 
 				if (panel.equals("Betreuer_Anfragen_1")) {
-					JPanel betreuerAnfragen_1Panel = new BetreuerAnfragen_1Panel(panelSwitcher,
+					JPanel betreuerAnfragen_1Panel = new BetreuerAnfragen_1Panel(panelSwitcher, panelManager,
 							(Betreuer) SessionManager.getInstance().getAktuellerBenutzer());
 
 					panelManager.updatePanels(betreuerAnfragen_1Panel, "Betreuer_Anfragen_1");
 
 					panelSwitcher.switchToPanel("Betreuer_Anfragen_1");
-					
+
 				} else if (panel.equals("Betreuer_Studenten_1")) {
 					JPanel betreuerStudenten_1Panel = new BetreuerStudenten_1Panel(panelSwitcher,
 							(Betreuer) SessionManager.getInstance().getAktuellerBenutzer());
