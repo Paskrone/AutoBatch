@@ -422,8 +422,6 @@ public class Datenbankabfrage {
 
 	}
 
-	
-
 	public boolean updateDataArbeitBoolean(Arbeit arbeit, boolean arg, String spalte) {
 		if (arg) {
 			String query = "UPDATE `db4`.`arbeit` SET `" + spalte + "` = b'1' WHERE (idArbeit = " + arbeit.getIdArbeit()
@@ -434,6 +432,17 @@ public class Datenbankabfrage {
 		} else if (!arg) {
 			String query = "UPDATE `db4`.`arbeit` SET `" + spalte + "` = b'0' WHERE (idArbeit = " + arbeit.getIdArbeit()
 					+ ")";
+			if (update(query)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean updateDataArbeitFloat(Arbeit arbeit, float arg, String spalte) {
+		if (arg != 0) {
+			String query = "UPDATE `db4`.`arbeit` SET `" + spalte + "` = '" + arg + "' WHERE (idArbeit = "
+					+ arbeit.getIdArbeit() + ")";
 			if (update(query)) {
 				return true;
 			}
@@ -464,19 +473,21 @@ public class Datenbankabfrage {
 			ResultSet rs;
 
 			rs = stmt.executeQuery(
-					"SELECT idArbeit, unternehmen, thema, beschreibung, angenommen, nda_notwendig, student, betreuer FROM arbeit");
+					"SELECT idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, gesamtnote, angenommen, nda_notwendig, student, betreuer FROM arbeit");
 
 			while (rs.next()) {
 				int idArbeit = rs.getInt("idArbeit");
 				String unternehmen = rs.getString("unternehmen");
 				String thema = rs.getString("thema");
 				String beschreibung = rs.getString("beschreibung");
+				float noteArbeit = rs.getFloat("noteArbeit");
+				float noteVortrag = rs.getFloat("noteVortrag");
 				byte angenommen = rs.getByte("angenommen");
 				byte nda_notwenig = rs.getByte("nda_notwendig");
 				int studentMNR = rs.getInt("student");
 				String betreuerMail = rs.getString("betreuer");
-				Arbeit t = new Arbeit(idArbeit, unternehmen, thema, beschreibung, angenommen, nda_notwenig, studentMNR,
-						betreuerMail);
+				Arbeit t = new Arbeit(idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, angenommen, nda_notwenig,
+						studentMNR, betreuerMail);
 				arbeiten.add(t);
 			}
 
