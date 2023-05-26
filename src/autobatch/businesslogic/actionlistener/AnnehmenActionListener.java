@@ -10,6 +10,7 @@ import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
 import autobatch.businessobjects.Arbeit;
 import autobatch.dbaccess.Datenbankabfrage;
+import autobatch.gui.betreuer.BetreuerAnfragenPanel;
 import autobatch.gui.betreuer.BetreuerStudentenPanel;
 import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
@@ -44,12 +45,14 @@ public class AnnehmenActionListener implements ActionListener {
 		
 		datenbankabfrage.updateDataStudentString(student, betreuer.getEmail(), "betreuer");
 
-		datenbankabfrage.updateDataArbeitInt(arbeit, 1, "angenommen");
+		datenbankabfrage.updateDataArbeitBoolean(arbeit, true, "angenommen");
 
 		datenbankabfrage.updateDataStudentInt(student, arbeit.getIdArbeit(), "arbeit");
 		
+		JPanel betreuerAnfragenPanel = new BetreuerAnfragenPanel(panelSwitcher, panelManager, betreuer);
 		JPanel betreuerStudentenPanel = new BetreuerStudentenPanel(panelSwitcher, panelManager, betreuer);
 
+		panelManager.updatePanels(betreuerAnfragenPanel, "Betreuer_Anfragen");
 		panelManager.updatePanels(betreuerStudentenPanel, "Betreuer_Studenten");
 
 		lblPopUp.setVisible(true);
