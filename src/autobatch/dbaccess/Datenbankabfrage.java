@@ -371,7 +371,7 @@ public class Datenbankabfrage {
 			int idArbeit = getViableIdArbeit();
 
 			String query = "INSERT INTO `db4`.`arbeit` (`idArbeit`, `thema`, `unternehmen`, `beschreibung`, `angenommen`, `student`, `betreuer`) VALUES ('"
-					+ idArbeit + "', '" + thema + "', '" + unternehmen + "', '" + beschreibung + "', '0', '"
+					+ idArbeit + "', '" + thema + "', '" + unternehmen + "', '" + beschreibung + "', b'0', '"
 					+ student.getMnr() + "', '" + betreuer.getEmail() + "')";
 
 			if (update(query)) {
@@ -387,9 +387,9 @@ public class Datenbankabfrage {
 	public int getViableIdArbeit() {
 
 		List<Integer> ids = new ArrayList<>();
-		
+
 		int id = 0;
-		
+
 		Connection con = null;
 
 		try {
@@ -411,21 +411,29 @@ public class Datenbankabfrage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		for (Integer integer : ids) {
 			if (id == integer) {
 				id++;
 			}
 		}
-		
+
 		return id;
-		
+
 	}
 
-	public boolean updateDataArbeitInt(Arbeit arbeit, int arg, String spalte) {
-		if (arg != 0) {
-			String query = "UPDATE `db4`.`arbeit` SET `" + spalte + "` = '" + arg + "' WHERE (idArbeit = "
-					+ arbeit.getIdArbeit() + ")";
+	
+
+	public boolean updateDataArbeitBoolean(Arbeit arbeit, boolean arg, String spalte) {
+		if (arg) {
+			String query = "UPDATE `db4`.`arbeit` SET `" + spalte + "` = b'1' WHERE (idArbeit = " + arbeit.getIdArbeit()
+					+ ")";
+			if (update(query)) {
+				return true;
+			}
+		} else if (!arg) {
+			String query = "UPDATE `db4`.`arbeit` SET `" + spalte + "` = b'0' WHERE (idArbeit = " + arbeit.getIdArbeit()
+					+ ")";
 			if (update(query)) {
 				return true;
 			}
@@ -435,7 +443,8 @@ public class Datenbankabfrage {
 
 	public boolean deleteDataArbeit(int studentMNR, String betreuerEmail) {
 
-		String query = "DELETE FROM `db4`.`arbeit` WHERE (`student` = '" + studentMNR + "' && `betreuer` = '" + betreuerEmail + "')";
+		String query = "DELETE FROM `db4`.`arbeit` WHERE (`student` = '" + studentMNR + "' && `betreuer` = '"
+				+ betreuerEmail + "')";
 
 		if (update(query)) {
 			return true;
@@ -455,17 +464,19 @@ public class Datenbankabfrage {
 			ResultSet rs;
 
 			rs = stmt.executeQuery(
-					"SELECT idArbeit, unternehmen, thema, beschreibung, angenommen, student, betreuer FROM arbeit");
+					"SELECT idArbeit, unternehmen, thema, beschreibung, angenommen, nda_notwendig, student, betreuer FROM arbeit");
 
 			while (rs.next()) {
 				int idArbeit = rs.getInt("idArbeit");
 				String unternehmen = rs.getString("unternehmen");
 				String thema = rs.getString("thema");
 				String beschreibung = rs.getString("beschreibung");
-				int angenommen = rs.getInt("angenommen");
+				byte angenommen = rs.getByte("angenommen");
+				byte nda_notwenig = rs.getByte("nda_notwendig");
 				int studentMNR = rs.getInt("student");
 				String betreuerMail = rs.getString("betreuer");
-				Arbeit t = new Arbeit(idArbeit, unternehmen, thema, beschreibung, angenommen, studentMNR, betreuerMail);
+				Arbeit t = new Arbeit(idArbeit, unternehmen, thema, beschreibung, angenommen, nda_notwenig, studentMNR,
+						betreuerMail);
 				arbeiten.add(t);
 			}
 
@@ -491,7 +502,6 @@ public class Datenbankabfrage {
 	private boolean update(String query) {
 		try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);
 				PreparedStatement stmt = conn.prepareStatement(query)) {
-
 			stmt.executeUpdate();
 			conn.close();
 			return true;

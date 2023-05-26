@@ -63,16 +63,16 @@ public class StudentenIpPanel extends JPanel {
         txtBeschreibung = new JTextField();
         txtBeschreibung.setColumns(10);
         
-        JLabel lblDatum = new JLabel("Datum");
+        JLabel lblDatum = new JLabel("Datum:");
         lblDatum.setFont(new Font("Tahoma", Font.PLAIN, 20));
         
-        JLabel lblThema = new JLabel("Arbeit");
+        JLabel lblThema = new JLabel("Thema:");
         lblThema.setFont(new Font("Tahoma", Font.PLAIN, 20));
         
-        JLabel lblUnternehmen = new JLabel("Unternehmen");
+        JLabel lblUnternehmen = new JLabel("Unternehmen:");
         lblUnternehmen.setFont(new Font("Tahoma", Font.PLAIN, 20));
         
-        JLabel lblBeschreibung = new JLabel("Beschreibung");
+        JLabel lblBeschreibung = new JLabel("Beschreibung:");
         lblBeschreibung.setFont(new Font("Tahoma", Font.PLAIN, 20));
         
         

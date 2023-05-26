@@ -8,12 +8,13 @@ public class Arbeit {
 	private String thema;
 	private String beschreibung;
 	
-	private int angenommen;
+	private byte angenommen;
+	private byte nda_notwendig;
 
 	private int studentMNR;
 	private String betreuerMail;
 
-	public Arbeit(int idArbeit, String unternehmen, String thema, String beschreibung, int angenommen, int studentMNR,
+	public Arbeit(int idArbeit, String unternehmen, String thema, String beschreibung, byte angenommen, byte nda_notwendig, int studentMNR,
 			String betreuerMail) {
 		super();
 		this.idArbeit = idArbeit;
@@ -21,6 +22,7 @@ public class Arbeit {
 		this.thema = thema;
 		this.beschreibung = beschreibung;
 		this.angenommen = angenommen;
+		this.nda_notwendig = nda_notwendig;
 		this.studentMNR = studentMNR;
 		this.betreuerMail = betreuerMail;
 
@@ -78,8 +80,16 @@ public class Arbeit {
 		return angenommen == 1;
 	}
 
-	public void setAngenommen(int angenommen) {
+	public void setAngenommen(byte angenommen) {
 		this.angenommen = angenommen;
+	}
+
+	public boolean getNda_notwenidg() {
+		return nda_notwendig == 1;
+	}
+
+	public void setNda_notwenidg(byte nda_notwenidg) {
+		this.nda_notwendig = nda_notwenidg;
 	}
 
 }
