@@ -1,5 +1,10 @@
 package autobatch.dbaccess;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -510,5 +515,88 @@ public class Datenbankabfrage {
 			return false;
 		}
 	}
+	
+	public void saveFileToDatabase(File selectedFile, String username) {
+	    try {
+	        FileInputStream input = new FileInputStream(selectedFile);
+	        Connection con = DriverManager.getConnection(url + dbName, userName, pw);
+	        PreparedStatement statement = con.prepareStatement("INSERT INTO documents (username, file, filename) VALUES (?, ?, ?)");
+	        statement.setString(1, username);
+	        statement.setBinaryStream(2, input);
+	        statement.setString(3, selectedFile.getName());
+	        statement.executeUpdate();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	
+	public void saveFileFromDatabaseById(int id, String outputFilePath) {
+        try {
+            Connection con = DriverManager.getConnection(url + dbName, userName, pw);
+            PreparedStatement statement = con.prepareStatement("SELECT file FROM documents WHERE id = ?");
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                byte[] fileBytes = rs.getBytes("file");
+                OutputStream targetFile= new FileOutputStream(outputFilePath);
+                targetFile.write(fileBytes);
+                targetFile.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+	
+	public InputStream getFileFromDatabase(String filename) {
+	    InputStream input = null;
+
+	    try {
+	        Connection con = DriverManager.getConnection(url + dbName, userName, pw);
+	        PreparedStatement statement = con.prepareStatement("SELECT file FROM documents WHERE filename = ?");
+	        statement.setString(1, filename);
+
+	        ResultSet result = statement.executeQuery();
+	        if (result.next()) {
+	            input = result.getBinaryStream("file");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return input;
+	}
+
+	
+	public List<String> getStudentSubmissions(String username) {
+		System.out.println("Abfragen der Studentenabgaben für Benutzer: " + username);
+	    List<String> filenames = new ArrayList<>();
+	    Connection con = null;
+
+	    try {
+	        con = DriverManager.getConnection(url + dbName, userName, pw);
+	        PreparedStatement statement = con.prepareStatement("SELECT filename FROM documents WHERE username = ?");
+	        statement.setString(1, username);
+
+	        ResultSet result = statement.executeQuery();
+	        while (result.next()) {
+	            filenames.add(result.getString("filename"));
+	        }
+	        System.out.println("Gefundene Dateinamen: " + filenames);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (con != null) {
+	            try {
+	                con.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	    return filenames;
+	}
+
 
 }
+	    
