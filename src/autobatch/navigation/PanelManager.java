@@ -70,7 +70,7 @@ public class PanelManager {
 			studentenIpPanel = new StudentenIpPanel(panelSwitcher, currentStudent);
 			studentenBetreuerPanel = new StudentenBetreuerPanel(panelSwitcher, this, currentStudent);
 			studentenBetreuer_1Panel = new StudentenBetreuer_1Panel(panelSwitcher, currentStudent);
-			studentenAbgabenPanel = new StudentenAbgabenPanel(panelSwitcher, currentStudent);
+			studentenAbgabenPanel = new StudentenAbgabenPanel(this, panelSwitcher, currentStudent);
 			studentenFormularePanel = new StudentenFormularePanel(panelSwitcher, currentStudent);
 
 			cards.add(studentenPanel, "Studenten");
@@ -115,5 +115,8 @@ public class PanelManager {
 		cards.add(panel, panelName);
 
 	}
-
+	
 }
+	
+	
+
