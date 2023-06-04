@@ -568,7 +568,7 @@ public class Datenbankabfrage {
 	}
 
 	
-	public List<String> getStudentSubmissions(String username) {
+	public List<String> getSubmissions(String username) {
 		System.out.println("Abfragen der Studentenabgaben für Benutzer: " + username);
 	    List<String> filenames = new ArrayList<>();
 	    Connection con = null;
