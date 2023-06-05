@@ -21,13 +21,13 @@ import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.session.SessionManager;
 
 public class IPAnfragenActionListener implements ActionListener {
-	private Arbeit thema;
+	private Arbeit themaa;
 	private Student student;
 	private Betreuer betreuer;
 
-	public IPAnfragenActionListener(Arbeit thema, Student student, Betreuer betreuer) {
+	public IPAnfragenActionListener(Arbeit themaa, Student student, Betreuer betreuer) {
 		super();
-		this.thema = thema;
+		this.themaa = themaa;
 		this.student = student;
 		this.betreuer = betreuer;
 	}
@@ -52,7 +52,7 @@ public class IPAnfragenActionListener implements ActionListener {
 			               "Infomation", JOptionPane.ERROR_MESSAGE);
 			}
 			else {
-				System.out.println(dbaccess.setDataArbeit((Student)currentUser, betreuer, thema.getThema(),thema.getUnternehmen() ,thema.getBeschreibung()));
+				System.out.println(dbaccess.setDataArbeit((Student)currentUser, betreuer, themaa.getThema(),themaa.getUnternehmen() ,themaa.getBeschreibung()));
 				
 				JFrame frame = new JFrame();
 				 JOptionPane.showMessageDialog(frame, "Anfrage geschickt",
