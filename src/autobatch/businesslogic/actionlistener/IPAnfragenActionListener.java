@@ -15,21 +15,24 @@ import javax.swing.JOptionPane;
 import autobatch.businessobjects.Arbeit;
 import autobatch.businessobjects.Benutzer;
 import autobatch.businessobjects.Betreuer;
+import autobatch.businessobjects.IPAnfragen;
 import autobatch.businessobjects.Student;
 
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.session.SessionManager;
 
 public class IPAnfragenActionListener implements ActionListener {
-	private Arbeit themaa;
+	private Arbeit thema;
 	private Student student;
 	private Betreuer betreuer;
+	private IPAnfragen anfrage;
 
-	public IPAnfragenActionListener(Arbeit themaa, Student student, Betreuer betreuer) {
+	public IPAnfragenActionListener( Arbeit thema,Student student, Betreuer betreuer, IPAnfragen anfrage) {
 		super();
-		this.themaa = themaa;
 		this.student = student;
 		this.betreuer = betreuer;
+		this.anfrage = anfrage;
+		this.thema=thema;
 	}
 
 	@Override
@@ -37,35 +40,52 @@ public class IPAnfragenActionListener implements ActionListener {
 		Benutzer currentUser = SessionManager.getInstance().getAktuellerBenutzer();
 		Datenbankabfrage dbaccess = new Datenbankabfrage();	
 		boolean pruefe=true;
+		boolean pruefe_ip=true;
 		
+		//Der Student muss einen Betreuer haben und noch keinen IP Anfrage geschickt haben
 		for (int i = 0; i < dbaccess.getAllArbeiten().size(); i++) {
-			if (dbaccess.getAllArbeiten().get(i).getStudentMNR()==((Student) currentUser).getMnr()) {
+			
+			if (thema.getAngenommen()==false || ((Student) currentUser).getMnr()!=thema.getStudentMNR()) {
 				pruefe=false;
 			}
 		}
-		
-		
-		if (pruefe) {
-			if (betreuer==null) {
+			
+		if (pruefe) 
+		{
+			for (int i = 0; i < dbaccess.getAllIpAnfragen().size(); i++) 
+			{	
+				if(((Student) currentUser).getMnr()==thema.getStudentMNR())
+				{
+					pruefe_ip=false;
+				}
+						
+			}
+			
+			if (pruefe_ip==true) 
+				{
+					System.out.println(dbaccess.setDataIpAnfragen((Student)currentUser, betreuer, anfrage.getThema(),anfrage.getUnternehmen() ,anfrage.getBeschreibung(),anfrage.getIptermin()));
+					
+					JFrame frame = new JFrame();
+					 JOptionPane.showMessageDialog(frame, "Anfrage geschickt",
+				               "Infomation", JOptionPane.INFORMATION_MESSAGE);
+				}	
+			else {
+				JFrame frame = new JFrame();
+				 JOptionPane.showMessageDialog(frame, "IP Anfrage schon geschickt",
+			               "Infomation", JOptionPane.ERROR_MESSAGE);
+			}
+				
+		}
+		else 
+			{
 				JFrame frame = new JFrame();
 				 JOptionPane.showMessageDialog(frame, "Sie müssen einen Betreuer finden",
 			               "Infomation", JOptionPane.ERROR_MESSAGE);
 			}
-			else {
-				System.out.println(dbaccess.setDataArbeit((Student)currentUser, betreuer, themaa.getThema(),themaa.getUnternehmen() ,themaa.getBeschreibung()));
-				
-				JFrame frame = new JFrame();
-				 JOptionPane.showMessageDialog(frame, "Anfrage geschickt",
-			               "Infomation", JOptionPane.INFORMATION_MESSAGE);
-			}
-		}
-		else {
-			 JFrame frame = new JFrame();
-			 JOptionPane.showMessageDialog(frame, "Anfrage schon geschickt",
-		               "Infomation", JOptionPane.ERROR_MESSAGE);
-		}
 	}
 }
+
+
 
 
 

@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import autobatch.businesslogic.actionlistener.IPAnfragenActionListener;
 import autobatch.businesslogic.actionlistener.SaveDataActionListener;
 import autobatch.businessobjects.Betreuer;
+import autobatch.businessobjects.IPAnfragen;
 import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.businessobjects.Arbeit;
@@ -23,6 +24,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -36,15 +39,19 @@ public class StudentenIpPanel extends JPanel {
 	private JTextField txtUN;
 	private JTextField txtBeschreibung;
 	private boolean pruefe;
+	private IPAnfragen anfrage;
 	
 	public StudentenIpPanel(PanelSwitcher panelSwitcher, Student student) {
 		
 		this.panelSwitcher = panelSwitcher;
         this.student = student;
+       
+        
         
         Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
 		betreuer = datenbankabfrage.getBetreuerByMail(student.getBetreuer());
 		Arbeit arbeit = datenbankabfrage.getArbeitByID(student.getArbeit());
+		 anfrage=new IPAnfragen("", "", "", 0, 0, "", Date.valueOf(LocalDate.of(1, 1, 1)),0);
         
     	setPreferredSize(new Dimension(1000, 500));
         setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,16 +70,16 @@ public class StudentenIpPanel extends JPanel {
         txtBeschreibung = new JTextField();
         txtBeschreibung.setColumns(10);
         
-        JLabel lblDatum = new JLabel("Datum:");
+        JLabel lblDatum = new JLabel("Datum");
         lblDatum.setFont(new Font("Tahoma", Font.PLAIN, 20));
         
-        JLabel lblThema = new JLabel("Thema:");
+        JLabel lblThema = new JLabel("Arbeit");
         lblThema.setFont(new Font("Tahoma", Font.PLAIN, 20));
         
-        JLabel lblUnternehmen = new JLabel("Unternehmen:");
+        JLabel lblUnternehmen = new JLabel("Unternehmen");
         lblUnternehmen.setFont(new Font("Tahoma", Font.PLAIN, 20));
         
-        JLabel lblBeschreibung = new JLabel("Beschreibung:");
+        JLabel lblBeschreibung = new JLabel("Beschreibung");
         lblBeschreibung.setFont(new Font("Tahoma", Font.PLAIN, 20));
         
         
@@ -81,7 +88,7 @@ public class StudentenIpPanel extends JPanel {
         
         
         JButton btnSave = new JButton("Daten Speichern");
-        btnSave.addActionListener(new SaveDataActionListener(txtUN,txtBeschreibung, txtThema, txtDatum, student, betreuer,arbeit,btnAnfragen));
+        btnSave.addActionListener(new SaveDataActionListener(txtUN,txtBeschreibung, txtThema, txtDatum, student, betreuer,arbeit,btnAnfragen, anfrage));
         btnSave.setFont(new Font("Tahoma", Font.PLAIN, 20));
         
         
