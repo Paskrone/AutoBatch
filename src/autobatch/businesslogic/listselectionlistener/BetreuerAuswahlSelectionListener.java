@@ -53,7 +53,7 @@ public class BetreuerAuswahlSelectionListener implements ListSelectionListener {
 					panelSwitcher.switchToPanel("Betreuer_Anfragen_1");
 
 				} else if (panel.equals("Betreuer_Studenten_1")) {
-					JPanel betreuerStudenten_1Panel = new BetreuerStudenten_1Panel(panelSwitcher,
+					JPanel betreuerStudenten_1Panel = new BetreuerStudenten_1Panel(panelManager, panelSwitcher,
 							(Betreuer) SessionManager.getInstance().getAktuellerBenutzer());
 
 					panelManager.updatePanels(betreuerStudenten_1Panel, "Betreuer_Studenten_1");
