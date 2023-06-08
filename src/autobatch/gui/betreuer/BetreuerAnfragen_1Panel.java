@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import autobatch.businesslogic.actionlistener.AblehnenActionListener;
 import autobatch.businesslogic.actionlistener.AnfragenActionListener;
 import autobatch.businesslogic.actionlistener.AnnehmenActionListener;
 import autobatch.businessobjects.Betreuer;
@@ -80,54 +81,83 @@ public class BetreuerAnfragen_1Panel extends JPanel {
 
 		JButton btnAnnehmen = new JButton("Annehmen");
 		btnAnnehmen.addActionListener(new AnnehmenActionListener(panelSwitcher, panelManager, student, betreuer, arbeit, lblPopUp));
+		
+		JButton btnAblehnen = new JButton("Ablehnen");
+		btnAblehnen.addActionListener(new AblehnenActionListener(panelSwitcher, panelManager, student, betreuer, lblPopUp));
 
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup()
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(betreuerNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup().addContainerGap().addGroup(groupLayout
-								.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup().addGroup(groupLayout
-										.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createSequentialGroup().addComponent(lblUnternehmen)
-												.addPreferredGap(ComponentPlacement.UNRELATED)
-												.addComponent(lblUnternehmenIN, GroupLayout.PREFERRED_SIZE, 181,
-														GroupLayout.PREFERRED_SIZE))
-										.addComponent(lblThema)).addGap(226)
-										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-												.addGroup(groupLayout.createSequentialGroup().addComponent(lblName)
-														.addPreferredGap(ComponentPlacement.RELATED,
-																GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-														.addComponent(lblNameIN))
-												.addComponent(lblStudent).addComponent(lblNewLabel)))
-								.addComponent(lblBeschreibung)))
-						.addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(lblThemaIN,
-								GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(lblBeschreibungIN))
-						.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createSequentialGroup().addGap(6).addComponent(lblPopUp))
-										.addComponent(btnAnnehmen))))
-				.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-						.addComponent(betreuerNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(35)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblUnternehmen)
-								.addComponent(lblUnternehmenIN).addComponent(lblStudent))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblThema)
-								.addComponent(lblName).addComponent(lblNameIN))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblThemaIN)
-								.addComponent(lblNewLabel))
-						.addGap(16).addComponent(lblBeschreibung).addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblBeschreibungIN).addGap(100).addComponent(btnAnnehmen)
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblPopUp)
-						.addContainerGap(156, Short.MAX_VALUE)));
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(betreuerNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(lblUnternehmen)
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addComponent(lblUnternehmenIN, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE))
+										.addComponent(lblThema))
+									.addGap(226)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(lblName)
+											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addComponent(lblNameIN))
+										.addComponent(lblStudent)
+										.addComponent(lblNewLabel)))
+								.addComponent(lblBeschreibung)))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblThemaIN, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblBeschreibungIN))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(6)
+									.addComponent(lblPopUp))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(btnAnnehmen)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnAblehnen)))))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(betreuerNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(35)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblUnternehmen)
+						.addComponent(lblUnternehmenIN)
+						.addComponent(lblStudent))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblThema)
+						.addComponent(lblName)
+						.addComponent(lblNameIN))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblThemaIN)
+						.addComponent(lblNewLabel))
+					.addGap(16)
+					.addComponent(lblBeschreibung)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblBeschreibungIN)
+					.addGap(100)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnAnnehmen)
+						.addComponent(btnAblehnen))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblPopUp)
+					.addContainerGap(156, Short.MAX_VALUE))
+		);
 		setLayout(groupLayout);
 	}
 }

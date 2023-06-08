@@ -48,7 +48,7 @@ public class StudentenBetreuerAnfragePanel extends JPanel {
 		tf_Unternehmen = new JTextField();
 		tf_Unternehmen.setColumns(10);
 
-		JLabel lblThema = new JLabel("Arbeit:");
+		JLabel lblThema = new JLabel("Thema:");
 
 		tf_Thema = new JTextField();
 		tf_Thema.setColumns(10);
