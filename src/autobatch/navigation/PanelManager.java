@@ -17,6 +17,7 @@ import autobatch.gui.student.StudentenBetreuerPanel;
 import autobatch.gui.student.StudentenBetreuer_1Panel;
 import autobatch.gui.student.StudentenDatenPanel;
 import autobatch.gui.student.StudentenFormularePanel;
+import autobatch.gui.student.StudentenIP_1Panel;
 import autobatch.gui.student.StudentenIpPanel;
 import autobatch.gui.student.StudentenPanel;
 import autobatch.gui.studiendekan.StudiendekanIpPanel;
@@ -32,7 +33,7 @@ public class PanelManager {
 
 	private StudentenPanel studentenPanel;
 	private StudentenDatenPanel studentenDatenPanel;
-	private StudentenIpPanel studentenIpPanel;
+	private JPanel studentenIpPanel;
 	private StudentenBetreuerPanel studentenBetreuerPanel;
 	private StudentenBetreuer_1Panel studentenBetreuer_1Panel;
 	private StudentenAbgabenPanel studentenAbgabenPanel;
@@ -69,7 +70,12 @@ public class PanelManager {
 			Student currentStudent = (Student) currentUser;
 			studentenPanel = new StudentenPanel(panelSwitcher, currentStudent);
 			studentenDatenPanel = new StudentenDatenPanel(panelSwitcher, currentStudent);
-			studentenIpPanel = new StudentenIpPanel(panelSwitcher, currentStudent);
+			if (currentStudent.getBetreuer() != null) {
+				studentenIpPanel = new StudentenIpPanel(panelSwitcher, currentStudent);
+
+			} else {
+				studentenIpPanel = new StudentenIP_1Panel(panelSwitcher, currentStudent);
+			}
 			studentenBetreuerPanel = new StudentenBetreuerPanel(panelSwitcher, this, currentStudent);
 			studentenBetreuer_1Panel = new StudentenBetreuer_1Panel(panelSwitcher, currentStudent);
 			studentenAbgabenPanel = new StudentenAbgabenPanel(this, panelSwitcher, currentStudent);
@@ -89,7 +95,7 @@ public class PanelManager {
 
 			Studiendekan currentStudiendekan = (Studiendekan) currentUser;
 			studiendekanPanel = new StudiendekanPanel(panelSwitcher, currentStudiendekan);
-			studiendekanIpPanel=new StudiendekanIpPanel(panelSwitcher, this,currentStudiendekan);
+			studiendekanIpPanel = new StudiendekanIpPanel(panelSwitcher, this, currentStudiendekan);
 			cards.add(studiendekanPanel, "Studiendekane");
 			cards.add(studiendekanIpPanel, "Anfragen");
 
@@ -118,8 +124,5 @@ public class PanelManager {
 		cards.add(panel, panelName);
 
 	}
-	
-}
-	
-	
 
+}

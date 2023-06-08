@@ -1,8 +1,10 @@
 package autobatch.gui.betreuer;
 
 import java.awt.Dimension;
+
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,10 +12,12 @@ import javax.swing.border.EmptyBorder;
 import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
 import autobatch.businesslogic.actionlistener.AbgabeHinzufuegenActionListener;
+import autobatch.businesslogic.actionlistener.ChangeNoteActionListener;
 import autobatch.businesslogic.itemlistener.NdaItemListener;
 import autobatch.businesslogic.mouselistener.downloadFileMouseListener;
 import autobatch.businessobjects.Arbeit;
 import autobatch.dbaccess.Datenbankabfrage;
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -42,7 +46,7 @@ public class BetreuerStudenten_1Panel extends JPanel {
     private Datenbankabfrage dbaccess;
 	
 
-	public BetreuerStudenten_1Panel(PanelSwitcher panelSwitcher, Betreuer betreuer) {
+	public BetreuerStudenten_1Panel(PanelManager panelManager, PanelSwitcher panelSwitcher, Betreuer betreuer) {
 
 		this.panelSwitcher = panelSwitcher;
 		setPreferredSize(new Dimension(1000, 500));
@@ -72,11 +76,6 @@ public class BetreuerStudenten_1Panel extends JPanel {
 
 		JLabel lblThemaIN = new JLabel("New label");
 
-		if (student != null) {
-			lblNameIn.setText(student.getVorname() + " " + student.getNachname());
-			lblThemaIN.setText(arbeit.getThema());
-		}
-
 		JLabel lblNewLabel = new JLabel("Matrikelnummer:");
 
 		JLabel lblNewLabel_1 = new JLabel("Abgabetermin:");
@@ -87,9 +86,9 @@ public class BetreuerStudenten_1Panel extends JPanel {
 
 		JLabel lblNewLabel_4 = new JLabel("IP-Ende:");
 
-		JLabel lblNewLabel_5 = new JLabel("Note:");
+		JLabel lblNewLabel_5 = new JLabel("Note Arbeit:");
 
-		JLabel lblmnrIN = new JLabel("New label");
+		JLabel lblmnrIN = new JLabel("");
 
 		JLabel lblAbgabeterminIN = new JLabel("New label");
 
@@ -107,13 +106,33 @@ public class BetreuerStudenten_1Panel extends JPanel {
 
 		JLabel lblNewLabel_6 = new JLabel("New label");
 
-		JLabel lblNewLabel_7 = new JLabel("New label");
+		JLabel lblNEmailIN = new JLabel("");
 
 		JLabel lblNewLabel_8 = new JLabel("New label");
 
-		JLabel lblNewLabel_9 = new JLabel("New label");
+		JLabel lblSemesterIN = new JLabel("New label");
 
-		JLabel lblNewLabel_10 = new JLabel("New label");
+		if (student != null) {
+			lblNameIn.setText(student.getVorname() + " " + student.getNachname());
+			lblThemaIN.setText(arbeit.getThema());
+			lblmnrIN.setText(student.getMnr() + "");
+			lblNEmailIN.setText(student.getEmail());
+		}
+
+		JLabel lblNoteVortragIN = new JLabel("New label");
+
+		JLabel lblGesamtnoteIN = new JLabel("New label");
+
+		JLabel lblNoteArbeitIN = new JLabel("");
+		if (arbeit.getNoteArbeit() != 0) {
+			lblNoteArbeitIN.setText(arbeit.getNoteArbeit() + "");
+		}
+		if (arbeit.getNoteVortrag()!=0) {
+			lblNoteVortragIN.setText(arbeit.getNoteVortrag() + "");
+		}
+		if (arbeit.getGesamtnote()!=0) {
+			lblGesamtnoteIN.setText(arbeit.getGesamtnote()+"");
+		}
 
 		JLabel lblNewLabel_11 = new JLabel("New label");
 		
@@ -186,6 +205,13 @@ public class BetreuerStudenten_1Panel extends JPanel {
 		// Hier das einsehen der Abagben des Studenten ermöglichen
 		
 
+		JButton btnNote = new JButton("Note Arbeit ändern");
+		btnNote.addActionListener(new ChangeNoteActionListener(panelManager, panelSwitcher, betreuer, arbeit));
+
+		JLabel lblNewLabel_7 = new JLabel("Note Vortrag:");
+
+		JLabel lblNewLabel_9 = new JLabel("Gesamtnote:");
+
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -221,8 +247,9 @@ public class BetreuerStudenten_1Panel extends JPanel {
 							.addGap(79)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNewLabel_11)
-								.addComponent(lblNewLabel_10)
+								
 								.addGroup(groupLayout.createSequentialGroup()
+
 									.addComponent(chckbxNDAJa)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(chckbxNDANein))
@@ -286,7 +313,7 @@ public class BetreuerStudenten_1Panel extends JPanel {
 						.addComponent(lblThema)
 						.addComponent(lblThemaIN)
 						.addComponent(lblNewLabel_3)
-						.addComponent(lblNewLabel_10))
+						)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblIPAnfang)
@@ -316,6 +343,7 @@ public class BetreuerStudenten_1Panel extends JPanel {
 							.addComponent(lbl_error)))
 					.addContainerGap(22, Short.MAX_VALUE))
 		);
+
 		setLayout(groupLayout);
 
 	}
