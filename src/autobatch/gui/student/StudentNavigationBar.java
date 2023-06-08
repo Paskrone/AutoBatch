@@ -11,14 +11,16 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import autobatch.businesslogic.mouselistener.NavigationBarMouseListener;
 import autobatch.businessobjects.Student;
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 
 public class StudentNavigationBar extends JPanel {
 
+	private PanelManager panelmanager;
 	private PanelSwitcher panelSwitcher;
 	private Student student;
 
-	public StudentNavigationBar(PanelSwitcher panelSwitcher, Student student) {
+	public StudentNavigationBar(PanelManager panelmanager, PanelSwitcher panelSwitcher, Student student) {
 
 		this.panelSwitcher = panelSwitcher;
 		setPreferredSize(new Dimension(1000, 50));
@@ -28,7 +30,15 @@ public class StudentNavigationBar extends JPanel {
 			@Override
 			public void labelClicked() {
 
-				panelSwitcher.switchToPanel("Studenten_Ip");
+				if (student.getBetreuer() != null) {
+					JPanel panel = new StudentenIpPanel(panelmanager, panelSwitcher, student);
+					panelmanager.updatePanels(panel, "Studenten_Ip");
+					panelSwitcher.switchToPanel("Studenten_Ip");
+				} else {
+					JPanel panel = new StudentenIP_1Panel(panelmanager, panelSwitcher, student);
+					panelmanager.updatePanels(panel, "Studenten_Ip_1");
+					panelSwitcher.switchToPanel("Studenten_Ip_1");
+				}
 
 			}
 		});
@@ -39,8 +49,13 @@ public class StudentNavigationBar extends JPanel {
 			@Override
 			public void labelClicked() {
 				if (student.getBetreuer() == null) {
+					JPanel studentenBetreuerPanel = new StudentenBetreuerPanel(panelSwitcher, panelmanager, student);
+					panelmanager.updatePanels(studentenBetreuerPanel, "Studenten_Betreuer");
 					panelSwitcher.switchToPanel("Studenten_Betreuer");
 				} else {
+					JPanel studentenBetreuer_1Panel = new StudentenBetreuer_1Panel(panelmanager, panelSwitcher,
+							student);
+					panelmanager.updatePanels(studentenBetreuer_1Panel, "Studenten_Betreuer_1");
 					panelSwitcher.switchToPanel("Studenten_Betreuer_1");
 				}
 
@@ -52,7 +67,8 @@ public class StudentNavigationBar extends JPanel {
 
 			@Override
 			public void labelClicked() {
-
+				JPanel panel = new StudentenAbgabenPanel(panelmanager, panelSwitcher, student);
+				panelmanager.updatePanels(panel, "Studenten_Abgaben");
 				panelSwitcher.switchToPanel("Studenten_Abgaben");
 
 			}
@@ -63,7 +79,8 @@ public class StudentNavigationBar extends JPanel {
 
 			@Override
 			public void labelClicked() {
-
+				JPanel panel = new StudentenFormularePanel(panelmanager, panelSwitcher, student);
+				panelmanager.updatePanels(panel, "Studenten_Formulare");
 				panelSwitcher.switchToPanel("Studenten_Formulare");
 
 			}
@@ -74,7 +91,8 @@ public class StudentNavigationBar extends JPanel {
 
 			@Override
 			public void labelClicked() {
-
+				JPanel panel = new StudentenDatenPanel(panelmanager, panelSwitcher, student);
+				panelmanager.updatePanels(panel, "Studenten_Daten");
 				panelSwitcher.switchToPanel("Studenten_Daten");
 
 			}

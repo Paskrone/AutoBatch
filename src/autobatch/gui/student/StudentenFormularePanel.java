@@ -8,6 +8,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
 
 import autobatch.businessobjects.Student;
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 
 public class StudentenFormularePanel extends JPanel {
@@ -15,7 +16,7 @@ public class StudentenFormularePanel extends JPanel {
 	private PanelSwitcher panelSwitcher;
 	private Student student;
 
-	public StudentenFormularePanel(PanelSwitcher panelSwitcher, Student student) {
+	public StudentenFormularePanel(PanelManager panelManager, PanelSwitcher panelSwitcher, Student student) {
 		
 		this.panelSwitcher = panelSwitcher;
         this.student = student;
@@ -23,7 +24,7 @@ public class StudentenFormularePanel extends JPanel {
     	setPreferredSize(new Dimension(1000, 500));
         setBorder(new EmptyBorder(5, 5, 5, 5));
         
-        StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher, student);
+        StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelManager, panelSwitcher, student);
         
         GroupLayout groupLayout = new GroupLayout(this);
         groupLayout.setHorizontalGroup(

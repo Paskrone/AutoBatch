@@ -36,7 +36,7 @@ public class StudentenAbgabenPanel extends JPanel {
         setPreferredSize(new Dimension(1000, 500));
         setBorder(new EmptyBorder(5, 5, 5, 5));
 
-        StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher, student);
+        StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelManager, panelSwitcher, student);
 
         JLabel lblBisherigeAbagben = new JLabel("Bisherige Abgaben:");
 

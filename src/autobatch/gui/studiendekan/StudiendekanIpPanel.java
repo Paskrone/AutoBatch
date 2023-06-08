@@ -28,39 +28,40 @@ import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 
 public class StudiendekanIpPanel extends JPanel {
-	
+
 	private PanelSwitcher panelSwitcher;
 	private Studiendekan studiendekan;
 	private PanelManager panelManager;
 	private JTable table;
 	private Betreuer betreuer;
-	
-	public StudiendekanIpPanel(PanelSwitcher panelSwitcher,PanelManager panelmanager, Studiendekan studiendekan) {
+
+	public StudiendekanIpPanel(PanelSwitcher panelSwitcher, PanelManager panelmanager, Studiendekan studiendekan) {
 
 		this.panelSwitcher = panelSwitcher;
 		this.studiendekan = studiendekan;
-		this.panelManager=panelmanager;
-		StudiendekanNavigationBar studiendekanNavBar=new StudiendekanNavigationBar(panelSwitcher);
-		
+		this.panelManager = panelmanager;
+		StudiendekanNavigationBar studiendekanNavBar = new StudiendekanNavigationBar(panelmanager, panelSwitcher,
+				studiendekan);
+
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
-		
+
 		String[] columnNames = { "Nachname", "Email", "Matrikelnr.", "idThema" };
 		Datenbankabfrage dbQuery = new Datenbankabfrage();
 
-		List<IPAnfragen> a = dbQuery.getAllIpAnfragen();
-		List<IPAnfragen> arbeiten = new ArrayList<>();
+		List<Arbeit> a = dbQuery.getAllArbeiten();
+		List<Arbeit> arbeiten = new ArrayList<>();
 
 		List<Student> studenten = new ArrayList<>();
 
-		for (IPAnfragen anfrage : a) {
-			
-			if (!anfrage.getAngenommen() && anfrage.getBetreuerMail() != null) {
-				System.out.println("klappt");
-				studenten.add(dbQuery.getStudentByMNR(anfrage.getStudentMNR()));
-				arbeiten.add(anfrage);
+		for (Arbeit arbeit : a) {
+			if (arbeit.getDatum() != null) {
+				System.out.println(arbeit.getDatum());
+				studenten.add(dbQuery.getStudentByMNR(arbeit.getStudentMNR()));
+				arbeiten.add(arbeit);
 			}
 		}
+
 		Object[][] data = new Object[studenten.size()][4];
 		for (int i = 0; i < studenten.size(); i++) {
 			data[i][0] = studenten.get(i).getNachname();
@@ -93,13 +94,13 @@ public class StudiendekanIpPanel extends JPanel {
 		JScrollPane scrollPane = new JScrollPane(table);
 
 		table.setFillsViewportHeight(true);
-		
+
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(studiendekanNavBar, GroupLayout.PREFERRED_SIZE,
-										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(studiendekanNavBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup().addGap(6).addComponent(scrollPane,
 										GroupLayout.PREFERRED_SIZE, 976, GroupLayout.PREFERRED_SIZE)))
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
@@ -111,7 +112,7 @@ public class StudiendekanIpPanel extends JPanel {
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 210, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(212, Short.MAX_VALUE)));
 		setLayout(groupLayout);
-			
+
 	}
 
 }

@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 
 import autobatch.businessobjects.Studiendekan;
 import autobatch.gui.betreuer.BetreuerNavigationBar;
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 
 import java.awt.Dimension;
@@ -20,7 +21,7 @@ public class StudiendekanPanel extends JPanel {
 	private PanelSwitcher panelSwitcher;
 	private Studiendekan studiendekan;
 	
-	public StudiendekanPanel(PanelSwitcher panelSwitcher, Studiendekan studiendekan) {
+	public StudiendekanPanel(PanelManager panelmanager,PanelSwitcher panelSwitcher, Studiendekan studiendekan) {
 		
 		this.panelSwitcher = panelSwitcher;
 		
@@ -29,7 +30,7 @@ public class StudiendekanPanel extends JPanel {
     	setPreferredSize(new Dimension(1000, 500));
         setBorder(new EmptyBorder(5, 5, 5, 5));
         
-        StudiendekanNavigationBar studiendekanNavBar = new StudiendekanNavigationBar(panelSwitcher);
+		StudiendekanNavigationBar studiendekanNavBar = new StudiendekanNavigationBar(panelmanager, panelSwitcher, studiendekan);
         
         //AutoBath Logo anzeigen
         ImageIcon imageIcon = new ImageIcon("src/images/autobatchlogo_klein.png");

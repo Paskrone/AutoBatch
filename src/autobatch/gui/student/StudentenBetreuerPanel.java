@@ -61,7 +61,7 @@ public class StudentenBetreuerPanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
         
-        StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher, student);
+        StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelManager, panelSwitcher, student);
         
         GroupLayout groupLayout = new GroupLayout(this);
         groupLayout.setHorizontalGroup(

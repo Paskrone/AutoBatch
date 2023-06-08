@@ -10,7 +10,7 @@ import autobatch.businesslogic.actionlistener.AnfragenActionListener;
 import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.businessobjects.Betreuer;
-
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -29,7 +29,7 @@ public class StudentenBetreuerAnfragePanel extends JPanel {
 
 	private Betreuer betreuer;
 
-	public StudentenBetreuerAnfragePanel(PanelSwitcher panelSwitcher, Student student) {
+	public StudentenBetreuerAnfragePanel(PanelManager panelManager, PanelSwitcher panelSwitcher, Student student) {
 		this.student = student;
 		this.panelSwitcher = panelSwitcher;
 
@@ -39,7 +39,7 @@ public class StudentenBetreuerAnfragePanel extends JPanel {
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher, student);
+		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelManager, panelSwitcher, student);
 
 		System.out.println(panelSwitcher.getData("1"));
 

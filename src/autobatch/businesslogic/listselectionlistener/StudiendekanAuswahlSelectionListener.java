@@ -47,7 +47,7 @@ public class StudiendekanAuswahlSelectionListener implements ListSelectionListen
 				panelSwitcher.storeData("3", idThema);
 
 				if (panel.equals("studiendekanIpAnfragen")) {
-					JPanel studiendekanIPAnfragen = new StudiendekanIpAnfragenPanel (panelSwitcher, panelManager,
+					JPanel studiendekanIPAnfragen = new StudiendekanIpAnfragenPanel (panelManager, panelSwitcher,
 							(Studiendekan) SessionManager.getInstance().getAktuellerBenutzer());
 
 					panelManager.updatePanels(studiendekanIPAnfragen, "studiendekanIpAnfragen");

@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
@@ -377,9 +378,9 @@ public class Datenbankabfrage {
 		if (student != null && betreuer != null && thema != null && unternehmen != null && beschreibung != null) {
 			int idArbeit = getViableIdArbeit();
 
-			String query = "INSERT INTO `db4`.`arbeit` (`idArbeit`, `thema`, `unternehmen`, `beschreibung`, `angenommen`, `student`, `betreuer`) VALUES ('"
+			String query = "INSERT INTO `db4`.`arbeit` (`idArbeit`, `thema`, `unternehmen`, `beschreibung`, `angenommen`, `student`, `betreuer`, `studiendekan`) VALUES ('"
 					+ idArbeit + "', '" + thema + "', '" + unternehmen + "', '" + beschreibung + "', b'0', '"
-					+ student.getMnr() + "', '" + betreuer.getEmail() + "')";
+					+ student.getMnr() + "', '" + betreuer.getEmail() + "', '" + student.getStudiendekan() + "')";
 
 			if (update(query)) {
 				System.out.println("insert");
@@ -428,120 +429,112 @@ public class Datenbankabfrage {
 		return id;
 
 	}
-	
-	
-	//befülle Ip_Anfragen tabelle:)
-	
-		public boolean setDataIpAnfragen(Student student, Betreuer betreuer, String thema, String unternehmen,
-				String beschreibung, Date termin) {
-			if (student != null && betreuer != null && thema != null && unternehmen != null && beschreibung != null) {
-				int idArbeit = getViableIdIp();
 
-				String query = "INSERT INTO `db4`.`ip_anfragen` (`thema`, `unternehmen`, `beschreibung`, `angenommen`, `student`, `betreuer`,`termin`,`idArbeit`) VALUES ('"
-						+ thema + "', '" + unternehmen + "', '" + beschreibung + "', '0', '"
-						+ student.getMnr() + "', '" + betreuer.getEmail() + "', '"+ termin + "', '"+ idArbeit +"')";
+	// befülle Ip_Anfragen tabelle:)
 
-				if (update(query)) {
-					System.out.println("insert");
+	public boolean setDataIpAnfragen(Student student, Betreuer betreuer, String thema, String unternehmen,
+			String beschreibung, Date termin) {
+		if (student != null && betreuer != null && thema != null && unternehmen != null && beschreibung != null) {
+			int idArbeit = getViableIdIp();
 
-					return true;
+			String query = "INSERT INTO `db4`.`ip_anfragen` (`thema`, `unternehmen`, `beschreibung`, `angenommen`, `student`, `betreuer`,`termin`,`idArbeit`) VALUES ('"
+					+ thema + "', '" + unternehmen + "', '" + beschreibung + "', '0', '" + student.getMnr() + "', '"
+					+ betreuer.getEmail() + "', '" + termin + "', '" + idArbeit + "')";
 
-				}
+			if (update(query)) {
+				System.out.println("insert");
+
+				return true;
+
 			}
-			return false;
 		}
-		
-		
-		
-		public List<IPAnfragen> getAllIpAnfragen() {
-			List<IPAnfragen> anfragen = new ArrayList<>();
-			Connection con = null;
+		return false;
+	}
 
-			try {
-				Class.forName(driver);
-				con = DriverManager.getConnection(url + dbName, userName, pw);
+	public List<IPAnfragen> getAllIpAnfragen() {
+		List<IPAnfragen> anfragen = new ArrayList<>();
+		Connection con = null;
 
-				Statement stmt = con.createStatement();
-				ResultSet rs;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url + dbName, userName, pw);
 
-				rs = stmt.executeQuery(
-						"SELECT   thema,unternehmen, beschreibung, angenommen, student, betreuer, termin ,idArbeit FROM ip_anfragen");
+			Statement stmt = con.createStatement();
+			ResultSet rs;
 
-				while (rs.next()) {
-					int idArbeit = rs.getInt("idArbeit");
-					String unternehmen = rs.getString("unternehmen");
-					String thema = rs.getString("thema");
-					String beschreibung = rs.getString("beschreibung");
-					int angenommen = rs.getInt("angenommen");
-					int studentMNR = rs.getInt("student");
-					String betreuerMail = rs.getString("betreuer");
-					Date termin=rs.getDate("termin");
-					IPAnfragen t = new IPAnfragen(thema,unternehmen, beschreibung, angenommen, studentMNR, betreuerMail, termin, idArbeit);
-					anfragen.add(t);
-				}
+			rs = stmt.executeQuery(
+					"SELECT   thema,unternehmen, beschreibung, angenommen, student, betreuer, termin ,idArbeit FROM ip_anfragen");
 
-				con.close();
-
-			} catch (Exception e) {
-				e.printStackTrace();
+			while (rs.next()) {
+				int idArbeit = rs.getInt("idArbeit");
+				String unternehmen = rs.getString("unternehmen");
+				String thema = rs.getString("thema");
+				String beschreibung = rs.getString("beschreibung");
+				int angenommen = rs.getInt("angenommen");
+				int studentMNR = rs.getInt("student");
+				String betreuerMail = rs.getString("betreuer");
+				java.sql.Date termin = rs.getDate("termin");
+				IPAnfragen t = new IPAnfragen(thema, unternehmen, beschreibung, angenommen, studentMNR, betreuerMail,
+						termin, idArbeit);
+				anfragen.add(t);
 			}
 
-			return anfragen;
+			con.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
-		
-		
+		return anfragen;
+	}
 
-		
-		public int getViableIdIp() {
+	public int getViableIdIp() {
 
-			List<Integer> ids = new ArrayList<>();
-			
-			int id = 1;
-			
-			Connection con = null;
+		List<Integer> ids = new ArrayList<>();
 
-			try {
-				Class.forName(driver);
-				con = DriverManager.getConnection(url + dbName, userName, pw);
+		int id = 1;
 
-				Statement stmt = con.createStatement();
-				ResultSet rs;
+		Connection con = null;
 
-				rs = stmt.executeQuery("SELECT idArbeit FROM ip_anfragen");
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url + dbName, userName, pw);
 
-				while (rs.next()) {
-					int idArbeit = rs.getInt("idArbeit");
-					ids.add(idArbeit);
-				}
+			Statement stmt = con.createStatement();
+			ResultSet rs;
 
-				con.close();
+			rs = stmt.executeQuery("SELECT idArbeit FROM ip_anfragen");
 
-			} catch (Exception e) {
-				e.printStackTrace();
+			while (rs.next()) {
+				int idArbeit = rs.getInt("idArbeit");
+				ids.add(idArbeit);
 			}
-			
-			for (Integer integer : ids) {
-				if (id == integer) {
-					id++;
-				}
-			}
-			
-			return id;
-			
-		}
-		
-		public IPAnfragen getIPAnfragenByID(int idArbeit) {
-			List<IPAnfragen> I = getAllIpAnfragen();
-			for (IPAnfragen anfrgen : I) {
-				if (anfrgen.getIdArbeit() == idArbeit) {
-					return anfrgen;
-				}
-			}
-			return null;
+
+			con.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
+		for (Integer integer : ids) {
+			if (id == integer) {
+				id++;
+			}
+		}
 
+		return id;
+
+	}
+
+	public IPAnfragen getIPAnfragenByID(int idArbeit) {
+		List<IPAnfragen> I = getAllIpAnfragen();
+		for (IPAnfragen anfrgen : I) {
+			if (anfrgen.getIdArbeit() == idArbeit) {
+				return anfrgen;
+			}
+		}
+		return null;
+	}
 
 	public boolean updateDataArbeitBoolean(Arbeit arbeit, boolean arg, String spalte) {
 		if (arg) {
@@ -559,17 +552,17 @@ public class Datenbankabfrage {
 		}
 		return false;
 	}
-	
+
 	public boolean updateDataIPAnfragenBoolean(IPAnfragen anfrage, boolean arg, String spalte) {
 		if (arg) {
-			String query = "UPDATE `db4`.`ip_anfragen` SET `" + spalte + "` = b'1' WHERE (idArbeit = " + anfrage.getIdArbeit()
-					+ ")";
+			String query = "UPDATE `db4`.`ip_anfragen` SET `" + spalte + "` = b'1' WHERE (idArbeit = "
+					+ anfrage.getIdArbeit() + ")";
 			if (update(query)) {
 				return true;
 			}
 		} else if (!arg) {
-			String query = "UPDATE `db4`.`ip_anfragen` SET `" + spalte + "` = b'0' WHERE (idArbeit = " + anfrage.getIdArbeit()
-					+ ")";
+			String query = "UPDATE `db4`.`ip_anfragen` SET `" + spalte + "` = b'0' WHERE (idArbeit = "
+					+ anfrage.getIdArbeit() + ")";
 			if (update(query)) {
 				return true;
 			}
@@ -579,6 +572,28 @@ public class Datenbankabfrage {
 
 	public boolean updateDataArbeitFloat(Arbeit arbeit, float arg, String spalte) {
 		if (arg != 0) {
+			String query = "UPDATE `db4`.`arbeit` SET `" + spalte + "` = '" + arg + "' WHERE (idArbeit = "
+					+ arbeit.getIdArbeit() + ")";
+			if (update(query)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean updateDataArbeitDate(Arbeit arbeit, LocalDate arg, String spalte) {
+		if (arg != null) {
+			String query = "UPDATE `db4`.`arbeit` SET `" + spalte + "` = '" + arg + "' WHERE (idArbeit = "
+					+ arbeit.getIdArbeit() + ")";
+			if (update(query)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean updateDataArbeitString(Arbeit arbeit, String arg, String spalte) {
+		if (arg != null) {
 			String query = "UPDATE `db4`.`arbeit` SET `" + spalte + "` = '" + arg + "' WHERE (idArbeit = "
 					+ arbeit.getIdArbeit() + ")";
 			if (update(query)) {
@@ -611,7 +626,7 @@ public class Datenbankabfrage {
 			ResultSet rs;
 
 			rs = stmt.executeQuery(
-					"SELECT idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, gesamtnote, angenommen, nda_notwendig, student, betreuer FROM arbeit");
+					"SELECT idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, gesamtnote, angenommen, nda_notwendig, ipStart, ipAngefragt, ipAngenommen, student, betreuer, studiendekan FROM arbeit");
 
 			while (rs.next()) {
 				int idArbeit = rs.getInt("idArbeit");
@@ -622,10 +637,14 @@ public class Datenbankabfrage {
 				float noteVortrag = rs.getFloat("noteVortrag");
 				byte angenommen = rs.getByte("angenommen");
 				byte nda_notwenig = rs.getByte("nda_notwendig");
+				byte ipAngefragt = rs.getByte("ipAngefragt");
+				byte ipAngeneommen = rs.getByte("ipAngenommen");
+				Date ipStart = rs.getDate("ipStart");
 				int studentMNR = rs.getInt("student");
 				String betreuerMail = rs.getString("betreuer");
-				Arbeit t = new Arbeit(idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, angenommen, nda_notwenig,
-						studentMNR, betreuerMail);
+				String studiendekanMail = rs.getString("studiendekan");
+				Arbeit t = new Arbeit(idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, angenommen,
+						nda_notwenig, ipAngefragt, ipAngeneommen, ipStart, studentMNR, betreuerMail, studiendekanMail);
 				arbeiten.add(t);
 			}
 
@@ -659,88 +678,85 @@ public class Datenbankabfrage {
 			return false;
 		}
 	}
-	
+
 	public void saveFileToDatabase(File selectedFile, String username) {
-	    try {
-	        FileInputStream input = new FileInputStream(selectedFile);
-	        Connection con = DriverManager.getConnection(url + dbName, userName, pw);
-	        PreparedStatement statement = con.prepareStatement("INSERT INTO documents (username, file, filename) VALUES (?, ?, ?)");
-	        statement.setString(1, username);
-	        statement.setBinaryStream(2, input);
-	        statement.setString(3, selectedFile.getName());
-	        statement.executeUpdate();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
+		try {
+			FileInputStream input = new FileInputStream(selectedFile);
+			Connection con = DriverManager.getConnection(url + dbName, userName, pw);
+			PreparedStatement statement = con
+					.prepareStatement("INSERT INTO documents (username, file, filename) VALUES (?, ?, ?)");
+			statement.setString(1, username);
+			statement.setBinaryStream(2, input);
+			statement.setString(3, selectedFile.getName());
+			statement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	
 	public void saveFileFromDatabaseById(int id, String outputFilePath) {
-        try {
-            Connection con = DriverManager.getConnection(url + dbName, userName, pw);
-            PreparedStatement statement = con.prepareStatement("SELECT file FROM documents WHERE id = ?");
-            statement.setInt(1, id);
-            ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
-                byte[] fileBytes = rs.getBytes("file");
-                OutputStream targetFile= new FileOutputStream(outputFilePath);
-                targetFile.write(fileBytes);
-                targetFile.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-	
-	public InputStream getFileFromDatabase(String filename) {
-	    InputStream input = null;
-
-	    try {
-	        Connection con = DriverManager.getConnection(url + dbName, userName, pw);
-	        PreparedStatement statement = con.prepareStatement("SELECT file FROM documents WHERE filename = ?");
-	        statement.setString(1, filename);
-
-	        ResultSet result = statement.executeQuery();
-	        if (result.next()) {
-	            input = result.getBinaryStream("file");
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-
-	    return input;
+		try {
+			Connection con = DriverManager.getConnection(url + dbName, userName, pw);
+			PreparedStatement statement = con.prepareStatement("SELECT file FROM documents WHERE id = ?");
+			statement.setInt(1, id);
+			ResultSet rs = statement.executeQuery();
+			if (rs.next()) {
+				byte[] fileBytes = rs.getBytes("file");
+				OutputStream targetFile = new FileOutputStream(outputFilePath);
+				targetFile.write(fileBytes);
+				targetFile.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	
+	public InputStream getFileFromDatabase(String filename) {
+		InputStream input = null;
+
+		try {
+			Connection con = DriverManager.getConnection(url + dbName, userName, pw);
+			PreparedStatement statement = con.prepareStatement("SELECT file FROM documents WHERE filename = ?");
+			statement.setString(1, filename);
+
+			ResultSet result = statement.executeQuery();
+			if (result.next()) {
+				input = result.getBinaryStream("file");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return input;
+	}
+
 	public List<String> getSubmissions(String username) {
 		System.out.println("Abfragen der Studentenabgaben für Benutzer: " + username);
-	    List<String> filenames = new ArrayList<>();
-	    Connection con = null;
+		List<String> filenames = new ArrayList<>();
+		Connection con = null;
 
-	    try {
-	        con = DriverManager.getConnection(url + dbName, userName, pw);
-	        PreparedStatement statement = con.prepareStatement("SELECT filename FROM documents WHERE username = ?");
-	        statement.setString(1, username);
+		try {
+			con = DriverManager.getConnection(url + dbName, userName, pw);
+			PreparedStatement statement = con.prepareStatement("SELECT filename FROM documents WHERE username = ?");
+			statement.setString(1, username);
 
-	        ResultSet result = statement.executeQuery();
-	        while (result.next()) {
-	            filenames.add(result.getString("filename"));
-	        }
-	        System.out.println("Gefundene Dateinamen: " + filenames);
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    } finally {
-	        if (con != null) {
-	            try {
-	                con.close();
-	            } catch (SQLException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	    }
-	    return filenames;
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				filenames.add(result.getString("filename"));
+			}
+			System.out.println("Gefundene Dateinamen: " + filenames);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return filenames;
 	}
 
-
 }
-	    

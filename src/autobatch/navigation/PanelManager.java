@@ -33,7 +33,6 @@ public class PanelManager {
 
 	private StudentenPanel studentenPanel;
 	private StudentenDatenPanel studentenDatenPanel;
-	private JPanel studentenIpPanel;
 	private StudentenBetreuerPanel studentenBetreuerPanel;
 	private StudentenBetreuer_1Panel studentenBetreuer_1Panel;
 	private StudentenAbgabenPanel studentenAbgabenPanel;
@@ -68,22 +67,16 @@ public class PanelManager {
 		if (currentUser instanceof Student) {
 
 			Student currentStudent = (Student) currentUser;
-			studentenPanel = new StudentenPanel(panelSwitcher, currentStudent);
-			studentenDatenPanel = new StudentenDatenPanel(panelSwitcher, currentStudent);
-			if (currentStudent.getBetreuer() != null) {
-				studentenIpPanel = new StudentenIpPanel(panelSwitcher, currentStudent);
-
-			} else {
-				studentenIpPanel = new StudentenIP_1Panel(panelSwitcher, currentStudent);
-			}
+			studentenPanel = new StudentenPanel(this, panelSwitcher, currentStudent);
+			studentenDatenPanel = new StudentenDatenPanel(this, panelSwitcher, currentStudent);
+			
 			studentenBetreuerPanel = new StudentenBetreuerPanel(panelSwitcher, this, currentStudent);
-			studentenBetreuer_1Panel = new StudentenBetreuer_1Panel(panelSwitcher, currentStudent);
+			studentenBetreuer_1Panel = new StudentenBetreuer_1Panel(this, panelSwitcher, currentStudent);
 			studentenAbgabenPanel = new StudentenAbgabenPanel(this, panelSwitcher, currentStudent);
-			studentenFormularePanel = new StudentenFormularePanel(panelSwitcher, currentStudent);
+			studentenFormularePanel = new StudentenFormularePanel(this, panelSwitcher, currentStudent);
 
 			cards.add(studentenPanel, "Studenten");
 			cards.add(studentenDatenPanel, "Studenten_Daten");
-			cards.add(studentenIpPanel, "Studenten_Ip");
 			cards.add(studentenBetreuerPanel, "Studenten_Betreuer");
 			cards.add(studentenBetreuer_1Panel, "Studenten_Betreuer_1");
 			cards.add(studentenAbgabenPanel, "Studenten_Abgaben");
@@ -94,7 +87,7 @@ public class PanelManager {
 		} else if (currentUser instanceof Studiendekan) {
 
 			Studiendekan currentStudiendekan = (Studiendekan) currentUser;
-			studiendekanPanel = new StudiendekanPanel(panelSwitcher, currentStudiendekan);
+			studiendekanPanel = new StudiendekanPanel(this, panelSwitcher, currentStudiendekan);
 			studiendekanIpPanel = new StudiendekanIpPanel(panelSwitcher, this, currentStudiendekan);
 			cards.add(studiendekanPanel, "Studiendekane");
 			cards.add(studiendekanIpPanel, "Anfragen");

@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 import autobatch.businesslogic.mouselistener.NavigationBarMouseListener;
+import autobatch.businessobjects.Studiendekan;
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -13,32 +15,31 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class StudiendekanNavigationBar extends JPanel {
 
-	private PanelSwitcher panelSwitcher;
 	
-	public StudiendekanNavigationBar(PanelSwitcher panelSwitcher) {
+	public StudiendekanNavigationBar(PanelManager panelManager, PanelSwitcher panelSwitcher, Studiendekan studiendekan) {
 		
 		
-		
-		this.panelSwitcher = panelSwitcher;
 		setPreferredSize(new Dimension(1000, 50));
 		
 		JLabel lbl_Studenten = new JLabel("Studenten");
 	
 		
 		JLabel lbl_Ip = new JLabel("IP");
+		lbl_Ip.addMouseListener(new NavigationBarMouseListener() {
+			
+			@Override
+			public void labelClicked() {
+				JPanel panel = new StudiendekanIpPanel(panelSwitcher, panelManager, studiendekan);
+				panelManager.updatePanels(panel, "Studiendekan_Ip");
+				panelSwitcher.switchToPanel("Studiendekan_Ip");
+			}
+		});
 		
 		
 		JLabel lbl_Formulare = new JLabel("Formulare");
 		
 		JLabel lbl_Anfragen = new JLabel("Anfragen");
-		lbl_Anfragen.addMouseListener(new NavigationBarMouseListener() {
-			@Override
-			public void labelClicked() {
-				
-				panelSwitcher.switchToPanel("Anfragen");
-				
-			}
-		});
+		
 		
 		JLabel lbl_abmelden = new JLabel("abmelden");
 		lbl_abmelden.addMouseListener(new NavigationBarMouseListener() {

@@ -28,29 +28,26 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class StudiendekanIpAnfragenPanel extends JPanel {
 
-	private PanelSwitcher panelSwitcher;
-	private PanelManager panelManager;
 	
 	private Student student;
 
-	private IPAnfragen anfrage;
+	private Arbeit arbeit;
 
 	private Betreuer betreuer;
 
-	public StudiendekanIpAnfragenPanel(PanelSwitcher panelSwitcher, PanelManager panelManager, Studiendekan dekan) {
-		this.panelSwitcher = panelSwitcher;
+	public StudiendekanIpAnfragenPanel(PanelManager panelmanager, PanelSwitcher panelSwitcher, Studiendekan dekan) {
 
 		Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
 		int mnr = Integer.parseInt(panelSwitcher.getData("2") + "");
 		this.student = datenbankabfrage.getStudentByMNR(mnr);
 
-		int idThema = Integer.parseInt(panelSwitcher.getData("3") + "");
-		this.anfrage = datenbankabfrage.getIPAnfragenByID(idThema);
+		int idArbeit= Integer.parseInt(panelSwitcher.getData("3") + "");
+		this.arbeit = datenbankabfrage.getArbeitByID(idArbeit);
 
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		StudiendekanNavigationBar studiendekanNavBar = new StudiendekanNavigationBar(panelSwitcher);
+		StudiendekanNavigationBar studiendekanNavBar = new StudiendekanNavigationBar(panelmanager, panelSwitcher, dekan);
 
 		System.out.println(panelSwitcher.getData("1"));
 
@@ -60,16 +57,16 @@ public class StudiendekanIpAnfragenPanel extends JPanel {
 
 		JLabel lblBeschreibung = new JLabel("Beschreibung:");
 
-		JLabel lblUnternehmenIN = new JLabel(anfrage.getUnternehmen());
+		JLabel lblUnternehmenIN = new JLabel(arbeit.getUnternehmen());
 
 		JLabel lblStudent = new JLabel("Student Informationen:");
 
-		JLabel lblThemaIN = new JLabel(anfrage.getThema());
+		JLabel lblThemaIN = new JLabel(arbeit.getThema());
 
 		JLabel lblBeschreibungIN = new JLabel("");
 
-		if (anfrage.getBeschreibung() != null) {
-			lblBeschreibungIN.setText(anfrage.getBeschreibung());
+		if (arbeit.getBeschreibung() != null) {
+			lblBeschreibungIN.setText(arbeit.getBeschreibung());
 		}
 
 		JLabel lblName = new JLabel("Name:");
@@ -80,7 +77,7 @@ public class StudiendekanIpAnfragenPanel extends JPanel {
 		lblPopUp.setVisible(false);
 
 		JButton btnAnnehmen = new JButton("Annehmen");
-		btnAnnehmen.addActionListener(new IPAnnhmenActionListener(dekan,panelSwitcher, panelManager, student, betreuer, anfrage, lblPopUp));
+		btnAnnehmen.addActionListener(new IPAnnhmenActionListener(dekan,panelSwitcher, panelmanager, student, betreuer, arbeit, lblPopUp));
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

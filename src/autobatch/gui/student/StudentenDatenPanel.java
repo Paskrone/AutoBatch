@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import autobatch.businesslogic.actionlistener.DatenSpeichernActionListener;
 import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import autobatch.session.SessionManager;
 
@@ -29,7 +30,7 @@ public class StudentenDatenPanel extends JPanel {
 	private JTextField tf_strasse;
 	private JTextField tf_passwort;
 
-	public StudentenDatenPanel(PanelSwitcher panelSwitcher, Student student) {
+	public StudentenDatenPanel(PanelManager panelManager, PanelSwitcher panelSwitcher, Student student) {
 
 		this.panelSwitcher = panelSwitcher;
 		this.student = student;
@@ -37,7 +38,7 @@ public class StudentenDatenPanel extends JPanel {
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher, student);
+		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelManager, panelSwitcher, student);
 		
 
 		JLabel lblMatrikelnummer = new JLabel("Matrikelnummer:");

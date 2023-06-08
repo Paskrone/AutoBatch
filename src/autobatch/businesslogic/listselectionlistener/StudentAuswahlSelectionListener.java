@@ -36,7 +36,7 @@ public class StudentAuswahlSelectionListener implements ListSelectionListener {
 
 				panelSwitcher.storeData("1", mail);
 
-				JPanel studentenBetreuerAnfragePanel = new StudentenBetreuerAnfragePanel(panelSwitcher,
+				JPanel studentenBetreuerAnfragePanel = new StudentenBetreuerAnfragePanel(panelManager, panelSwitcher,
 						(Student) SessionManager.getInstance().getAktuellerBenutzer());
 
 				panelManager.updatePanels(studentenBetreuerAnfragePanel, "Studenten_Betreuer_Anfrage");

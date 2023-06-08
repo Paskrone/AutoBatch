@@ -1,5 +1,8 @@
 package autobatch.businessobjects;
 
+import java.time.LocalDate;
+import java.sql.Date;
+
 import autobatch.dbaccess.Datenbankabfrage;
 
 public class Arbeit {
@@ -16,12 +19,18 @@ public class Arbeit {
 
 	private byte angenommen;
 	private byte nda_notwendig;
+	private byte ipAngefragt;
+	private byte ipAngenommen;
+
+	private LocalDate datum;
 
 	private int studentMNR;
 	private String betreuerMail;
+	private String studiendekanMail;
 
 	public Arbeit(int idArbeit, String unternehmen, String thema, String beschreibung, float noteArbeit,
-			float noteVortrag, byte angenommen, byte nda_notwendig, int studentMNR, String betreuerMail) {
+			float noteVortrag, byte angenommen, byte nda_notwendig, byte ipAngefragt, byte ipAngenommen,
+			Date datum, int studentMNR, String betreuerMail, String studiendekanMail) {
 		super();
 		this.idArbeit = idArbeit;
 		this.unternehmen = unternehmen;
@@ -34,9 +43,24 @@ public class Arbeit {
 
 		this.angenommen = angenommen;
 		this.nda_notwendig = nda_notwendig;
+		this.ipAngefragt = ipAngefragt;
+		this.ipAngenommen = ipAngenommen;
+		
+		
+		this.datum = setDate(datum);
+
 		this.studentMNR = studentMNR;
 		this.betreuerMail = betreuerMail;
+		this.studiendekanMail = studiendekanMail;
 
+	}
+	
+	public LocalDate setDate(Date d) {
+		if (d!=null) {
+			return d.toLocalDate();
+		} else {
+			return null;
+		}
 	}
 
 	public int getIdArbeit() {
@@ -132,6 +156,38 @@ public class Arbeit {
 			datenbankabfrage.updateDataArbeitFloat(this, this.gesamtnote, "gesamtnote");
 		}
 
+	}
+
+	public LocalDate getDatum() {
+		return datum;
+	}
+
+	public void setDatum(LocalDate datum) {
+		this.datum = datum;
+	}
+
+	public String getStudiendekanMail() {
+		return studiendekanMail;
+	}
+
+	public void setStudiendekanMail(String studiendekanMail) {
+		this.studiendekanMail = studiendekanMail;
+	}
+
+	public boolean getIpAngenommen() {
+		return ipAngenommen == 1;
+	}
+
+	public void setIpAngenommen(byte ipAngenommen) {
+		this.ipAngenommen = ipAngenommen;
+	}
+
+	public boolean getIpAngefragt() {
+		return ipAngefragt == 1;
+	}
+
+	public void setIpAngefragt(byte ipAngefragt) {
+		this.ipAngefragt = ipAngefragt;
 	}
 
 }
