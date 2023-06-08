@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 
 import autobatch.businessobjects.Arbeit;
 import autobatch.businessobjects.Betreuer;
-import autobatch.businessobjects.IPAnfragen;
 import autobatch.businessobjects.Student;
 import autobatch.businessobjects.Studiendekan;
 import autobatch.dbaccess.Datenbankabfrage;

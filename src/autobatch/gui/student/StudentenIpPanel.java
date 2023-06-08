@@ -6,10 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import autobatch.businesslogic.actionlistener.IPAnfrageActionListener;
-import autobatch.businesslogic.actionlistener.IPAnfragenActionListener;
-import autobatch.businesslogic.actionlistener.SaveDataActionListener;
 import autobatch.businessobjects.Betreuer;
-import autobatch.businessobjects.IPAnfragen;
 import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.businessobjects.Arbeit;

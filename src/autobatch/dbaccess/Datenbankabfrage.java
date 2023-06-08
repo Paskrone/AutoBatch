@@ -18,7 +18,6 @@ import java.util.List;
 
 import autobatch.businessobjects.Benutzer;
 import autobatch.businessobjects.Betreuer;
-import autobatch.businessobjects.IPAnfragen;
 import autobatch.businessobjects.Student;
 import autobatch.businessobjects.Studiendekan;
 import autobatch.businessobjects.Arbeit;
@@ -451,43 +450,7 @@ public class Datenbankabfrage {
 		return false;
 	}
 
-	public List<IPAnfragen> getAllIpAnfragen() {
-		List<IPAnfragen> anfragen = new ArrayList<>();
-		Connection con = null;
-
-		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url + dbName, userName, pw);
-
-			Statement stmt = con.createStatement();
-			ResultSet rs;
-
-			rs = stmt.executeQuery(
-					"SELECT   thema,unternehmen, beschreibung, angenommen, student, betreuer, termin ,idArbeit FROM ip_anfragen");
-
-			while (rs.next()) {
-				int idArbeit = rs.getInt("idArbeit");
-				String unternehmen = rs.getString("unternehmen");
-				String thema = rs.getString("thema");
-				String beschreibung = rs.getString("beschreibung");
-				int angenommen = rs.getInt("angenommen");
-				int studentMNR = rs.getInt("student");
-				String betreuerMail = rs.getString("betreuer");
-				java.sql.Date termin = rs.getDate("termin");
-				IPAnfragen t = new IPAnfragen(thema, unternehmen, beschreibung, angenommen, studentMNR, betreuerMail,
-						termin, idArbeit);
-				anfragen.add(t);
-			}
-
-			con.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return anfragen;
-	}
-
+	
 	public int getViableIdIp() {
 
 		List<Integer> ids = new ArrayList<>();
@@ -526,15 +489,7 @@ public class Datenbankabfrage {
 
 	}
 
-	public IPAnfragen getIPAnfragenByID(int idArbeit) {
-		List<IPAnfragen> I = getAllIpAnfragen();
-		for (IPAnfragen anfrgen : I) {
-			if (anfrgen.getIdArbeit() == idArbeit) {
-				return anfrgen;
-			}
-		}
-		return null;
-	}
+	
 
 	public boolean updateDataArbeitBoolean(Arbeit arbeit, boolean arg, String spalte) {
 		if (arg) {
@@ -553,22 +508,7 @@ public class Datenbankabfrage {
 		return false;
 	}
 
-	public boolean updateDataIPAnfragenBoolean(IPAnfragen anfrage, boolean arg, String spalte) {
-		if (arg) {
-			String query = "UPDATE `db4`.`ip_anfragen` SET `" + spalte + "` = b'1' WHERE (idArbeit = "
-					+ anfrage.getIdArbeit() + ")";
-			if (update(query)) {
-				return true;
-			}
-		} else if (!arg) {
-			String query = "UPDATE `db4`.`ip_anfragen` SET `" + spalte + "` = b'0' WHERE (idArbeit = "
-					+ anfrage.getIdArbeit() + ")";
-			if (update(query)) {
-				return true;
-			}
-		}
-		return false;
-	}
+	
 
 	public boolean updateDataArbeitFloat(Arbeit arbeit, float arg, String spalte) {
 		if (arg != 0) {

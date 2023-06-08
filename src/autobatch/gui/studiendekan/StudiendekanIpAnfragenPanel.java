@@ -1,26 +1,19 @@
 package autobatch.gui.studiendekan;
 
-import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import autobatch.businesslogic.actionlistener.AnfragenActionListener;
-import autobatch.businesslogic.actionlistener.AnnehmenActionListener;
 import autobatch.businesslogic.actionlistener.IPAnnhmenActionListener;
 import autobatch.businessobjects.Betreuer;
-import autobatch.businessobjects.IPAnfragen;
 import autobatch.businessobjects.Student;
 import autobatch.businessobjects.Studiendekan;
 import autobatch.businessobjects.Arbeit;
 import autobatch.dbaccess.Datenbankabfrage;
-import autobatch.gui.student.StudentNavigationBar;
 import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
