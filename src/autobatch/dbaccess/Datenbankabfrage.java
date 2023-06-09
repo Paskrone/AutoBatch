@@ -122,7 +122,7 @@ public class Datenbankabfrage {
 	
 	public boolean updateDataStudiendekanString(Studiendekan studiendekan, String arg, String spalte) {
 		if (arg != null) {
-			String query = "UPDATE `db4`.`betreuer` SET `" + spalte + "` = '" + arg + "' WHERE (`email` = ? )";
+			String query = "UPDATE `db4`.`studiendekan` SET `" + spalte + "` = '" + arg + "' WHERE (`email` = ? )";
 			
 			
 			try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);

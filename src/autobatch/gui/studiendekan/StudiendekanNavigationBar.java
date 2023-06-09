@@ -49,6 +49,16 @@ public class StudiendekanNavigationBar extends JPanel {
 		});
 		
 		JLabel lblNoten = new JLabel("Noten");
+		lblNoten.addMouseListener(new NavigationBarMouseListener() {
+			
+			@Override
+			public void labelClicked() {
+
+				JPanel panel = new StudiendekanNotenPanel(panelManager, panelSwitcher, studiendekan);
+				panelManager.updatePanels(panel, "StudiendekanNotenPanel");
+				panelSwitcher.switchToPanel("StudiendekanNotenPanel");
+			}
+		});
 		
 		
 		JLabel lblDaten = new JLabel("Daten");

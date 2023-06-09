@@ -32,8 +32,10 @@ public class DatenSpeichernStudiendekanActionListener implements ActionListener 
 			studiendekan.setPasswort(passwort);
 
 			Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
-			datenbankabfrage.updateDataStudiendekanString(studiendekan, passwort, "Passwort");
-			lblPopUp.setText("gespeichert!");
+			if (datenbankabfrage.updateDataStudiendekanString(studiendekan, passwort, "Passwort")) {
+				lblPopUp.setText("gespeichert!");
+
+			}
 		}
 
 		lblPopUp.setVisible(true);

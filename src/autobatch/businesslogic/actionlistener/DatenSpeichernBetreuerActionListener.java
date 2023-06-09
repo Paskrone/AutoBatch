@@ -29,12 +29,13 @@ public class DatenSpeichernBetreuerActionListener implements ActionListener {
 		if (!tf_Passwort.getText().equals("")) {
 			String passwort = tf_Passwort.getText();
 			betreuer.setPasswort(passwort);
-			
+
 			Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
-			datenbankabfrage.updateDataBetreuerString(betreuer, passwort, "Passwort");
-			lblPopUp.setText("gespeichert!");
+			if (datenbankabfrage.updateDataBetreuerString(betreuer, passwort, "Passwort")) {
+				lblPopUp.setText("gespeichert!");
+			}
 		}
-		
+
 		lblPopUp.setVisible(true);
 
 	}

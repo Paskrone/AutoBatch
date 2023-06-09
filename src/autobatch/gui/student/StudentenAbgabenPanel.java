@@ -75,10 +75,13 @@ public class StudentenAbgabenPanel extends JPanel {
         });
         
         listModel_1 = new DefaultListModel<>();
-        ArrayList<String> submissions_1 = (ArrayList<String>) dbaccess.getSubmissions(dbaccess.getBetreuerByMail(student.getBetreuer()).getBenutzername());
-        for(String submission : submissions_1) {
-            listModel_1.addElement(submission);
-        }
+        if (student.getBetreuer()!=null) {
+			        ArrayList<String> submissions_1 = (ArrayList<String>) dbaccess.getSubmissions(dbaccess.getBetreuerByMail(student.getBetreuer()).getBenutzername());
+					for (String submission : submissions_1) {
+						listModel_1.addElement(submission);
+					}
+		}
+      
         
         JList<String> fileList_1 = new JList<String>(listModel_1);
         fileList_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
