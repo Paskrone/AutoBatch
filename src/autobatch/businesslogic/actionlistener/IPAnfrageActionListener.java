@@ -59,7 +59,7 @@ public class IPAnfrageActionListener implements ActionListener {
 					arbeit.setBeschreibung(beschreibung);
 					datenbankabfrage.updateDataArbeitString(arbeit, beschreibung, "beschreibung");
 				}
-				arbeit.setDatum(datum);
+				arbeit.setIpStart(datum);
 				datenbankabfrage.updateDataArbeitDate(arbeit, datum, "ipStart");
 
 				lblPopUp.setText("Anfrage wurde geschickt!");

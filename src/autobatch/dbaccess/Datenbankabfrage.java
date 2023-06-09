@@ -562,7 +562,7 @@ public class Datenbankabfrage {
 			ResultSet rs;
 
 			rs = stmt.executeQuery(
-					"SELECT idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, gesamtnote, angenommen, nda_notwendig, ipStart, ipAngefragt, ipAngenommen, ba_Anmeldung_Student, ba_Anmeldung_Betreuer, ba_Anmeldung_Studiendekan, ipBestanden, veroeffentlichung, student, betreuer, studiendekan FROM arbeit");
+					"SELECT idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, gesamtnote, angenommen, nda_notwendig, ipAngefragt, ipAngenommen, ipStart, baAbgabetermin, ausgabetermin, ba_Anmeldung_Student, ba_Anmeldung_Betreuer, ba_Anmeldung_Studiendekan, ipBestanden, veroeffentlichung, student, betreuer, studiendekan FROM arbeit");
 
 			while (rs.next()) {
 				int idArbeit = rs.getInt("idArbeit");
@@ -583,12 +583,15 @@ public class Datenbankabfrage {
 				byte veroeffentlichung = rs.getByte("veroeffentlichung");
 
 				Date ipStart = rs.getDate("ipStart");
+				Date baAbgabetermin = rs.getDate("baAbgabetermin");
+				Date ausgabetermin = rs.getDate("ausgabetermin");
+				
 				int studentMNR = rs.getInt("student");
 				String betreuerMail = rs.getString("betreuer");
 				String studiendekanMail = rs.getString("studiendekan");
 				Arbeit t = new Arbeit(idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, angenommen,
 						nda_notwenig, ipAngefragt, ipAngeneommen, ba_Anmeldung_Student, ba_Anmeldung_Betreuer,
-						ba_Anmeldung_Studiendekan, ipBestanden, veroeffentlichung, ipStart, studentMNR, betreuerMail,
+						ba_Anmeldung_Studiendekan, ipBestanden, veroeffentlichung, ipStart, baAbgabetermin, ausgabetermin, studentMNR, betreuerMail,
 						studiendekanMail);
 				arbeiten.add(t);
 			}

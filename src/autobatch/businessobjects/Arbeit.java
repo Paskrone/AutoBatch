@@ -1,6 +1,7 @@
 package autobatch.businessobjects;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.sql.Date;
 
 import autobatch.dbaccess.Datenbankabfrage;
@@ -17,7 +18,7 @@ public class Arbeit {
 	private float noteVortrag;
 	private float gesamtnote;
 
-	private byte angenommen;
+	private byte themaAngenommen;
 	private byte nda_notwendig;
 	private byte ipAngefragt;
 	private byte ipAngenommen;
@@ -28,7 +29,9 @@ public class Arbeit {
 	private byte ipBestanden;
 	private byte veroeffentlichung;
 
-	private LocalDate datum;
+	private LocalDate ipStart;
+	private LocalDate baAbgabetermin;
+	private LocalDate ausgabetermin;
 
 	private int studentMNR;
 	private String betreuerMail;
@@ -36,8 +39,8 @@ public class Arbeit {
 
 	public Arbeit(int idArbeit, String unternehmen, String thema, String beschreibung, float noteArbeit,
 			float noteVortrag, byte angenommen, byte nda_notwendig, byte ipAngefragt, byte ipAngenommen,
-			byte ba_Anmeldung_Student, byte ba_Anmeldung_Betreuer, byte ba_Anmeldung_Studiendekan, byte ipBestanden, byte veroeffentlichung,
-			Date datum, int studentMNR, String betreuerMail, String studiendekanMail) {
+			byte ba_Anmeldung_Student, byte ba_Anmeldung_Betreuer, byte ba_Anmeldung_Studiendekan, byte ipBestanden,
+			byte veroeffentlichung, Date ipStart, Date baAbgabetermin, Date ausgabetermin, int studentMNR, String betreuerMail, String studiendekanMail) {
 		super();
 		this.idArbeit = idArbeit;
 		this.unternehmen = unternehmen;
@@ -48,18 +51,20 @@ public class Arbeit {
 		this.noteVortrag = noteVortrag;
 		setGesamtnote();
 
-		this.angenommen = angenommen;
+		this.themaAngenommen = angenommen;
 		this.nda_notwendig = nda_notwendig;
 		this.ipAngefragt = ipAngefragt;
 		this.ipAngenommen = ipAngenommen;
-		
+
 		this.ba_Anmeldung_Betreuer = ba_Anmeldung_Betreuer;
 		this.ba_Anmeldung_Student = ba_Anmeldung_Student;
 		this.ba_Anmeldung_Studiendekan = ba_Anmeldung_Studiendekan;
 		this.ipBestanden = ipBestanden;
 		this.veroeffentlichung = veroeffentlichung;
 
-		this.datum = setDate(datum);
+		this.ipStart = setDate(ipStart);
+		this.baAbgabetermin = setDate(baAbgabetermin);
+		this.ausgabetermin = setDate(ausgabetermin);
 
 		this.studentMNR = studentMNR;
 		this.betreuerMail = betreuerMail;
@@ -123,21 +128,27 @@ public class Arbeit {
 		this.betreuerMail = betreuerMail;
 	}
 
-	public boolean getAngenommen() {
-		return angenommen == 1;
+	public boolean getThemaAngenommen() {
+		return themaAngenommen == 1;
 	}
 
-	public void setAngenommen(byte angenommen) {
-		this.angenommen = angenommen;
-	}
+	public void setThemaAngenommen(boolean b) {
+		if (b) {
+			this.themaAngenommen = 1;
+		} else {
+			this.themaAngenommen = 0;
+		}	}
 
 	public boolean getNda_notwenidg() {
 		return nda_notwendig == 1;
 	}
 
-	public void setNda_notwenidg(byte nda_notwenidg) {
-		this.nda_notwendig = nda_notwenidg;
-	}
+	public void setNda_notwenidg(boolean b) {
+		if (b) {
+			this.nda_notwendig = 1;
+		} else {
+			this.nda_notwendig = 0;
+		}	}
 
 	public float getNoteArbeit() {
 		return noteArbeit;
@@ -170,12 +181,12 @@ public class Arbeit {
 
 	}
 
-	public LocalDate getDatum() {
-		return datum;
+	public String getIpStart() {
+		return ipStart.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 	}
 
-	public void setDatum(LocalDate datum) {
-		this.datum = datum;
+	public void setIpStart(LocalDate datum) {
+		this.ipStart = datum;
 	}
 
 	public String getStudiendekanMail() {
@@ -190,56 +201,99 @@ public class Arbeit {
 		return ipAngenommen == 1;
 	}
 
-	public void setIpAngenommen(byte ipAngenommen) {
-		this.ipAngenommen = ipAngenommen;
-	}
+	public void setIpAngenommen(boolean b) {
+		if (b) {
+			this.ipAngenommen = 1;
+		} else {
+			this.ipAngenommen = 0;
+		}	}
 
 	public boolean getIpAngefragt() {
 		return ipAngefragt == 1;
 	}
 
-	public void setIpAngefragt(byte ipAngefragt) {
-		this.ipAngefragt = ipAngefragt;
+	public void setIpAngefragt(boolean b) {
+		if (b) {
+			this.ipAngefragt = 1;
+		} else {
+			this.ipAngefragt = 0;
+		}
 	}
 
 	public boolean getBa_Anmeldung_Student() {
 		return ba_Anmeldung_Student == 1;
 	}
 
-	public void setBa_Anmeldung_Student(byte ba_Anmeldung_Student) {
-		this.ba_Anmeldung_Student = ba_Anmeldung_Student;
+	public void setBa_Anmeldung_Student(boolean b) {
+		if (b) {
+			this.ba_Anmeldung_Student = 1;
+		} else {
+			ba_Anmeldung_Student = 0;
+		}
 	}
 
 	public boolean getBa_Anmeldung_Betreuer() {
 		return ba_Anmeldung_Betreuer == 1;
 	}
 
-	public void setBa_Anmeldung_Betreuer(byte ba_Anmeldung_Betreuer) {
-		this.ba_Anmeldung_Betreuer = ba_Anmeldung_Betreuer;
+	public void setBa_Anmeldung_Betreuer(boolean b) {
+		if (b) {
+			this.ba_Anmeldung_Betreuer = 1;
+		} else {
+			this.ba_Anmeldung_Betreuer = 0;
+		}
 	}
 
 	public boolean getBa_Anmeldung_Studiendekan() {
 		return ba_Anmeldung_Studiendekan == 1;
 	}
 
-	public void setBa_Anmeldung_Studiendekan(byte ba_Anmeldung_Studiendekan) {
-		this.ba_Anmeldung_Studiendekan = ba_Anmeldung_Studiendekan;
+	public void setBa_Anmeldung_Studiendekan(boolean b) {
+		if (b) {
+			this.ba_Anmeldung_Studiendekan = 1;
+		} else {
+			this.ba_Anmeldung_Studiendekan = 0;
+		}
 	}
 
 	public boolean getIpBestanden() {
 		return ipBestanden == 1;
 	}
 
-	public void setIpBestanden(byte ipBestanden) {
-		this.ipBestanden = ipBestanden;
+	public void setIpBestanden(boolean b) {
+		if (b) {
+			this.ipBestanden = 1;
+		} else {
+			this.ipBestanden = 0;
+		}
 	}
 
 	public boolean getVeroeffentlichung() {
-		return veroeffentlichung==1;
+		return veroeffentlichung == 1;
 	}
 
-	public void setVeroeffentlichung(byte veroeffentlichung) {
-		this.veroeffentlichung = veroeffentlichung;
+	public void setVeroeffentlichung(boolean b) {
+		if (b) {
+			this.veroeffentlichung = 1;
+		} else {
+			this.veroeffentlichung = 0;
+		}
+	}
+
+	public String getBaAbgabetermin() {
+		return baAbgabetermin.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+	}
+
+	public void setBaAbgabetermin(LocalDate baAbgabetermin) {
+		this.baAbgabetermin = baAbgabetermin;
+	}
+
+	public String getAusgabetermin() {
+		return ausgabetermin.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+	}
+
+	public void setAusgabetermin(LocalDate ausgabetermin) {
+		this.ausgabetermin = ausgabetermin;
 	}
 
 }

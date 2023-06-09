@@ -103,7 +103,7 @@ public class StudentenFormularePanel extends JPanel {
 
 		Arbeit arbeit = datenbankabfrage.getArbeitByID(student.getArbeit());
 
-		JButton btnNewButton = new JButton("bestätigen");
+		JButton btnNewButton = new JButton("Bestätigen");
 		btnNewButton.addActionListener(new FormularStudentActionListener(student, arbeit, ja, clicked, tf_Telefon, tf_Semester, lblPopUp));
 		
 

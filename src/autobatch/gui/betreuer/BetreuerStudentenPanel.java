@@ -48,7 +48,7 @@ public class BetreuerStudentenPanel extends JPanel {
 		
 
 		for (Arbeit arbeit : a) {
-			if (arbeit.getAngenommen() && arbeit.getBetreuerMail().equals(betreuer.getEmail())) {
+			if (arbeit.getThemaAngenommen() && arbeit.getBetreuerMail().equals(betreuer.getEmail())) {
 				System.out.println("klappt");
 				studenten.add(dbQuery.getStudentByMNR(arbeit.getStudentMNR()));
 				arbeiten.add(arbeit);

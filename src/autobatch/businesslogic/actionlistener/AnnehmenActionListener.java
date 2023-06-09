@@ -40,6 +40,8 @@ public class AnnehmenActionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		arbeit.setThemaAngenommen(true);
 
 		Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
 		

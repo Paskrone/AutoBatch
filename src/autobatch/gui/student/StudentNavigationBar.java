@@ -79,7 +79,7 @@ public class StudentNavigationBar extends JPanel {
 			}
 		});
 
-		JLabel lbl_formulare = new JLabel("BA-Anmeldung");
+		JLabel lbl_formulare = new JLabel("BA-Anmeldeformular");
 		lbl_formulare.addMouseListener(new NavigationBarMouseListener() {
 
 			@Override

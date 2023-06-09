@@ -42,6 +42,12 @@ public class FormularStudentActionListener implements ActionListener {
 		if (clicked && !tf_telefon.getText().equals("") && !tf_semester.getText().equals("")) {
 			long telefonnummer = Long.parseLong(tf_telefon.getText());
 			int semester = Integer.parseInt(tf_semester.getText());
+			
+			student.setTelefonnummer(telefonnummer);
+			student.setSemester(semester);
+			
+			arbeit.setVeroeffentlichung(ja);
+			arbeit.setBa_Anmeldung_Student(true);
 
 			datenbankabfrage.updateDataStudentLong(student, telefonnummer, "telefonnummer");
 			datenbankabfrage.updateDataStudentInt(student, semester, "semseter");

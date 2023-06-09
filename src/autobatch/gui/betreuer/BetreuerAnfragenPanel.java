@@ -52,7 +52,7 @@ public class BetreuerAnfragenPanel extends JPanel {
 		List<Student> studenten = new ArrayList<>();
 
 		for (Arbeit arbeit : a) {
-			if (!arbeit.getAngenommen() && arbeit.getBetreuerMail() != null
+			if (!arbeit.getThemaAngenommen() && arbeit.getBetreuerMail() != null
 					&& arbeit.getBetreuerMail().equals(betreuer.getEmail())) {
 				System.out.println("klappt");
 				studenten.add(dbQuery.getStudentByMNR(arbeit.getStudentMNR()));
