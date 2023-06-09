@@ -6,23 +6,21 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import autobatch.businessobjects.Betreuer;
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
 public class BetreuerDatenPanel extends JPanel {
 
-	private PanelSwitcher panelSwitcher;
-	private Betreuer betreuer;
 	
-	public BetreuerDatenPanel(PanelSwitcher panelSwitcher, Betreuer betreuer) {
+	
+	public BetreuerDatenPanel(PanelManager panelManager, PanelSwitcher panelSwitcher, Betreuer betreuer) {
 		
-		this.betreuer = betreuer;
-		this.panelSwitcher = panelSwitcher;
     	setPreferredSize(new Dimension(1000, 500));
         setBorder(new EmptyBorder(5, 5, 5, 5));
         
-        BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelSwitcher);
+        BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelManager,panelSwitcher,betreuer);
         
         GroupLayout groupLayout = new GroupLayout(this);
         groupLayout.setHorizontalGroup(

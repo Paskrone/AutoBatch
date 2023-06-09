@@ -97,9 +97,9 @@ public class PanelManager {
 		} else if (currentUser instanceof Betreuer) {
 
 			Betreuer currentBetreuer = (Betreuer) currentUser;
-			betreuerPanel = new BetreuerPanel(panelSwitcher, currentBetreuer);
+			betreuerPanel = new BetreuerPanel(this, panelSwitcher, currentBetreuer);
 			betreuerAnfragenPanel = new BetreuerAnfragenPanel(panelSwitcher, this, currentBetreuer);
-			betreuerDatenPanel = new BetreuerDatenPanel(panelSwitcher, currentBetreuer);
+			betreuerDatenPanel = new BetreuerDatenPanel(this, panelSwitcher, currentBetreuer);
 			betreuerStudentenPanel = new BetreuerStudentenPanel(panelSwitcher, this, currentBetreuer);
 
 			cards.add(betreuerPanel, "Betreuer");

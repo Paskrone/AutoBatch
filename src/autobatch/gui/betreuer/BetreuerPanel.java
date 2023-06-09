@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import autobatch.businessobjects.Betreuer;
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -18,13 +19,13 @@ public class BetreuerPanel extends JPanel {
 	private PanelSwitcher panelSwitcher;
 	private Betreuer betreuer;
 	
-	public BetreuerPanel(PanelSwitcher panelSwitcher, Betreuer betreuer) {
+	public BetreuerPanel(PanelManager panelManager, PanelSwitcher panelSwitcher, Betreuer betreuer) {
 		
 		this.panelSwitcher = panelSwitcher;
     	setPreferredSize(new Dimension(1000, 500));
         setBorder(new EmptyBorder(5, 5, 5, 5));
         
-        BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelSwitcher);
+        BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelManager,panelSwitcher,betreuer);
         
         //AutoBath Logo anzeigen
         ImageIcon imageIcon = new ImageIcon("src/images/autobatchlogo_klein.png");

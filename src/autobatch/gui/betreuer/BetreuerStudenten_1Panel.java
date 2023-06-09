@@ -60,7 +60,7 @@ public class BetreuerStudenten_1Panel extends JPanel {
 		int idThema = Integer.parseInt(panelSwitcher.getData("3") + "");
 		Arbeit arbeit = dbaccess.getArbeitByID(idThema);
 
-		BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelSwitcher);
+		BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelManager,panelSwitcher,betreuer);
 
 		JLabel lblName = new JLabel("Name:");
 

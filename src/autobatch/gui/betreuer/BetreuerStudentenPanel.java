@@ -35,7 +35,7 @@ public class BetreuerStudentenPanel extends JPanel {
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelSwitcher);
+		BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelManager,panelSwitcher,betreuer);
 
 		// Erstelle eine neue Tabelle 
 		String[] columnNames = { "Nachname", "Email", "Matrikelnr.", "idThema" };
