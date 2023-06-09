@@ -134,7 +134,7 @@ public class Datenbankabfrage {
 			ResultSet rs;
 
 			rs = stmt.executeQuery(
-					"SELECT MNR, Nachname, Vorname, email, Telefonnummer, Studiengang, studiendekan, betreuer, Benutzername, Passwort, ort, postleizahl, strasse, arbeit From studenten");
+					"SELECT MNR, Nachname, Vorname, email, semseter, Telefonnummer, Studiengang, studiendekan, betreuer, Benutzername, Passwort, ort, postleizahl, strasse, arbeit From studenten");
 
 			while (rs.next()) {
 				int mnr = rs.getInt("MNR");
@@ -144,6 +144,7 @@ public class Datenbankabfrage {
 				String username = rs.getString("Benutzername");
 				String email = rs.getString("email");
 				long telefonnummer = rs.getLong("Telefonnummer");
+				int semester = rs.getInt("semseter");
 				String studiengang = rs.getString("Studiengang");
 				String ort = rs.getString("ort");
 				int postleizahl = rs.getInt("postleizahl");
@@ -153,7 +154,7 @@ public class Datenbankabfrage {
 				int arbeit = rs.getInt("arbeit");
 
 				Student student = new Student(mnr, vorname, nachname, password, username, email, telefonnummer,
-						studiengang, ort, strasse, postleizahl, studiendekan, betreuer);
+						semester, studiengang, ort, strasse, postleizahl, studiendekan, betreuer);
 				// arbeit mit Setter, da es ein int ist und sonst Probleme auftauchen da int
 				// nicht null sein kann
 				student.setArbeit(arbeit);
@@ -450,7 +451,6 @@ public class Datenbankabfrage {
 		return false;
 	}
 
-	
 	public int getViableIdIp() {
 
 		List<Integer> ids = new ArrayList<>();
@@ -489,8 +489,6 @@ public class Datenbankabfrage {
 
 	}
 
-	
-
 	public boolean updateDataArbeitBoolean(Arbeit arbeit, boolean arg, String spalte) {
 		if (arg) {
 			String query = "UPDATE `db4`.`arbeit` SET `" + spalte + "` = b'1' WHERE (idArbeit = " + arbeit.getIdArbeit()
@@ -507,8 +505,6 @@ public class Datenbankabfrage {
 		}
 		return false;
 	}
-
-	
 
 	public boolean updateDataArbeitFloat(Arbeit arbeit, float arg, String spalte) {
 		if (arg != 0) {
@@ -566,7 +562,7 @@ public class Datenbankabfrage {
 			ResultSet rs;
 
 			rs = stmt.executeQuery(
-					"SELECT idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, gesamtnote, angenommen, nda_notwendig, ipStart, ipAngefragt, ipAngenommen, student, betreuer, studiendekan FROM arbeit");
+					"SELECT idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, gesamtnote, angenommen, nda_notwendig, ipStart, ipAngefragt, ipAngenommen, ba_Anmeldung_Student, ba_Anmeldung_Betreuer, ba_Anmeldung_Studiendekan, ipBestanden, veroeffentlichung, student, betreuer, studiendekan FROM arbeit");
 
 			while (rs.next()) {
 				int idArbeit = rs.getInt("idArbeit");
@@ -579,12 +575,21 @@ public class Datenbankabfrage {
 				byte nda_notwenig = rs.getByte("nda_notwendig");
 				byte ipAngefragt = rs.getByte("ipAngefragt");
 				byte ipAngeneommen = rs.getByte("ipAngenommen");
+
+				byte ba_Anmeldung_Student = rs.getByte("ba_Anmeldung_Student");
+				byte ba_Anmeldung_Betreuer = rs.getByte("ba_Anmeldung_Betreuer");
+				byte ba_Anmeldung_Studiendekan = rs.getByte("ba_Anmeldung_Studiendekan");
+				byte ipBestanden = rs.getByte("ipBestanden");
+				byte veroeffentlichung = rs.getByte("veroeffentlichung");
+
 				Date ipStart = rs.getDate("ipStart");
 				int studentMNR = rs.getInt("student");
 				String betreuerMail = rs.getString("betreuer");
 				String studiendekanMail = rs.getString("studiendekan");
 				Arbeit t = new Arbeit(idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, angenommen,
-						nda_notwenig, ipAngefragt, ipAngeneommen, ipStart, studentMNR, betreuerMail, studiendekanMail);
+						nda_notwenig, ipAngefragt, ipAngeneommen, ba_Anmeldung_Student, ba_Anmeldung_Betreuer,
+						ba_Anmeldung_Studiendekan, ipBestanden, veroeffentlichung, ipStart, studentMNR, betreuerMail,
+						studiendekanMail);
 				arbeiten.add(t);
 			}
 

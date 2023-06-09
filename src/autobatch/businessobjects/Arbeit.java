@@ -22,6 +22,12 @@ public class Arbeit {
 	private byte ipAngefragt;
 	private byte ipAngenommen;
 
+	private byte ba_Anmeldung_Student;
+	private byte ba_Anmeldung_Betreuer;
+	private byte ba_Anmeldung_Studiendekan;
+	private byte ipBestanden;
+	private byte veroeffentlichung;
+
 	private LocalDate datum;
 
 	private int studentMNR;
@@ -30,6 +36,7 @@ public class Arbeit {
 
 	public Arbeit(int idArbeit, String unternehmen, String thema, String beschreibung, float noteArbeit,
 			float noteVortrag, byte angenommen, byte nda_notwendig, byte ipAngefragt, byte ipAngenommen,
+			byte ba_Anmeldung_Student, byte ba_Anmeldung_Betreuer, byte ba_Anmeldung_Studiendekan, byte ipBestanden, byte veroeffentlichung,
 			Date datum, int studentMNR, String betreuerMail, String studiendekanMail) {
 		super();
 		this.idArbeit = idArbeit;
@@ -46,7 +53,12 @@ public class Arbeit {
 		this.ipAngefragt = ipAngefragt;
 		this.ipAngenommen = ipAngenommen;
 		
-		
+		this.ba_Anmeldung_Betreuer = ba_Anmeldung_Betreuer;
+		this.ba_Anmeldung_Student = ba_Anmeldung_Student;
+		this.ba_Anmeldung_Studiendekan = ba_Anmeldung_Studiendekan;
+		this.ipBestanden = ipBestanden;
+		this.veroeffentlichung = veroeffentlichung;
+
 		this.datum = setDate(datum);
 
 		this.studentMNR = studentMNR;
@@ -54,9 +66,9 @@ public class Arbeit {
 		this.studiendekanMail = studiendekanMail;
 
 	}
-	
+
 	public LocalDate setDate(Date d) {
-		if (d!=null) {
+		if (d != null) {
 			return d.toLocalDate();
 		} else {
 			return null;
@@ -188,6 +200,46 @@ public class Arbeit {
 
 	public void setIpAngefragt(byte ipAngefragt) {
 		this.ipAngefragt = ipAngefragt;
+	}
+
+	public boolean getBa_Anmeldung_Student() {
+		return ba_Anmeldung_Student == 1;
+	}
+
+	public void setBa_Anmeldung_Student(byte ba_Anmeldung_Student) {
+		this.ba_Anmeldung_Student = ba_Anmeldung_Student;
+	}
+
+	public boolean getBa_Anmeldung_Betreuer() {
+		return ba_Anmeldung_Betreuer == 1;
+	}
+
+	public void setBa_Anmeldung_Betreuer(byte ba_Anmeldung_Betreuer) {
+		this.ba_Anmeldung_Betreuer = ba_Anmeldung_Betreuer;
+	}
+
+	public boolean getBa_Anmeldung_Studiendekan() {
+		return ba_Anmeldung_Studiendekan == 1;
+	}
+
+	public void setBa_Anmeldung_Studiendekan(byte ba_Anmeldung_Studiendekan) {
+		this.ba_Anmeldung_Studiendekan = ba_Anmeldung_Studiendekan;
+	}
+
+	public boolean getIpBestanden() {
+		return ipBestanden == 1;
+	}
+
+	public void setIpBestanden(byte ipBestanden) {
+		this.ipBestanden = ipBestanden;
+	}
+
+	public boolean getVeroeffentlichung() {
+		return veroeffentlichung==1;
+	}
+
+	public void setVeroeffentlichung(byte veroeffentlichung) {
+		this.veroeffentlichung = veroeffentlichung;
 	}
 
 }

@@ -10,6 +10,7 @@ public class Student extends Benutzer {
 	private String email;
 
 	private long telefonnummer;
+	private int semester;
 
 	private String studiengang;
 	private String ort;
@@ -21,8 +22,8 @@ public class Student extends Benutzer {
 	private int arbeit;
 
 	public Student(int mnr, String vorname, String nachname, String passwort, String benutzername, String email,
-			long telefonnummer, String studiengang, String ort, String strasse, int postleizahl, String studiendekan,
-			String betreuer) {
+			long telefonnummer, int semester, String studiengang, String ort, String strasse, int postleizahl,
+			String studiendekan, String betreuer) {
 		super();
 		this.mnr = mnr;
 		this.vorname = vorname;
@@ -31,6 +32,7 @@ public class Student extends Benutzer {
 		this.benutzername = benutzername;
 		this.email = email;
 		this.telefonnummer = telefonnummer;
+		this.semester = semester;
 		this.studiengang = studiengang;
 		this.ort = ort;
 		this.strasse = strasse;
@@ -149,6 +151,14 @@ public class Student extends Benutzer {
 
 	public void setArbeit(int arbeit) {
 		this.arbeit = arbeit;
+	}
+
+	public int getSemester() {
+		return semester;
+	}
+
+	public void setSemester(int semester) {
+		this.semester = semester;
 	}
 
 }

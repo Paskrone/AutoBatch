@@ -10,19 +10,24 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import autobatch.businesslogic.mouselistener.NavigationBarMouseListener;
+import autobatch.businessobjects.Arbeit;
 import autobatch.businessobjects.Student;
+import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 
 public class StudentNavigationBar extends JPanel {
 
-	private PanelManager panelmanager;
-	private PanelSwitcher panelSwitcher;
-	private Student student;
+	Arbeit arbeit = null;
 
 	public StudentNavigationBar(PanelManager panelmanager, PanelSwitcher panelSwitcher, Student student) {
 
-		this.panelSwitcher = panelSwitcher;
+		if (student.getArbeit() != 0) {
+			Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
+			arbeit = datenbankabfrage.getArbeitByID(student.getArbeit());
+			System.out.println(arbeit.getBa_Anmeldung_Student());
+		}
+
 		setPreferredSize(new Dimension(1000, 50));
 
 		JLabel lbl_Ip = new JLabel("IP");
@@ -74,14 +79,23 @@ public class StudentNavigationBar extends JPanel {
 			}
 		});
 
-		JLabel lbl_formulare = new JLabel("Formulare");
+		JLabel lbl_formulare = new JLabel("BA-Anmeldung");
 		lbl_formulare.addMouseListener(new NavigationBarMouseListener() {
 
 			@Override
 			public void labelClicked() {
-				JPanel panel = new StudentenFormularePanel(panelmanager, panelSwitcher, student);
-				panelmanager.updatePanels(panel, "Studenten_Formulare");
-				panelSwitcher.switchToPanel("Studenten_Formulare");
+
+				if (arbeit != null && arbeit.getBa_Anmeldung_Student()) {
+					JPanel panel = new StudentenFormulare_1Panel(panelmanager, panelSwitcher, student);
+					panelmanager.updatePanels(panel, "Studenten_Formulare_1");
+					panelSwitcher.switchToPanel("Studenten_Formulare_1");
+				} else {
+					JPanel panel = new StudentenFormularePanel(panelmanager, panelSwitcher, student);
+					panelmanager.updatePanels(panel, "Studenten_Formulare");
+					panelSwitcher.switchToPanel("Studenten_Formulare");
+				}
+
+				
 
 			}
 		});
@@ -110,36 +124,21 @@ public class StudentNavigationBar extends JPanel {
 		});
 
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(42)
-					.addComponent(lbl_betreuer, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(lbl_Ip, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-					.addGap(28)
-					.addComponent(lbl_formulare)
-					.addGap(42)
-					.addComponent(lbl_abgaben, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-					.addGap(38)
-					.addComponent(lbl_daten)
-					.addPreferredGap(ComponentPlacement.RELATED, 457, Short.MAX_VALUE)
-					.addComponent(lbl_abmelden)
-					.addGap(32))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(19, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbl_abmelden)
-						.addComponent(lbl_formulare)
-						.addComponent(lbl_abgaben)
-						.addComponent(lbl_betreuer)
-						.addComponent(lbl_Ip)
-						.addComponent(lbl_daten))
-					.addGap(15))
-		);
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addGap(42)
+						.addComponent(lbl_betreuer, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+						.addGap(18).addComponent(lbl_Ip, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+						.addGap(28).addComponent(lbl_formulare).addGap(42)
+						.addComponent(lbl_abgaben, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+						.addGap(38).addComponent(lbl_daten)
+						.addPreferredGap(ComponentPlacement.RELATED, 457, Short.MAX_VALUE).addComponent(lbl_abmelden)
+						.addGap(32)));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap(19, Short.MAX_VALUE)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lbl_abmelden)
+								.addComponent(lbl_formulare).addComponent(lbl_abgaben).addComponent(lbl_betreuer)
+								.addComponent(lbl_Ip).addComponent(lbl_daten))
+						.addGap(15)));
 		setLayout(groupLayout);
 
 	}
