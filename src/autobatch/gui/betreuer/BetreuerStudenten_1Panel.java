@@ -90,7 +90,7 @@ public class BetreuerStudenten_1Panel extends JPanel {
 
 		JLabel lblmnrIN = new JLabel("");
 
-		JLabel lblAbgabeterminIN = new JLabel("New label");
+		JLabel lblAbgabeterminIN = new JLabel("");
 
 		JCheckBox chckbxNDAJa = new JCheckBox("Ja");
 		buttonGroupNDA.add(chckbxNDAJa);
@@ -106,9 +106,12 @@ public class BetreuerStudenten_1Panel extends JPanel {
 
 		JLabel lblNewLabel_6 = new JLabel("New label");
 
-		JLabel lblIPSatrt = new JLabel("New label");
+		JLabel lblIPSatrt = new JLabel("");
 		if (arbeit.getIpStart() != null) {
-			lblIPSatrt.setText(arbeit.getIpStart() + "");
+			lblIPSatrt.setText(arbeit.getIpStart());
+		}
+		if (arbeit.getBaAbgabetermin()!=null) {
+			lblAbgabeterminIN.setText(arbeit.getBaAbgabetermin());
 		}
 
 		JLabel lblMailIN = new JLabel("New label");

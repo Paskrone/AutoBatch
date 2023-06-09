@@ -20,8 +20,6 @@ public class StudiendekanNavigationBar extends JPanel {
 		
 		
 		setPreferredSize(new Dimension(1000, 50));
-		
-		JLabel lbl_Studenten = new JLabel("Studenten");
 	
 		
 		JLabel lbl_Ip = new JLabel("IP");
@@ -36,9 +34,7 @@ public class StudiendekanNavigationBar extends JPanel {
 		});
 		
 		
-		JLabel lbl_Formulare = new JLabel("Formulare");
-		
-		JLabel lbl_Anfragen = new JLabel("Anfragen");
+		JLabel lbl_Formulare = new JLabel("BA-Anmeldformulare");
 		
 		
 		JLabel lbl_abmelden = new JLabel("abmelden");
@@ -51,23 +47,43 @@ public class StudiendekanNavigationBar extends JPanel {
 
 			}
 		});
+		
+		JLabel lblNoten = new JLabel("Noten");
+		
+		
+		JLabel lblDaten = new JLabel("Daten");
+		lblDaten.addMouseListener(new NavigationBarMouseListener() {
+
+			@Override
+			public void labelClicked() {
+
+				JPanel panel = new StudiendekanDatenPanel(panelManager, panelSwitcher, studiendekan);
+				panelManager.updatePanels(panel, "StudiendekanDatenPanel");
+				panelSwitcher.switchToPanel("StudiendekanDatenPanel");
+
+			}
+		});
+		
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(41)
-					.addComponent(lbl_Studenten)
-					.addGap(36)
-					.addComponent(lbl_Anfragen, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 582, Short.MAX_VALUE)
+					.addGap(66)
 					.addComponent(lbl_Ip, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(lbl_Formulare, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-					.addGap(71))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(923, Short.MAX_VALUE)
-					.addComponent(lbl_abmelden, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED, 810, Short.MAX_VALUE)
+							.addComponent(lbl_abmelden, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lbl_Formulare)
+							.addGap(46)
+							.addComponent(lblNoten)
+							.addGap(40)
+							.addComponent(lblDaten)
+							.addGap(559))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -76,10 +92,10 @@ public class StudiendekanNavigationBar extends JPanel {
 					.addComponent(lbl_abmelden)
 					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbl_Studenten)
 						.addComponent(lbl_Ip)
-						.addComponent(lbl_Anfragen)
-						.addComponent(lbl_Formulare))
+						.addComponent(lbl_Formulare)
+						.addComponent(lblNoten)
+						.addComponent(lblDaten))
 					.addGap(14))
 		);
 		setLayout(groupLayout);

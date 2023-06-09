@@ -10,7 +10,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
-import autobatch.businesslogic.actionlistener.DatenSpeichernActionListener;
+import autobatch.businesslogic.actionlistener.DatenSpeichernStudentActionListener;
 import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelManager;

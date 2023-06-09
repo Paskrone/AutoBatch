@@ -83,6 +83,28 @@ public class Datenbankabfrage {
 		return null;
 	}
 
+	public boolean updateDataBetreuerString(Betreuer betreuer, String arg, String spalte) {
+		if (arg != null) {
+			String query = "UPDATE `db4`.`betreuer` SET `" + spalte + "` = '" + arg + "' WHERE (`email` = ? )";
+			
+			
+			try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);
+					PreparedStatement stmt = conn.prepareStatement(query)) {
+				
+				stmt.setString(1, betreuer.getEmail());
+
+				stmt.executeUpdate();
+				conn.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	} 
+	
+	
+
 	// Gibt ein Studiendekanobjekt zurück, das auf den übergebenen Benutzernamen
 	// basiert.
 	// Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie
@@ -97,6 +119,26 @@ public class Datenbankabfrage {
 		}
 		return null;
 	}
+	
+	public boolean updateDataStudiendekanString(Studiendekan studiendekan, String arg, String spalte) {
+		if (arg != null) {
+			String query = "UPDATE `db4`.`betreuer` SET `" + spalte + "` = '" + arg + "' WHERE (`email` = ? )";
+			
+			
+			try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);
+					PreparedStatement stmt = conn.prepareStatement(query)) {
+				
+				stmt.setString(1, studiendekan.getEmail());
+
+				stmt.executeUpdate();
+				conn.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	} 
 
 	public Student getStudentByUsername(String username) {
 		List<Student> sl = this.getAllStudents();
@@ -193,7 +235,7 @@ public class Datenbankabfrage {
 				String username = rs.getString("Benutzername");
 				String password = rs.getString("Passwort");
 				String studiengang = rs.getString("Studiengang");
-				Studiendekan studiendekan = new Studiendekan(email, nachname, vorname, username, password, studiengang);
+				Studiendekan studiendekan = new Studiendekan(vorname, nachname, password, username, email, studiengang);
 				studiendekans.add(studiendekan);
 			}
 
@@ -342,7 +384,6 @@ public class Datenbankabfrage {
 			String query = "UPDATE `db4`.`studenten` SET `" + spalte + "` = '" + arg + "' WHERE (MNR = "
 					+ student.getMnr() + ")";
 			if (update(query)) {
-				student.setOrt(arg);
 				return true;
 			}
 		}
@@ -585,14 +626,14 @@ public class Datenbankabfrage {
 				Date ipStart = rs.getDate("ipStart");
 				Date baAbgabetermin = rs.getDate("baAbgabetermin");
 				Date ausgabetermin = rs.getDate("ausgabetermin");
-				
+
 				int studentMNR = rs.getInt("student");
 				String betreuerMail = rs.getString("betreuer");
 				String studiendekanMail = rs.getString("studiendekan");
 				Arbeit t = new Arbeit(idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, angenommen,
 						nda_notwenig, ipAngefragt, ipAngeneommen, ba_Anmeldung_Student, ba_Anmeldung_Betreuer,
-						ba_Anmeldung_Studiendekan, ipBestanden, veroeffentlichung, ipStart, baAbgabetermin, ausgabetermin, studentMNR, betreuerMail,
-						studiendekanMail);
+						ba_Anmeldung_Studiendekan, ipBestanden, veroeffentlichung, ipStart, baAbgabetermin,
+						ausgabetermin, studentMNR, betreuerMail, studiendekanMail);
 				arbeiten.add(t);
 			}
 

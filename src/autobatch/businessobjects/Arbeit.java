@@ -40,7 +40,8 @@ public class Arbeit {
 	public Arbeit(int idArbeit, String unternehmen, String thema, String beschreibung, float noteArbeit,
 			float noteVortrag, byte angenommen, byte nda_notwendig, byte ipAngefragt, byte ipAngenommen,
 			byte ba_Anmeldung_Student, byte ba_Anmeldung_Betreuer, byte ba_Anmeldung_Studiendekan, byte ipBestanden,
-			byte veroeffentlichung, Date ipStart, Date baAbgabetermin, Date ausgabetermin, int studentMNR, String betreuerMail, String studiendekanMail) {
+			byte veroeffentlichung, Date ipStart, Date baAbgabetermin, Date ausgabetermin, int studentMNR,
+			String betreuerMail, String studiendekanMail) {
 		super();
 		this.idArbeit = idArbeit;
 		this.unternehmen = unternehmen;
@@ -137,7 +138,8 @@ public class Arbeit {
 			this.themaAngenommen = 1;
 		} else {
 			this.themaAngenommen = 0;
-		}	}
+		}
+	}
 
 	public boolean getNda_notwenidg() {
 		return nda_notwendig == 1;
@@ -148,7 +150,8 @@ public class Arbeit {
 			this.nda_notwendig = 1;
 		} else {
 			this.nda_notwendig = 0;
-		}	}
+		}
+	}
 
 	public float getNoteArbeit() {
 		return noteArbeit;
@@ -181,14 +184,6 @@ public class Arbeit {
 
 	}
 
-	public String getIpStart() {
-		return ipStart.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-	}
-
-	public void setIpStart(LocalDate datum) {
-		this.ipStart = datum;
-	}
-
 	public String getStudiendekanMail() {
 		return studiendekanMail;
 	}
@@ -206,7 +201,8 @@ public class Arbeit {
 			this.ipAngenommen = 1;
 		} else {
 			this.ipAngenommen = 0;
-		}	}
+		}
+	}
 
 	public boolean getIpAngefragt() {
 		return ipAngefragt == 1;
@@ -280,8 +276,27 @@ public class Arbeit {
 		}
 	}
 
+	public String getIpStart() {
+
+		try {
+			return ipStart.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	public void setIpStart(LocalDate datum) {
+		this.ipStart = datum;
+	}
+
 	public String getBaAbgabetermin() {
-		return baAbgabetermin.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+		try {
+			return baAbgabetermin.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public void setBaAbgabetermin(LocalDate baAbgabetermin) {
@@ -289,7 +304,12 @@ public class Arbeit {
 	}
 
 	public String getAusgabetermin() {
-		return ausgabetermin.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+		try {
+			return ausgabetermin.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public void setAusgabetermin(LocalDate ausgabetermin) {

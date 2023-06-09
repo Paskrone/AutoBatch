@@ -1,6 +1,6 @@
 package autobatch.businessobjects;
 
-public class Studiendekan extends Benutzer{
+public class Studiendekan extends Benutzer {
 
 	private String vorname;
 	private String nachname;
@@ -8,7 +8,7 @@ public class Studiendekan extends Benutzer{
 	private String benutzername;
 	private String email;
 	private String studiengang;
-	
+
 	public Studiendekan(String vorname, String nachname, String passwort, String benutzername, String email,
 			String studiengang) {
 		this.vorname = vorname;
@@ -66,6 +66,5 @@ public class Studiendekan extends Benutzer{
 	public void setStudiengang(String studiengang) {
 		this.studiengang = studiengang;
 	}
-	
-	
+
 }
