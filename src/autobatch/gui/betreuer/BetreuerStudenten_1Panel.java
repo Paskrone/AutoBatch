@@ -72,9 +72,9 @@ public class BetreuerStudenten_1Panel extends JPanel {
 
 		JLabel lblIPAnfang = new JLabel("IP-Anfang:");
 
-		JLabel lblNameIn = new JLabel("New label");
+		JLabel lblNameIn = new JLabel("");
 
-		JLabel lblThemaIN = new JLabel("New label");
+		JLabel lblThemaIN = new JLabel("");
 
 		JLabel lblNewLabel = new JLabel("Matrikelnummer:");
 
@@ -104,9 +104,9 @@ public class BetreuerStudenten_1Panel extends JPanel {
 		chckbxNDAJa.addItemListener(new NdaItemListener(arbeit, chckbxNDAJa, true));
 		chckbxNDANein.addItemListener(new NdaItemListener(arbeit, chckbxNDANein, false));
 
-		JLabel lblBAStart = new JLabel("New label");
+		JLabel lblBAStart = new JLabel("");
 		
-		JLabel lblMailIN = new JLabel("New label");
+		JLabel lblMailIN = new JLabel("");
 
 		if (student != null) {
 			lblNameIn.setText(student.getVorname() + " " + student.getNachname());
@@ -212,7 +212,7 @@ public class BetreuerStudenten_1Panel extends JPanel {
 		JLabel lblNewLabel_9 = new JLabel("Note Vortrag:");
 
 		JLabel lblSemester = new JLabel("New label");
-		lblSemester.setText(student.getSemester() + "");
+		lblSemester.setText("");
 
 		JButton btnNote = new JButton("Note Arbeit ändern");
 		btnNote.addActionListener(new ChangeNoteActionListener(panelManager, panelSwitcher, betreuer, arbeit));
@@ -284,11 +284,10 @@ public class BetreuerStudenten_1Panel extends JPanel {
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(lblNoteVortrag))
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(114)
-									.addComponent(lblGesamtnote))
-								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(52)
-									.addComponent(lblNewLabel_7)))))
+									.addComponent(lblNewLabel_7)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblGesamtnote)))))
 					.addContainerGap(221, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
@@ -358,8 +357,8 @@ public class BetreuerStudenten_1Panel extends JPanel {
 								.addComponent(lblNoteArbeit)
 								.addComponent(lblNewLabel_9)
 								.addComponent(lblNoteVortrag)
-								.addComponent(lblGesamtnote)
-								.addComponent(lblNewLabel_7))
+								.addComponent(lblNewLabel_7)
+								.addComponent(lblGesamtnote))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(lblBetreuerAbgaben)
 							.addGap(5)

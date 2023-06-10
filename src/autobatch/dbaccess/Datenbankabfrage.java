@@ -433,65 +433,6 @@ public class Datenbankabfrage {
 
 		List<Integer> ids = new ArrayList<>();
 
-		int id = 0;
-
-		Connection con = null;
-
-		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url + dbName, userName, pw);
-
-			Statement stmt = con.createStatement();
-			ResultSet rs;
-
-			rs = stmt.executeQuery("SELECT idArbeit FROM arbeit");
-
-			while (rs.next()) {
-				int idArbeit = rs.getInt("idArbeit");
-				ids.add(idArbeit);
-			}
-
-			con.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		for (Integer integer : ids) {
-			if (id == integer) {
-				id++;
-			}
-		}
-
-		return id;
-
-	}
-
-	// befülle Ip_Anfragen tabelle:)
-
-	public boolean setDataIpAnfragen(Student student, Betreuer betreuer, String thema, String unternehmen,
-			String beschreibung, Date termin) {
-		if (student != null && betreuer != null && thema != null && unternehmen != null && beschreibung != null) {
-			int idArbeit = getViableIdIp();
-
-			String query = "INSERT INTO `db4`.`ip_anfragen` (`thema`, `unternehmen`, `beschreibung`, `angenommen`, `student`, `betreuer`,`termin`,`idArbeit`) VALUES ('"
-					+ thema + "', '" + unternehmen + "', '" + beschreibung + "', '0', '" + student.getMnr() + "', '"
-					+ betreuer.getEmail() + "', '" + termin + "', '" + idArbeit + "')";
-
-			if (update(query)) {
-				System.out.println("insert");
-
-				return true;
-
-			}
-		}
-		return false;
-	}
-
-	public int getViableIdIp() {
-
-		List<Integer> ids = new ArrayList<>();
-
 		int id = 1;
 
 		Connection con = null;
@@ -503,7 +444,7 @@ public class Datenbankabfrage {
 			Statement stmt = con.createStatement();
 			ResultSet rs;
 
-			rs = stmt.executeQuery("SELECT idArbeit FROM ip_anfragen");
+			rs = stmt.executeQuery("SELECT idArbeit FROM arbeit");
 
 			while (rs.next()) {
 				int idArbeit = rs.getInt("idArbeit");

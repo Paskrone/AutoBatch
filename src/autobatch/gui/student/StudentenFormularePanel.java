@@ -103,8 +103,8 @@ public class StudentenFormularePanel extends JPanel {
 
 		Arbeit arbeit = datenbankabfrage.getArbeitByID(student.getArbeit());
 
-		JButton btnNewButton = new JButton("Bestätigen");
-		btnNewButton.addActionListener(new FormularStudentActionListener(student, arbeit, ja, clicked, tf_Telefon, tf_Semester, lblPopUp));
+		JButton btnBestätigen = new JButton("Bestätigen");
+		btnBestätigen.addActionListener(new FormularStudentActionListener(student, arbeit, ja, clicked, tf_Telefon, tf_Semester, lblPopUp));
 		
 
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -145,7 +145,7 @@ public class StudentenFormularePanel extends JPanel {
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(6)
 									.addComponent(lblPopUp))
-								.addComponent(btnNewButton))))
+								.addComponent(btnBestätigen))))
 					.addGap(16))
 		);
 		groupLayout.setVerticalGroup(
@@ -181,7 +181,7 @@ public class StudentenFormularePanel extends JPanel {
 						.addComponent(rb_Ja)
 						.addComponent(rb_Nein))
 					.addGap(47)
-					.addComponent(btnNewButton)
+					.addComponent(btnBestätigen)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(lblPopUp)
 					.addContainerGap(115, Short.MAX_VALUE))

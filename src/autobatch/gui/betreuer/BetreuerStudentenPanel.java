@@ -70,7 +70,6 @@ public class BetreuerStudentenPanel extends JPanel {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
-				// Alle Zellen sind nicht editierbar
 			}
 		};
 
