@@ -25,7 +25,6 @@ public class StudentNavigationBar extends JPanel {
 		if (student.getArbeit() != 0) {
 			Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
 			arbeit = datenbankabfrage.getArbeitByID(student.getArbeit());
-			System.out.println(arbeit.getBa_Anmeldung_Student());
 		}
 
 		setPreferredSize(new Dimension(1000, 50));
@@ -43,6 +42,11 @@ public class StudentNavigationBar extends JPanel {
 					JPanel panel = new StudentenIP_1Panel(panelmanager, panelSwitcher, student);
 					panelmanager.updatePanels(panel, "Studenten_Ip_1");
 					panelSwitcher.switchToPanel("Studenten_Ip_1");
+				}
+				if (arbeit!=null && arbeit.getIpStart()!=null) {
+					JPanel panel= new StudentenIP_2Panel(panelmanager, panelSwitcher, student);
+					panelmanager.updatePanels(panel, "Studenten_Ip_2");
+					panelSwitcher.switchToPanel("Studenten_Ip_2");
 				}
 
 			}

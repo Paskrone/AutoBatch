@@ -57,6 +57,8 @@ public class FormularBetreuerActionListener implements ActionListener {
 				
 				arbeit.setThema(thema);
 				arbeit.setBaAbgabetermin(abgabetermin);
+				arbeit.setBaStart(ausgabetermin);
+				
 				
 				Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
 
@@ -65,7 +67,7 @@ public class FormularBetreuerActionListener implements ActionListener {
 				// ausgabetermin und abgabetermin erweitern
 				
 				datenbankabfrage.updateDataArbeitDate(arbeit, abgabetermin, "baAbgabetermin");
-				datenbankabfrage.updateDataArbeitDate(arbeit, ausgabetermin, "ausgabetermin");
+				datenbankabfrage.updateDataArbeitDate(arbeit, ausgabetermin, "baStart");
 
 				lblPopUp.setText("Abgeschickt.");
 

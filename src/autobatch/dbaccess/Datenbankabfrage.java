@@ -86,11 +86,10 @@ public class Datenbankabfrage {
 	public boolean updateDataBetreuerString(Betreuer betreuer, String arg, String spalte) {
 		if (arg != null) {
 			String query = "UPDATE `db4`.`betreuer` SET `" + spalte + "` = '" + arg + "' WHERE (`email` = ? )";
-			
-			
+
 			try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);
 					PreparedStatement stmt = conn.prepareStatement(query)) {
-				
+
 				stmt.setString(1, betreuer.getEmail());
 
 				stmt.executeUpdate();
@@ -101,9 +100,7 @@ public class Datenbankabfrage {
 			}
 		}
 		return false;
-	} 
-	
-	
+	}
 
 	// Gibt ein Studiendekanobjekt zurück, das auf den übergebenen Benutzernamen
 	// basiert.
@@ -119,15 +116,14 @@ public class Datenbankabfrage {
 		}
 		return null;
 	}
-	
+
 	public boolean updateDataStudiendekanString(Studiendekan studiendekan, String arg, String spalte) {
 		if (arg != null) {
 			String query = "UPDATE `db4`.`studiendekan` SET `" + spalte + "` = '" + arg + "' WHERE (`email` = ? )";
-			
-			
+
 			try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);
 					PreparedStatement stmt = conn.prepareStatement(query)) {
-				
+
 				stmt.setString(1, studiendekan.getEmail());
 
 				stmt.executeUpdate();
@@ -138,7 +134,7 @@ public class Datenbankabfrage {
 			}
 		}
 		return false;
-	} 
+	}
 
 	public Student getStudentByUsername(String username) {
 		List<Student> sl = this.getAllStudents();
@@ -603,7 +599,7 @@ public class Datenbankabfrage {
 			ResultSet rs;
 
 			rs = stmt.executeQuery(
-					"SELECT idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, gesamtnote, angenommen, nda_notwendig, ipAngefragt, ipAngenommen, ipStart, baAbgabetermin, ausgabetermin, ba_Anmeldung_Student, ba_Anmeldung_Betreuer, ba_Anmeldung_Studiendekan, ipBestanden, veroeffentlichung, student, betreuer, studiendekan FROM arbeit");
+					"SELECT idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, gesamtnote, angenommen, nda_notwendig, ipAngenommen, ipStart, baAbgabetermin, baStart, ba_Anmeldung_Student, ba_Anmeldung_Betreuer, ba_Anmeldung_Studiendekan, ipBestanden, veroeffentlichung, student, betreuer, studiendekan FROM arbeit");
 
 			while (rs.next()) {
 				int idArbeit = rs.getInt("idArbeit");
@@ -614,7 +610,6 @@ public class Datenbankabfrage {
 				float noteVortrag = rs.getFloat("noteVortrag");
 				byte angenommen = rs.getByte("angenommen");
 				byte nda_notwenig = rs.getByte("nda_notwendig");
-				byte ipAngefragt = rs.getByte("ipAngefragt");
 				byte ipAngeneommen = rs.getByte("ipAngenommen");
 
 				byte ba_Anmeldung_Student = rs.getByte("ba_Anmeldung_Student");
@@ -625,15 +620,15 @@ public class Datenbankabfrage {
 
 				Date ipStart = rs.getDate("ipStart");
 				Date baAbgabetermin = rs.getDate("baAbgabetermin");
-				Date ausgabetermin = rs.getDate("ausgabetermin");
+				Date baStart = rs.getDate("baStart");
 
 				int studentMNR = rs.getInt("student");
 				String betreuerMail = rs.getString("betreuer");
 				String studiendekanMail = rs.getString("studiendekan");
 				Arbeit t = new Arbeit(idArbeit, unternehmen, thema, beschreibung, noteArbeit, noteVortrag, angenommen,
-						nda_notwenig, ipAngefragt, ipAngeneommen, ba_Anmeldung_Student, ba_Anmeldung_Betreuer,
-						ba_Anmeldung_Studiendekan, ipBestanden, veroeffentlichung, ipStart, baAbgabetermin,
-						ausgabetermin, studentMNR, betreuerMail, studiendekanMail);
+						nda_notwenig, ipAngeneommen, ba_Anmeldung_Student, ba_Anmeldung_Betreuer,
+						ba_Anmeldung_Studiendekan, ipBestanden, veroeffentlichung, ipStart, baAbgabetermin, baStart,
+						studentMNR, betreuerMail, studiendekanMail);
 				arbeiten.add(t);
 			}
 

@@ -20,7 +20,6 @@ public class Arbeit {
 
 	private byte themaAngenommen;
 	private byte nda_notwendig;
-	private byte ipAngefragt;
 	private byte ipAngenommen;
 
 	private byte ba_Anmeldung_Student;
@@ -31,17 +30,17 @@ public class Arbeit {
 
 	private LocalDate ipStart;
 	private LocalDate baAbgabetermin;
-	private LocalDate ausgabetermin;
+	private LocalDate baStart;
 
 	private int studentMNR;
 	private String betreuerMail;
 	private String studiendekanMail;
 
 	public Arbeit(int idArbeit, String unternehmen, String thema, String beschreibung, float noteArbeit,
-			float noteVortrag, byte angenommen, byte nda_notwendig, byte ipAngefragt, byte ipAngenommen,
-			byte ba_Anmeldung_Student, byte ba_Anmeldung_Betreuer, byte ba_Anmeldung_Studiendekan, byte ipBestanden,
-			byte veroeffentlichung, Date ipStart, Date baAbgabetermin, Date ausgabetermin, int studentMNR,
-			String betreuerMail, String studiendekanMail) {
+			float noteVortrag, byte angenommen, byte nda_notwendig, byte ipAngenommen, byte ba_Anmeldung_Student,
+			byte ba_Anmeldung_Betreuer, byte ba_Anmeldung_Studiendekan, byte ipBestanden, byte veroeffentlichung,
+			Date ipStart, Date baAbgabetermin, Date baStart, int studentMNR, String betreuerMail,
+			String studiendekanMail) {
 		super();
 		this.idArbeit = idArbeit;
 		this.unternehmen = unternehmen;
@@ -54,7 +53,6 @@ public class Arbeit {
 
 		this.themaAngenommen = angenommen;
 		this.nda_notwendig = nda_notwendig;
-		this.ipAngefragt = ipAngefragt;
 		this.ipAngenommen = ipAngenommen;
 
 		this.ba_Anmeldung_Betreuer = ba_Anmeldung_Betreuer;
@@ -65,7 +63,7 @@ public class Arbeit {
 
 		this.ipStart = setDate(ipStart);
 		this.baAbgabetermin = setDate(baAbgabetermin);
-		this.ausgabetermin = setDate(ausgabetermin);
+		this.baStart = setDate(baStart);
 
 		this.studentMNR = studentMNR;
 		this.betreuerMail = betreuerMail;
@@ -204,18 +202,6 @@ public class Arbeit {
 		}
 	}
 
-	public boolean getIpAngefragt() {
-		return ipAngefragt == 1;
-	}
-
-	public void setIpAngefragt(boolean b) {
-		if (b) {
-			this.ipAngefragt = 1;
-		} else {
-			this.ipAngefragt = 0;
-		}
-	}
-
 	public boolean getBa_Anmeldung_Student() {
 		return ba_Anmeldung_Student == 1;
 	}
@@ -286,6 +272,15 @@ public class Arbeit {
 
 	}
 
+	public String getIpEnde() {
+		try {
+			LocalDate ipEnde = this.ipStart.plusMonths(1);
+			return ipEnde.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 	public void setIpStart(LocalDate datum) {
 		this.ipStart = datum;
 	}
@@ -303,17 +298,17 @@ public class Arbeit {
 		this.baAbgabetermin = baAbgabetermin;
 	}
 
-	public String getAusgabetermin() {
+	public String getBaStart() {
 		try {
-			return ausgabetermin.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+			return baStart.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
 		} catch (Exception e) {
 			return null;
 		}
 	}
 
-	public void setAusgabetermin(LocalDate ausgabetermin) {
-		this.ausgabetermin = ausgabetermin;
+	public void setBaStart(LocalDate baStart) {
+		this.baStart = baStart;
 	}
 
 }

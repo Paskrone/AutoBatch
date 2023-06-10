@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import autobatch.businesslogic.actionlistener.IPAnfrageActionListener;
-import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.businessobjects.Arbeit;
@@ -16,16 +15,11 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 
-import java.awt.event.ActionListener;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.awt.event.ActionEvent;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class StudentenIpPanel extends JPanel {
@@ -82,7 +76,7 @@ public class StudentenIpPanel extends JPanel {
 
 		JLabel lblNewLabel = new JLabel("Anfrage bereits gestellt.");
 
-		if (!arbeit.getIpAngefragt()) {
+		if (arbeit.getIpStart()!=null) {
 			lblNewLabel.setVisible(false);
 		}
 

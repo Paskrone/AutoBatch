@@ -22,7 +22,7 @@ public class StudentenIP_2Panel extends JPanel {
 
 		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelManager, panelSwitcher, student);
 
-		JLabel lblNewLabel = new JLabel("IP angenommen");
+		JLabel lblNewLabel = new JLabel("IP bereits beantragt");
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)

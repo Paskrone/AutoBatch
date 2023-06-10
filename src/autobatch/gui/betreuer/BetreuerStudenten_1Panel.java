@@ -104,16 +104,8 @@ public class BetreuerStudenten_1Panel extends JPanel {
 		chckbxNDAJa.addItemListener(new NdaItemListener(arbeit, chckbxNDAJa, true));
 		chckbxNDANein.addItemListener(new NdaItemListener(arbeit, chckbxNDANein, false));
 
-		JLabel lblNewLabel_6 = new JLabel("New label");
-
-		JLabel lblIPSatrt = new JLabel("");
-		if (arbeit.getIpStart() != null) {
-			lblIPSatrt.setText(arbeit.getIpStart());
-		}
-		if (arbeit.getBaAbgabetermin()!=null) {
-			lblAbgabeterminIN.setText(arbeit.getBaAbgabetermin());
-		}
-
+		JLabel lblBAStart = new JLabel("New label");
+		
 		JLabel lblMailIN = new JLabel("New label");
 
 		if (student != null) {
@@ -122,6 +114,20 @@ public class BetreuerStudenten_1Panel extends JPanel {
 			lblmnrIN.setText(student.getMnr() + "");
 			lblMailIN.setText(student.getEmail());
 		}
+
+		JLabel lblIPSatrt = new JLabel("");
+		JLabel lblIPEnde = new JLabel("");
+
+		if (arbeit.getIpStart() != null) {
+			lblIPSatrt.setText(arbeit.getIpStart());
+			lblIPEnde.setText(arbeit.getIpEnde());
+		}
+		
+		if (arbeit.getBaAbgabetermin()!=null) {
+			lblAbgabeterminIN.setText(arbeit.getBaAbgabetermin());
+		}
+
+		
 
 		JLabel lblNoteArbeit = new JLabel("");
 
@@ -142,7 +148,6 @@ public class BetreuerStudenten_1Panel extends JPanel {
 			lblGesamtnote.setText(arbeit.getGesamtnote() + "");
 		}
 
-		JLabel lblNewLabel_11 = new JLabel("New label");
 
 		JLabel lblBetreuerAbgaben = new JLabel("Bisherige Abgaben:");
 
@@ -226,98 +231,156 @@ public class BetreuerStudenten_1Panel extends JPanel {
 		});
 
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addComponent(betreuerNavigationBar, GroupLayout.DEFAULT_SIZE, 990, Short.MAX_VALUE)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(lblEmail)
-						.addContainerGap(946, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(lblName)
-								.addComponent(lblThema).addComponent(lblIPAnfang).addComponent(lblNewLabel_5)
-								.addComponent(lblStarttermin))
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblNoteArbeit).addGap(7)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-								.createSequentialGroup()
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(lblIPSatrt)
-										.addComponent(lblNameIn).addComponent(lblThemaIN).addComponent(lblNewLabel_6)
-										.addComponent(lblMailIN))
-								.addGap(250)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(lblNewLabel)
-										.addComponent(lblNewLabel_1).addComponent(lblNewLabel_2)
-										.addComponent(lblNewLabel_3).addComponent(lblNewLabel_4))
-								.addGap(79)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(lblSemester)
-										.addComponent(lblNewLabel_11)
-										.addGroup(groupLayout.createSequentialGroup().addComponent(chckbxNDAJa)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(chckbxNDANein))
-										.addComponent(lblAbgabeterminIN).addComponent(lblmnrIN).addComponent(btnNote)
-										.addComponent(btnFormular)))
-								.addGroup(groupLayout.createSequentialGroup().addGap(6).addComponent(lblNewLabel_9)
-										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-												.addGroup(groupLayout.createSequentialGroup()
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(lblNoteVortrag))
-												.addGroup(groupLayout.createSequentialGroup().addGap(29)
-														.addComponent(lblNewLabel_7)
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(lblGesamtnote)))))
-						.addContainerGap(221, Short.MAX_VALUE))
-				.addGroup(
-						groupLayout.createSequentialGroup().addContainerGap()
-								.addComponent(lblStudentAbgaben, GroupLayout.PREFERRED_SIZE, 120,
-										GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(864, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addComponent(fileListScrollPane, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE)
-						.addGap(18)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(lbl_success)
-								.addComponent(lbl_error))
-						.addContainerGap(480, Short.MAX_VALUE))
-				.addGroup(
-						groupLayout.createSequentialGroup().addContainerGap()
-								.addComponent(fileListScrollPane_1, GroupLayout.PREFERRED_SIZE, 260,
-										GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(724, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(lblBetreuerAbgaben)
-						.addContainerGap(864, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(btn_uploadDocument)
-						.addContainerGap(803, Short.MAX_VALUE)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup()
-				.addComponent(betreuerNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-						GroupLayout.PREFERRED_SIZE)
-				.addGap(18)
-				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblName)
-						.addComponent(lblNameIn).addComponent(lblNewLabel).addComponent(lblmnrIN))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblNewLabel_1)
-						.addComponent(lblAbgabeterminIN).addComponent(lblNewLabel_6).addComponent(lblStarttermin))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(groupLayout
-						.createParallelGroup(Alignment.BASELINE).addComponent(lblEmail).addComponent(lblNewLabel_2)
-						.addComponent(chckbxNDAJa).addComponent(chckbxNDANein).addComponent(lblMailIN))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblThema)
-						.addComponent(lblThemaIN).addComponent(lblNewLabel_3).addComponent(lblSemester))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblIPAnfang)
-						.addComponent(lblNewLabel_4).addComponent(lblIPSatrt).addComponent(lblNewLabel_11))
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-						.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblNewLabel_5)
-								.addComponent(lblNoteArbeit).addComponent(lblNewLabel_9).addComponent(lblNoteVortrag)
-								.addComponent(lblNewLabel_7).addComponent(lblGesamtnote))
-						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(lblBetreuerAbgaben).addGap(5)
-						.addComponent(fileListScrollPane, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-						.addGap(9).addComponent(btn_uploadDocument).addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(lblStudentAbgaben).addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(fileListScrollPane_1, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup().addGap(65)
-								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lbl_success)
-										.addComponent(btnNote))
-								.addGap(18).addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lbl_error).addComponent(btnFormular))))
-				.addContainerGap(22, Short.MAX_VALUE)));
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblEmail)
+					.addContainerGap(946, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblName)
+						.addComponent(lblThema)
+						.addComponent(lblIPAnfang)
+						.addComponent(lblNewLabel_5)
+						.addComponent(lblStarttermin))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNoteArbeit)
+					.addGap(7)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblIPSatrt)
+								.addComponent(lblNameIn)
+								.addComponent(lblThemaIN)
+								.addComponent(lblBAStart)
+								.addComponent(lblMailIN))
+							.addGap(250)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel)
+								.addComponent(lblNewLabel_1)
+								.addComponent(lblNewLabel_2)
+								.addComponent(lblNewLabel_3)
+								.addComponent(lblNewLabel_4))
+							.addGap(79)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblSemester)
+								.addComponent(lblIPEnde)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(chckbxNDAJa)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(chckbxNDANein))
+								.addComponent(lblAbgabeterminIN)
+								.addComponent(lblmnrIN)
+								.addComponent(btnNote)
+								.addComponent(btnFormular)))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(6)
+							.addComponent(lblNewLabel_9)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblNoteVortrag))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(114)
+									.addComponent(lblGesamtnote))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(52)
+									.addComponent(lblNewLabel_7)))))
+					.addContainerGap(221, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblStudentAbgaben, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(864, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(fileListScrollPane, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lbl_success)
+						.addComponent(lbl_error))
+					.addContainerGap(480, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(fileListScrollPane_1, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(724, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblBetreuerAbgaben)
+					.addContainerGap(864, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btn_uploadDocument)
+					.addContainerGap(803, Short.MAX_VALUE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(betreuerNavigationBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblName)
+						.addComponent(lblNameIn)
+						.addComponent(lblNewLabel)
+						.addComponent(lblmnrIN))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_1)
+						.addComponent(lblAbgabeterminIN)
+						.addComponent(lblBAStart)
+						.addComponent(lblStarttermin))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblEmail)
+						.addComponent(lblNewLabel_2)
+						.addComponent(chckbxNDAJa)
+						.addComponent(chckbxNDANein)
+						.addComponent(lblMailIN))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblThema)
+						.addComponent(lblThemaIN)
+						.addComponent(lblNewLabel_3)
+						.addComponent(lblSemester))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblIPAnfang)
+						.addComponent(lblNewLabel_4)
+						.addComponent(lblIPSatrt)
+						.addComponent(lblIPEnde))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNewLabel_5)
+								.addComponent(lblNoteArbeit)
+								.addComponent(lblNewLabel_9)
+								.addComponent(lblNoteVortrag)
+								.addComponent(lblGesamtnote)
+								.addComponent(lblNewLabel_7))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblBetreuerAbgaben)
+							.addGap(5)
+							.addComponent(fileListScrollPane, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+							.addGap(9)
+							.addComponent(btn_uploadDocument)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblStudentAbgaben)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(fileListScrollPane_1, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(65)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lbl_success)
+								.addComponent(btnNote))
+							.addGap(18)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lbl_error)
+								.addComponent(btnFormular))))
+					.addContainerGap(22, Short.MAX_VALUE))
+		);
 
 		setLayout(groupLayout);
 
