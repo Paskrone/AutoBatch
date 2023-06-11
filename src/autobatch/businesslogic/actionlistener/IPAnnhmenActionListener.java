@@ -17,19 +17,24 @@ import autobatch.gui.studiendekan.StudiendekanIpAnfragenPanel;
 import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 
+/**
+ * ActionListener zur Verarbeitung der Annahme der IP-Anfrage.
+ */
 public class IPAnnhmenActionListener implements ActionListener {
 
-	private PanelSwitcher panelSwitcher;
-	private PanelManager panelManager;
+	// Instanzvariablen
+	private PanelSwitcher panelSwitcher; // zur Verwaltung des Panelwechsels
+	private PanelManager panelManager; // zur Verwaltung der Panels
 
-	private Student student;
-	private Betreuer betreuer;
-	private Studiendekan dekan;
+	private Student student; // betroffener Student
+	private Betreuer betreuer; // betroffener Betreuer
+	private Studiendekan dekan; // betroffener Studiendekan
 
-	private Arbeit arbeit;
+	private Arbeit arbeit; // Arbeit, die verarbeitet wird
 
-	private JLabel lblPopUp;
+	private JLabel lblPopUp; // Label zur Anzeige von Benachrichtigungen
 
+	// Konstruktor
 	public IPAnnhmenActionListener(Studiendekan dekan, PanelSwitcher panelSwitcher, PanelManager panelManager,
 			Student student, Betreuer betreuer, Arbeit arbeit, JLabel lblPopUp) {
 		super();
@@ -43,21 +48,26 @@ public class IPAnnhmenActionListener implements ActionListener {
 		this.lblPopUp = lblPopUp;
 	}
 
+	/**
+	 * Diese Methode wird ausgeführt, wenn der Benutzer den Button zum Annehmen der IP-Anfrage drückt.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+		// Erzeugen eines neuen Datenbankzugriffs
 		Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
 
+		// Aktualisieren des Studenten und der Arbeit in der Datenbank
 		datenbankabfrage.updateDataStudentString(student, student.getBetreuer(), "betreuer");
-
 		datenbankabfrage.updateDataArbeitBoolean(arbeit, true, "ipAngenommen");
 
-//		datenbankabfrage.updateDataStudentInt(student, anfrage.getIdArbeit(), "arbeit");
-
+		// Erstellen eines neuen StudiendekanIpAnfragenPanels
 		JPanel studiendekanAnfragenPanl = new StudiendekanIpAnfragenPanel(panelManager, panelSwitcher, dekan);
 
+		// Aktualisieren des Panels
 		panelManager.updatePanels(studiendekanAnfragenPanl, "studiendekanIpAnfragen");
 
+		// Anzeigen des Pop-Up-Labels
 		lblPopUp.setVisible(true);
 
 	}

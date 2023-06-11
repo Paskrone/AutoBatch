@@ -15,11 +15,16 @@ import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import autobatch.session.SessionManager;
 
+/**
+ * ActionListener zum Erstellen eines neuen Benutzerkontos.
+ */
 public class CreateAccountActionListener implements ActionListener {
 
+	// Instanzvariablen
 	private PanelSwitcher panelSwitcher;
 	private PanelManager panelManager;
-
+	
+	// Verschiedene Textfelder zur Eingabe von Benutzerinformationen
 	private JTextField tf_Mnr;
 	private JTextField tf_vorname;
 	private JTextField tf_nachname;
@@ -35,6 +40,7 @@ public class CreateAccountActionListener implements ActionListener {
 	private JPasswordField tf_Passwort;
 	private JLabel lbl_registrationAnzeige;
 
+	// Konstruktor
 	public CreateAccountActionListener(PanelSwitcher panelSwitcher, PanelManager panelManager, JTextField tf_Mnr,
 			JTextField tf_vorname, JTextField tf_nachname, JTextField tf_Email, JTextField tf_telefonnummer,
 			JLabel lblStudiengang, JTextField tf_Ort, JTextField tf_Postleizahl, JTextField tf_Strasse,
@@ -59,11 +65,16 @@ public class CreateAccountActionListener implements ActionListener {
 
 	}
 
+	/**
+	 * Diese Methode wird ausgeführt, wenn der Benutzer den Button zum Erstellen eines neuen Kontos drückt.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		// Passwort aus dem Passwort-Feld abrufen und in einen String umwandeln
 		char[] passwordChars = tf_Passwort.getPassword();
 		String password = new String(passwordChars);
 
+		// Überprüfen, ob alle erforderlichen Informationen eingegeben wurden
 		if (check(password)) {
 
 			String mnr = tf_Mnr.getText();
@@ -89,7 +100,8 @@ public class CreateAccountActionListener implements ActionListener {
 			default:
 				break;
 			}
-
+			
+			// Erstellen eines neuen Studentenobjekts und Registrierung in der Datenbank
 			if (dbaccess.registerStudent(new Student(mnrInt, tf_vorname.getText(), tf_nachname.getText(), password,
 					tf_benutzername.getText(), tf_Email.getText(), telefonnummer, 0, lblStudiengang.getText(),
 					tf_Ort.getText(), tf_Strasse.getText(), postleizahl, studiendekan, null))) {
@@ -111,6 +123,9 @@ public class CreateAccountActionListener implements ActionListener {
 
 	}
 
+	/**
+	 * Diese Methode überprüft, ob alle erforderlichen Informationen für die Registrierung eingegeben wurden.
+	 */
 	private boolean check(String password) {
 
 		if (tf_Mnr.getText().equals("") || tf_vorname.getText().equals("") || tf_nachname.getText().equals("")

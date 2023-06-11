@@ -1,70 +1,149 @@
 package autobatch.businessobjects;
 
+/**
+ * Diese Klasse repräsentiert einen Studiendekan.
+ * Sie erbt von der abstrakten Klasse Benutzer und fügt ein spezifisches Attribut (Studiengang) hinzu.
+ */
 public class Studiendekan extends Benutzer {
 
-	private String vorname;
-	private String nachname;
-	private String passwort;
-	private String benutzername;
-	private String email;
-	private String studiengang;
+    private String vorname;
+    private String nachname;
+    private String passwort;
+    private String benutzername;
+    private String email;
+    private String studiengang;
 
-	public Studiendekan(String vorname, String nachname, String passwort, String benutzername, String email,
-			String studiengang) {
-		this.vorname = vorname;
-		this.nachname = nachname;
-		this.passwort = passwort;
-		this.benutzername = benutzername;
-		this.email = email;
-		this.studiengang = studiengang;
-	}
+    /**
+     * Konstruktor für einen Studiendekan.
+     *
+     * @param vorname      Der Vorname des Studiendekans.
+     * @param nachname     Der Nachname des Studiendekans.
+     * @param passwort     Das Passwort des Studiendekans.
+     * @param benutzername Der Benutzername des Studiendekans.
+     * @param email        Die E-Mail-Adresse des Studiendekans.
+     * @param studiengang  Der Studiengang, den der Studiendekan leitet.
+     */
+    public Studiendekan(String vorname, String nachname, String passwort, String benutzername, String email,
+            String studiengang) {
+        this.vorname = vorname;
+        this.nachname = nachname;
+        this.passwort = passwort;
+        this.benutzername = benutzername;
+        this.email = email;
+        this.studiengang = studiengang;
+    }
 
-	public String getVorname() {
-		return vorname;
-	}
+    /**
+     * Gibt den Vornamen des Studiendekans zurück.
+     *
+     * @return Der Vorname des Studiendekans.
+     */
+    public String getVorname() {
+        return vorname;
+    }
 
-	public void setVorname(String vorname) {
-		this.vorname = vorname;
-	}
+    /**
+     * Setzt den Vornamen des Studiendekans.
+     *
+     * @param vorname Der neue Vorname des Studiendekans.
+     */
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
 
-	public String getNachname() {
-		return nachname;
-	}
+    /**
+     * Gibt den Nachnamen des Studiendekans zurück.
+     *
+     * @return Der Nachname des Studiendekans.
+     */
+    public String getNachname() {
+        return nachname;
+    }
 
-	public void setNachname(String nachname) {
-		this.nachname = nachname;
-	}
+    /**
+     * Setzt den Nachnamen des Studiendekans.
+     *
+     * @param nachname Der neue Nachname des Studiendekans.
+     */
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
+    }
 
-	public String getPasswort() {
-		return passwort;
-	}
+    /**
+     * Gibt das Passwort des Studiendekans zurück.
+     *
+     * @return Das Passwort des Studiendekans.
+     */
+    public String getPasswort() {
+        return passwort;
+    }
 
-	public void setPasswort(String passwort) {
-		this.passwort = passwort;
-	}
+    /**
+     * Setzt das Passwort des Studiendekans.
+     *
+     * @param passwort Das neue Passwort des Studiendekans.
+     */
+    public void setPasswort(String passwort) {
+        this.passwort = passwort;
+    }
 
-	public String getBenutzername() {
-		return benutzername;
-	}
+    /**
+     * Gibt den Benutzernamen des Studiendekans zurück.
+     *
+     * @return Der Benutzername des Studiendekans.
+     */
+    public String getBenutzername() {
+        return benutzername;
+    }
 
-	public void setBenutzername(String benutzername) {
-		this.benutzername = benutzername;
-	}
+    /**
+     * Setzt den Benutzernamen des Studiendekans.
+     *
+     * @param benutzername Der
+     *     /**
+     * Setzt den Benutzernamen des Studiendekans.
+     *
+     * @param benutzername Der neue Benutzername des Studiendekans.
+     */
+    public void setBenutzername(String benutzername) {
+        this.benutzername = benutzername;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    /**
+     * Gibt die E-Mail-Adresse des Studiendekans zurück.
+     *
+     * @return Die E-Mail-Adresse des Studiendekans.
+     */
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    /**
+     * Setzt die E-Mail-Adresse des Studiendekans.
+     *
+     * @param email Die neue E-Mail-Adresse des Studiendekans.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getStudiengang() {
-		return studiengang;
-	}
+    /**
+     * Gibt den Studiengang des Studiendekans zurück.
+     *
+     * @return Der Studiengang des Studiendekans.
+     */
+    public String getStudiengang() {
+        return studiengang;
+    }
 
-	public void setStudiengang(String studiengang) {
-		this.studiengang = studiengang;
-	}
+    /**
+     * Setzt den Studiengang des Studiendekans.
+     *
+     * @param studiengang Der neue Studiengang des Studiendekans.
+     */
+    public void setStudiengang(String studiengang) {
+        this.studiengang = studiengang;
+    }
 
 }
+

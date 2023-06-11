@@ -3,8 +3,6 @@ package autobatch.businesslogic.actionlistener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -16,6 +14,9 @@ import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.session.SessionManager;
 
+/**
+ * Ein ActionListener, der dazu dient, dem Benutzer das Hinzufügen von Abgaben zu ermöglichen.
+ */
 public class AbgabeHinzufuegenActionListener implements ActionListener{
 	
 	Datenbankabfrage dbaccess = new Datenbankabfrage();
@@ -25,23 +26,39 @@ public class AbgabeHinzufuegenActionListener implements ActionListener{
 	private JLabel lbl_error;
 	private Student student;
 	
+	/**
+	 * Konstruktor für den ActionListener
+	 * @param lbl_success Label zur Anzeige einer erfolgreichen Operation
+	 * @param lbl_error Label zur Anzeige eines Fehlers
+	 */
 	public AbgabeHinzufuegenActionListener(JLabel lbl_success, JLabel lbl_error) {
 		this.lbl_success = lbl_success;
 		this.lbl_error = lbl_error;
 	}
 	
+	/**
+	 * Konstruktor für den ActionListener
+	 * @param lbl_success Label zur Anzeige einer erfolgreichen Operation
+	 * @param lbl_error Label zur Anzeige eines Fehlers
+	 * @param student Der betroffene Student
+	 */
 	public AbgabeHinzufuegenActionListener(JLabel lbl_success, JLabel lbl_error, Student student) {
 		this.lbl_success = lbl_success;
 		this.lbl_error = lbl_error;
 		this.student = student;
 	}
 
+	/**
+	 * Diese Methode wird aufgerufen, wenn eine Aktion ausgeführt wird.
+	 * @param e Das ausgelöste ActionEvent
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		// Prüft, ob der aktuelle Benutzer ein Student ist und fügt entsprechend die Datei hinzu
 		if(currentUser instanceof Student) {
 			if(((Student) currentUser).getBetreuer() != null) {
-				// Datei-Auswahl-Dialog erstellen
+				// Erstellt einen Datei-Auswahl-Dialog
 			    JFileChooser fileChooser = new JFileChooser();
 			    FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF", "pdf");
 			    fileChooser.setFileFilter(filter);
@@ -57,8 +74,9 @@ public class AbgabeHinzufuegenActionListener implements ActionListener{
 			}
 		}
 		
+		// Prüft, ob der aktuelle Benutzer ein Betreuer ist und fügt entsprechend die Datei hinzu
 		else if(currentUser instanceof Betreuer) {
-			// Datei-Auswahl-Dialog erstellen
+			// Erstellt einen Datei-Auswahl-Dialog
 		    JFileChooser fileChooser = new JFileChooser();
 		    FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF", "pdf");
 		    fileChooser.setFileFilter(filter);
@@ -66,20 +84,11 @@ public class AbgabeHinzufuegenActionListener implements ActionListener{
 		    int returnValue = fileChooser.showOpenDialog(null);
 		    if (returnValue == JFileChooser.APPROVE_OPTION) {
 		        File selectedFile = fileChooser.getSelectedFile();
-		        dbaccess.saveFileToDatabase(selectedFile, currentUsername, student.getBenutzername());
+		        dbaccess.saveFileToDatabase(selectedFile, currentUsername,student.getBenutzername());
 		        lbl_success.setVisible(true);
 		    }
-		} else {
-			System.out.println("Aktueller Benutzer hat keine Zugriffsberechtigung");
-		}
-		
-		
-	    
-	    
-	}
-
-	
-	
-
-
-}
+		    } else {
+		    System.out.println("Aktueller Benutzer hat keine Zugriffsberechtigung");
+		    	}
+		    		}
+							}

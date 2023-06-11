@@ -14,49 +14,58 @@ import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import autobatch.session.SessionManager;
 
+/**
+ * Listener zur Verarbeitung von Ereignissen bei der Auswahl von Studiendekan in einer Tabelle.
+ */
 public class StudiendekanAuswahlSelectionListener implements ListSelectionListener {
 
-	private PanelSwitcher panelSwitcher;
-	private PanelManager panelManager;
+    // Instanzvariablen
+    private PanelSwitcher panelSwitcher;
+    private PanelManager panelManager;
+    private JTable table;
+    private String panel;
 
-	private JTable table;
+    /**
+     * Konstruktor
+     * @param panelSwitcher Dienst zum Wechseln zwischen Panels
+     * @param panelManager Dienst zum Verwalten von Panels
+     * @param table Die Tabelle, die die Auswahl enthält
+     * @param panel Der Name des Panels, auf das umgeschaltet werden soll
+     */
+    public StudiendekanAuswahlSelectionListener(PanelSwitcher panelSwitcher, PanelManager panelManager, JTable table,
+                                                String panel) {
+        this.panelSwitcher = panelSwitcher;
+        this.panelManager = panelManager;
+        this.table = table;
+        this.panel = panel;
+    }
 
-	private String panel;
+    /**
+     * Diese Methode wird ausgeführt, wenn eine Auswahl in der Tabelle getroffen wird.
+     */
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if (!e.getValueIsAdjusting()) { // Überprüfen Sie, ob die Auswahl vollständig ist
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow != -1) { // Überprüfen Sie, ob eine Zeile ausgewählt wurde
+                // Holen Sie sich die Daten aus der ausgewählten Zeile
+                Object mnr = table.getValueAt(selectedRow, 2);
+                Object idThema = table.getValueAt(selectedRow, 3);
 
-	public StudiendekanAuswahlSelectionListener(PanelSwitcher panelSwitcher, PanelManager panelManager, JTable table,
-			String panel) {
-		super();
-		this.panelSwitcher = panelSwitcher;
-		this.panelManager = panelManager;
-		this.table = table;
+                // Speichern Sie die ausgewählten Daten
+                panelSwitcher.storeData("2", mnr);
+                panelSwitcher.storeData("3", idThema);
 
-		this.panel = panel;
-	}
+                // Erzeugen Sie ein neues Panel und schalten Sie darauf um, wenn das gewählte Panel "studiendekanIpAnfragen" ist
+                if (panel.equals("studiendekanIpAnfragen")) {
+                    JPanel studiendekanIPAnfragen = new StudiendekanIpAnfragenPanel(panelManager, panelSwitcher,
+                            (Studiendekan) SessionManager.getInstance().getAktuellerBenutzer());
 
-	@Override
-	public void valueChanged(ListSelectionEvent e) {
-		if (!e.getValueIsAdjusting()) { // Überprüfen Sie, ob die Selektion vollständig ist
-			int selectedRow = table.getSelectedRow();
-			if (selectedRow != -1) { // Überprüfen Sie, ob eine Zeile ausgewählt wurde
-				// Holen Sie sich die Daten aus der ausgewählten Zeile
-				Object mnr = table.getValueAt(selectedRow, 2);
+                    panelManager.updatePanels(studiendekanIPAnfragen, "studiendekanIpAnfragen");
 
-				Object idThema = table.getValueAt(selectedRow, 3);
-
-				panelSwitcher.storeData("2", mnr);
-				panelSwitcher.storeData("3", idThema);
-
-				if (panel.equals("studiendekanIpAnfragen")) {
-					JPanel studiendekanIPAnfragen = new StudiendekanIpAnfragenPanel (panelManager, panelSwitcher,
-							(Studiendekan) SessionManager.getInstance().getAktuellerBenutzer());
-
-					panelManager.updatePanels(studiendekanIPAnfragen, "studiendekanIpAnfragen");
-
-					panelSwitcher.switchToPanel("studiendekanIpAnfragen");
-
-				}
-
-			}
-		}
-	}
+                    panelSwitcher.switchToPanel("studiendekanIpAnfragen");
+                }
+            }
+        }
+    }
 }

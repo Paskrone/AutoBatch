@@ -16,13 +16,19 @@ import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import autobatch.session.SessionManager;
 
+/**
+ * ActionListener zur Verarbeitung des Anmeldevorgangs.
+ */
 public class LoginActionListener implements ActionListener {
-	private JTextField tf_username;
-	private JPasswordField tf_password;
-	private JLabel lbl_error;
-	private PanelSwitcher panelSwitcher;
-	private PanelManager panelManager;
+	// Instanzvariablen
+	private JTextField tf_username; // Textfeld für den Benutzernamen
+	private JPasswordField tf_password; // Passwortfeld für das Passwort
+	private JLabel lbl_error; // Label zur Anzeige von Fehlermeldungen
 
+	private PanelSwitcher panelSwitcher; // zur Verwaltung des Panelwechsels
+	private PanelManager panelManager; // zur Verwaltung der Panels
+
+	// Konstruktor
 	public LoginActionListener(PanelSwitcher panelSwitcher, PanelManager panelManager, JTextField tf_username,
 			JPasswordField tf_password, JLabel lbl_error) {
 		this.panelSwitcher = panelSwitcher;
@@ -32,28 +38,39 @@ public class LoginActionListener implements ActionListener {
 		this.panelManager = panelManager;
 	}
 
+	/**
+	 * Diese Methode wird ausgeführt, wenn der Benutzer den Login-Button drückt.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		// Ermitteln der Eingaben des Benutzers
 		String username = tf_username.getText();
 		char[] passwordChars = tf_password.getPassword();
 		String password = new String(passwordChars);
 
+		// Erzeugen eines neuen Datenbankzugriffs
 		Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
+
+		// Prüfen, ob die Benutzerdaten gültig sind
 		boolean checkData = datenbankabfrage.searchAllTablesByUsernameAndPassword(username, password);
 		if (checkData) {
 
-			// Benutzer speichern
+			// Aktuellen Benutzer speichern
 			Benutzer aktuellerBenutzer = datenbankabfrage.getBenutzer(username);
 			SessionManager.getInstance().setAktuellerBenutzer(aktuellerBenutzer);
 
-			// Textfields leeren
+			// Eingabefelder zurücksetzen
 			tf_password.setText("");
 			tf_username.setText("");
+
+			// Fehlermeldung ausblenden
 			lbl_error.setVisible(false);
 
+			// Panels initialisieren
 			panelManager.initializePanels();
 
 		} else {
+			// Fehlermeldung anzeigen und Passwortfeld zurücksetzen
 			lbl_error.setVisible(true);
 			tf_password.setText("");
 		}

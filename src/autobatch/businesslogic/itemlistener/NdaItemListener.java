@@ -8,32 +8,48 @@ import javax.swing.JCheckBox;
 import autobatch.businessobjects.Arbeit;
 import autobatch.dbaccess.Datenbankabfrage;
 
+/**
+ * ItemListener zur Verarbeitung des Zustands einer Checkbox, die repräsentiert, ob eine NDA erforderlich ist.
+ */
 public class NdaItemListener implements ItemListener {
 
-	private Arbeit arbeit;
-	private JCheckBox checkbox;
-	private boolean notwenidg;
+    // Instanzvariablen
+    private Arbeit arbeit; // Arbeitsobjekt, das aktualisiert wird
+    private JCheckBox checkbox; // Die Checkbox, die den NDA-Zustand repräsentiert
+    private boolean notwenidg; // Flag, das anzeigt, ob eine NDA erforderlich ist oder nicht
 
-	public NdaItemListener(Arbeit arbeit, JCheckBox checkbox, boolean notwenidg) {
-		super();
-		this.arbeit = arbeit;
-		this.checkbox = checkbox;
-		this.notwenidg = notwenidg;
-	}
+    /**
+     * Konstruktor
+     * @param arbeit Arbeitsobjekt, das aktualisiert wird
+     * @param checkbox Die Checkbox, die den NDA-Zustand repräsentiert
+     * @param notwenidg Flag, das anzeigt, ob eine NDA erforderlich ist oder nicht
+     */
+    public NdaItemListener(Arbeit arbeit, JCheckBox checkbox, boolean notwenidg) {
+        super();
+        this.arbeit = arbeit;
+        this.checkbox = checkbox;
+        this.notwenidg = notwenidg;
+    }
 
-	@Override
-	public void itemStateChanged(ItemEvent e) {
+    /**
+     * Diese Methode wird ausgeführt, wenn der Zustand der Checkbox geändert wird.
+     */
+    @Override
+    public void itemStateChanged(ItemEvent e) {
 
-		if (checkbox.isSelected()) {
-			System.out.println("Checkbox aktiviert");
-			Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
+        // Wenn die Checkbox ausgewählt ist
+        if (checkbox.isSelected()) {
+            System.out.println("Checkbox aktiviert");
 
-			datenbankabfrage.updateDataArbeitBoolean(arbeit, notwenidg, "nda_notwendig");
+            // Erstelle eine Instanz von Datenbankabfrage
+            Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
 
-		} else {
-			System.out.println("Checkbox deaktiviert");
-		}
+            // Aktualisiere den NDA-Zustand im Datenbank-Arbeitsobjekt
+            datenbankabfrage.updateDataArbeitBoolean(arbeit, notwenidg, "nda_notwendig");
 
-	}
-
+        } else {
+            // Wenn die Checkbox nicht ausgewählt ist
+            System.out.println("Checkbox deaktiviert");
+        }
+    }
 }

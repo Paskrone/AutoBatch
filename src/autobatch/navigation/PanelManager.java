@@ -24,20 +24,23 @@ import autobatch.gui.studiendekan.StudiendekanIpPanel;
 import autobatch.gui.studiendekan.StudiendekanPanel;
 import autobatch.session.SessionManager;
 
+/**
+ * Verwaltet die unterschiedlichen Panels für die Benutzerschnittstelle.
+ */
 public class PanelManager {
 
-	private PanelSwitcher panelSwitcher;
+	private PanelSwitcher panelSwitcher; // Hilft bei der Umschaltung zwischen den Panels
 
-	private LoginPanel loginPanel;
-	private RegistrationPanel registrationPanel;
+	private LoginPanel loginPanel; // Panel für die Anmeldung
+	private RegistrationPanel registrationPanel; // Panel für die Registrierung
 
-	private StudentenPanel studentenPanel;
+	private StudentenPanel studentenPanel; // Panel für die Studentenansicht
 
-	private StudiendekanPanel studiendekanPanel;
+	private StudiendekanPanel studiendekanPanel; // Panel für die Ansicht des Studiendekan
 
-	private BetreuerPanel betreuerPanel;
+	private BetreuerPanel betreuerPanel; // Panel für die Betreueransicht
 
-	private JPanel cards;
+	private JPanel cards; // Container für alle Panels
 
 	public PanelManager(PanelSwitcher panelSwitcher, JPanel cards) {
 		this.panelSwitcher = panelSwitcher;
@@ -45,6 +48,9 @@ public class PanelManager {
 		initializeLoginAndRegistrationPanels();
 	}
 
+	/**
+	 * Initialisiert die Login- und Registrierungs-Panels und fügt sie zum cards-Container hinzu.
+	 */
 	private void initializeLoginAndRegistrationPanels() {
 		loginPanel = new LoginPanel(panelSwitcher, this);
 		registrationPanel = new RegistrationPanel(panelSwitcher, this);
@@ -52,42 +58,50 @@ public class PanelManager {
 		cards.add(registrationPanel, "Registrieren");
 	}
 
-	// Panels für den Student
+	/**
+	 * Initialisiert die Panels basierend auf der Art des aktuell angemeldeten Benutzers.
+	 * Fügt das entsprechende Panel zum cards-Container hinzu und wechselt zu diesem.
+	 */
 	public void initializePanels() {
 		Benutzer currentUser = SessionManager.getInstance().getAktuellerBenutzer();
 		if (currentUser instanceof Student) {
-
-			Student currentStudent = (Student) currentUser;
-			studentenPanel = new StudentenPanel(this, panelSwitcher, currentStudent);
-
-			cards.add(studentenPanel, "Studenten");
-
-			this.panelSwitcher.switchToPanel("Studenten");
+			
+			 Student currentStudent = (Student) currentUser;
+			 studentenPanel = new StudentenPanel(this, panelSwitcher, currentStudent);
+			 
+					 
+			 cards.add(studentenPanel, "Studenten");
+					 
+			 this.panelSwitcher.switchToPanel("Studenten");
 
 		} else if (currentUser instanceof Studiendekan) {
-
-			Studiendekan currentStudiendekan = (Studiendekan) currentUser;
-			studiendekanPanel = new StudiendekanPanel(this, panelSwitcher, currentStudiendekan);
-			cards.add(studiendekanPanel, "Studiendekane");
-
-			this.panelSwitcher.switchToPanel("Studiendekane");
+			
+			 Studiendekan currentStudiendekan = (Studiendekan) currentUser;
+			 studiendekanPanel = new StudiendekanPanel(this, panelSwitcher,
+			 currentStudiendekan); cards.add(studiendekanPanel, "Studiendekane");
+			 
+			 this.panelSwitcher.switchToPanel("Studiendekane");
 
 		} else if (currentUser instanceof Betreuer) {
-
-			Betreuer currentBetreuer = (Betreuer) currentUser;
-			betreuerPanel = new BetreuerPanel(this, panelSwitcher, currentBetreuer);
-
-			cards.add(betreuerPanel, "Betreuer");
-
-			this.panelSwitcher.switchToPanel("Betreuer");
+			
+			 Betreuer currentBetreuer = (Betreuer) currentUser; betreuerPanel = new
+			 BetreuerPanel(this, panelSwitcher, currentBetreuer);
+					 
+			 cards.add(betreuerPanel, "Betreuer");
+					
+			 this.panelSwitcher.switchToPanel("Betreuer");
 
 		}
 	}
 
+	/**
+	 * Aktualisiert die Panels. Fügt das gegebene Panel zum cards-Container hinzu.
+	 *
+	 * @param panel Das hinzuzufügende Panel.
+	 * @param panelName Der Name des hinzuzufügenden Panels.
+	 */
 	public void updatePanels(JPanel panel, String panelName) {
-
 		cards.add(panel, panelName);
-
+	
+		}
 	}
-
-}
