@@ -35,10 +35,10 @@ public class BetreuerStudentenPanel extends JPanel {
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelSwitcher);
+		BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelManager,panelSwitcher,betreuer);
 
 		// Erstelle eine neue Tabelle 
-		String[] columnNames = { "Nachname", "Email", "Matrikelnr.", "idThema" };
+		String[] columnNames = { "Nachname", "Email", "Matrikelnr.", "idArbeit" };
 		Datenbankabfrage dbQuery = new Datenbankabfrage();
 
 		List<Arbeit> a = dbQuery.getAllArbeiten();
@@ -48,8 +48,7 @@ public class BetreuerStudentenPanel extends JPanel {
 		
 
 		for (Arbeit arbeit : a) {
-			if (arbeit.getAngenommen() && arbeit.getBetreuerMail().equals(betreuer.getEmail())) {
-				System.out.println("klappt");
+			if (arbeit.getThemaAngenommen() && arbeit.getBetreuerMail().equals(betreuer.getEmail())) {
 				studenten.add(dbQuery.getStudentByMNR(arbeit.getStudentMNR()));
 				arbeiten.add(arbeit);
 			}
@@ -71,7 +70,6 @@ public class BetreuerStudentenPanel extends JPanel {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
-				// Alle Zellen sind nicht editierbar
 			}
 		};
 

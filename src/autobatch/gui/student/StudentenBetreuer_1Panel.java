@@ -11,6 +11,7 @@ import autobatch.businessobjects.Betreuer;
 import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.gui.betreuer.BetreuerStudenten_1Panel;
+import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -25,7 +26,7 @@ public class StudentenBetreuer_1Panel extends JPanel {
 	private Student student;
 	private Betreuer betreuer;
 
-	public StudentenBetreuer_1Panel(PanelSwitcher panelSwitcher, Student student) {
+	public StudentenBetreuer_1Panel(PanelManager panelManager, PanelSwitcher panelSwitcher, Student student) {
 		this.student = student;
 		this.panelSwitcher = panelSwitcher;
 
@@ -36,7 +37,7 @@ public class StudentenBetreuer_1Panel extends JPanel {
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelSwitcher, student);
+		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelManager, panelSwitcher, student);
 
 		JLabel lblBetreuerInfos = new JLabel("Betreuer Informationen:");
 

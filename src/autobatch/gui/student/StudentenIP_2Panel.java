@@ -13,16 +13,16 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class StudentenIP_1Panel extends JPanel {
+public class StudentenIP_2Panel extends JPanel {
 
-	public StudentenIP_1Panel(PanelManager panelManager, PanelSwitcher panelSwitcher, Student student) {
+	public StudentenIP_2Panel(PanelManager panelManager, PanelSwitcher panelSwitcher, Student student) {
 
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		StudentNavigationBar studentNavigationBar = new StudentNavigationBar(panelManager, panelSwitcher, student);
 
-		JLabel lblNewLabel = new JLabel("Noch kein Betreuer!!");
+		JLabel lblNewLabel = new JLabel("IP bereits beantragt");
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)

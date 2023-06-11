@@ -40,7 +40,7 @@ public class BetreuerAnfragenPanel extends JPanel {
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelSwitcher);
+		BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelManager,panelSwitcher,betreuer);
 
 		// Erstelle eine neue Tabelle
 		String[] columnNames = { "Nachname", "Email", "Matrikelnr.", "idThema" };
@@ -52,7 +52,7 @@ public class BetreuerAnfragenPanel extends JPanel {
 		List<Student> studenten = new ArrayList<>();
 
 		for (Arbeit arbeit : a) {
-			if (!arbeit.getAngenommen() && arbeit.getBetreuerMail() != null
+			if (!arbeit.getThemaAngenommen() && arbeit.getBetreuerMail() != null
 					&& arbeit.getBetreuerMail().equals(betreuer.getEmail())) {
 				System.out.println("klappt");
 				studenten.add(dbQuery.getStudentByMNR(arbeit.getStudentMNR()));

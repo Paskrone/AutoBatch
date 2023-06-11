@@ -10,7 +10,7 @@ import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelSwitcher;
 
-public class DatenSpeichernActionListener implements ActionListener{
+public class DatenSpeichernStudentActionListener implements ActionListener{
 	
 	
 	private Student student;
@@ -23,7 +23,7 @@ public class DatenSpeichernActionListener implements ActionListener{
 	
 	private JLabel lblPopUp;
 
-	public DatenSpeichernActionListener(Student student, PanelSwitcher panelSwitcher, JTextField tf_ort, JTextField tf_postleizahl,
+	public DatenSpeichernStudentActionListener(Student student, PanelSwitcher panelSwitcher, JTextField tf_ort, JTextField tf_postleizahl,
 			JTextField tf_strasse, JTextField tf_telefon, JTextField tf_passwort, JLabel lblPopUp) {
 		super();
 		this.student = student;

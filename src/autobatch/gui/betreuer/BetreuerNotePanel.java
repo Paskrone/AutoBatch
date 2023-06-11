@@ -24,12 +24,12 @@ public class BetreuerNotePanel extends JPanel {
 
 	private JTextField textField;
 
-	public BetreuerNotePanel(PanelManager panelmanager, PanelSwitcher panelSwitcher, Betreuer betreuer, Arbeit arbeit) {
+	public BetreuerNotePanel(PanelManager panelManager, PanelSwitcher panelSwitcher, Betreuer betreuer, Arbeit arbeit) {
 
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelSwitcher);
+		BetreuerNavigationBar betreuerNavigationBar = new BetreuerNavigationBar(panelManager,panelSwitcher,betreuer);
 
 		JLabel lblNewLabel = new JLabel("Note:");
 
@@ -47,8 +47,8 @@ public class BetreuerNotePanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JPanel betreuerStudenten_1Panel = new BetreuerStudenten_1Panel(panelmanager, panelSwitcher, betreuer);
-				panelmanager.updatePanels(betreuerStudenten_1Panel, "Betreuer_Studenten_1");
+				JPanel betreuerStudenten_1Panel = new BetreuerStudenten_1Panel(panelManager, panelSwitcher, betreuer);
+				panelManager.updatePanels(betreuerStudenten_1Panel, "Betreuer_Studenten_1");
 				panelSwitcher.switchToPanel("Betreuer_Studenten_1");
 			}
 		});

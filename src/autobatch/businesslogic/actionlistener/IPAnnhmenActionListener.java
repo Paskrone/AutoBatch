@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 
 import autobatch.businessobjects.Arbeit;
 import autobatch.businessobjects.Betreuer;
-import autobatch.businessobjects.IPAnfragen;
 import autobatch.businessobjects.Student;
 import autobatch.businessobjects.Studiendekan;
 import autobatch.dbaccess.Datenbankabfrage;
@@ -22,24 +21,25 @@ public class IPAnnhmenActionListener implements ActionListener {
 
 	private PanelSwitcher panelSwitcher;
 	private PanelManager panelManager;
-	
+
 	private Student student;
 	private Betreuer betreuer;
 	private Studiendekan dekan;
 
-	private IPAnfragen anfrage;
+	private Arbeit arbeit;
 
 	private JLabel lblPopUp;
 
-	public IPAnnhmenActionListener(Studiendekan dekan,PanelSwitcher panelSwitcher,PanelManager panelManager, Student student, Betreuer betreuer, IPAnfragen anfragen, JLabel lblPopUp) {
+	public IPAnnhmenActionListener(Studiendekan dekan, PanelSwitcher panelSwitcher, PanelManager panelManager,
+			Student student, Betreuer betreuer, Arbeit arbeit, JLabel lblPopUp) {
 		super();
 		this.panelSwitcher = panelSwitcher;
 		this.panelManager = panelManager;
-		
+
 		this.student = student;
 		this.betreuer = betreuer;
-		this.dekan=dekan;
-		this.anfrage=anfragen;
+		this.dekan = dekan;
+		this.arbeit = arbeit;
 		this.lblPopUp = lblPopUp;
 	}
 
@@ -47,23 +47,19 @@ public class IPAnnhmenActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		Datenbankabfrage datenbankabfrage = new Datenbankabfrage();
-		
+
 		datenbankabfrage.updateDataStudentString(student, student.getBetreuer(), "betreuer");
 
-		datenbankabfrage.updateDataIPAnfragenBoolean(anfrage, true, "angenommen");
+		datenbankabfrage.updateDataArbeitBoolean(arbeit, true, "ipAngenommen");
 
 //		datenbankabfrage.updateDataStudentInt(student, anfrage.getIdArbeit(), "arbeit");
-		
-		JPanel studiendekanAnfragenPanl = new StudiendekanIpAnfragenPanel(panelSwitcher, panelManager, dekan);
-		
+
+		JPanel studiendekanAnfragenPanl = new StudiendekanIpAnfragenPanel(panelManager, panelSwitcher, dekan);
 
 		panelManager.updatePanels(studiendekanAnfragenPanl, "studiendekanIpAnfragen");
-	
 
 		lblPopUp.setVisible(true);
 
 	}
 
 }
-
-
