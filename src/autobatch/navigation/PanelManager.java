@@ -32,19 +32,10 @@ public class PanelManager {
 	private RegistrationPanel registrationPanel;
 
 	private StudentenPanel studentenPanel;
-	private StudentenDatenPanel studentenDatenPanel;
-	private StudentenBetreuerPanel studentenBetreuerPanel;
-	private StudentenBetreuer_1Panel studentenBetreuer_1Panel;
-	private StudentenAbgabenPanel studentenAbgabenPanel;
-	private StudentenFormularePanel studentenFormularePanel;
 
 	private StudiendekanPanel studiendekanPanel;
-	private StudiendekanIpPanel studiendekanIpPanel;
 
 	private BetreuerPanel betreuerPanel;
-	private BetreuerAnfragenPanel betreuerAnfragenPanel;
-	private BetreuerDatenPanel betreuerDatenPanel;
-	private BetreuerStudentenPanel betreuerStudentenPanel;
 
 	private JPanel cards;
 
@@ -68,19 +59,8 @@ public class PanelManager {
 
 			Student currentStudent = (Student) currentUser;
 			studentenPanel = new StudentenPanel(this, panelSwitcher, currentStudent);
-			studentenDatenPanel = new StudentenDatenPanel(this, panelSwitcher, currentStudent);
-			
-			studentenBetreuerPanel = new StudentenBetreuerPanel(panelSwitcher, this, currentStudent);
-			studentenBetreuer_1Panel = new StudentenBetreuer_1Panel(this, panelSwitcher, currentStudent);
-			studentenAbgabenPanel = new StudentenAbgabenPanel(this, panelSwitcher, currentStudent);
-			studentenFormularePanel = new StudentenFormularePanel(this, panelSwitcher, currentStudent);
 
 			cards.add(studentenPanel, "Studenten");
-			cards.add(studentenDatenPanel, "Studenten_Daten");
-			cards.add(studentenBetreuerPanel, "Studenten_Betreuer");
-			cards.add(studentenBetreuer_1Panel, "Studenten_Betreuer_1");
-			cards.add(studentenAbgabenPanel, "Studenten_Abgaben");
-			cards.add(studentenFormularePanel, "Studenten_Formulare");
 
 			this.panelSwitcher.switchToPanel("Studenten");
 
@@ -88,9 +68,7 @@ public class PanelManager {
 
 			Studiendekan currentStudiendekan = (Studiendekan) currentUser;
 			studiendekanPanel = new StudiendekanPanel(this, panelSwitcher, currentStudiendekan);
-			studiendekanIpPanel = new StudiendekanIpPanel(panelSwitcher, this, currentStudiendekan);
 			cards.add(studiendekanPanel, "Studiendekane");
-			cards.add(studiendekanIpPanel, "Anfragen");
 
 			this.panelSwitcher.switchToPanel("Studiendekane");
 
@@ -98,14 +76,8 @@ public class PanelManager {
 
 			Betreuer currentBetreuer = (Betreuer) currentUser;
 			betreuerPanel = new BetreuerPanel(this, panelSwitcher, currentBetreuer);
-			betreuerAnfragenPanel = new BetreuerAnfragenPanel(panelSwitcher, this, currentBetreuer);
-			betreuerDatenPanel = new BetreuerDatenPanel(this, panelSwitcher, currentBetreuer);
-			betreuerStudentenPanel = new BetreuerStudentenPanel(panelSwitcher, this, currentBetreuer);
 
 			cards.add(betreuerPanel, "Betreuer");
-			cards.add(betreuerAnfragenPanel, "Betreuer_Anfragen");
-			cards.add(betreuerDatenPanel, "Betreuer_Daten");
-			cards.add(betreuerStudentenPanel, "Betreuer_Studenten");
 
 			this.panelSwitcher.switchToPanel("Betreuer");
 
