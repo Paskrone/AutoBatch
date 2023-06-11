@@ -48,7 +48,7 @@ public class StudiendekanFormularPanel extends JPanel {
 		List<Student> studenten = new ArrayList<>();
 
 		for (Arbeit arbeit : a) {
-			if (arbeit.getBa_Anmeldung_Betreuer() && !arbeit.getBa_Anmeldung_Studiendekan()) {
+			if (arbeit.getStudiendekanMail().equals(studiendekan.getEmail()) && arbeit.getBa_Anmeldung_Betreuer() && !arbeit.getBa_Anmeldung_Studiendekan()) {
 				studenten.add(datenbankabfrage.getStudentByMNR(arbeit.getStudentMNR()));
 				arbeiten.add(arbeit);
 			}
