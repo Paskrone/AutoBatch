@@ -158,7 +158,7 @@ public class BetreuerStudenten_1Panel extends JPanel {
 		lbl_error.setVisible(false);
 
 		listModel = new DefaultListModel<>();
-		ArrayList<String> submissions = (ArrayList<String>) dbaccess.getSubmissions(betreuer.getBenutzername());
+		ArrayList<String> submissions = (ArrayList<String>) dbaccess.getSubmissionsForBetreuerFromStudent(betreuer.getBenutzername(), student.getBenutzername());
 		for (String submission : submissions) {
 			listModel.addElement(submission);
 		}
@@ -203,7 +203,7 @@ public class BetreuerStudenten_1Panel extends JPanel {
 		});
 
 		JButton btn_uploadDocument = new JButton("Dokument Hochladen");
-		btn_uploadDocument.addActionListener(new AbgabeHinzufuegenActionListener(lbl_success, lbl_error));
+		btn_uploadDocument.addActionListener(new AbgabeHinzufuegenActionListener(lbl_success, lbl_error, student));
 
 		JLabel lblNewLabel_9 = new JLabel("Note Vortrag:");
 

@@ -23,10 +23,17 @@ public class AbgabeHinzufuegenActionListener implements ActionListener{
 	String currentUsername = SessionManager.getInstance().getAktuellerBenutzer().getBenutzername();
 	private JLabel lbl_success;
 	private JLabel lbl_error;
+	private Student student;
 	
 	public AbgabeHinzufuegenActionListener(JLabel lbl_success, JLabel lbl_error) {
 		this.lbl_success = lbl_success;
 		this.lbl_error = lbl_error;
+	}
+	
+	public AbgabeHinzufuegenActionListener(JLabel lbl_success, JLabel lbl_error, Student student) {
+		this.lbl_success = lbl_success;
+		this.lbl_error = lbl_error;
+		this.student = student;
 	}
 
 	@Override
@@ -59,7 +66,7 @@ public class AbgabeHinzufuegenActionListener implements ActionListener{
 		    int returnValue = fileChooser.showOpenDialog(null);
 		    if (returnValue == JFileChooser.APPROVE_OPTION) {
 		        File selectedFile = fileChooser.getSelectedFile();
-		        dbaccess.saveFileToDatabase(selectedFile, currentUsername);
+		        dbaccess.saveFileToDatabase(selectedFile, currentUsername, student.getBenutzername());
 		        lbl_success.setVisible(true);
 		    }
 		} else {

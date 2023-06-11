@@ -76,7 +76,7 @@ public class StudentenAbgabenPanel extends JPanel {
         
         listModel_1 = new DefaultListModel<>();
         if (student.getBetreuer()!=null) {
-			        ArrayList<String> submissions_1 = (ArrayList<String>) dbaccess.getSubmissions(dbaccess.getBetreuerByMail(student.getBetreuer()).getBenutzername());
+			        ArrayList<String> submissions_1 = (ArrayList<String>) dbaccess.getSubmissionsFromBetreuerWithStudent(dbaccess.getBetreuerByMail(student.getBetreuer()).getBenutzername(), student.getBenutzername());
 					for (String submission : submissions_1) {
 						listModel_1.addElement(submission);
 					}
