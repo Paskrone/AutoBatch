@@ -48,7 +48,8 @@ public class StudiendekanFormularPanel extends JPanel {
 		List<Student> studenten = new ArrayList<>();
 
 		for (Arbeit arbeit : a) {
-			if (arbeit.getStudiendekanMail().equals(studiendekan.getEmail()) && arbeit.getBa_Anmeldung_Betreuer() && !arbeit.getBa_Anmeldung_Studiendekan()) {
+			if (arbeit.getStudiendekanMail() != null && arbeit.getStudiendekanMail().equals(studiendekan.getEmail())
+					&& arbeit.getBa_Anmeldung_Betreuer() && !arbeit.getBa_Anmeldung_Studiendekan()) {
 				studenten.add(datenbankabfrage.getStudentByMNR(arbeit.getStudentMNR()));
 				arbeiten.add(arbeit);
 			}
@@ -78,8 +79,9 @@ public class StudiendekanFormularPanel extends JPanel {
 		column.setMinWidth(0);
 		column.setMaxWidth(0);
 		column.setPreferredWidth(0);
-		
-		table.getSelectionModel().addListSelectionListener(new StudiendekanFormularSelectionListener(panelSwitcher, panelmanager, table));
+
+		table.getSelectionModel().addListSelectionListener(
+				new StudiendekanFormularSelectionListener(panelSwitcher, panelmanager, table));
 
 		JScrollPane scrollPane = new JScrollPane(table);
 

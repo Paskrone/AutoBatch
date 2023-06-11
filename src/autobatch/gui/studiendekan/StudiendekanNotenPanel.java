@@ -49,7 +49,7 @@ public class StudiendekanNotenPanel extends JPanel {
 		List<Student> studenten = new ArrayList<>();
 
 		for (Arbeit arbeit : a) {
-			if (arbeit.getNoteArbeit() != 0) {
+			if (arbeit.getStudiendekanMail()!=null && arbeit.getStudiendekanMail().equals(studiendekan.getEmail()) && arbeit.getNoteArbeit() != 0) {
 				studenten.add(datenbankabfrage.getStudentByMNR(arbeit.getStudentMNR()));
 				arbeiten.add(arbeit);
 			}

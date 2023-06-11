@@ -99,7 +99,11 @@ public class StudentNavigationBar extends JPanel {
 					panelSwitcher.switchToPanel("Studenten_Formulare");
 				}
 
-				
+				if (arbeit==null) {
+					JPanel panel = new StudentenFormulare_2Panel(panelmanager, panelSwitcher, student);
+					panelmanager.updatePanels(panel, "StudentenFormulare_2Panel");
+					panelSwitcher.switchToPanel("StudentenFormulare_2Panel");
+				}
 
 			}
 		});

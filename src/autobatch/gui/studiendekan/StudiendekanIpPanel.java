@@ -54,7 +54,8 @@ public class StudiendekanIpPanel extends JPanel {
 		List<Student> studenten = new ArrayList<>();
 
 		for (Arbeit arbeit : a) {
-			if (arbeit.getStudiendekanMail().equals(studiendekan.getEmail()) && arbeit.getIpStart() != null) {
+			if (!arbeit.getIpAngenommen() && arbeit.getStudiendekanMail() != null && arbeit.getStudiendekanMail().equals(studiendekan.getEmail())
+					&& arbeit.getIpStart() != null) {
 				System.out.println(arbeit.getIpStart());
 				studenten.add(dbQuery.getStudentByMNR(arbeit.getStudentMNR()));
 				arbeiten.add(arbeit);
