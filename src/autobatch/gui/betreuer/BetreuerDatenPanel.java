@@ -18,9 +18,23 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+/**
+ * Eine JPanel-Klasse, die ein Panel zur Darstellung und Bearbeitung der Betreuerdaten implementiert.
+ */
 public class BetreuerDatenPanel extends JPanel {
+	
+	/**
+	 * Das Eingabefeld, in das das Passwort des Betreuers eingegeben wird.
+	 */
 	private JTextField tf_Passwort;
 
+	/**
+	 * Erzeugt ein neues BetreuerDatenPanel, das die Daten eines bestimmten Betreuers anzeigt.
+	 *
+	 * @param panelManager der PanelManager, der zur Anzeige der Panels verwendet wird.
+	 * @param panelSwitcher der PanelSwitcher, der zur Navigation zwischen den Panels verwendet wird.
+	 * @param betreuer der Betreuer, dessen Daten angezeigt werden sollen.
+	 */
 	public BetreuerDatenPanel(PanelManager panelManager, PanelSwitcher panelSwitcher, Betreuer betreuer) {
 
 		setPreferredSize(new Dimension(1000, 500));
