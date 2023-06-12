@@ -20,13 +20,40 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 
+/**
+ * Das LoginPanel ist eine UI-Komponente, die ein Formular zur Benutzerauthentifizierung bereitstellt.
+ * Es erlaubt den Benutzern, ihren Benutzernamen und ihr Passwort einzugeben und sich anzumelden oder 
+ * auf die Registrierungsseite zu navigieren.
+ */
 public class LoginPanel extends JPanel {
 
+	/**
+	 * Instanz der Klasse PanelSwitcher, die zur Navigation zwischen den Panels dient.
+	 */
 	private PanelSwitcher panelSwitcher;
+
+	/**
+	 * Instanz der Klasse PanelManager, die zur Verwaltung der Panels dient.
+	 */
 	private PanelManager panelManager;
+
+	/**
+	 * JTextField, das den Benutzernamen für die Anmeldung enthält.
+	 */
 	private JTextField tf_username;
+
+	/**
+	 * JPasswordField, das das Passwort für die Anmeldung enthält.
+	 */
 	private JPasswordField tf_password;
 
+	/**
+	 * Konstruktor für das LoginPanel, der das Login-Formular erstellt und die ActionListeners für 
+	 * die Schaltflächen "Anmelden" und "Registrieren" einrichtet.
+	 * 
+	 * @param panelSwitcher  Instanz der PanelSwitcher-Klasse für die Navigation zwischen den Panels.
+	 * @param panelManager   Instanz der PanelManager-Klasse zur Verwaltung der Panels.
+	 */
 	public LoginPanel(PanelSwitcher panelSwitcher, PanelManager panelManager) {
 		this.panelSwitcher = panelSwitcher;	
 		this.panelManager = panelManager;

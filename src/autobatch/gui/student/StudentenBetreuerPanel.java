@@ -21,13 +21,22 @@ import autobatch.navigation.PanelSwitcher;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * Eine Klasse, die ein JPanel repräsentiert, auf dem ein Student seine Betreuer aus einer Tabelle auswählen kann.
+ */
 public class StudentenBetreuerPanel extends JPanel {
 
-	private PanelManager panelManager;
-	
-	private PanelSwitcher panelSwitcher;
-	private Student student;
+	private PanelManager panelManager;  // Verwaltet die Navigation zwischen verschiedenen Panels
+	private PanelSwitcher panelSwitcher;  // Hilft beim Wechseln zwischen verschiedenen Panels
+	private Student student;  // Der aktuelle Student, der die Auswahl vornimmt
 
+    /**
+     * Erstellt ein neues Panel, das dem Studenten erlaubt, seinen Betreuer aus einer Tabelle auszuwählen.
+     *
+     * @param panelSwitcher Ein Helfer zum Wechseln zwischen verschiedenen Panels.
+     * @param panelManager Der Manager, der die Navigation zwischen den Panels verwaltet.
+     * @param student Der aktuelle Student, der die Auswahl vornimmt.
+     */
 	public StudentenBetreuerPanel(PanelSwitcher panelSwitcher, PanelManager panelManager, Student student) {
 		this.panelManager = panelManager;
 		

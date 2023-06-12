@@ -16,12 +16,23 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * Die Klasse StudentenPanel repräsentiert ein JPanel spezifisch für Studenten.
+ * Es ist der Startpunkt des Studenten, nach erfolgreichen Login.
+ */
 public class StudentenPanel extends JPanel {
 
 	private PanelManager panelmanager;
 	private PanelSwitcher panelSwitcher;
 	private Student student;
 	
+    /**
+     * Erstellt ein neues StudentenPanel.
+     *
+     * @param panelmanager   Der Manager, der die Navigation zwischen den Panels verwaltet.
+     * @param panelSwitcher  Ein Helfer zum Wechseln zwischen verschiedenen Panels.
+     * @param student        Der Student, für den das Panel angezeigt wird.
+     */
     public StudentenPanel(PanelManager panelmanager, PanelSwitcher panelSwitcher, Student student) {
     	this.student = student;
     	this.panelSwitcher = panelSwitcher;

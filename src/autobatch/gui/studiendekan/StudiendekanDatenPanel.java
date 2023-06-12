@@ -19,9 +19,23 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+/**
+ * Das StudiendekanDatenPanel ist ein JPanel, das die Daten eines Studiendekans anzeigt und ermöglicht, sie zu bearbeiten und zu speichern.
+ */
 public class StudiendekanDatenPanel extends JPanel {
-	private JTextField tf_Passwort;
 
+    /**
+     * Das Passwort-Eingabefeld des Studiendekans.
+     */
+    private JTextField tf_Passwort;
+
+    /**
+     * Erstellt ein neues StudiendekanDatenPanel.
+     *
+     * @param panelmanager Der PanelManager, der für die Navigation zwischen den Panels zuständig ist.
+     * @param panelSwitcher Der PanelSwitcher, der für das Umschalten zwischen den Panels verantwortlich ist.
+     * @param studiendekan Der Studiendekan, dessen Daten angezeigt und bearbeitet werden sollen.
+     */
 	public StudiendekanDatenPanel(PanelManager panelmanager, PanelSwitcher panelSwitcher, Studiendekan studiendekan) {
 
 		setPreferredSize(new Dimension(1000, 500));

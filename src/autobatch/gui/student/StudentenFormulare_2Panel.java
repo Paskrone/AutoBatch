@@ -12,8 +12,18 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 
+/**
+ * Die Klasse StudentenFormulare_2Panel stellt ein JPanel dar, das spezifische Informationen zum Betreuerstatus eines Studenten anzeigt.
+ */
 public class StudentenFormulare_2Panel extends JPanel {
 
+    /**
+     * Erstellt ein neues Panel, das Informationen zum Betreuerstatus eines Studenten anzeigt.
+     *
+     * @param panelManager   Der Manager, der die Navigation zwischen den Panels verwaltet.
+     * @param panelSwitcher  Ein Helfer zum Wechseln zwischen verschiedenen Panels.
+     * @param student        Der aktuelle Student, dessen Betreuerstatus angezeigt wird.
+     */
 	public StudentenFormulare_2Panel(PanelManager panelmanager, PanelSwitcher panelSwitcher, Student student) {
 
 		setPreferredSize(new Dimension(1000, 500));

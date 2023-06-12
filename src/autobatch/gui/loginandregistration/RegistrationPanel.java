@@ -25,8 +25,14 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+/**
+ * Die Klasse RegistrationPanel ist für die Registrierung von neuen Benutzern zuständig. 
+ * Es enthält eine Anzahl von Eingabefeldern, in denen der Benutzer persönliche Informationen eingeben kann. 
+ * Außerdem enthält es einen Button, um einen Account zu erstellen.
+ */
 public class RegistrationPanel extends JPanel {
 
+	// Eingabefelder für Benutzerinformationen
 	private JTextField tf_Mnr;
 	private JTextField tf_vorname;
 	private JTextField tf_nachname;
@@ -39,6 +45,12 @@ public class RegistrationPanel extends JPanel {
 	private JTextField tf_Strasse;
 	private JTable table;
 
+	/**
+	 * Konstruktor der Klasse RegistrationPanel. Erstellt ein neues Panel mit vordefinierter Größe und den entsprechenden Eingabefeldern.
+	 *
+	 * @param panelSwitcher Das PanelSwitcher-Objekt, das für den Wechsel zwischen verschiedenen Panels in der GUI verwendet wird.
+	 * @param panelManager Das PanelManager-Objekt, das für die Verwaltung der verschiedenen Panels in der GUI verwendet wird.
+	 */
 	public RegistrationPanel(PanelSwitcher panelSwitcher, PanelManager panelManager) {
 
 		setPreferredSize(new Dimension(1000, 500));

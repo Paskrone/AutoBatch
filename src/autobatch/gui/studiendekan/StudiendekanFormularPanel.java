@@ -27,11 +27,29 @@ import javax.swing.JScrollPane;
 import java.awt.Component;
 import javax.swing.JTable;
 
+
+/**
+ * Das StudiendekanFormularPanel ist ein JPanel, das eine Liste von Arbeiten anzeigt, für die der Studiendekan Ausgabetermin und Abgabetermin festlegen kann.
+ */
 public class StudiendekanFormularPanel extends JPanel {
 
-	private JTable table;
-	private DefaultTableModel model;
+    /**
+     * Die Tabelle, die die Liste der Arbeiten anzeigt.
+     */
+    private JTable table;
 
+    /**
+     * Das DefaultTableModel, das die Daten für die Tabelle enthält.
+     */
+    private DefaultTableModel model;
+
+    /**
+     * Erstellt ein neues StudiendekanFormularPanel.
+     *
+     * @param panelmanager Der PanelManager, der für die Navigation zwischen den Panels zuständig ist.
+     * @param panelSwitcher Der PanelSwitcher, der für das Umschalten zwischen den Panels verantwortlich ist.
+     * @param studiendekan Der Studiendekan, für den das Formular angezeigt wird.
+     */
 	public StudiendekanFormularPanel(PanelManager panelmanager, PanelSwitcher panelSwitcher,
 			Studiendekan studiendekan) {
 

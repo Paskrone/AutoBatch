@@ -14,9 +14,19 @@ import java.awt.Dimension;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
+/**
+ * Das StudiendekanPanel ist ein JPanel, das das Hauptpanel für den Studiendekan darstellt.
+ * Es enthält die Navigationsleiste und zeigt das AutoBath-Logo an.
+ */
 public class StudiendekanPanel extends JPanel {
 
+    /**
+     * Erstellt ein neues StudiendekanPanel.
+     *
+     * @param panelmanager Der PanelManager, der für die Navigation zwischen den Panels zuständig ist.
+     * @param panelSwitcher Der PanelSwitcher, der für das Umschalten zwischen den Panels verantwortlich ist.
+     * @param studiendekan Der Studiendekan, für den das Panel angezeigt wird.
+     */
 	public StudiendekanPanel(PanelManager panelmanager, PanelSwitcher panelSwitcher, Studiendekan studiendekan) {
 
 		setPreferredSize(new Dimension(1000, 500));

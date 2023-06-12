@@ -35,17 +35,34 @@ import java.awt.Component;
 import java.awt.Color;
 import javax.swing.JButton;
 
+/**
+ * Das Panel für die Betreuer-Studenten-Schnittstelle in der GUI.
+ * Dieses Panel stellt die notwendigen Informationen und Funktionen für Betreuer bereit, um Studenteninformationen zu verwalten,
+ * darunter die Details der Studenten, die Themen ihrer Arbeiten, und ihre Abschlussergebnisse.
+ * Es erlaubt auch den Zugriff auf Studenten- und Betreuereinreichungen und bietet die Möglichkeit,
+ * Dokumente hochzuladen und herunterzuladen.
+ * <p>
+ * Darüber hinaus ermöglicht dieses Panel das Ändern von Studentennoten und das Anmelden zu BA-Themen.
+ */
 public class BetreuerStudenten_1Panel extends JPanel {
 
-	private PanelSwitcher panelSwitcher;
-	private Betreuer betreuer;
-	private final ButtonGroup buttonGroupNDA = new ButtonGroup();
-	private DefaultListModel<String> listModel;
-	private JList<String> fileList;
-	private DefaultListModel<String> listModel_1;
-	private JList<String> fileList_1;
-	private Datenbankabfrage dbaccess;
+	private PanelSwitcher panelSwitcher; // Verwaltet das Umschalten zwischen verschiedenen Panels
+	private Betreuer betreuer; // Der aktuelle Betreuer
+	private final ButtonGroup buttonGroupNDA = new ButtonGroup(); // Gruppe von Checkboxen für die NDA-Optionen
+	private DefaultListModel<String> listModel; // Modell der Liste der Einreichungen des Betreuers
+	private JList<String> fileList; // Liste der Dateien des Betreuers
+	private DefaultListModel<String> listModel_1; // Modell der Liste der Einreichungen des Studenten
+	private JList<String> fileList_1; // Liste der Dateien des Studenten
+	private Datenbankabfrage dbaccess; // Datenbankabfrageklasse für den Zugriff auf die Datenbankdaten
 
+	/**
+	 * Konstruktor für das BetreuerStudenten_1Panel.
+	 * Initialisiert die UI-Komponenten und lädt die notwendigen Daten aus der Datenbank.
+	 * 
+	 * @param panelManager Verwaltet das Hinzufügen und Entfernen von Panels in der UI.
+	 * @param panelSwitcher Verwaltet das Umschalten zwischen verschiedenen Panels.
+	 * @param betreuer Der aktuelle Betreuer.
+	 */
 	public BetreuerStudenten_1Panel(PanelManager panelManager, PanelSwitcher panelSwitcher, Betreuer betreuer) {
 
 		this.panelSwitcher = panelSwitcher;

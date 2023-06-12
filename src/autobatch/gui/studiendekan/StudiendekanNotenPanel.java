@@ -29,11 +29,21 @@ import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.Component;
 
+/**
+ * Das StudiendekanNotenPanel ist ein JPanel, das die Noten der Studenten für den Studiendekan darstellt und bearbeitbar macht.
+ */
 public class StudiendekanNotenPanel extends JPanel {
 
-	private JTable table;
-	private static DefaultTableModel model;
+    private JTable table;
+    private static DefaultTableModel model;
 
+    /**
+     * Erstellt ein neues StudiendekanNotenPanel.
+     *
+     * @param panelmanager Der PanelManager, der für die Navigation zwischen den Panels zuständig ist.
+     * @param panelSwitcher Der PanelSwitcher, der für das Umschalten zwischen den Panels verantwortlich ist.
+     * @param studiendekan Der Studiendekan, für den das Panel angezeigt wird.
+     */
 	public StudiendekanNotenPanel(PanelManager panelmanager, PanelSwitcher panelSwitcher, Studiendekan studiendekan) {
 
 		setPreferredSize(new Dimension(1000, 500));

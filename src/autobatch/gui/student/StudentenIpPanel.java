@@ -22,6 +22,11 @@ import javax.swing.JButton;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * Die Klasse StudentenIpPanel repräsentiert ein JPanel, das spezifisch für Studenten erstellt wurde.
+ * Es stellt verschiedene Informationen zur Anzeige und Interaktion zur Verfügung,
+ * einschließlich Daten zur Arbeit des Studenten und zur Beantragung eines interdisziplinären Projekts (IP).
+ */
 public class StudentenIpPanel extends JPanel {
 
 	private JTextField txtDatum;
@@ -29,6 +34,13 @@ public class StudentenIpPanel extends JPanel {
 	private JTextField txtUN;
 	private JTextField txtBeschreibung;
 
+    /**
+     * Erstellt ein neues StudentenIpPanel.
+     *
+     * @param panelManager   Der Manager, der die Navigation zwischen den Panels verwaltet.
+     * @param panelSwitcher  Ein Helfer zum Wechseln zwischen verschiedenen Panels.
+     * @param student        Der Student, für den das Panel angezeigt wird.
+     */
 	public StudentenIpPanel(PanelManager panelManager, PanelSwitcher panelSwitcher, Student student) {
 
 		Datenbankabfrage datenbankabfrage = new Datenbankabfrage();

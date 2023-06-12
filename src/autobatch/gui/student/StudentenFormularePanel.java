@@ -22,13 +22,26 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 
+/**
+ * Die Klasse StudentenFormularePanel stellt ein JPanel dar, das ein Anmeldeformular für Studenten anzeigt.
+ * Es ermöglicht den Studenten, verschiedene Informationen zu aktualisieren und die Zustimmung zur Veröffentlichung
+ * ihrer Bachelor-Arbeit und Namen durch die HFT zu geben.
+ */
 public class StudentenFormularePanel extends JPanel {
-	private JTextField tf_Semester;
-	private JTextField tf_Telefon;
 
-	private boolean ja = false;
-	private boolean clicked = true;
+    private JTextField tf_Semester;
+    private JTextField tf_Telefon;
 
+    private boolean ja = false;
+    private boolean clicked = true;
+
+    /**
+     * Erstellt ein neues Anmeldeformular-Panel, das Informationen eines Studenten anzeigt und aktualisiert.
+     *
+     * @param panelManager   Der Manager, der die Navigation zwischen den Panels verwaltet.
+     * @param panelSwitcher  Ein Helfer zum Wechseln zwischen verschiedenen Panels.
+     * @param student        Der aktuelle Student, dessen Informationen angezeigt und aktualisiert werden.
+     */
 	public StudentenFormularePanel(PanelManager panelManager, PanelSwitcher panelSwitcher, Student student) {
 
 		setPreferredSize(new Dimension(1000, 500));

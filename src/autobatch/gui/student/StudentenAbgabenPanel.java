@@ -16,18 +16,28 @@ import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 
+/**
+ * Eine Klasse, die ein JPanel repräsentiert, in dem Studenten ihre Einreichungen anzeigen und neue Einreichungen hinzufügen können.
+ * Es zeigt auch die Einreichungen an, die von ihrem Betreuer gemacht wurden.
+ */
 public class StudentenAbgabenPanel extends JPanel {
 
-	private PanelManager panelManager;
-    private PanelSwitcher panelSwitcher ;
-    private Student student;
-    private JButton downloadButton;
-    private DefaultListModel<String> listModel;
-    private JList<String> fileList;
-    private DefaultListModel<String> listModel_1;
-    private JList<String> fileList_1;
-    private Datenbankabfrage dbaccess = new Datenbankabfrage();
+	private PanelManager panelManager;  // Verwaltet die Navigation zwischen Panels
+    private PanelSwitcher panelSwitcher;  // Hilft beim Wechseln zwischen verschiedenen Panels
+    private Student student;  // Der aktuelle Student, der die Einreichungen vornimmt
+    private JButton downloadButton;  // Ein Button zum Herunterladen von Einreichungen
+    private DefaultListModel<String> listModel;  // Ein Modell für die Liste der Einreichungen des Studenten
+    private JList<String> fileList;  // Eine Liste der Einreichungen des Studenten
+    private DefaultListModel<String> listModel_1;  // Ein Modell für die Liste der Einreichungen des Betreuers
+    private JList<String> fileList_1;  // Eine Liste der Einreichungen des Betreuers
+    private Datenbankabfrage dbaccess = new Datenbankabfrage();  // Eine Instanz zur Durchführung von Datenbankabfragen
 
+    /**
+     * Erstellt ein neues Panel, in dem Studenten ihre Einreichungen anzeigen und neue Einreichungen hinzufügen können.
+     * @param panelManager Der Manager, der die Navigation zwischen den Panels verwaltet.
+     * @param panelSwitcher Ein Helfer zum Wechseln zwischen verschiedenen Panels.
+     * @param student Der aktuelle Student, der die Einreichungen vornimmt.
+     */
     public StudentenAbgabenPanel(PanelManager panelManager, PanelSwitcher panelSwitcher, Student student) {
     	this.panelManager = panelManager;
         this.panelSwitcher = panelSwitcher;

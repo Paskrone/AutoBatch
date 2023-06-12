@@ -23,14 +23,45 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 
+/**
+ * Das BetreuerStudentenFormularPanel dient als UI-Komponente zur bestätigung des zugehörigen Betreuer Formulars. 
+ * Es enthält ein Formular zur Eingabe oder Änderung der Daten.
+ */
 public class BetreuerStudentenFormularPanel extends JPanel {
+	/**
+	 * Textfeld für das Thema.
+	 */
 	private JTextField tf_Thema;
+
+	/**
+	 * Textfeld für das Ausgabedatum.
+	 */
 	private JTextField tf_Ausgabetermin;
+
+	/**
+	 * Textfeld für das Abgabedatum.
+	 */
 	private JTextField tf_Abgabetermin;
 
+	/**
+	 * Prüfungsvariable für das bestandene Interdisziplinäre Projekt.
+	 */
 	private boolean ja = false;
+
+	/**
+	 * Prüfungsvariable, ob ein Button geklickt wurde.
+	 */
 	private boolean clicked = true;
 
+	/**
+	 * Erstellt ein neues BetreuerStudentenFormularPanel, das den angegebenen Betreuer und Arbeit 
+	 * zur Bearbeitung anzeigt.
+	 * 
+	 * @param panelManager   Der PanelManager der Anwendung.
+	 * @param panelSwitcher  Der PanelSwitcher der Anwendung.
+	 * @param betreuer       Der zu bearbeitende Betreuer.
+	 * @param arbeit         Die Arbeit, die dem Betreuer zugeordnet ist.
+	 */
 	public BetreuerStudentenFormularPanel(PanelManager panelManager, PanelSwitcher panelSwitcher, Betreuer betreuer,
 			Arbeit arbeit) {
 

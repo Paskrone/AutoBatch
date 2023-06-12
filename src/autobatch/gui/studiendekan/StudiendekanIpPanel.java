@@ -26,14 +26,25 @@ import autobatch.gui.betreuer.BetreuerNavigationBar;
 import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 
+/**
+ * Das StudiendekanIpPanel ist ein JPanel, das eine Liste der IP-Anfragen für den Studiendekan darstellt.
+ * Es zeigt Informationen über die Studenten an, die eine IP-Anfrage gestellt haben, und ermöglicht es dem Studiendekan, eine Auswahl zu treffen.
+ */
 public class StudiendekanIpPanel extends JPanel {
 
-	private PanelSwitcher panelSwitcher;
-	private Studiendekan studiendekan;
-	private PanelManager panelManager;
-	private JTable table;
-	private Betreuer betreuer;
+    private PanelSwitcher panelSwitcher;
+    private Studiendekan studiendekan;
+    private PanelManager panelManager;
+    private JTable table;
+    private Betreuer betreuer;
 
+    /**
+     * Erstellt ein neues StudiendekanIpPanel.
+     *
+     * @param panelSwitcher Der PanelSwitcher, der für das Umschalten zwischen den Panels verantwortlich ist.
+     * @param panelmanager Der PanelManager, der für die Navigation zwischen den Panels zuständig ist.
+     * @param studiendekan Der Studiendekan, für den das Panel angezeigt wird.
+     */
 	public StudiendekanIpPanel(PanelSwitcher panelSwitcher, PanelManager panelmanager, Studiendekan studiendekan) {
 
 		this.panelSwitcher = panelSwitcher;

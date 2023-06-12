@@ -19,10 +19,29 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+/**
+ * Das StudiendekanFormular_1Panel ist ein JPanel, das das erste Formular für den Studiendekan darstellt.
+ * Es ermöglicht die Eingabe von Ausgabetermin und Abgabetermin einer Arbeit.
+ */
 public class StudiendekanFormular_1Panel extends JPanel {
-	private JTextField tf_Ausgabetermin;
-	private JTextField tf_Abgabetermin;
 
+    /**
+     * Das Textfeld für den Ausgabetermin.
+     */
+    private JTextField tf_Ausgabetermin;
+
+    /**
+     * Das Textfeld für den Abgabetermin.
+     */
+    private JTextField tf_Abgabetermin;
+
+    /**
+     * Erstellt ein neues StudiendekanFormular_1Panel.
+     *
+     * @param panelmanager Der PanelManager, der für die Navigation zwischen den Panels zuständig ist.
+     * @param panelSwitcher Der PanelSwitcher, der für das Umschalten zwischen den Panels verantwortlich ist.
+     * @param studiendekan Der Studiendekan, für den das Formular angezeigt wird.
+     */
 	public StudiendekanFormular_1Panel(PanelManager panelmanager, PanelSwitcher panelSwitcher,
 			Studiendekan studiendekan) {
 
