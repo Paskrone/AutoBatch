@@ -6,11 +6,11 @@ package autobatch.businessobjects;
  */
 public class Betreuer extends Benutzer {
 	
-    private String vorname;
-    private String nachname;
-    private String passwort;
-    private String benutzername;
-    private String email;
+    private String vorname; // Vorname des Benutzers
+    private String nachname; // Nachname des Benutzers
+    private String passwort; // Passwort des Benutzers
+    private String benutzername; // Benutzername des Benutzers
+    private String email; // E-Mail des Benutzers
 	
     /**
      * Erzeugt ein neues Betreuer-Objekt.

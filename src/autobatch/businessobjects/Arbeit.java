@@ -6,6 +6,12 @@ import java.sql.Date;
 
 import autobatch.dbaccess.Datenbankabfrage;
 
+/**
+ * Die Klasse Arbeit repräsentiert eine Arbeit im Autobatch-System.
+ * Sie enthält Informationen wie die Arbeit ID, das Unternehmen, das Thema, die Beschreibung,
+ * die Noten für die Arbeit und den Vortrag, die Gesamtnote, verschiedene Status-Flags,
+ * Termine und Informationen zu den beteiligten Personen.
+ */
 public class Arbeit {
 
 	private int idArbeit;
@@ -36,6 +42,30 @@ public class Arbeit {
 	private String betreuerMail;
 	private String studiendekanMail;
 
+	/**
+	 * Konstruktor für die Klasse Arbeit.
+	 *
+	 * @param idArbeit Die ID der Arbeit.
+	 * @param unternehmen Das Unternehmen der Arbeit.
+	 * @param thema Das Thema der Arbeit.
+	 * @param beschreibung Die Beschreibung der Arbeit.
+	 * @param noteArbeit Die Note für die Arbeit.
+	 * @param noteVortrag Die Note für den Vortrag.
+	 * @param angenommen Der Status der Annahme des Themas.
+	 * @param nda_notwendig Der Status, ob ein NDA notwendig ist.
+	 * @param ipAngenommen Der Status der Annahme der IP.
+	 * @param ba_Anmeldung_Student Der Status der Anmeldung der Arbeit durch den Studenten.
+	 * @param ba_Anmeldung_Betreuer Der Status der Anmeldung der Arbeit durch den Betreuer.
+	 * @param ba_Anmeldung_Studiendekan Der Status der Anmeldung der Arbeit durch den Studiendekan.
+	 * @param ipBestanden Der Status der erfolgreichen Absolvierung der IP.
+	 * @param veroeffentlichung Der Status der Veröffentlichung der Arbeit.
+	 * @param ipStart Das Startdatum der IP.
+	 * @param baAbgabetermin Der Abgabetermin der Arbeit.
+	 * @param baStart Der Starttermin der Arbeit.
+	 * @param studentMNR Die Matrikelnummer des Studenten.
+	 * @param betreuerMail Die E-Mail-Adresse des Betreuers.
+	 * @param studiendekanMail Die E-Mail-Adresse des Studiendekans.
+	 */
 	public Arbeit(int idArbeit, String unternehmen, String thema, String beschreibung, float noteArbeit,
 			float noteVortrag, byte angenommen, byte nda_notwendig, byte ipAngenommen, byte ba_Anmeldung_Student,
 			byte ba_Anmeldung_Betreuer, byte ba_Anmeldung_Studiendekan, byte ipBestanden, byte veroeffentlichung,

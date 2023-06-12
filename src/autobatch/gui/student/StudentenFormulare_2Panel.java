@@ -20,7 +20,7 @@ public class StudentenFormulare_2Panel extends JPanel {
     /**
      * Erstellt ein neues Panel, das Informationen zum Betreuerstatus eines Studenten anzeigt.
      *
-     * @param panelManager   Der Manager, der die Navigation zwischen den Panels verwaltet.
+     * @param panelmanager   Der Manager, der die Navigation zwischen den Panels verwaltet.
      * @param panelSwitcher  Ein Helfer zum Wechseln zwischen verschiedenen Panels.
      * @param student        Der aktuelle Student, dessen Betreuerstatus angezeigt wird.
      */
