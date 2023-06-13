@@ -85,11 +85,6 @@ public class Datenbankabfrage {
 		return null;
 	}
 
-	// Gibt ein Betreuerobjekt zurück, das auf den übergebenen Benutzernamen
-	// basiert.
-	// Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie
-	// anhand eines übergebenen usernames.
-
 	/**
      * Gibt ein Betreuerobjekt zurück, das auf den übergebenen Benutzernamen basiert.
      * Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie anhand eines übergebenen usernames.
