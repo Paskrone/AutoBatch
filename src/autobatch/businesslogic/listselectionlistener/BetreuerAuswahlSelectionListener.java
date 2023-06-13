@@ -52,7 +52,11 @@ public class BetreuerAuswahlSelectionListener implements ListSelectionListener {
     }
 
     /**
-     * Diese Methode wird ausgeführt, wenn eine Auswahl in der Tabelle getroffen wird.
+     * Diese Methode wird aufgerufen, wenn eine Auswahl in der Tabelle getroffen wird.
+     * Es überprüft zunächst, ob die Auswahl vollständig ist und ob eine Zeile ausgewählt wurde.
+     * Dann holt es die Daten aus der ausgewählten Zeile und speichert sie.
+     * Abhängig vom ausgewählten Panel erstellt es ein neues Panel und wechselt zu diesem.
+     * @param e Das ListSelectionEvent, das die Auswahländerung in der Tabelle darstellt.
      */
     @Override
     public void valueChanged(ListSelectionEvent e) {

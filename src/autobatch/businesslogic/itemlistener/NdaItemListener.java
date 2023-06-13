@@ -13,10 +13,24 @@ import autobatch.dbaccess.Datenbankabfrage;
  */
 public class NdaItemListener implements ItemListener {
 
-    // Instanzvariablen
-    private Arbeit arbeit; // Arbeitsobjekt, das aktualisiert wird
-    private JCheckBox checkbox; // Die Checkbox, die den NDA-Zustand repräsentiert
-    private boolean notwenidg; // Flag, das anzeigt, ob eine NDA erforderlich ist oder nicht
+    /**
+     * Arbeit ist ein Geschäftsobjekt, das die Daten und Operationen einer Arbeit repräsentiert. 
+     * In diesem Kontext wird es verwendet, um die Zustandsänderung einer NDA-Anforderung an eine Arbeit zu repräsentieren.
+     */
+    private Arbeit arbeit;
+
+    /**
+     * Checkbox ist ein Swing-Komponente, die einen Schalter darstellt, der ein- oder ausgeschaltet sein kann.
+     * In diesem Kontext repräsentiert es die Zustandsänderung, ob eine NDA-Anforderung für eine Arbeit notwendig ist oder nicht.
+     */
+    private JCheckBox checkbox;
+
+    /**
+     * Notwendig ist ein boolean Flag, das anzeigt, ob eine NDA-Anforderung für eine Arbeit notwendig ist oder nicht.
+     * Wenn es auf true gesetzt ist, ist eine NDA-Anforderung notwendig. Wenn es auf false gesetzt ist, ist sie nicht notwendig.
+     */
+    private boolean notwenidg;
+
 
     /**
      * Konstruktor
@@ -32,7 +46,11 @@ public class NdaItemListener implements ItemListener {
     }
 
     /**
-     * Diese Methode wird ausgeführt, wenn der Zustand der Checkbox geändert wird.
+     * Diese Methode wird aufgerufen, wenn der Zustand der Checkbox geändert wird.
+     * Wenn die Checkbox aktiviert ist, wird eine neue Datenbankabfrage Instanz erstellt und die updateDataArbeitBoolean Methode aufgerufen,
+     * um den NDA-Zustand des Arbeitsobjekts in der Datenbank zu aktualisieren.
+     * Wenn die Checkbox deaktiviert ist, wird eine Statusmeldung auf der Konsole ausgegeben.
+     * @param e Das ItemEvent, das die Zustandsänderung der Checkbox darstellt.
      */
     @Override
     public void itemStateChanged(ItemEvent e) {

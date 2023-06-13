@@ -15,7 +15,7 @@ import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 
 /**
- * Ein ActionListener, der dazu dient, Anfragen abzulehnen.
+ * ActionListener, der dazu dient, Anfragen abzulehnen.
  */
 public class AblehnenActionListener implements ActionListener {
 

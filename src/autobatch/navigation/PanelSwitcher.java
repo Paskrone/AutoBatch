@@ -10,8 +10,16 @@ import javax.swing.JPanel;
  * Es kann auch Daten speichern und abrufen, die zwischen verschiedenen Panels geteilt werden sollen.
  */
 public class PanelSwitcher {
-    private JPanel cards;
-    private HashMap<String, Object> sharedData;
+	
+	/**
+	 * Das JPanel, das als Container für die Karten dient.
+	 */
+	private JPanel cards;
+
+	/**
+	 * Eine HashMap zum Speichern und Abrufen von Daten, die zwischen verschiedenen Panels geteilt werden sollen.
+	 */
+	private HashMap<String, Object> sharedData;
 
     /**
      * Konstruktor zum Initialisieren von PanelSwitcher.

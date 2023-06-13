@@ -31,17 +31,30 @@ import autobatch.businessobjects.Arbeit;
  */
 public class Datenbankabfrage {
 
-	// Deklaration der Klassenvariablen
-	private String url = "jdbc:mysql://3.69.96.96:3306/";
-	private String dbName = "db4";
-	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String userName = "db4";
-	private String pw = "!db4.hfts23?";
+	 /**
+     * Die URL zur Datenbank.
+     */
+    private String url = "jdbc:mysql://3.69.96.96:3306/";
 
-	// Gibt ein Benutzerobjekt (Student, Betreuer oder Studiendekan) zurück,
-	// basierend auf dem übergebenen Benutzernamen.
-	// Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie
-	// anhand eines übergebenen usernames.
+    /**
+     * Der Name der Datenbank.
+     */
+    private String dbName = "db4";
+
+    /**
+     * Der JDBC-Treiber.
+     */
+    private String driver = "com.mysql.cj.jdbc.Driver";
+
+    /**
+     * Der Benutzername für den Datenbankzugriff.
+     */
+    private String userName = "db4";
+
+    /**
+     * Das Passwort für den Datenbankzugriff.
+     */
+    private String pw = "!db4.hfts23?";
 
 	
 	/**

@@ -21,7 +21,10 @@ import autobatch.navigation.PanelSwitcher;
  */
 public class StudentNavigationBar extends JPanel {
 
-	Arbeit arbeit = null;
+	 /**
+     * Die Arbeit des Studenten.
+     */
+    private Arbeit arbeit = null;
 
 	/**
      * Erstellt eine neue StudentNavigationBar.
@@ -39,6 +42,9 @@ public class StudentNavigationBar extends JPanel {
 
 		setPreferredSize(new Dimension(1000, 50));
 
+		/**
+	     * Das JLabel für den Navigationspunkt "IP".
+	     */
 		JLabel lbl_Ip = new JLabel("IP");
 		lbl_Ip.addMouseListener(new NavigationBarMouseListener() {
 			@Override
@@ -61,7 +67,9 @@ public class StudentNavigationBar extends JPanel {
 
 			}
 		});
-
+		/**
+	     * Das JLabel für den Navigationspunkt "Betreuer".
+	     */
 		JLabel lbl_betreuer = new JLabel("Betreuer");
 		lbl_betreuer.addMouseListener(new NavigationBarMouseListener() {
 
@@ -81,6 +89,9 @@ public class StudentNavigationBar extends JPanel {
 			}
 		});
 
+		/**
+	     * Das JLabel für den Navigationspunkt "Abgaben".
+	     */
 		JLabel lbl_abgaben = new JLabel("Abgaben");
 		lbl_abgaben.addMouseListener(new NavigationBarMouseListener() {
 
@@ -93,6 +104,9 @@ public class StudentNavigationBar extends JPanel {
 			}
 		});
 
+		/**
+	     * Das JLabel für den Navigationspunkt "BA-Anmeldeformular".
+	     */
 		JLabel lbl_formulare = new JLabel("BA-Anmeldeformular");
 		lbl_formulare.addMouseListener(new NavigationBarMouseListener() {
 
@@ -118,6 +132,9 @@ public class StudentNavigationBar extends JPanel {
 			}
 		});
 
+		/**
+	     * Das JLabel für den Navigationspunkt "Daten".
+	     */
 		JLabel lbl_daten = new JLabel("Daten");
 		lbl_daten.addMouseListener(new NavigationBarMouseListener() {
 
@@ -130,6 +147,9 @@ public class StudentNavigationBar extends JPanel {
 			}
 		});
 
+		/**
+	     * Das JLabel für den Navigationspunkt "Abmelden".
+	     */
 		JLabel lbl_abmelden = new JLabel("abmelden");
 		lbl_abmelden.addMouseListener(new NavigationBarMouseListener() {
 

@@ -13,12 +13,29 @@ import autobatch.dbaccess.Datenbankabfrage;
  * ActionListener zur Verarbeitung des Eintragens der Arbeit Note.
  */
 public class NoteEintragenActionListener implements ActionListener {
-	// Instanzvariablen
-	private Arbeit arbeit; // Arbeit, für die die Note eingetragen werden soll
-	private JTextField textField; // Textfeld zur Eingabe der Note
-	private JLabel lblPopUp; // Label zur Anzeige von Feedback und/oder Fehlermeldungen
+	
+	/**
+	 * Arbeit, für die die Note eingetragen werden soll.
+	 */
+	private Arbeit arbeit;
 
-	// Konstruktor
+	/**
+	 * JTextField zur Eingabe der Note.
+	 */
+	private JTextField textField;
+
+	/**
+	 * JLabel zur Anzeige von Feedback und/oder Fehlermeldungen.
+	 */
+	private JLabel lblPopUp;
+
+	/**
+	 * ActionListener zur Verarbeitung des Eintragens der Arbeit Note.
+	 * 
+	 * @param arbeit Die Arbeit, für die die Note eingetragen werden soll.
+	 * @param textField Das JTextField zur Eingabe der Note.
+	 * @param lblPopUp Das JLabel zur Anzeige von Feedback und/oder Fehlermeldungen.
+	 */
 	public NoteEintragenActionListener(Arbeit arbeit, JTextField textField, JLabel lblPopUp) {
 		super();
 		this.arbeit = arbeit;
@@ -28,6 +45,11 @@ public class NoteEintragenActionListener implements ActionListener {
 
 	/**
 	 * Diese Methode wird ausgeführt, wenn der Benutzer auf den Button zum Eintragen der Note klickt.
+	 * Zuerst wird ein neuer Datenbankzugriff erzeugt. Die Eingabe des Benutzers wird dann aus dem Textfeld
+	 * extrahiert und in eine Fließkommazahl umgewandelt. Es wird geprüft, ob die Note innerhalb des gültigen Bereichs 
+	 * (1 bis 5) liegt. Falls ja, wird die Note der Arbeit in der Datenbank aktualisiert und in der Arbeit-Instanz gesetzt. 
+	 * Andernfalls wird eine Fehlermeldung ausgegeben. Unabhängig vom Ausgang der Prüfung wird das Pop-up-Label angezeigt.
+	 * @param e Das ausgelöste ActionEvent.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

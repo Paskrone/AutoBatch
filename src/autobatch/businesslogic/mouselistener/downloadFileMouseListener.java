@@ -15,8 +15,9 @@ import autobatch.dbaccess.Datenbankabfrage;
  * Diese Klasse erweitert MouseAdapter und bietet die Funktion, Dateien herunterzuladen.
  */
 public class downloadFileMouseListener extends MouseAdapter{
-
-	// Instanz der Datenbankabfrage
+	/**
+	*Instanz der Datenbankabfrage
+	*/
 	Datenbankabfrage dbaccess = new Datenbankabfrage();
 	
 	/**

@@ -24,12 +24,35 @@ import javax.swing.JTextField;
  */
 public class StudentenBetreuerAnfragePanel extends JPanel {
 
-	private PanelSwitcher panelSwitcher;  // Hilft beim Wechseln zwischen verschiedenen Panels
-	private Student student;  // Der aktuelle Student, der die Anfrage sendet
-	private JTextField tf_Unternehmen;  // Textfeld zur Eingabe des Unternehmensnamens
-	private JTextField tf_Thema;  // Textfeld zur Eingabe des Themennamens
-	private JTextField tf_beschreibung;  // Textfeld zur Eingabe der Beschreibung
-	private Betreuer betreuer;  // Der Betreuer des aktuellen Studenten
+	/**
+     * Hilft beim Wechseln zwischen verschiedenen Panels.
+     */
+    private PanelSwitcher panelSwitcher;
+
+    /**
+     * Der aktuelle Student, der die Anfrage sendet.
+     */
+    private Student student;
+
+    /**
+     * Textfeld zur Eingabe des Unternehmensnamens.
+     */
+    private JTextField tf_Unternehmen;
+
+    /**
+     * Textfeld zur Eingabe des Themennamens.
+     */
+    private JTextField tf_Thema;
+
+    /**
+     * Textfeld zur Eingabe der Beschreibung.
+     */
+    private JTextField tf_beschreibung;
+
+    /**
+     * Der Betreuer des aktuellen Studenten.
+     */
+    private Betreuer betreuer;
 
     /**
      * Erstellt ein neues Panel, das die Funktion zum Senden einer Anfrage an einen Betreuer bietet.

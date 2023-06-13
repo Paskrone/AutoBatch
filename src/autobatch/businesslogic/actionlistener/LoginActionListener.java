@@ -20,15 +20,42 @@ import autobatch.session.SessionManager;
  * ActionListener zur Verarbeitung des Anmeldevorgangs.
  */
 public class LoginActionListener implements ActionListener {
-	// Instanzvariablen
-	private JTextField tf_username; // Textfeld für den Benutzernamen
-	private JPasswordField tf_password; // Passwortfeld für das Passwort
-	private JLabel lbl_error; // Label zur Anzeige von Fehlermeldungen
+	
+	/**
+	 * JTextField, das zur Eingabe des Benutzernamens verwendet wird.
+	 */
+	private JTextField tf_username;
 
-	private PanelSwitcher panelSwitcher; // zur Verwaltung des Panelwechsels
-	private PanelManager panelManager; // zur Verwaltung der Panels
+	/**
+	 * JPasswordField, das zur Eingabe des Passworts verwendet wird.
+	 */
+	private JPasswordField tf_password;
 
-	// Konstruktor
+	/**
+	 * JLabel, das zur Anzeige von Fehlermeldungen verwendet wird.
+	 */
+	private JLabel lbl_error;
+
+	/**
+	 * PanelSwitcher-Objekt, das für die Verwaltung des Wechsels zwischen verschiedenen Panels in der GUI verwendet wird.
+	 */
+	private PanelSwitcher panelSwitcher;
+
+	/**
+	 * PanelManager-Objekt, das zur Verwaltung der Panels in der GUI verwendet wird.
+	 */
+	private PanelManager panelManager;
+
+
+	/**
+	 * Konstruktor
+	 *
+	 * @param panelSwitcher  Das PanelSwitcher-Objekt, das für die Verwaltung des Wechsels zwischen verschiedenen Panels in der GUI verwendet wird.
+	 * @param panelManager   Das PanelManager-Objekt, das zur Verwaltung der Panels in der GUI verwendet wird.
+	 * @param tf_username    Das JTextField, das zur Eingabe des Benutzernamens verwendet wird.
+	 * @param tf_password    Das JPasswordField, das zur Eingabe des Passworts verwendet wird.
+	 * @param lbl_error      Das JLabel, das zur Anzeige von Fehlermeldungen verwendet wird.
+	 */
 	public LoginActionListener(PanelSwitcher panelSwitcher, PanelManager panelManager, JTextField tf_username,
 			JPasswordField tf_password, JLabel lbl_error) {
 		this.panelSwitcher = panelSwitcher;
@@ -39,7 +66,11 @@ public class LoginActionListener implements ActionListener {
 	}
 
 	/**
-	 * Diese Methode wird ausgeführt, wenn der Benutzer den Login-Button drückt.
+	 * Diese Methode wird ausgeführt, wenn der Benutzer den Login-Button drückt. Zunächst werden die Benutzereingaben (Benutzername und Passwort) ermittelt. 
+	 * Anschließend wird mit Hilfe eines Datenbankzugriffs geprüft, ob die eingegebenen Daten gültig sind. 
+	 * Falls ja, wird der aktuelle Benutzer in der Session gespeichert, die Eingabefelder werden zurückgesetzt, die Fehlermeldung wird ausgeblendet und die Panels initialisiert.
+	 * Falls die Daten ungültig sind, wird eine Fehlermeldung angezeigt und das Passwortfeld zurückgesetzt.
+	 * @param e Das ausgelöste ActionEvent.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

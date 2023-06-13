@@ -16,15 +16,34 @@ import autobatch.dbaccess.Datenbankabfrage;
  */
 public class FormularStudiendekanActionListener implements ActionListener {
 
-	// Instanzvariablen
-	private JTextField tf_Ausgabetermin; // Textfeld für das Ausgabedatum
-	private JTextField tf_Abgabetermin; // Textfeld für das Abgabedatum
+	/**
+	 * Textfeld zur Eingabe des Ausgabetermins der Arbeit.
+	 */
+	private JTextField tf_Ausgabetermin;
 
-	private JLabel lblPopUp; // Label zur Anzeige von Benachrichtigungen
+	/**
+	 * Textfeld zur Eingabe des Abgabetermins der Arbeit.
+	 */
+	private JTextField tf_Abgabetermin;
 
-	private Arbeit arbeit; // Arbeit, die verarbeitet werden soll
+	/**
+	 * JLabel, das dazu dient, Pop-up-Nachrichten anzuzeigen.
+	 */
+	private JLabel lblPopUp;
 
-	// Konstruktor
+	/**
+	 * Arbeit-Objekt, das die Arbeit repräsentiert, die vom Studiendekan verwaltet wird.
+	 */
+	private Arbeit arbeit;
+
+	/**
+	 * ActionListener zur Verarbeitung des Formulars des Studiendekans.
+	 *
+	 * @param tf_Ausgabetermin   Das Textfeld zur Eingabe des Ausgabetermins der Arbeit.
+	 * @param tf_Abgabetermin    Das Textfeld zur Eingabe des Abgabetermins der Arbeit.
+	 * @param lblPopUp           Das JLabel, das dazu dient, Pop-up-Nachrichten anzuzeigen.
+	 * @param arbeit             Das Arbeit-Objekt, das die Arbeit repräsentiert, die vom Studiendekan verwaltet wird.
+	 */
 	public FormularStudiendekanActionListener(JTextField tf_Ausgabetermin, JTextField tf_Abgabetermin, JLabel lblPopUp,
 			Arbeit arbeit) {
 		super();
@@ -37,6 +56,12 @@ public class FormularStudiendekanActionListener implements ActionListener {
 
 	/**
 	 * Diese Methode wird ausgeführt, wenn der Benutzer den Button zum Absenden des Formulars drückt.
+	 * Sie überprüft zunächst, ob die Textfelder für das Abgabe- und das Ausgabedatum nicht leer sind.
+	 * Wenn diese Bedingungen erfüllt sind, werden die Daten aus den Textfeldern geholt und in LocalDate-Objekte umgewandelt.
+	 * Anschließend werden die Instanzvariablen des Arbeit-Objekts aktualisiert.
+	 * Danach wird eine neue Datenbankabfrage erzeugt und die Daten in der Datenbank aktualisiert.
+	 * Zum Schluss wird eine Nachricht für den Benutzer angezeigt, dass das Formular abgeschickt wurde.
+	 * @param e Das ausgelöste ActionEvent.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

@@ -46,14 +46,45 @@ import javax.swing.JButton;
  */
 public class BetreuerStudenten_1Panel extends JPanel {
 
-	private PanelSwitcher panelSwitcher; // Verwaltet das Umschalten zwischen verschiedenen Panels
-	private Betreuer betreuer; // Der aktuelle Betreuer
-	private final ButtonGroup buttonGroupNDA = new ButtonGroup(); // Gruppe von Checkboxen für die NDA-Optionen
-	private DefaultListModel<String> listModel; // Modell der Liste der Einreichungen des Betreuers
-	private JList<String> fileList; // Liste der Dateien des Betreuers
-	private DefaultListModel<String> listModel_1; // Modell der Liste der Einreichungen des Studenten
-	private JList<String> fileList_1; // Liste der Dateien des Studenten
-	private Datenbankabfrage dbaccess; // Datenbankabfrageklasse für den Zugriff auf die Datenbankdaten
+	/**
+     * Der PanelSwitcher für das Umschalten zwischen verschiedenen Panels.
+     */
+    private PanelSwitcher panelSwitcher;
+
+    /**
+     * Der aktuelle Betreuer.
+     */
+    private Betreuer betreuer;
+
+    /**
+     * Die ButtonGroup für die NDA-Optionen.
+     */
+    private final ButtonGroup buttonGroupNDA = new ButtonGroup();
+
+    /**
+     * Das DefaultListModel für die Liste der Einreichungen des Betreuers.
+     */
+    private DefaultListModel<String> listModel;
+
+    /**
+     * Die JList für die Dateien des Betreuers.
+     */
+    private JList<String> fileList;
+
+    /**
+     * Das DefaultListModel für die Liste der Einreichungen des Studenten.
+     */
+    private DefaultListModel<String> listModel_1;
+
+    /**
+     * Die JList für die Dateien des Studenten.
+     */
+    private JList<String> fileList_1;
+
+    /**
+     * Die Datenbankabfrageklasse für den Zugriff auf die Datenbankdaten.
+     */
+    private Datenbankabfrage dbaccess;
 
 	/**
 	 * Konstruktor für das BetreuerStudenten_1Panel.
@@ -69,6 +100,9 @@ public class BetreuerStudenten_1Panel extends JPanel {
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 
+		/**
+		 * Die Datenbankabfrageklasse für den Zugriff auf die Datenbankdaten.
+		 */
 		Datenbankabfrage dbaccess = new Datenbankabfrage();
 
 		int mnr = Integer.parseInt(panelSwitcher.getData("2") + "");
@@ -174,12 +208,18 @@ public class BetreuerStudenten_1Panel extends JPanel {
 		lbl_error.setForeground(new Color(251, 44, 22));
 		lbl_error.setVisible(false);
 
+		/**
+		 * Das DefaultListModel für die Liste der Einreichungen des Betreuers.
+		 */
 		listModel = new DefaultListModel<>();
 		ArrayList<String> submissions = (ArrayList<String>) dbaccess.getSubmissionsForBetreuerFromStudent(betreuer.getBenutzername(), student.getBenutzername());
 		for (String submission : submissions) {
 			listModel.addElement(submission);
 		}
 
+		/**
+		 * Das DefaultListModel für die Liste der Einreichungen des Studenten.
+		 */
 		listModel_1 = new DefaultListModel<>();
 		ArrayList<String> submissions_1 = (ArrayList<String>) dbaccess.getSubmissions(student.getBenutzername());
 		System.out.println(student.getBenutzername());
@@ -187,9 +227,15 @@ public class BetreuerStudenten_1Panel extends JPanel {
 			listModel_1.addElement(submission);
 		}
 
+		/**
+		 * Die JList für die Dateien des Betreuers.
+		 */
 		fileList = new JList<>(listModel);
 		fileList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+		/**
+		 * Die JList für die Dateien des Studenten.
+		 */
 		fileList_1 = new JList<>(listModel_1);
 		fileList_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 

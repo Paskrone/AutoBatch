@@ -29,10 +29,25 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  */
 public class StudentenIpPanel extends JPanel {
 
-	private JTextField txtDatum;
-	private JTextField txtThema;
-	private JTextField txtUN;
-	private JTextField txtBeschreibung;
+	/**
+     * Das Textfeld für die Eingabe des Datums.
+     */
+    private JTextField txtDatum;
+
+    /**
+     * Das Textfeld für die Anzeige und Bearbeitung des Arbeitsthemas.
+     */
+    private JTextField txtThema;
+
+    /**
+     * Das Textfeld für die Anzeige und Bearbeitung des Unternehmensnamens.
+     */
+    private JTextField txtUN;
+
+    /**
+     * Das Textfeld für die Anzeige und Bearbeitung der Beschreibung.
+     */
+    private JTextField txtBeschreibung;
 
     /**
      * Erstellt ein neues StudentenIpPanel.

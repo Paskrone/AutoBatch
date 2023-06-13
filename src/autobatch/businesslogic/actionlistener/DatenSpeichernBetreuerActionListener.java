@@ -14,12 +14,26 @@ import autobatch.dbaccess.Datenbankabfrage;
  */
 public class DatenSpeichernBetreuerActionListener implements ActionListener {
 
-	// Instanzvariablen
-	private Betreuer betreuer; // Betreuer, dessen Daten gespeichert werden sollen
-	private JTextField tf_Passwort; // Textfeld zur Eingabe des neuen Passworts
-	private JLabel lblPopUp; // Label zur Anzeige von Benachrichtigungen
+	/**
+	 * Betreuer-Objekt, dessen Daten gespeichert werden sollen.
+	 */
+	private Betreuer betreuer; 
+	/**
+	 * Textfeld, in dem das Passwort des Betreuers eingegeben wird.
+	 */
+	private JTextField tf_Passwort; 
+	/**
+	 * Label, das als Pop-Up-Benachrichtigung dient, um den Benutzer zu informieren, ob das Speichern erfolgreich war.
+	 */
+	private JLabel lblPopUp; 
 
-	// Konstruktor
+	/**
+	 * Konstruktor
+	 *
+	 * @param betreuer       Das Betreuer-Objekt, dessen Daten gespeichert werden sollen.
+	 * @param tf_Passwort    Das Textfeld, in dem das Passwort des Betreuers eingegeben wird.
+	 * @param lblPopUp       Das Label, das als Pop-Up-Benachrichtigung dient, um den Benutzer zu informieren, ob das Speichern erfolgreich war.
+	 */
 	public DatenSpeichernBetreuerActionListener(Betreuer betreuer, JTextField tf_Passwort, JLabel lblPopUp) {
 		super();
 		this.betreuer = betreuer;
@@ -28,7 +42,10 @@ public class DatenSpeichernBetreuerActionListener implements ActionListener {
 	}
 
 	/**
-	 * Diese Methode wird ausgeführt, wenn der Benutzer den Button zum Speichern der Daten drückt.
+	 * Diese Methode wird ausgeführt, wenn der Benutzer den Button zum Speichern der Daten drückt. Es überprüft, ob das
+	 * Passwort-Feld gefüllt ist. Wenn ja, wird das Passwort des Betreuers aktualisiert und in der Datenbank gespeichert.
+	 * Ein Pop-Up-Label wird verwendet, um den Benutzer zu informieren, ob das Speichern erfolgreich war.
+	 * @param e Das ausgelöste ActionEvent.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

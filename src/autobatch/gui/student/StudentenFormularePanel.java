@@ -29,10 +29,24 @@ import javax.swing.JButton;
  */
 public class StudentenFormularePanel extends JPanel {
 
+	/**
+     * Das Textfeld für die Eingabe des Semesters.
+     */
     private JTextField tf_Semester;
+
+    /**
+     * Das Textfeld für die Eingabe der Telefonnummer.
+     */
     private JTextField tf_Telefon;
 
+    /**
+     * Eine Flagge, die angibt, ob der Student der Veröffentlichung seiner Bachelor-Arbeit und seines Namens zugestimmt hat.
+     */
     private boolean ja = false;
+
+    /**
+     * Eine Flagge, die angibt, ob der Bestätigungsbutton geklickt wurde.
+     */
     private boolean clicked = true;
 
     /**

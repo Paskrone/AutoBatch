@@ -17,10 +17,21 @@ import autobatch.session.SessionManager;
  */
 public class StudentAuswahlSelectionListener implements ListSelectionListener {
 
-    // Instanzvariablen
+    /**
+     * panelSwitcher: Ein Dienst zum Wechseln zwischen verschiedenen Panels.
+     */
     private PanelSwitcher panelSwitcher;
+
+    /**
+     * panelManager: Ein Dienst zum Verwalten der Panels in der Anwendung.
+     */
     private PanelManager panelManager;
+
+    /**
+     * table: Ein JTable-Objekt, das eine Tabelle in der GUI repräsentiert.
+     */
     private JTable table;
+
 
     /**
      * Konstruktor
@@ -35,7 +46,12 @@ public class StudentAuswahlSelectionListener implements ListSelectionListener {
     }
 
     /**
-     * Diese Methode wird ausgeführt, wenn eine Auswahl in der Tabelle getroffen wird.
+     * Diese Methode wird aufgerufen, wenn eine Auswahl in der Tabelle getroffen wird.
+     * Zuerst wird überprüft, ob die Auswahl vollständig ist und ob eine Zeile ausgewählt wurde. 
+     * Wenn dies der Fall ist, werden die Daten aus der ausgewählten Zeile abgerufen und 
+     * gespeichert. Anschließend wird ein neues Panel erstellt, das die Anfrage eines 
+     * Studenten an einen Betreuer darstellt, und dieses Panel wird zur Anzeige gebracht.
+     * @param e ist das ListSelectionEvent, das die Änderung der Auswahl in der Tabelle repräsentiert.
      */
     @Override
     public void valueChanged(ListSelectionEvent e) {

@@ -25,14 +25,45 @@ import javax.swing.JPasswordField;
  */
 public class StudentenDatenPanel extends JPanel {
 
-	private PanelSwitcher panelSwitcher;  // Hilft beim Wechseln zwischen verschiedenen Panels
-	private Student student;  // Der aktuelle Student, dessen Daten angezeigt und bearbeitet werden
-	private JTextField tf_ort;  // Textfeld für den Ort des Studenten
-	private JTextField tf_telefon;  // Textfeld für die Telefonnummer des Studenten
-	private JTextField tf_postleizahl;  // Textfeld für die Postleitzahl des Studenten
-	private JTextField tf_strasse;  // Textfeld für die Straße des Studenten
-	private JTextField tf_Semester;  // Textfeld für das Semester des Studenten
-	private JTextField tf_passwort;  // Textfeld für das Passwort des Studenten
+	/**
+     * Hilft beim Wechseln zwischen verschiedenen Panels.
+     */
+    private PanelSwitcher panelSwitcher;
+
+    /**
+     * Der aktuelle Student, dessen Daten angezeigt und bearbeitet werden.
+     */
+    private Student student;
+
+    /**
+     * Textfeld für den Ort des Studenten.
+     */
+    private JTextField tf_ort;
+
+    /**
+     * Textfeld für die Telefonnummer des Studenten.
+     */
+    private JTextField tf_telefon;
+
+    /**
+     * Textfeld für die Postleitzahl des Studenten.
+     */
+    private JTextField tf_postleizahl;
+
+    /**
+     * Textfeld für die Straße des Studenten.
+     */
+    private JTextField tf_strasse;
+
+    /**
+     * Textfeld für das Semester des Studenten.
+     */
+    private JTextField tf_Semester;
+
+    /**
+     * Textfeld für das Passwort des Studenten.
+     */
+    private JTextField tf_passwort;
 
 	/**
      * Erstellt ein neues Panel, in dem die Daten eines Studenten angezeigt und bearbeitet werden können.

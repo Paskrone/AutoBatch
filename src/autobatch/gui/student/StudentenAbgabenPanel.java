@@ -22,15 +22,51 @@ import autobatch.navigation.PanelSwitcher;
  */
 public class StudentenAbgabenPanel extends JPanel {
 
-	private PanelManager panelManager;  // Verwaltet die Navigation zwischen Panels
-    private PanelSwitcher panelSwitcher;  // Hilft beim Wechseln zwischen verschiedenen Panels
-    private Student student;  // Der aktuelle Student, der die Einreichungen vornimmt
-    private JButton downloadButton;  // Ein Button zum Herunterladen von Einreichungen
-    private DefaultListModel<String> listModel;  // Ein Modell für die Liste der Einreichungen des Studenten
-    private JList<String> fileList;  // Eine Liste der Einreichungen des Studenten
-    private DefaultListModel<String> listModel_1;  // Ein Modell für die Liste der Einreichungen des Betreuers
-    private JList<String> fileList_1;  // Eine Liste der Einreichungen des Betreuers
-    private Datenbankabfrage dbaccess = new Datenbankabfrage();  // Eine Instanz zur Durchführung von Datenbankabfragen
+
+    /**
+     * Verwaltet die Navigation zwischen Panels.
+     */
+    private PanelManager panelManager;
+
+    /**
+     * Hilft beim Wechseln zwischen verschiedenen Panels.
+     */
+    private PanelSwitcher panelSwitcher;
+
+    /**
+     * Der aktuelle Student, der die Einreichungen vornimmt.
+     */
+    private Student student;
+
+    /**
+     * Ein Button zum Herunterladen von Einreichungen.
+     */
+    private JButton downloadButton;
+
+    /**
+     * Ein Modell für die Liste der Einreichungen des Studenten.
+     */
+    private DefaultListModel<String> listModel;
+
+    /**
+     * Eine Liste der Einreichungen des Studenten.
+     */
+    private JList<String> fileList;
+
+    /**
+     * Ein Modell für die Liste der Einreichungen des Betreuers.
+     */
+    private DefaultListModel<String> listModel_1;
+
+    /**
+     * Eine Liste der Einreichungen des Betreuers.
+     */
+    private JList<String> fileList_1;
+
+    /**
+     * Eine Instanz zur Durchführung von Datenbankabfragen.
+     */
+    private Datenbankabfrage dbaccess = new Datenbankabfrage();
 
     /**
      * Erstellt ein neues Panel, in dem Studenten ihre Einreichungen anzeigen und neue Einreichungen hinzufügen können.

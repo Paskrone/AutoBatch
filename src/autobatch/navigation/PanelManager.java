@@ -29,19 +29,48 @@ import autobatch.session.SessionManager;
  */
 public class PanelManager {
 
-	private PanelSwitcher panelSwitcher; // Hilft bei der Umschaltung zwischen den Panels
+	/**
+	 * Hilft bei der Umschaltung zwischen den Panels.
+	 */
+	private PanelSwitcher panelSwitcher;
 
-	private LoginPanel loginPanel; // Panel für die Anmeldung
-	private RegistrationPanel registrationPanel; // Panel für die Registrierung
+	/**
+	 * Panel für die Anmeldung.
+	 */
+	private LoginPanel loginPanel;
 
-	private StudentenPanel studentenPanel; // Panel für die Studentenansicht
+	/**
+	 * Panel für die Registrierung.
+	 */
+	private RegistrationPanel registrationPanel;
 
-	private StudiendekanPanel studiendekanPanel; // Panel für die Ansicht des Studiendekan
+	/**
+	 * Panel für die Studentenansicht.
+	 */
+	private StudentenPanel studentenPanel;
 
-	private BetreuerPanel betreuerPanel; // Panel für die Betreueransicht
+	/**
+	 * Panel für die Ansicht des Studiendekans.
+	 */
+	private StudiendekanPanel studiendekanPanel;
 
-	private JPanel cards; // Container für alle Panels
+	/**
+	 * Panel für die Betreueransicht.
+	 */
+	private BetreuerPanel betreuerPanel;
 
+	/**
+	 * Container für alle Panels.
+	 */
+	private JPanel cards;
+
+
+	/**
+	 * Verwaltet die unterschiedlichen Panels für die Benutzerschnittstelle.
+	 * 
+	 * @param panelSwitcher Der PanelSwitcher zum Wechseln zwischen den Panels.
+	 * @param cards Der JPanel-Container, der die Panels enthält.
+	 */
 	public PanelManager(PanelSwitcher panelSwitcher, JPanel cards) {
 		this.panelSwitcher = panelSwitcher;
 		this.cards = cards;

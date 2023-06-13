@@ -15,18 +15,47 @@ import autobatch.navigation.PanelSwitcher;
  */
 public class DatenSpeichernStudentActionListener implements ActionListener{
 	
-	// Instanzvariablen
-	private Student student; // Student, dessen Daten gespeichert werden sollen
+	/**
+	 * Der Student, dessen Daten aktualisiert werden sollen.
+	 */
+	private Student student; 
+	/**
+	 * Textfeld zur Eingabe des neuen Wohnortes des Studenten.
+	 */
+	private JTextField tf_ort; 
+	/**
+	 * Textfeld zur Eingabe der neuen Postleitzahl des Studenten.
+	 */
+	private JTextField tf_postleizahl; 
+	/**
+	 * Textfeld zur Eingabe der neuen Straße des Studenten.
+	 */
+	private JTextField tf_strasse; 
+	/**
+	 * Textfeld zur Eingabe der neuen Telefonnummer des Studenten.
+	 */
+	private JTextField tf_telefon; 
+	/**
+	 * Textfeld zur Eingabe des neuen Passworts des Studenten.
+	 */
+	private JTextField tf_passwort; 
+	/**
+	 * Label zur Anzeige von Benachrichtigungen, ob die Datenaktualisierung erfolgreich war.
+	 */
+	private JLabel lblPopUp;
 	
-	private JTextField tf_ort; // Textfeld zur Eingabe des neuen Wohnorts
-	private JTextField tf_postleizahl; // Textfeld zur Eingabe der neuen Postleitzahl
-	private JTextField tf_strasse; // Textfeld zur Eingabe der neuen Straße
-	private JTextField tf_telefon; // Textfeld zur Eingabe der neuen Telefonnummer
-	private JTextField tf_passwort; // Textfeld zur Eingabe des neuen Passworts
-	
-	private JLabel lblPopUp; // Label zur Anzeige von Benachrichtigungen
-	
-	// Konstruktor
+	/**
+	 * Konstruktor
+	 *
+	 * @param student           Der Student, dessen Daten aktualisiert werden sollen.
+	 * @param panelSwitcher     Der PanelSwitcher für das Umschalten zwischen verschiedenen Panels.
+	 * @param tf_ort            Das Textfeld zur Eingabe des neuen Wohnortes des Studenten.
+	 * @param tf_postleizahl    Das Textfeld zur Eingabe der neuen Postleitzahl des Studenten.
+	 * @param tf_strasse        Das Textfeld zur Eingabe der neuen Straße des Studenten.
+	 * @param tf_telefon        Das Textfeld zur Eingabe der neuen Telefonnummer des Studenten.
+	 * @param tf_passwort       Das Textfeld zur Eingabe des neuen Passworts des Studenten.
+	 * @param lblPopUp          Das Label zur Anzeige von Benachrichtigungen, ob die Datenaktualisierung erfolgreich war.
+	 */
 	public DatenSpeichernStudentActionListener(Student student, PanelSwitcher panelSwitcher, JTextField tf_ort, JTextField tf_postleizahl,
 			JTextField tf_strasse, JTextField tf_telefon, JTextField tf_passwort, JLabel lblPopUp) {
 		super();
@@ -43,6 +72,10 @@ public class DatenSpeichernStudentActionListener implements ActionListener{
 	
 	/**
 	 * Diese Methode wird ausgeführt, wenn der Benutzer den Button zum Speichern der Daten drückt.
+	 * Sie liest die neuen Daten aus den entsprechenden Textfeldern und aktualisiert die Daten des Studenten in der Datenbank.
+	 * Wenn die Aktualisierung erfolgreich ist, wird das entsprechende Attribut des Studentenobjekts aktualisiert.
+	 * Nach dem Aktualisierungsprozess wird eine Pop-Up-Benachrichtigung angezeigt.
+	 * @param e Das ausgelöste ActionEvent.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

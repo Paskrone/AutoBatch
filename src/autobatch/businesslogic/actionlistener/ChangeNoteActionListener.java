@@ -16,10 +16,21 @@ import autobatch.navigation.PanelSwitcher;
  */
 public class ChangeNoteActionListener implements ActionListener {
 
+	/**
+     * Der PanelManager, der zur Verwaltung der Panels verwendet wird.
+     */
 	private PanelManager panelManager;
+	/**
+     * Der PanelSwitcher, der zum Wechseln zwischen Panels verwendet wird.
+     */
 	private PanelSwitcher panelSwitcher;
-
+	/**
+     * Der Betreuer, der betroffen ist.
+     */
 	private Betreuer betreuer;
+	/**
+     * Die Arbeit, die betroffen ist.
+     */
 	private Arbeit arbeit;
 
 	/**
@@ -39,7 +50,8 @@ public class ChangeNoteActionListener implements ActionListener {
 	}
 
 	/**
-	 * Diese Methode wird aufgerufen, wenn eine Aktion ausgeführt wird.
+	 * Diese Methode wird aufgerufen, wenn eine Aktion ausgeführt wird. Sie erstellt ein neues BetreuerNotePanel und 
+     * aktualisiert es im PanelManager, und wechselt dann zu diesem neuen Panel.
 	 * @param e Das ausgelöste ActionEvent
 	 */
 	@Override

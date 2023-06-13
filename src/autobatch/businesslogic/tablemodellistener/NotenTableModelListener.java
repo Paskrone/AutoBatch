@@ -18,11 +18,34 @@ import autobatch.navigation.PanelSwitcher;
  */
 public class NotenTableModelListener implements TableModelListener {
 
-	private DefaultTableModel model;
-	private PanelManager panelmanager;
-	private PanelSwitcher panelSwitcher;
-	private Studiendekan studiendekan;
 
+    /**
+     * Das DefaultTableModel, das überwacht wird.
+     */
+    private DefaultTableModel model;
+
+    /**
+     * Der PanelManager, der für die Aktualisierung des Panels verwendet wird.
+     */
+    private PanelManager panelmanager;
+
+    /**
+     * Der PanelSwitcher, der für den Panelwechsel verwendet wird.
+     */
+    private PanelSwitcher panelSwitcher;
+
+    /**
+     * Der Studiendekan, dessen Notenpanel aktualisiert wird.
+     */
+    private Studiendekan studiendekan;
+
+    /**
+     * Konstruktor
+     * @param model Das DefaultTableModel, das überwacht wird
+     * @param panelmanager Der PanelManager, der für die Aktualisierung des Panels verwendet wird
+     * @param panelSwitcher Der PanelSwitcher, der für den Panelwechsel verwendet wird
+     * @param studiendekan Der Studiendekan, dessen Notenpanel aktualisiert wird
+     */
 	public NotenTableModelListener(DefaultTableModel model, PanelManager panelmanager, PanelSwitcher panelSwitcher,
 			Studiendekan studiendekan) {
 		super();
@@ -33,9 +56,9 @@ public class NotenTableModelListener implements TableModelListener {
 	}
 
 	/**
-	 * Diese Methode wird aufgerufen, wenn eine Änderung in dem Datenmodell der Tabelle auftritt. 
-	 * Sie prüft speziell auf Updates und verarbeitet diese.
-	 */
+     * Diese Methode wird aufgerufen, wenn eine Änderung in dem Datenmodell der Tabelle auftritt.
+     * Sie prüft speziell auf Updates und verarbeitet diese.
+     */
 	@Override
 	public void tableChanged(TableModelEvent e) {
 		if (e.getType() == TableModelEvent.UPDATE) {

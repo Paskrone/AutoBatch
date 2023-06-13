@@ -11,7 +11,7 @@ import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 
 /**
- * Ein ActionListener, der dazu dient, Anfragen zu bearbeiten.
+ * ActionListener, der dazu dient, Anfragen zu bearbeiten.
  */
 public class AnfragenActionListener implements ActionListener {
 

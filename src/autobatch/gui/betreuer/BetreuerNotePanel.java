@@ -27,8 +27,11 @@ import javax.swing.JButton;
  * die Note erfolgreich gespeichert wurde.
  */
 public class BetreuerNotePanel extends JPanel {
-
-	private JTextField textField; // Textfeld zur Eingabe der Note
+	
+	/**
+	 *Textfeld zur Eingabe der Note
+	 */
+	private JTextField textField;
 
 	/**
 	 * Erstellt ein neues BetreuerNotePanel. 

@@ -22,19 +22,53 @@ import autobatch.navigation.PanelSwitcher;
  */
 public class IPAnnhmenActionListener implements ActionListener {
 
-	// Instanzvariablen
-	private PanelSwitcher panelSwitcher; // zur Verwaltung des Panelwechsels
-	private PanelManager panelManager; // zur Verwaltung der Panels
+	/**
+	 * PanelSwitcher-Objekt, das für die Verwaltung des Wechsels zwischen verschiedenen Panels in der GUI verwendet wird.
+	 */
+	private PanelSwitcher panelSwitcher;
 
-	private Student student; // betroffener Student
-	private Betreuer betreuer; // betroffener Betreuer
-	private Studiendekan dekan; // betroffener Studiendekan
+	/**
+	 * PanelManager-Objekt, das zur Verwaltung der Panels in der GUI verwendet wird.
+	 */
+	private PanelManager panelManager;
 
-	private Arbeit arbeit; // Arbeit, die verarbeitet wird
+	/**
+	 * Student-Objekt, das den betroffenen Studenten repräsentiert.
+	 */
+	private Student student;
 
-	private JLabel lblPopUp; // Label zur Anzeige von Benachrichtigungen
+	/**
+	 * Betreuer-Objekt, das den betroffenen Betreuer repräsentiert.
+	 */
+	private Betreuer betreuer;
 
-	// Konstruktor
+	/**
+	 * Studiendekan-Objekt, das den betroffenen Studiendekan repräsentiert.
+	 */
+	private Studiendekan dekan;
+
+	/**
+	 * Arbeit-Objekt, das die Arbeit repräsentiert, die verarbeitet wird.
+	 */
+	private Arbeit arbeit;
+
+	/**
+	 * JLabel, das dazu dient, Pop-up-Nachrichten anzuzeigen.
+	 */
+	private JLabel lblPopUp;
+
+
+	/**
+	 * Konstruktor
+	 *
+	 * @param dekan          Das Studiendekan-Objekt, das den betroffenen Studiendekan repräsentiert.
+	 * @param panelSwitcher  Das PanelSwitcher-Objekt, das für die Verwaltung des Wechsels zwischen verschiedenen Panels in der GUI verwendet wird.
+	 * @param panelManager   Das PanelManager-Objekt, das zur Verwaltung der Panels in der GUI verwendet wird.
+	 * @param student        Das Student-Objekt, das den betroffenen Studenten repräsentiert.
+	 * @param betreuer       Das Betreuer-Objekt, das den betroffenen Betreuer repräsentiert.
+	 * @param arbeit         Das Arbeit-Objekt, das die Arbeit repräsentiert, die verarbeitet wird.
+	 * @param lblPopUp       Das JLabel, das dazu dient, Pop-up-Nachrichten anzuzeigen.
+	 */
 	public IPAnnhmenActionListener(Studiendekan dekan, PanelSwitcher panelSwitcher, PanelManager panelManager,
 			Student student, Betreuer betreuer, Arbeit arbeit, JLabel lblPopUp) {
 		super();
@@ -50,6 +84,10 @@ public class IPAnnhmenActionListener implements ActionListener {
 
 	/**
 	 * Diese Methode wird ausgeführt, wenn der Benutzer den Button zum Annehmen der IP-Anfrage drückt.
+	 * Zunächst wird ein neuer Datenbankzugriff erstellt, danach werden der Betreuer des betroffenen Studenten und der Status der IP-Anfrage 
+	 * in der Datenbank aktualisiert. Anschließend wird ein neues Panel für die Anfragen des Studiendekans erstellt und im PanelManager aktualisiert.
+	 * Schließlich wird eine Nachricht für den Benutzer angezeigt, dass die Anfrage angenommen wurde.
+	 * @param e Das ausgelöste ActionEvent.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

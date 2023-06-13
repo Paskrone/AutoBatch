@@ -32,11 +32,30 @@ import autobatch.navigation.PanelSwitcher;
  */
 public class StudiendekanIpPanel extends JPanel {
 
-    private PanelSwitcher panelSwitcher;
-    private Studiendekan studiendekan;
-    private PanelManager panelManager;
-    private JTable table;
-    private Betreuer betreuer;
+	/**
+	 * Der PanelSwitcher, der für das Umschalten zwischen den Panels verantwortlich ist.
+	 */
+	private PanelSwitcher panelSwitcher;
+
+	/**
+	 * Der PanelManager, der für die Navigation zwischen den Panels zuständig ist.
+	 */
+	private PanelManager panelManager;
+
+	/**
+	 * Der Studiendekan, für den das Panel angezeigt wird.
+	 */
+	private Studiendekan studiendekan;
+
+	/**
+	 * Die JTable zur Anzeige der IP-Anfragen.
+	 */
+	private JTable table;
+
+	/**
+	 * Der Betreuer, der ausgewählt wurde.
+	 */
+	private Betreuer betreuer;
 
     /**
      * Erstellt ein neues StudiendekanIpPanel.

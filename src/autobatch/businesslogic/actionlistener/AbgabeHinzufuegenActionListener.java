@@ -15,7 +15,7 @@ import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.session.SessionManager;
 
 /**
- * Ein ActionListener, der dazu dient, dem Benutzer das Hinzufügen von Abgaben zu ermöglichen.
+ * ActionListener, der dazu dient, dem Benutzer das Hinzufügen von Abgaben zu ermöglichen.
  */
 public class AbgabeHinzufuegenActionListener implements ActionListener{
 	

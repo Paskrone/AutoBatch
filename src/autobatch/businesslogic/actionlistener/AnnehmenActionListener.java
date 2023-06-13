@@ -16,7 +16,7 @@ import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 
 /**
- * Ein ActionListener, der dazu dient, Anfragen anzunehmen.
+ * ActionListener, der dazu dient, Anfragen anzunehmen.
  */
 public class AnnehmenActionListener implements ActionListener {
 

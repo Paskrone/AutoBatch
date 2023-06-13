@@ -6,11 +6,34 @@ package autobatch.businessobjects;
  */
 public class Studiendekan extends Benutzer {
 
+    /**
+     * Der Vorname des Studiendekans.
+     */
     private String vorname;
+
+    /**
+     * Der Nachname des Studiendekans.
+     */
     private String nachname;
+
+    /**
+     * Das Passwort des Studiendekans.
+     */
     private String passwort;
+
+    /**
+     * Der Benutzername des Studiendekans.
+     */
     private String benutzername;
+
+    /**
+     * Die E-Mail-Adresse des Studiendekans.
+     */
     private String email;
+
+    /**
+     * Der Studiengang, den der Studiendekan leitet.
+     */
     private String studiengang;
 
     /**
@@ -97,10 +120,6 @@ public class Studiendekan extends Benutzer {
     }
 
     /**
-     * Setzt den Benutzernamen des Studiendekans.
-     *
-     * @param benutzername Der
-     *     /**
      * Setzt den Benutzernamen des Studiendekans.
      *
      * @param benutzername Der neue Benutzername des Studiendekans.

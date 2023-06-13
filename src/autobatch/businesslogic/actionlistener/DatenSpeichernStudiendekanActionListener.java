@@ -13,13 +13,26 @@ import autobatch.dbaccess.Datenbankabfrage;
  */
 public class DatenSpeichernStudiendekanActionListener implements ActionListener {
 
-	// Instanzvariablen
-	private Studiendekan studiendekan; // Studiendekan, dessen Daten gespeichert werden sollen
+	/**
+	 * Der Studiendekan, dessen Daten aktualisiert werden sollen.
+	 */
+	private Studiendekan studiendekan; 
+	/**
+	 * Textfeld zur Eingabe des neuen Passworts des Studiendekans.
+	 */
+	private JTextField tf_Passwort; 
+	/**
+	 * Label zur Anzeige von Benachrichtigungen, ob die Datenaktualisierung erfolgreich war.
+	 */
+	private JLabel lblPopUp; 
 
-	private JTextField tf_Passwort; // Textfeld zur Eingabe des neuen Passworts
-	private JLabel lblPopUp; // Label zur Anzeige von Benachrichtigungen
-
-	// Konstruktor
+	/**
+	 * Konstruktor
+	 *
+	 * @param studiendekan  Der Studiendekan, dessen Daten aktualisiert werden sollen.
+	 * @param tf_Passwort   Das Textfeld zur Eingabe des neuen Passworts des Studiendekans.
+	 * @param lblPopUp      Das Label zur Anzeige von Benachrichtigungen, ob die Datenaktualisierung erfolgreich war.
+	 */
 	public DatenSpeichernStudiendekanActionListener(Studiendekan studiendekan, JTextField tf_Passwort,
 			JLabel lblPopUp) {
 		super();
@@ -30,6 +43,11 @@ public class DatenSpeichernStudiendekanActionListener implements ActionListener 
 	
 	/**
 	 * Diese Methode wird ausgeführt, wenn der Benutzer den Button zum Speichern der Daten drückt.
+	 * Sie überprüft zunächst, ob das Textfeld für das Passwort nicht leer ist.
+	 * Wenn es nicht leer ist, wird das neue Passwort aus dem Textfeld abgerufen und das Passwort des Studiendekan-Objekts aktualisiert.
+	 * Anschließend wird ein neuer Datenbankzugriff erzeugt und das Passwort in der Datenbank aktualisiert.
+	 * Wenn die Aktualisierung erfolgreich ist, wird die Benachrichtigung auf "gespeichert!" gesetzt und sichtbar gemacht.
+	 * @param e Das ausgelöste ActionEvent.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

@@ -22,8 +22,19 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  */
 public class StudentenPanel extends JPanel {
 
+	/**
+	 * Der Manager, der die Navigation zwischen den Panels verwaltet.
+	 */
 	private PanelManager panelmanager;
+
+	/**
+	 * Ein Helfer zum Wechseln zwischen verschiedenen Panels.
+	 */
 	private PanelSwitcher panelSwitcher;
+
+	/**
+	 * Der Student, für den das Panel angezeigt wird.
+	 */
 	private Student student;
 	
     /**

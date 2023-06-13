@@ -32,18 +32,61 @@ import javax.swing.JTable;
  */
 public class RegistrationPanel extends JPanel {
 
-	// Eingabefelder für Benutzerinformationen
+	/**
+	 * Eingabefeld für die Matrikelnummer des Benutzers.
+	 */
 	private JTextField tf_Mnr;
+
+	/**
+	 * Eingabefeld für den Vornamen des Benutzers.
+	 */
 	private JTextField tf_vorname;
+
+	/**
+	 * Eingabefeld für den Nachnamen des Benutzers.
+	 */
 	private JTextField tf_nachname;
+
+	/**
+	 * Eingabefeld für die E-Mail-Adresse des Benutzers.
+	 */
 	private JTextField tf_Email;
+
+	/**
+	 * Eingabefeld für die Telefonnummer des Benutzers.
+	 */
 	private JTextField tf_telefonnummer;
+
+	/**
+	 * Eingabefeld für den Benutzernamen.
+	 */
 	private JTextField tf_benutzername;
+
+	/**
+	 * Eingabefeld für das Passwort des Benutzers.
+	 */
 	private JPasswordField tf_Passwort;
+
+	/**
+	 * Eingabefeld für den Wohnort des Benutzers.
+	 */
 	private JTextField tf_Ort;
+
+	/**
+	 * Eingabefeld für die Postleitzahl des Benutzers.
+	 */
 	private JTextField tf_Postleizahl;
+
+	/**
+	 * Eingabefeld für die Straße des Benutzers.
+	 */
 	private JTextField tf_Strasse;
+
+	/**
+	 * Tabelle zur Auswahl des Studiengangs.
+	 */
 	private JTable table;
+
 
 	/**
 	 * Konstruktor der Klasse RegistrationPanel. Erstellt ein neues Panel mit vordefinierter Größe und den entsprechenden Eingabefeldern.

@@ -34,7 +34,14 @@ import java.awt.Component;
  */
 public class StudiendekanNotenPanel extends JPanel {
 
+    /**
+     * Die Tabelle, die die Noten der Studenten darstellt.
+     */
     private JTable table;
+
+    /**
+     * Das Modell für die Tabelle, das die Daten und Spalteninformationen enthält.
+     */
     private static DefaultTableModel model;
 
     /**
@@ -127,20 +134,33 @@ public class StudiendekanNotenPanel extends JPanel {
 	}
 
 	
-	// Spalte Vortrag LIGHT_GRAY
+	/**
+	 * Die innere Klasse CustomCellRenderer ist ein benutzerdefinierter Zellenrenderer für die JTable. Sie ermöglicht die Anpassung der Hintergrundfarbe einer bestimmten Spalte in der Tabelle.
+	 */
 	private static class CustomCellRenderer extends DefaultTableCellRenderer {
+		/**
+	     * Gibt eine Komponente zurück, die das Rendern der Zelle übernimmt.
+	     *
+	     * @param table      Die Tabelle, die die Zelle enthält.
+	     * @param value      Der Wert der Zelle.
+	     * @param isSelected Gibt an, ob die Zelle ausgewählt ist.
+	     * @param hasFocus   Gibt an, ob die Zelle den Fokus hat.
+	     * @param row        Der Zeilenindex der Zelle.
+	     * @param column     Der Spaltenindex der Zelle.
+	     * @return Die gerenderte Komponente für die Zelle.
+	     */
 		@Override
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 				int row, int column) {
 			Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-			// Check if the column index matches the desired column to be colored
+			// Überprüfen, ob der Spaltenindex mit der gewünschten Spalte übereinstimmt
 			int desiredColumnIndex = 3;
 			if (column == desiredColumnIndex) {
-				// Set the desired background color for the column
+				// Die gewünschte Hintergrundfarbe für die Spalte setzen
 				component.setBackground(Color.LIGHT_GRAY);
 			} else {
-				// Set the default background color for other columns
+				// Die Standard-Hintergrundfarbe für andere Spalten setzen
 				component.setBackground(table.getBackground());
 			}
 

@@ -9,8 +9,15 @@ import autobatch.businessobjects.Student;
  */
 public class SessionManager {
 	
-    private static SessionManager instance; // Singleton Instanz
-    private Benutzer aktuellerBenutzer; // Aktuell angemeldeter Benutzer
+	/**
+     * Singleton-Instanz des SessionManagers.
+     */
+    private static SessionManager instance;
+
+    /**
+     * Aktuell angemeldeter Benutzer.
+     */
+    private Benutzer aktuellerBenutzer;
 
     /**
      * Privater Konstruktor für Singleton-Entwurfsmuster.

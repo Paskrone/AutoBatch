@@ -26,9 +26,20 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  */
 public class StudentenBetreuerPanel extends JPanel {
 
-	private PanelManager panelManager;  // Verwaltet die Navigation zwischen verschiedenen Panels
-	private PanelSwitcher panelSwitcher;  // Hilft beim Wechseln zwischen verschiedenen Panels
-	private Student student;  // Der aktuelle Student, der die Auswahl vornimmt
+	/**
+     * Verwaltet die Navigation zwischen verschiedenen Panels.
+     */
+    private PanelManager panelManager;
+
+    /**
+     * Hilft beim Wechseln zwischen verschiedenen Panels.
+     */
+    private PanelSwitcher panelSwitcher;
+
+    /**
+     * Der aktuelle Student, der die Auswahl vornimmt.
+     */
+    private Student student;
 
     /**
      * Erstellt ein neues Panel, das dem Studenten erlaubt, seinen Betreuer aus einer Tabelle auszuwählen.

@@ -6,24 +6,80 @@ package autobatch.businessobjects;
  */
 public class Student extends Benutzer {
 
-	private int mnr;
-	private String vorname;
-	private String nachname;
-	private String passwort;
-	private String benutzername;
-	private String email;
+    /**
+     * Die Matrikelnummer des Studenten.
+     */
+    private int mnr;
 
-	private long telefonnummer;
-	private int semester;
+    /**
+     * Der Vorname des Studenten.
+     */
+    private String vorname;
 
-	private String studiengang;
-	private String ort;
-	private String strasse;
-	private int postleizahl;
+    /**
+     * Der Nachname des Studenten.
+     */
+    private String nachname;
 
-	private String studiendekan;
-	private String betreuer;
-	private int arbeit;
+    /**
+     * Das Passwort des Studenten.
+     */
+    private String passwort;
+
+    /**
+     * Der Benutzername des Studenten.
+     */
+    private String benutzername;
+
+    /**
+     * Die E-Mail-Adresse des Studenten.
+     */
+    private String email;
+
+    /**
+     * Die Telefonnummer des Studenten.
+     */
+    private long telefonnummer;
+
+    /**
+     * Das aktuelle Semester des Studenten.
+     */
+    private int semester;
+
+    /**
+     * Der Studiengang des Studenten.
+     */
+    private String studiengang;
+
+    /**
+     * Der Wohnort des Studenten.
+     */
+    private String ort;
+
+    /**
+     * Die Straße, in der der Student wohnt.
+     */
+    private String strasse;
+
+    /**
+     * Die Postleitzahl des Studenten.
+     */
+    private int postleizahl;
+
+    /**
+     * Der Studiendekan des Studenten.
+     */
+    private String studiendekan;
+
+    /**
+     * Der Betreuer des Studenten.
+     */
+    private String betreuer;
+
+    /**
+     * Die Arbeitslast des Studenten.
+     */
+    private int arbeit;
 	
 	/**
 	 * Konstruktor für die Klasse Student.
@@ -43,7 +99,6 @@ public class Student extends Benutzer {
 	 * @param studiendekan Der Studiendekan des Studenten.
 	 * @param betreuer Der Betreuer des Studenten.
 	 */
-
 	public Student(int mnr, String vorname, String nachname, String passwort, String benutzername, String email,
 			long telefonnummer, int semester, String studiengang, String ort, String strasse, int postleizahl,
 			String studiendekan, String betreuer) {

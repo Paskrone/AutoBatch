@@ -18,16 +18,53 @@ import autobatch.dbaccess.Datenbankabfrage;
  */
 public class IPAnfrageActionListener implements ActionListener {
 
-	// Instanzvariablen
-	private Arbeit arbeit; // Arbeit, die verarbeitet werden soll
-	private Student student; // Student, der die Anfrage stellt
-	private JTextField txtDatum; // Textfeld für das Datum
-	private JTextField txtThema; // Textfeld für das Thema
-	private JTextField txtUN; // Textfeld für das Unternehmen
-	private JTextField txtBeschreibung; // Textfeld für die Beschreibung
-	private JLabel lblPopUp; // Label zur Anzeige von Benachrichtigungen
+	/**
+	 * Arbeit-Objekt, das die Arbeit repräsentiert, die vom Studenten verwaltet wird.
+	 */
+	private Arbeit arbeit;
 
-	// Konstruktor
+	/**
+	 * Student-Objekt, das den Studenten repräsentiert, der die Anfrage stellt.
+	 */
+	private Student student;
+
+	/**
+	 * Textfeld zur Eingabe des Datums der Anfrage.
+	 */
+	private JTextField txtDatum;
+
+	/**
+	 * Textfeld zur Eingabe des Themas der Anfrage.
+	 */
+	private JTextField txtThema;
+
+	/**
+	 * Textfeld zur Eingabe des Unternehmens der Anfrage.
+	 */
+	private JTextField txtUN;
+
+	/**
+	 * Textfeld zur Eingabe der Beschreibung der Anfrage.
+	 */
+	private JTextField txtBeschreibung;
+
+	/**
+	 * JLabel, das dazu dient, Pop-up-Nachrichten anzuzeigen.
+	 */
+	private JLabel lblPopUp;
+
+
+	/**
+	 * Konstruktor
+	 *
+	 * @param arbeit          Das Arbeit-Objekt, das die Arbeit repräsentiert, die vom Studenten verwaltet wird.
+	 * @param student         Das Student-Objekt, das den Studenten repräsentiert, der die Anfrage stellt.
+	 * @param txtDatum        Das Textfeld zur Eingabe des Datums der Anfrage.
+	 * @param txtThema        Das Textfeld zur Eingabe des Themas der Anfrage.
+	 * @param txtUN           Das Textfeld zur Eingabe des Unternehmens der Anfrage.
+	 * @param txtBeschreibung Das Textfeld zur Eingabe der Beschreibung der Anfrage.
+	 * @param lblPopUp        Das JLabel, das dazu dient, Pop-up-Nachrichten anzuzeigen.
+	 */
 	public IPAnfrageActionListener(Arbeit arbeit, Student student, JTextField txtDatum, JTextField txtThema,
 			JTextField txtUN, JTextField txtBeschreibung, JLabel lblPopUp) {
 		super();
@@ -42,6 +79,12 @@ public class IPAnfrageActionListener implements ActionListener {
 
 	/**
 	 * Diese Methode wird ausgeführt, wenn der Benutzer den Button zum Absenden der Anfrage drückt.
+	 * Sie überprüft zunächst, ob die Textfelder für das Datum, das Thema, das Unternehmen und die Beschreibung nicht leer sind.
+	 * Wenn diese Bedingungen erfüllt sind, werden die Daten aus den Textfeldern geholt und das Datum wird in ein LocalDate-Objekt umgewandelt.
+	 * Anschließend werden die Instanzvariablen des Arbeit-Objekts aktualisiert, wenn sie sich von den aktuellen Werten unterscheiden.
+	 * Danach wird eine neue Datenbankabfrage erzeugt und die Daten in der Datenbank aktualisiert.
+	 * Zum Schluss wird eine Nachricht für den Benutzer angezeigt, dass die Anfrage abgeschickt wurde.
+	 * @param e Das ausgelöste ActionEvent.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

@@ -14,10 +14,25 @@ import autobatch.navigation.PanelSwitcher;
  */
 public class Main {
 	
-    private JFrame frame;
-    private JPanel cards;
-    private PanelSwitcher panelSwitcher;
-    public static PanelManager panelManager;
+	/**
+	 * Das Hauptfenster der Anwendung.
+	 */
+	private JFrame frame;
+
+	/**
+	 * Das JPanel, das das Kartenlayout für die verschiedenen Panels enthält.
+	 */
+	private JPanel cards;
+
+	/**
+	 * Der PanelSwitcher, der zum Wechseln zwischen den verschiedenen Panels verwendet wird.
+	 */
+	private PanelSwitcher panelSwitcher;
+
+	/**
+	 * Der PanelManager, der für die Verwaltung der Panels in der GUI verwendet wird.
+	 */
+	public static PanelManager panelManager;
 
     /**
      * Der Hauptprogrammeinstiegspunkt.

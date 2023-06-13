@@ -15,19 +15,52 @@ import autobatch.dbaccess.Datenbankabfrage;
  */
 public class FormularStudentActionListener implements ActionListener {
 	
-	// Instanzvariablen
-	private boolean ja; // Entscheidungsvariable
-	private boolean clicked; // Variablenstatus für den Klickzustand
+	/**
+	 * Entscheidungsvariable, die einen booleschen Zustand speichert.
+	 */
+	private boolean ja;
 
-	private JTextField tf_telefon; // Textfeld zur Eingabe der Telefonnummer
-	private JTextField tf_semester; // Textfeld zur Eingabe des Semesters
+	/**
+	 * Variable, die den Klickzustand speichert. Sie ist 'true', wenn der Button geklickt wurde.
+	 */
+	private boolean clicked;
 
-	private JLabel lblPopUp; // Label zur Anzeige von Benachrichtigungen
+	/**
+	 * Textfeld zur Eingabe der Telefonnummer des Studenten.
+	 */
+	private JTextField tf_telefon;
 
-	private Arbeit arbeit; // Arbeit, die verarbeitet werden soll
-	private Student student; // Student, der bearbeitet wird
+	/**
+	 * Textfeld zur Eingabe des Semesters des Studenten.
+	 */
+	private JTextField tf_semester;
 
-	// Konstruktor
+	/**
+	 * JLabel, das dazu dient, Pop-up-Nachrichten anzuzeigen.
+	 */
+	private JLabel lblPopUp;
+
+	/**
+	 * Arbeit-Objekt, das die Arbeit des Studenten repräsentiert.
+	 */
+	private Arbeit arbeit;
+
+	/**
+	 * Student-Objekt, das den Studenten repräsentiert, der das Formular ausfüllt.
+	 */
+	private Student student; 
+
+	/**
+	 * Konstruktor
+	 *
+	 * @param student      Das Student-Objekt, das den Studenten repräsentiert, der das Formular ausfüllt.
+	 * @param arbeit       Das Arbeit-Objekt, das die Arbeit des Studenten repräsentiert.
+	 * @param ja           Entscheidungsvariable, die einen booleschen Zustand speichert.
+	 * @param clicked      Variable, die den Klickzustand speichert. Sie ist 'true', wenn der Button geklickt wurde.
+	 * @param tf_telefon   Das Textfeld zur Eingabe der Telefonnummer des Studenten.
+	 * @param tf_semester  Das Textfeld zur Eingabe des Semesters des Studenten.
+	 * @param lblPopUp     Das JLabel, das dazu dient, Pop-up-Nachrichten anzuzeigen.
+	 */
 	public FormularStudentActionListener(Student student, Arbeit arbeit, boolean ja, boolean clicked,
 			JTextField tf_telefon, JTextField tf_semester, JLabel lblPopUp) {
 		super();
@@ -42,6 +75,12 @@ public class FormularStudentActionListener implements ActionListener {
 
 	/**
 	 * Diese Methode wird ausgeführt, wenn der Benutzer den Button zum Absenden des Formulars drückt.
+	 * Sie überprüft zunächst, ob der Button geklickt wurde und ob keines der Textfelder (Telefon und Semester) leer ist.
+	 * Wenn diese Bedingungen erfüllt sind, werden die Daten aus den Textfeldern geholt und in geeignete Formate umgewandelt (long für die Telefonnummer, int für das Semester).
+	 * Anschließend werden die Instanzvariablen des Student- und Arbeit-Objekts aktualisiert.
+	 * Danach werden verschiedene Update-Operationen auf der Datenbank durchgeführt, um die Daten des Studenten und der Arbeit zu aktualisieren.
+	 * Zum Schluss wird eine Nachricht für den Benutzer angezeigt, dass das Formular abgeschickt wurde.
+	 * @param e Das ausgelöste ActionEvent.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
