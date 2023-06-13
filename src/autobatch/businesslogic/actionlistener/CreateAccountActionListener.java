@@ -20,25 +20,76 @@ import autobatch.session.SessionManager;
  */
 public class CreateAccountActionListener implements ActionListener {
 
-	// Instanzvariablen
+	/**
+	 * Dienst zum Wechseln zwischen Panels.
+	 */
 	private PanelSwitcher panelSwitcher;
+
+	/**
+	 * Dienst zum Verwalten von Panels.
+	 */
 	private PanelManager panelManager;
-	
-	// Verschiedene Textfelder zur Eingabe von Benutzerinformationen
+
+	/**
+	 * Textfeld zur Eingabe der Matrikelnummer.
+	 */
 	private JTextField tf_Mnr;
+
+	/**
+	 * Textfeld zur Eingabe des Vornamens.
+	 */
 	private JTextField tf_vorname;
+
+	/**
+	 * Textfeld zur Eingabe des Nachnamens.
+	 */
 	private JTextField tf_nachname;
+
+	/**
+	 * Textfeld zur Eingabe der E-Mail.
+	 */
 	private JTextField tf_Email;
+
+	/**
+	 * Textfeld zur Eingabe der Telefonnummer.
+	 */
 	private JTextField tf_telefonnummer;
 
+	/**
+	 * Label zur Anzeige des Studiengangs.
+	 */
 	private JLabel lblStudiengang;
 
+	/**
+	 * Textfeld zur Eingabe des Ortes.
+	 */
 	private JTextField tf_Ort;
+
+	/**
+	 * Textfeld zur Eingabe der Postleitzahl.
+	 */
 	private JTextField tf_Postleitzahl;
+
+	/**
+	 * Textfeld zur Eingabe der Straße.
+	 */
 	private JTextField tf_Strasse;
+
+	/**
+	 * Textfeld zur Eingabe des Benutzernamens.
+	 */
 	private JTextField tf_benutzername;
+
+	/**
+	 * Textfeld zur Eingabe des Passworts.
+	 */
 	private JPasswordField tf_Passwort;
+
+	/**
+	 * Label zur Anzeige der Registrierungsnachricht.
+	 */
 	private JLabel lbl_registrationAnzeige;
+
 
 	// Konstruktor
 	public CreateAccountActionListener(PanelSwitcher panelSwitcher, PanelManager panelManager, JTextField tf_Mnr,
@@ -125,6 +176,9 @@ public class CreateAccountActionListener implements ActionListener {
 
 	/**
 	 * Diese Methode überprüft, ob alle erforderlichen Informationen für die Registrierung eingegeben wurden.
+	 *
+	 * @param password Das Passwort des Benutzers als String.
+	 * @return true, wenn alle benötigten Informationen vorhanden sind, sonst false.
 	 */
 	private boolean check(String password) {
 

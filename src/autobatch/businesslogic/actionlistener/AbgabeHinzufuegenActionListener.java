@@ -19,11 +19,34 @@ import autobatch.session.SessionManager;
  */
 public class AbgabeHinzufuegenActionListener implements ActionListener{
 	
+	/**
+	 * Eine Instanz der Datenbankabfrage zur Interaktion mit der Datenbank.
+	 */
 	Datenbankabfrage dbaccess = new Datenbankabfrage();
+
+	/**
+	 * Die aktuell eingeloggte Benutzerinstanz.
+	 */
 	Benutzer currentUser = SessionManager.getInstance().getAktuellerBenutzer();
+
+	/**
+	 * Der Benutzername des aktuellen Benutzers.
+	 */
 	String currentUsername = SessionManager.getInstance().getAktuellerBenutzer().getBenutzername();
+
+	/**
+	 * Ein JLabel, das angezeigt wird, wenn eine Operation erfolgreich war.
+	 */
 	private JLabel lbl_success;
+
+	/**
+	 * Ein JLabel, das angezeigt wird, wenn eine Operation fehlgeschlagen ist.
+	 */
 	private JLabel lbl_error;
+
+	/**
+	 * Eine Instanz eines Studentenobjekts, das für Operationen in Bezug auf den spezifischen Studenten verwendet wird.
+	 */
 	private Student student;
 	
 	/**

@@ -113,10 +113,6 @@ public class Betreuer extends Benutzer {
     /**
      * Setzt die E-Mail-Adresse des Betreuers.
      *
-     * @param email Die neue E-Mail-Adresse des
-    /**
-     * Setzt die E-Mail-Adresse des Betreuers.
-     *
      * @param email Die neue E-Mail-Adresse des Betreuers.
      */
     public void setEmail(String email) {

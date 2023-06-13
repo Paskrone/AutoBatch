@@ -20,14 +20,34 @@ import autobatch.navigation.PanelSwitcher;
  */
 public class AnnehmenActionListener implements ActionListener {
 
+	/**
+	 * Der PanelSwitcher, der für das Umschalten der Panels in der Anwendung zuständig ist.
+	 */
 	private PanelSwitcher panelSwitcher;
+
+	/**
+	 * Der PanelManager, der für das Verwalten der Panels in der Anwendung zuständig ist.
+	 */
 	private PanelManager panelManager;
-	
+
+	/**
+	 * Der Student, der die Anfrage gestellt hat, die angenommen werden soll.
+	 */
 	private Student student;
+
+	/**
+	 * Der Betreuer, der die Anfrage annehmen wird.
+	 */
 	private Betreuer betreuer;
 
+	/**
+	 * Die Arbeit, die das Thema der Anfrage ist.
+	 */
 	private Arbeit arbeit;
 
+	/**
+	 * Ein JLabel, das zur Anzeige einer Popup-Nachricht verwendet wird, wenn die Anfrage angenommen wird.
+	 */
 	private JLabel lblPopUp;
 
 	/**

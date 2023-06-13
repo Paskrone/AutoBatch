@@ -19,12 +19,29 @@ import autobatch.navigation.PanelSwitcher;
  */
 public class AblehnenActionListener implements ActionListener {
 
+	/**
+	 * Der PanelSwitcher, der für das Umschalten der Panels in der Anwendung zuständig ist.
+	 */
 	private PanelSwitcher panelSwitcher;
+
+	/**
+	 * Der PanelManager, der für das Verwalten der Panels in der Anwendung zuständig ist.
+	 */
 	private PanelManager panelManager;
 
+	/**
+	 * Der Student, der die Anfrage gestellt hat, die abgelehnt werden soll.
+	 */
 	private Student student;
+
+	/**
+	 * Der Betreuer, der die Anfrage ablehnt.
+	 */
 	private Betreuer betreuer;
 
+	/**
+	 * Ein JLabel, das zur Anzeige einer Popup-Nachricht verwendet wird, wenn die Anfrage abgelehnt wird.
+	 */
 	private JLabel lblPopUp;
 
 	/**

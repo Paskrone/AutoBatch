@@ -15,14 +15,39 @@ import autobatch.dbaccess.Datenbankabfrage;
  */
 public class AnfragenActionListener implements ActionListener {
 
+	/**
+	 * Textfeld zur Eingabe des Unternehmensnamens.
+	 */
 	private JTextField tf_unternehmen;
+
+	/**
+	 * Textfeld zur Eingabe des Themas.
+	 */
 	private JTextField tf_thema;
+
+	/**
+	 * Textfeld zur Eingabe der Beschreibung.
+	 */
 	private JTextField tf_beschreibung;
 
+	/**
+	 * Der Student, der die Anfrage stellt.
+	 */
 	private Student student;
+
+	/**
+	 * Der Betreuer, der die Anfrage bearbeitet.
+	 */
 	private Betreuer betreuer;
-	
+
+	/**
+	 * Label zur Anzeige von Pop-up-Nachrichten.
+	 */
 	private JLabel lblPopUp;
+
+	/**
+	 * Label zur Anzeige von Fehlermeldungen.
+	 */
 	private JLabel lbl_error;
 
 	/**
@@ -50,7 +75,11 @@ public class AnfragenActionListener implements ActionListener {
 
 	/**
 	 * Diese Methode wird aufgerufen, wenn eine Aktion ausgeführt wird.
-	 * @param e Das ausgelöste ActionEvent
+	 * 
+	 * @param e Das ausgelöste ActionEvent.
+	 * 
+	 * Die Methode liest die Textfelder aus, führt eine Anfrage an die Datenbank aus, um die Daten des Studenten zu löschen
+	 * und neue Daten zu setzen. Wenn der Vorgang fehlschlägt, wird eine Fehlermeldung angezeigt, ansonsten eine Pop-up-Nachricht.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

@@ -17,11 +17,25 @@ import autobatch.session.SessionManager;
  */
 public class BetreuerAuswahlSelectionListener implements ListSelectionListener {
 
-    // Instanzvariablen
-    private PanelSwitcher panelSwitcher;
-    private PanelManager panelManager;
-    private JTable table;
-    private String panel;
+	/**
+	 * Dienst zum Wechseln zwischen Panels.
+	 */
+	private PanelSwitcher panelSwitcher;
+
+	/**
+	 * Dienst zum Verwalten von Panels.
+	 */
+	private PanelManager panelManager;
+
+	/**
+	 * Die Tabelle, die die Auswahl enthält.
+	 */
+	private JTable table;
+
+	/**
+	 * Das Panel, auf dem die Tabelle angezeigt wird.
+	 */
+	private String panel;
 
     /**
      * Konstruktor

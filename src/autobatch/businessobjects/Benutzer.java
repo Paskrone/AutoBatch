@@ -6,11 +6,30 @@ package autobatch.businessobjects;
  */
 public abstract class Benutzer {
 	
-    protected String nachname;
-    protected String vorname;
-    protected String benutzername;
-    protected String passwort;
-    protected String email;
+	/**
+	 * Der Nachname des Benutzers.
+	 */
+	protected String nachname;
+
+	/**
+	 * Der Vorname des Benutzers.
+	 */
+	protected String vorname;
+
+	/**
+	 * Der Benutzername des Benutzers.
+	 */
+	protected String benutzername;
+
+	/**
+	 * Das Passwort des Benutzers.
+	 */
+	protected String passwort;
+
+	/**
+	 * Die E-Mail-Adresse des Benutzers.
+	 */
+	protected String email;
     
     /**
      * Gibt den Nachnamen des Benutzers zurück.
