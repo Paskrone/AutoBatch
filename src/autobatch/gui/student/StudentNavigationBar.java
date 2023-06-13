@@ -15,11 +15,24 @@ import autobatch.businessobjects.Student;
 import autobatch.dbaccess.Datenbankabfrage;
 import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
-
+/**
+ * Die Klasse StudentNavigationBar repräsentiert die Navigationsleiste, die auf dem StudentenPanel angezeigt wird.
+ * Sie ermöglicht den Zugriff auf verschiedene Funktionen und Informationen durch Klicken auf verschiedene Abschnitte der Navigationsleiste.
+ */
 public class StudentNavigationBar extends JPanel {
 
-	Arbeit arbeit = null;
+	 /**
+     * Die Arbeit des Studenten.
+     */
+    private Arbeit arbeit = null;
 
+	/**
+     * Erstellt eine neue StudentNavigationBar.
+     *
+     * @param panelmanager   Der Manager, der die Navigation zwischen den Panels verwaltet.
+     * @param panelSwitcher  Ein Helfer zum Wechseln zwischen verschiedenen Panels.
+     * @param student        Der Student, für den die Navigationsleiste angezeigt wird.
+     */
 	public StudentNavigationBar(PanelManager panelmanager, PanelSwitcher panelSwitcher, Student student) {
 
 		if (student.getArbeit() != 0) {
@@ -29,6 +42,9 @@ public class StudentNavigationBar extends JPanel {
 
 		setPreferredSize(new Dimension(1000, 50));
 
+		/**
+	     * Das JLabel für den Navigationspunkt "IP".
+	     */
 		JLabel lbl_Ip = new JLabel("IP");
 		lbl_Ip.addMouseListener(new NavigationBarMouseListener() {
 			@Override
@@ -51,7 +67,9 @@ public class StudentNavigationBar extends JPanel {
 
 			}
 		});
-
+		/**
+	     * Das JLabel für den Navigationspunkt "Betreuer".
+	     */
 		JLabel lbl_betreuer = new JLabel("Betreuer");
 		lbl_betreuer.addMouseListener(new NavigationBarMouseListener() {
 
@@ -71,6 +89,9 @@ public class StudentNavigationBar extends JPanel {
 			}
 		});
 
+		/**
+	     * Das JLabel für den Navigationspunkt "Abgaben".
+	     */
 		JLabel lbl_abgaben = new JLabel("Abgaben");
 		lbl_abgaben.addMouseListener(new NavigationBarMouseListener() {
 
@@ -83,6 +104,9 @@ public class StudentNavigationBar extends JPanel {
 			}
 		});
 
+		/**
+	     * Das JLabel für den Navigationspunkt "BA-Anmeldeformular".
+	     */
 		JLabel lbl_formulare = new JLabel("BA-Anmeldeformular");
 		lbl_formulare.addMouseListener(new NavigationBarMouseListener() {
 
@@ -108,6 +132,9 @@ public class StudentNavigationBar extends JPanel {
 			}
 		});
 
+		/**
+	     * Das JLabel für den Navigationspunkt "Daten".
+	     */
 		JLabel lbl_daten = new JLabel("Daten");
 		lbl_daten.addMouseListener(new NavigationBarMouseListener() {
 
@@ -120,6 +147,9 @@ public class StudentNavigationBar extends JPanel {
 			}
 		});
 
+		/**
+	     * Das JLabel für den Navigationspunkt "Abmelden".
+	     */
 		JLabel lbl_abmelden = new JLabel("abmelden");
 		lbl_abmelden.addMouseListener(new NavigationBarMouseListener() {
 

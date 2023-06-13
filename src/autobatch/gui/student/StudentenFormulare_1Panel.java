@@ -12,8 +12,18 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 
+/**
+ * Die Klasse StudentenFormulare_1Panel stellt ein JPanel dar, das spezifische Informationen zu den von einem Studenten eingereichten Formularen anzeigt.
+ */
 public class StudentenFormulare_1Panel extends JPanel {
 
+    /**
+     * Erstellt ein neues Panel, das Informationen zu den von einem Studenten eingereichten Formularen anzeigt.
+     *
+     * @param panelmanager   Der Manager, der die Navigation zwischen den Panels verwaltet.
+     * @param panelSwitcher  Ein Helfer zum Wechseln zwischen verschiedenen Panels.
+     * @param student        Der aktuelle Student, dessen eingereichte Formulare angezeigt werden.
+     */
 	public StudentenFormulare_1Panel(PanelManager panelmanager, PanelSwitcher panelSwitcher, Student student) {
 
 		setPreferredSize(new Dimension(1000, 500));

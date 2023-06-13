@@ -20,12 +20,33 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * Eine Klasse, die ein JPanel repräsentiert, in dem die Informationen eines Betreuers und des zugewiesenen Themas eines Studenten angezeigt werden.
+ */
 public class StudentenBetreuer_1Panel extends JPanel {
 
-	private PanelSwitcher panelSwitcher;
-	private Student student;
-	private Betreuer betreuer;
+	/**
+     * Hilft beim Wechseln zwischen verschiedenen Panels.
+     */
+    private PanelSwitcher panelSwitcher;
 
+    /**
+     * Der aktuelle Student, dessen Betreuer- und Themeninformationen angezeigt werden.
+     */
+    private Student student;
+
+    /**
+     * Der Betreuer des aktuellen Studenten.
+     */
+    private Betreuer betreuer;
+
+    /**
+     * Erstellt ein neues Panel, das die Betreuer- und Themeninformationen eines Studenten anzeigt.
+     *
+     * @param panelManager Der Manager, der die Navigation zwischen den Panels verwaltet.
+     * @param panelSwitcher Ein Helfer zum Wechseln zwischen verschiedenen Panels.
+     * @param student Der aktuelle Student, dessen Betreuer- und Themeninformationen angezeigt werden.
+     */
 	public StudentenBetreuer_1Panel(PanelManager panelManager, PanelSwitcher panelSwitcher, Student student) {
 		this.student = student;
 		this.panelSwitcher = panelSwitcher;

@@ -1,0 +1,14 @@
+autobatch.businesslogic.actionlistener
+autobatch.businesslogic.itemlistener
+autobatch.businesslogic.listselectionlistener
+autobatch.businesslogic.mouselistener
+autobatch.businesslogic.tablemodellistener
+autobatch.businessobjects
+autobatch.dbaccess
+autobatch.gui
+autobatch.gui.betreuer
+autobatch.gui.loginandregistration
+autobatch.gui.student
+autobatch.gui.studiendekan
+autobatch.navigation
+autobatch.session

@@ -25,14 +25,38 @@ import java.awt.Component;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTable;
 
+/**
+ * Eine JPanel-Klasse, die das Panel zur Darstellung der Anfragen eines Betreuers implementiert.
+ */
 public class BetreuerAnfragenPanel extends JPanel {
 
+	/**
+	 * Verwaltet die Navigation zwischen den Panels.
+	 */
 	private PanelSwitcher panelSwitcher;
+	
+	/**
+	 * Der Betreuer, dessen Anfragen angezeigt werden.
+	 */
 	private Betreuer betreuer;
+	
+	/**
+	 * Tabelle zur Darstellung der Anfragen.
+	 */
 	private JTable table;
 
+	/**
+	 * Verwaltet die Anzeige der Panels.
+	 */
 	private PanelManager panelManager;
 
+	/**
+	 * Erzeugt ein neues BetreuerAnfragenPanel, das die Anfragen eines bestimmten Betreuers anzeigt.
+	 *
+	 * @param panelSwitcher der PanelSwitcher, der zur Navigation zwischen den Panels verwendet wird.
+	 * @param panelManager der PanelManager, der zur Anzeige der Panels verwendet wird.
+	 * @param betreuer der Betreuer, dessen Anfragen angezeigt werden sollen.
+	 */
 	public BetreuerAnfragenPanel(PanelSwitcher panelSwitcher, PanelManager panelManager, Betreuer betreuer) {
 
 		this.betreuer = betreuer;

@@ -35,23 +35,74 @@ import java.awt.Component;
 import java.awt.Color;
 import javax.swing.JButton;
 
+/**
+ * Das Panel für die Betreuer-Studenten-Schnittstelle in der GUI.
+ * Dieses Panel stellt die notwendigen Informationen und Funktionen für Betreuer bereit, um Studenteninformationen zu verwalten,
+ * darunter die Details der Studenten, die Themen ihrer Arbeiten, und ihre Abschlussergebnisse.
+ * Es erlaubt auch den Zugriff auf Studenten- und Betreuereinreichungen und bietet die Möglichkeit,
+ * Dokumente hochzuladen und herunterzuladen.
+ * <p>
+ * Darüber hinaus ermöglicht dieses Panel das Ändern von Studentennoten und das Anmelden zu BA-Themen.
+ */
 public class BetreuerStudenten_1Panel extends JPanel {
 
-	private PanelSwitcher panelSwitcher;
-	private Betreuer betreuer;
-	private final ButtonGroup buttonGroupNDA = new ButtonGroup();
-	private DefaultListModel<String> listModel;
-	private JList<String> fileList;
-	private DefaultListModel<String> listModel_1;
-	private JList<String> fileList_1;
-	private Datenbankabfrage dbaccess;
+	/**
+     * Der PanelSwitcher für das Umschalten zwischen verschiedenen Panels.
+     */
+    private PanelSwitcher panelSwitcher;
 
+    /**
+     * Der aktuelle Betreuer.
+     */
+    private Betreuer betreuer;
+
+    /**
+     * Die ButtonGroup für die NDA-Optionen.
+     */
+    private final ButtonGroup buttonGroupNDA = new ButtonGroup();
+
+    /**
+     * Das DefaultListModel für die Liste der Einreichungen des Betreuers.
+     */
+    private DefaultListModel<String> listModel;
+
+    /**
+     * Die JList für die Dateien des Betreuers.
+     */
+    private JList<String> fileList;
+
+    /**
+     * Das DefaultListModel für die Liste der Einreichungen des Studenten.
+     */
+    private DefaultListModel<String> listModel_1;
+
+    /**
+     * Die JList für die Dateien des Studenten.
+     */
+    private JList<String> fileList_1;
+
+    /**
+     * Die Datenbankabfrageklasse für den Zugriff auf die Datenbankdaten.
+     */
+    private Datenbankabfrage dbaccess;
+
+	/**
+	 * Konstruktor für das BetreuerStudenten_1Panel.
+	 * Initialisiert die UI-Komponenten und lädt die notwendigen Daten aus der Datenbank.
+	 * 
+	 * @param panelManager Verwaltet das Hinzufügen und Entfernen von Panels in der UI.
+	 * @param panelSwitcher Verwaltet das Umschalten zwischen verschiedenen Panels.
+	 * @param betreuer Der aktuelle Betreuer.
+	 */
 	public BetreuerStudenten_1Panel(PanelManager panelManager, PanelSwitcher panelSwitcher, Betreuer betreuer) {
 
 		this.panelSwitcher = panelSwitcher;
 		setPreferredSize(new Dimension(1000, 500));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 
+		/**
+		 * Die Datenbankabfrageklasse für den Zugriff auf die Datenbankdaten.
+		 */
 		Datenbankabfrage dbaccess = new Datenbankabfrage();
 
 		int mnr = Integer.parseInt(panelSwitcher.getData("2") + "");
@@ -157,12 +208,18 @@ public class BetreuerStudenten_1Panel extends JPanel {
 		lbl_error.setForeground(new Color(251, 44, 22));
 		lbl_error.setVisible(false);
 
+		/**
+		 * Das DefaultListModel für die Liste der Einreichungen des Betreuers.
+		 */
 		listModel = new DefaultListModel<>();
 		ArrayList<String> submissions = (ArrayList<String>) dbaccess.getSubmissionsForBetreuerFromStudent(betreuer.getBenutzername(), student.getBenutzername());
 		for (String submission : submissions) {
 			listModel.addElement(submission);
 		}
 
+		/**
+		 * Das DefaultListModel für die Liste der Einreichungen des Studenten.
+		 */
 		listModel_1 = new DefaultListModel<>();
 		ArrayList<String> submissions_1 = (ArrayList<String>) dbaccess.getSubmissions(student.getBenutzername());
 		System.out.println(student.getBenutzername());
@@ -170,9 +227,15 @@ public class BetreuerStudenten_1Panel extends JPanel {
 			listModel_1.addElement(submission);
 		}
 
+		/**
+		 * Die JList für die Dateien des Betreuers.
+		 */
 		fileList = new JList<>(listModel);
 		fileList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+		/**
+		 * Die JList für die Dateien des Studenten.
+		 */
 		fileList_1 = new JList<>(listModel_1);
 		fileList_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 

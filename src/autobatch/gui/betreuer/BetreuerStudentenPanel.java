@@ -23,11 +23,31 @@ import autobatch.navigation.PanelSwitcher;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
+/**
+ * Das BetreuerStudentenPanel ist eine UI-Komponente, die eine Tabelle der Studierenden anzeigt, 
+ * die von einem bestimmten Betreuer betreut werden. Jeder Eintrag in der Tabelle enthält 
+ * Informationen zum Nachnamen, E-Mail, Matrikelnummer und der Arbeit des Studierenden.
+ */
 public class BetreuerStudentenPanel extends JPanel {
 
+	/**
+	 * Instanz der Klasse PanelSwitcher, die zur Navigation zwischen den Panels dient.
+	 */
 	private PanelSwitcher panelSwitcher;
+
+	/**
+	 * Instanz der Klasse Betreuer, die die Daten des aktuellen Betreuers enthält.
+	 */
 	private Betreuer betreuer;
 
+	/**
+	 * Konstruktor für das BetreuerStudentenPanel, der die Tabelle der betreuten Studierenden erstellt 
+	 * und die Navigation einrichtet.
+	 * 
+	 * @param panelSwitcher  Instanz der PanelSwitcher-Klasse für die Navigation zwischen den Panels.
+	 * @param panelManager   Instanz der PanelManager-Klasse zur Verwaltung der Panels.
+	 * @param betreuer       Instanz der Betreuer-Klasse, die die Daten des aktuellen Betreuers enthält.
+	 */
 	public BetreuerStudentenPanel(PanelSwitcher panelSwitcher, PanelManager panelManager, Betreuer betreuer) {
 
 		this.betreuer = betreuer;

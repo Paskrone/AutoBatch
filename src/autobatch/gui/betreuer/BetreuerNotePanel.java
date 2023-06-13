@@ -20,10 +20,27 @@ import autobatch.navigation.PanelSwitcher;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+/**
+ * Diese Klasse repräsentiert ein JPanel, das verwendet wird, um eine Note für eine bestimmte Arbeit einzutragen.
+ * Es enthält ein Textfeld zur Eingabe der Note, einen "Speichern"-Button, um die eingegebene Note zu speichern, 
+ * und einen "Zurück"-Button, um zum vorherigen Panel zu navigieren. Zudem wird eine Nachricht angezeigt, wenn 
+ * die Note erfolgreich gespeichert wurde.
+ */
 public class BetreuerNotePanel extends JPanel {
-
+	
+	/**
+	 *Textfeld zur Eingabe der Note
+	 */
 	private JTextField textField;
 
+	/**
+	 * Erstellt ein neues BetreuerNotePanel. 
+	 *
+	 * @param panelManager Der PanelManager, der zur Anzeige der Panels verwendet wird.
+	 * @param panelSwitcher Der PanelSwitcher, der zur Navigation zwischen den Panels verwendet wird.
+	 * @param betreuer Der Betreuer, der derzeit angemeldet ist.
+	 * @param arbeit Die Arbeit, für die eine Note eingegeben wird.
+	 */
 	public BetreuerNotePanel(PanelManager panelManager, PanelSwitcher panelSwitcher, Betreuer betreuer, Arbeit arbeit) {
 
 		setPreferredSize(new Dimension(1000, 500));

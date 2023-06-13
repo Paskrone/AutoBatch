@@ -12,9 +12,19 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
+/**
+ * Die StudiendekanNavigationBar ist ein JPanel, das eine Navigationsleiste für den Studiendekan darstellt.
+ * Es ermöglicht dem Studiendekan, zwischen verschiedenen Panels zu wechseln und Aktionen auszuführen.
+ */
 public class StudiendekanNavigationBar extends JPanel {
 
+    /**
+     * Erstellt eine neue StudiendekanNavigationBar.
+     *
+     * @param panelManager Der PanelManager, der für die Navigation zwischen den Panels zuständig ist.
+     * @param panelSwitcher Der PanelSwitcher, der für das Umschalten zwischen den Panels verantwortlich ist.
+     * @param studiendekan Der Studiendekan, für den die Navigationsleiste angezeigt wird.
+     */
 	public StudiendekanNavigationBar(PanelManager panelManager, PanelSwitcher panelSwitcher,
 			Studiendekan studiendekan) {
 

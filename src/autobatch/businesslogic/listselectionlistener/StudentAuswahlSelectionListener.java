@@ -12,39 +12,67 @@ import autobatch.navigation.PanelManager;
 import autobatch.navigation.PanelSwitcher;
 import autobatch.session.SessionManager;
 
+/**
+ * Listener zur Verarbeitung von Ereignissen bei der Auswahl von Studenten in einer Tabelle.
+ */
 public class StudentAuswahlSelectionListener implements ListSelectionListener {
 
-	private PanelSwitcher panelSwitcher;
-	private PanelManager panelManager;
+    /**
+     * panelSwitcher: Ein Dienst zum Wechseln zwischen verschiedenen Panels.
+     */
+    private PanelSwitcher panelSwitcher;
 
-	private JTable table;
+    /**
+     * panelManager: Ein Dienst zum Verwalten der Panels in der Anwendung.
+     */
+    private PanelManager panelManager;
 
-	public StudentAuswahlSelectionListener(PanelSwitcher panelSwitcher, PanelManager panelManager, JTable table) {
-		super();
-		this.panelManager = panelManager;
-		this.panelSwitcher = panelSwitcher;
-		this.table = table;
-	}
+    /**
+     * table: Ein JTable-Objekt, das eine Tabelle in der GUI repräsentiert.
+     */
+    private JTable table;
 
-	@Override
-	public void valueChanged(ListSelectionEvent e) {
-		if (!e.getValueIsAdjusting()) { // Überprüfen Sie, ob die Selektion vollständig ist
-			int selectedRow = table.getSelectedRow();
-			if (selectedRow != -1) { // Überprüfen Sie, ob eine Zeile ausgewählt wurde
-				// Holen Sie sich die Daten aus der ausgewählten Zeile
-				Object mail = table.getValueAt(selectedRow, 1);
 
-				panelSwitcher.storeData("1", mail);
+    /**
+     * Konstruktor
+     * @param panelSwitcher Dienst zum Wechseln zwischen Panels
+     * @param panelManager Dienst zum Verwalten von Panels
+     * @param table Die Tabelle, die die Auswahl enthält
+     */
+    public StudentAuswahlSelectionListener(PanelSwitcher panelSwitcher, PanelManager panelManager, JTable table) {
+        this.panelManager = panelManager;
+        this.panelSwitcher = panelSwitcher;
+        this.table = table;
+    }
 
-				JPanel studentenBetreuerAnfragePanel = new StudentenBetreuerAnfragePanel(panelManager, panelSwitcher,
-						(Student) SessionManager.getInstance().getAktuellerBenutzer());
+    /**
+     * Diese Methode wird aufgerufen, wenn eine Auswahl in der Tabelle getroffen wird.
+     * Zuerst wird überprüft, ob die Auswahl vollständig ist und ob eine Zeile ausgewählt wurde. 
+     * Wenn dies der Fall ist, werden die Daten aus der ausgewählten Zeile abgerufen und 
+     * gespeichert. Anschließend wird ein neues Panel erstellt, das die Anfrage eines 
+     * Studenten an einen Betreuer darstellt, und dieses Panel wird zur Anzeige gebracht.
+     * @param e ist das ListSelectionEvent, das die Änderung der Auswahl in der Tabelle repräsentiert.
+     */
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if (!e.getValueIsAdjusting()) { // Überprüfen Sie, ob die Auswahl vollständig ist
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow != -1) { // Überprüfen Sie, ob eine Zeile ausgewählt wurde
+                // Holen Sie sich die Daten aus der ausgewählten Zeile
+                Object mail = table.getValueAt(selectedRow, 1);
 
-				panelManager.updatePanels(studentenBetreuerAnfragePanel, "Studenten_Betreuer_Anfrage");
+                panelSwitcher.storeData("1", mail);
 
-				panelSwitcher.switchToPanel("Studenten_Betreuer_Anfrage");
+                // Erzeugen Sie ein neues Panel und schalten Sie darauf um
+                JPanel studentenBetreuerAnfragePanel = new StudentenBetreuerAnfragePanel(panelManager, panelSwitcher,
+                        (Student) SessionManager.getInstance().getAktuellerBenutzer());
 
-			}
-		}
-	}
+                panelManager.updatePanels(studentenBetreuerAnfragePanel, "Studenten_Betreuer_Anfrage");
+
+                panelSwitcher.switchToPanel("Studenten_Betreuer_Anfrage");
+
+            }
+        }
+    }
 
 }

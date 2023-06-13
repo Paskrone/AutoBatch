@@ -14,8 +14,19 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * Die Klasse BetreuerPanel dient zur Darstellung des Hauptpanels für einen Betreuer.
+ * Sie beinhaltet eine Navigationsleiste und zeigt das Autobatch-Logo.
+ */
 public class BetreuerPanel extends JPanel {
 
+	/**
+	 * Der Konstruktor für die Klasse BetreuerPanel.
+	 * 
+	 * @param panelManager Ein PanelManager zur Verwaltung von Panels
+	 * @param panelSwitcher Ein PanelSwitcher zur Umschaltung zwischen verschiedenen Panels
+	 * @param betreuer Ein Betreuer-Objekt repräsentiert den aktuell eingeloggten Betreuer
+	 */
 	public BetreuerPanel(PanelManager panelManager, PanelSwitcher panelSwitcher, Betreuer betreuer) {
 
 		setPreferredSize(new Dimension(1000, 500));

@@ -29,11 +29,28 @@ import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.Component;
 
+/**
+ * Das StudiendekanNotenPanel ist ein JPanel, das die Noten der Studenten für den Studiendekan darstellt und bearbeitbar macht.
+ */
 public class StudiendekanNotenPanel extends JPanel {
 
-	private JTable table;
-	private static DefaultTableModel model;
+    /**
+     * Die Tabelle, die die Noten der Studenten darstellt.
+     */
+    private JTable table;
 
+    /**
+     * Das Modell für die Tabelle, das die Daten und Spalteninformationen enthält.
+     */
+    private static DefaultTableModel model;
+
+    /**
+     * Erstellt ein neues StudiendekanNotenPanel.
+     *
+     * @param panelmanager Der PanelManager, der für die Navigation zwischen den Panels zuständig ist.
+     * @param panelSwitcher Der PanelSwitcher, der für das Umschalten zwischen den Panels verantwortlich ist.
+     * @param studiendekan Der Studiendekan, für den das Panel angezeigt wird.
+     */
 	public StudiendekanNotenPanel(PanelManager panelmanager, PanelSwitcher panelSwitcher, Studiendekan studiendekan) {
 
 		setPreferredSize(new Dimension(1000, 500));
@@ -117,20 +134,33 @@ public class StudiendekanNotenPanel extends JPanel {
 	}
 
 	
-	// Spalte Vortrag LIGHT_GRAY
+	/**
+	 * Die innere Klasse CustomCellRenderer ist ein benutzerdefinierter Zellenrenderer für die JTable. Sie ermöglicht die Anpassung der Hintergrundfarbe einer bestimmten Spalte in der Tabelle.
+	 */
 	private static class CustomCellRenderer extends DefaultTableCellRenderer {
+		/**
+	     * Gibt eine Komponente zurück, die das Rendern der Zelle übernimmt.
+	     *
+	     * @param table      Die Tabelle, die die Zelle enthält.
+	     * @param value      Der Wert der Zelle.
+	     * @param isSelected Gibt an, ob die Zelle ausgewählt ist.
+	     * @param hasFocus   Gibt an, ob die Zelle den Fokus hat.
+	     * @param row        Der Zeilenindex der Zelle.
+	     * @param column     Der Spaltenindex der Zelle.
+	     * @return Die gerenderte Komponente für die Zelle.
+	     */
 		@Override
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 				int row, int column) {
 			Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-			// Check if the column index matches the desired column to be colored
+			// Überprüfen, ob der Spaltenindex mit der gewünschten Spalte übereinstimmt
 			int desiredColumnIndex = 3;
 			if (column == desiredColumnIndex) {
-				// Set the desired background color for the column
+				// Die gewünschte Hintergrundfarbe für die Spalte setzen
 				component.setBackground(Color.LIGHT_GRAY);
 			} else {
-				// Set the default background color for other columns
+				// Die Standard-Hintergrundfarbe für andere Spalten setzen
 				component.setBackground(table.getBackground());
 			}
 

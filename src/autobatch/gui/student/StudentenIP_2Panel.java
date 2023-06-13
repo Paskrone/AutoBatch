@@ -13,8 +13,19 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * Die Klasse StudentenIP_2Panel repräsentiert ein JPanel, das spezifisch für Studenten erstellt wurde.
+ * Es zeigt an, dass der Student bereits einen IP beantragt hat.
+ */
 public class StudentenIP_2Panel extends JPanel {
 
+    /**
+     * Erstellt ein neues Panel für Studenten, die bereits einen IP beantragt haben.
+     *
+     * @param panelManager   Der Manager, der die Navigation zwischen den Panels verwaltet.
+     * @param panelSwitcher  Ein Helfer zum Wechseln zwischen verschiedenen Panels.
+     * @param student        Der Student, für den das Panel angezeigt wird.
+     */
 	public StudentenIP_2Panel(PanelManager panelManager, PanelSwitcher panelSwitcher, Student student) {
 
 		setPreferredSize(new Dimension(1000, 500));

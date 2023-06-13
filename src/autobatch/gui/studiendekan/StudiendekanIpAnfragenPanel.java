@@ -19,15 +19,36 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+
+/**
+ * Das StudiendekanIpAnfragenPanel ist ein JPanel, das eine Anfrage für die Annahme einer Arbeit durch den Studiendekan darstellt.
+ * Es zeigt Informationen über das Unternehmen, das Thema und die Beschreibung der Arbeit sowie Informationen über den Studenten an.
+ * Der Studiendekan kann die Anfrage annehmen.
+ */
 public class StudiendekanIpAnfragenPanel extends JPanel {
 
-	
-	private Student student;
+    /**
+     * Der Student, für den die Anfrage gestellt wurde.
+     */
+    private Student student;
 
-	private Arbeit arbeit;
+    /**
+     * Die Arbeit, für die die Anfrage gestellt wurde.
+     */
+    private Arbeit arbeit;
 
-	private Betreuer betreuer;
+    /**
+     * Der Betreuer der Arbeit.
+     */
+    private Betreuer betreuer;
 
+    /**
+     * Erstellt ein neues StudiendekanIpAnfragenPanel.
+     *
+     * @param panelmanager Der PanelManager, der für die Navigation zwischen den Panels zuständig ist.
+     * @param panelSwitcher Der PanelSwitcher, der für das Umschalten zwischen den Panels verantwortlich ist.
+     * @param dekan Der Studiendekan, für den das Panel angezeigt wird.
+     */
 	public StudiendekanIpAnfragenPanel(PanelManager panelmanager, PanelSwitcher panelSwitcher, Studiendekan dekan) {
 
 		Datenbankabfrage datenbankabfrage = new Datenbankabfrage();

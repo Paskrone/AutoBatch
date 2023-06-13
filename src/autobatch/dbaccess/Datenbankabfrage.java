@@ -26,19 +26,46 @@ import autobatch.businessobjects.Arbeit;
 //export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 //mysql -u db4 -p'!db4.hfts23?' -h 3.69.96.96 -P 3306 db4
 
+/**
+ * Datenbankabfrageklasse zur Interaktion mit der Datenbank.
+ */
 public class Datenbankabfrage {
 
-	private String url = "jdbc:mysql://3.69.96.96:3306/";
-	private String dbName = "db4";
-	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String userName = "db4";
-	private String pw = "!db4.hfts23?";
+	 /**
+     * Die URL zur Datenbank.
+     */
+    private String url = "jdbc:mysql://3.69.96.96:3306/";
 
-	// Gibt ein Benutzerobjekt (Student, Betreuer oder Studiendekan) zurück,
-	// basierend auf dem übergebenen Benutzernamen.
-	// Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie
-	// anhand eines übergebenen usernames.
+    /**
+     * Der Name der Datenbank.
+     */
+    private String dbName = "db4";
 
+    /**
+     * Der JDBC-Treiber.
+     */
+    private String driver = "com.mysql.cj.jdbc.Driver";
+
+    /**
+     * Der Benutzername für den Datenbankzugriff.
+     */
+    private String userName = "db4";
+
+    /**
+     * Das Passwort für den Datenbankzugriff.
+     */
+    private String pw = "!db4.hfts23?";
+
+	
+	/**
+     * Gibt ein Benutzerobjekt (Student, Betreuer oder Studiendekan) zurück,
+     * basierend auf dem übergebenen Benutzernamen.
+     * Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie
+     * anhand eines übergebenen usernames.
+     *
+     * @param username Der Benutzername des gesuchten Benutzers.
+     * @return Ein Benutzerobjekt, das dem übergebenen Benutzernamen entspricht. Gibt null zurück, wenn kein Benutzer gefunden wird.
+     */
 	public Benutzer getBenutzer(String username) {
 		Student student = getStudentByUsername(username);
 		if (student != null) {
@@ -58,11 +85,13 @@ public class Datenbankabfrage {
 		return null;
 	}
 
-	// Gibt ein Betreuerobjekt zurück, das auf den übergebenen Benutzernamen
-	// basiert.
-	// Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie
-	// anhand eines übergebenen usernames.
-
+	/**
+     * Gibt ein Betreuerobjekt zurück, das auf den übergebenen Benutzernamen basiert.
+     * Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie anhand eines übergebenen usernames.
+     *
+     * @param username Der Benutzername des gesuchten Betreuers.
+     * @return Ein Betreuerobjekt, das dem übergebenen Benutzernamen entspricht. Gibt null zurück, wenn kein Betreuer gefunden wird.
+     */
 	public Betreuer getBetreuerByUsername(String username) {
 		List<Betreuer> betreuerList = getAllBetreuer();
 		for (Betreuer betreuer : betreuerList) {
@@ -73,6 +102,12 @@ public class Datenbankabfrage {
 		return null;
 	}
 
+	/**
+     * Sucht und gibt einen Betreuer zurück, basierend auf der übergebenen E-Mail.
+     *
+     * @param mail Die E-Mail des gesuchten Betreuers.
+     * @return Ein Betreuerobjekt, das der übergebenen E-Mail entspricht. Gibt null zurück, wenn kein Betreuer gefunden wird.
+     */
 	public Betreuer getBetreuerByMail(String mail) {
 		List<Betreuer> betreuerList = getAllBetreuer();
 		for (Betreuer betreuer : betreuerList) {
@@ -82,7 +117,15 @@ public class Datenbankabfrage {
 		}
 		return null;
 	}
-
+	
+	/**
+     * Aktualisiert Daten in der Betreuer-Tabelle basierend auf den übergebenen Argumenten.
+     *
+     * @param betreuer Das Betreuerobjekt, das aktualisiert werden soll.
+     * @param arg Das neue Argument.
+     * @param spalte Die Spalte, in der das Argument aktualisiert werden soll.
+     * @return true, wenn die Aktualisierung erfolgreich war, sonst false.
+     */
 	public boolean updateDataBetreuerString(Betreuer betreuer, String arg, String spalte) {
 		if (arg != null) {
 			String query = "UPDATE `db4`.`betreuer` SET `" + spalte + "` = '" + arg + "' WHERE (`email` = ? )";
@@ -102,11 +145,13 @@ public class Datenbankabfrage {
 		return false;
 	}
 
-	// Gibt ein Studiendekanobjekt zurück, das auf den übergebenen Benutzernamen
-	// basiert.
-	// Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie
-	// anhand eines übergebenen usernames.
-
+	/**
+     * Gibt ein Studiendekanobjekt zurück, das auf den übergebenen Benutzernamen basiert.
+     * Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie anhand eines übergebenen usernames.
+     *
+     * @param username Der Benutzername des gesuchten Studiendekans.
+     * @return Ein Studiendekanobjekt, das dem übergebenen Benutzernamen entspricht. Gibt null zurück, wenn kein Studiendekan gefunden wird.
+     */
 	public Studiendekan getStudiendekanByUsername(String username) {
 		List<Studiendekan> studiendekaneList = getAllStudiendekane();
 		for (Studiendekan studiendekan : studiendekaneList) {
@@ -117,6 +162,13 @@ public class Datenbankabfrage {
 		return null;
 	}
 
+	/**
+     * Aktualisiert Daten in der Studiendekan-Tabelle basierend auf den übergebenen Argument
+     * @param studiendekan Das Studiendekanobjekt, das aktualisiert werden soll.
+     * @param arg Das neue Argument.
+     * @param spalte Die Spalte, in der das Argument aktualisiert werden soll.
+     * @return true, wenn die Aktualisierung erfolgreich war, sonst false.
+     */
 	public boolean updateDataStudiendekanString(Studiendekan studiendekan, String arg, String spalte) {
 		if (arg != null) {
 			String query = "UPDATE `db4`.`studiendekan` SET `" + spalte + "` = '" + arg + "' WHERE (`email` = ? )";
@@ -136,6 +188,13 @@ public class Datenbankabfrage {
 		return false;
 	}
 
+	/**
+     * Gibt ein Studentenobjekt zurück, das auf den übergebenen Benutzernamen basiert.
+     * Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie anhand eines übergebenen usernames.
+     *
+     * @param username Der Benutzername des gesuchten Studenten.
+     * @return Ein Studentenobjekt, das dem übergebenen Benutzernamen entspricht. Gibt null zurück, wenn kein Student gefunden wird.
+     */
 	public Student getStudentByUsername(String username) {
 		List<Student> sl = this.getAllStudents();
 		for (Student student : sl) {
@@ -147,6 +206,13 @@ public class Datenbankabfrage {
 		return null;
 	}
 
+	/**
+     * Gibt ein Studentenobjekt zurück, das auf die übergebene Matrikelnummer basiert.
+     * Verwendet die schon erstellten ArrayListen aus der DB und durchsucht sie anhand einer übergebenen Matrikelnummer.
+     *
+     * @param mnr Die Matrikelnummer des gesuchten Studenten.
+     * @return Ein Studentenobjekt, das der übergebenen Matrikelnummer entspricht. Gibt null zurück, wenn kein Student gefunden wird.
+     */
 	public Student getStudentByMNR(int mnr) {
 		List<Student> sl = this.getAllStudents();
 		for (Student student : sl) {
@@ -158,8 +224,11 @@ public class Datenbankabfrage {
 		return null;
 	}
 
-	// Gibt ALLE Studenten zurück, die in der DB existieren.
-
+	/**
+     * Gibt eine Liste aller Studenten zurück, die in der Datenbank existieren.
+     *
+     * @return Eine Liste aller Studenten.
+     */
 	public List<Student> getAllStudents() {
 		List<Student> students = new ArrayList<>();
 		Connection con = null;
@@ -208,8 +277,11 @@ public class Datenbankabfrage {
 		return students;
 	}
 
-	// Gibt ALLE Studiendekane zurück, die in der DB existieren.
-
+	/**
+     * Gibt eine Liste aller Studiendekane zurück, die in der Datenbank existieren.
+     *
+     * @return Eine Liste aller Studiendekane.
+     */
 	public List<Studiendekan> getAllStudiendekane() {
 		List<Studiendekan> studiendekans = new ArrayList<>();
 		Connection con = null;
@@ -244,8 +316,11 @@ public class Datenbankabfrage {
 		return studiendekans;
 	}
 
-	// Gibt ALLE Betreuer zurück, die in der DB existieren.
-
+	/**
+     * Gibt eine Liste aller Betreuer zurück, die in der Datenbank existieren.
+     *
+     * @return Eine Liste aller Betreuer.
+     */
 	public List<Betreuer> getAllBetreuer() {
 		List<Betreuer> betreuer = new ArrayList<>();
 		Connection con = null;
@@ -277,7 +352,14 @@ public class Datenbankabfrage {
 
 		return betreuer;
 	}
-
+	
+	/**
+     * Sucht in allen Tabellen nach einem Benutzernamen und Passwort.
+     *
+     * @param username Der zu suchende Benutzername.
+     * @param password Das zugehörige Passwort.
+     * @return true, wenn der Benutzername und das Passwort gefunden wurden, sonst false.
+     */
 	public boolean searchAllTablesByUsernameAndPassword(String username, String password) {
 		try {
 			Class.forName(driver);
@@ -327,8 +409,12 @@ public class Datenbankabfrage {
 		}
 	}
 
-	// Sucht in der DB nach einen username und gibt true zurück, falls einer
-	// existiert
+	/**
+     * Überprüft, ob der übergebene Benutzername bereits in der Datenbank existiert.
+     *
+     * @param username Der zu überprüfende Benutzername.
+     * @return true, wenn der Benutzername bereits existiert, sonst false.
+     */
 	public boolean isUsernameTaken(String username) {
 		String query = "SELECT 1 FROM (SELECT Benutzername FROM studenten UNION SELECT Benutzername FROM betreuer UNION SELECT Benutzername FROM studiendekan) AS all_users WHERE Benutzername = ?";
 		try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);
@@ -342,7 +428,12 @@ public class Datenbankabfrage {
 		}
 	}
 
-	// Student in der Datenbank anlegen
+	/**
+     * Registriert einen neuen Studenten in der Datenbank.
+     *
+     * @param student Das zu registrierende Studentenobjekt.
+     * @return true, wenn die Registrierung erfolgreich war, sonst false.
+     */
 	public boolean registerStudent(Student student) {
 		if (isUsernameTaken(student.getBenutzername())) {
 			return false;
@@ -374,7 +465,13 @@ public class Datenbankabfrage {
 		}
 	}
 
-	// Update Studenten Tabelle
+	/**
+     * Aktualisiert die Daten in der Spalte eines Studenten in der Studenten Tabelle.
+     * @param student Der Student, dessen Daten aktualisiert werden sollen.
+     * @param arg Der neue Wert, der in die Spalte eingetragen werden soll.
+     * @param spalte Der Name der Spalte, die aktualisiert werden soll.
+     * @return Gibt zurück, ob die Aktualisierung erfolgreich war oder nicht.
+     */
 	public boolean updateDataStudentString(Student student, String arg, String spalte) {
 		if (arg != null) {
 			String query = "UPDATE `db4`.`studenten` SET `" + spalte + "` = '" + arg + "' WHERE (MNR = "
@@ -386,6 +483,13 @@ public class Datenbankabfrage {
 		return false;
 	}
 
+	/**
+     * Aktualisiert die Daten in der Spalte eines Studenten in der Studenten Tabelle.
+     * @param student Der Student, dessen Daten aktualisiert werden sollen.
+     * @param arg Der neue Wert, der in die Spalte eingetragen werden soll.
+     * @param spalte Der Name der Spalte, die aktualisiert werden soll.
+     * @return Gibt zurück, ob die Aktualisierung erfolgreich war oder nicht.
+     */
 	public boolean updateDataStudentInt(Student student, int arg, String spalte) {
 		if (arg != 0) {
 			String query = "UPDATE `db4`.`studenten` SET `" + spalte + "` = '" + arg + "' WHERE (MNR = "
@@ -397,6 +501,13 @@ public class Datenbankabfrage {
 		return false;
 	}
 
+	/**
+     * Aktualisiert die Daten in der Spalte eines Studenten in der Studenten Tabelle.
+     * @param student Der Student, dessen Daten aktualisiert werden sollen.
+     * @param arg Der neue Wert, der in die Spalte eingetragen werden soll.
+     * @param spalte Der Name der Spalte, die aktualisiert werden soll.
+     * @return Gibt zurück, ob die Aktualisierung erfolgreich war oder nicht.
+     */
 	public boolean updateDataStudentLong(Student student, long arg, String spalte) {
 		if (arg != 0) {
 			String query = "UPDATE `db4`.`studenten` SET `" + spalte + "` = '" + arg + "' WHERE (MNR = "
@@ -408,8 +519,16 @@ public class Datenbankabfrage {
 		return false;
 	}
 
-	// befülle Arbeit Tabelle
-
+	/**
+	 * Fügt einen neuen Arbeitseintrag in die Datenbank ein.
+	 * 
+	 * @param student Der Student, der die Arbeit durchführt.
+	 * @param betreuer Der Betreuer der Arbeit.
+	 * @param thema Das Thema der Arbeit.
+	 * @param unternehmen Das Unternehmen, das die Arbeit anbietet.
+	 * @param beschreibung Die Beschreibung der Arbeit.
+	 * @return Gibt true zurück, wenn das Hinzufügen erfolgreich war, sonst false.
+	 */
 	public boolean setDataArbeit(Student student, Betreuer betreuer, String thema, String unternehmen,
 			String beschreibung) {
 		if (student != null && betreuer != null && thema != null && unternehmen != null && beschreibung != null) {
@@ -428,7 +547,12 @@ public class Datenbankabfrage {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Ermittelt eine geeignete ID für eine neue Arbeit.
+	 * 
+	 * @return Die ermittelte ID.
+	 */
 	public int getViableIdArbeit() {
 
 		List<Integer> ids = new ArrayList<>();
@@ -467,6 +591,14 @@ public class Datenbankabfrage {
 
 	}
 
+	/**
+	 * Aktualisiert eine bestimmte Spalte eines Arbeitseintrags mit einem boolean-Wert in der Datenbank.
+	 * 
+	 * @param arbeit Die Arbeit, deren Daten aktualisiert werden sollen.
+	 * @param arg Der boolean-Wert, mit dem die Spalte aktualisiert werden soll.
+	 * @param spalte Der Name der Spalte, die aktualisiert werden soll.
+	 * @return Gibt true zurück, wenn die Aktualisierung erfolgreich war, sonst false.
+	 */
 	public boolean updateDataArbeitBoolean(Arbeit arbeit, boolean arg, String spalte) {
 		if (arg) {
 			String query = "UPDATE `db4`.`arbeit` SET `" + spalte + "` = b'1' WHERE (idArbeit = " + arbeit.getIdArbeit()
@@ -484,6 +616,15 @@ public class Datenbankabfrage {
 		return false;
 	}
 
+	/**
+	 * Aktualisiert eine bestimmte Spalte eines Arbeitseintrags mit einem float-Wert in der Datenbank.
+	 * 
+	 * @param arbeit Die Arbeit, deren
+	 * * Daten aktualisiert werden sollen.
+	 * @param arg Der float-Wert, mit dem die Spalte aktualisiert werden soll.
+	 * @param spalte Der Name der Spalte, die aktualisiert werden soll.
+	 * @return Gibt true zurück, wenn die Aktualisierung erfolgreich war, sonst false.
+	 */
 	public boolean updateDataArbeitFloat(Arbeit arbeit, float arg, String spalte) {
 		if (arg != 0) {
 			String query = "UPDATE `db4`.`arbeit` SET `" + spalte + "` = '" + arg + "' WHERE (idArbeit = "
@@ -495,6 +636,14 @@ public class Datenbankabfrage {
 		return false;
 	}
 
+	/**
+	 * Aktualisiert eine bestimmte Spalte eines Arbeitseintrags mit einem int-Wert in der Datenbank.
+	 * 
+	 * @param arbeit Die Arbeit, deren Daten aktualisiert werden sollen.
+	 * @param arg Der int-Wert, mit dem die Spalte aktualisiert werden soll.
+	 * @param spalte Der Name der Spalte, die aktualisiert werden soll.
+	 * @return Gibt true zurück, wenn die Aktualisierung erfolgreich war, sonst false.
+	 */
 	public boolean updateDataArbeitDate(Arbeit arbeit, LocalDate arg, String spalte) {
 		if (arg != null) {
 			String query = "UPDATE `db4`.`arbeit` SET `" + spalte + "` = '" + arg + "' WHERE (idArbeit = "
@@ -506,6 +655,14 @@ public class Datenbankabfrage {
 		return false;
 	}
 
+	/**
+	 * Aktualisiert eine bestimmte Spalte eines Arbeitseintrags mit einem String-Wert in der Datenbank.
+	 * 
+	 * @param arbeit Das Arbeit-Objekt, dessen Daten aktualisiert werden sollen.
+	 * @param arg Der String-Wert, mit dem die Spalte aktualisiert werden soll.
+	 * @param spalte Der Name der Spalte, die aktualisiert werden soll.
+	 * @return Gibt true zurück, wenn die Aktualisierung erfolgreich war, sonst false.
+	 */
 	public boolean updateDataArbeitString(Arbeit arbeit, String arg, String spalte) {
 		if (arg != null) {
 			String query = "UPDATE `db4`.`arbeit` SET `" + spalte + "` = '" + arg + "' WHERE (idArbeit = "
@@ -517,6 +674,13 @@ public class Datenbankabfrage {
 		return false;
 	}
 
+	/**
+	 * Löscht eine Arbeitseintrag in der Datenbank.
+	 * 
+	 * @param studentMNR Die Matrikelnummer des Studenten, der an der Arbeit beteiligt ist.
+	 * @param betreuerEmail Die E-Mail-Adresse des Betreuers der Arbeit.
+	 * @return Gibt true zurück, wenn das Löschen erfolgreich war, sonst false.
+	 */
 	public boolean deleteDataArbeit(int studentMNR, String betreuerEmail) {
 
 		String query = "DELETE FROM `db4`.`arbeit` WHERE (`student` = '" + studentMNR + "' && `betreuer` = '"
@@ -528,6 +692,11 @@ public class Datenbankabfrage {
 		return false;
 	}
 
+	/**
+	 * Ruft alle Arbeitseinträge aus der Datenbank ab.
+	 * 
+	 * @return Eine Liste aller Arbeitseinträge.
+	 */
 	public List<Arbeit> getAllArbeiten() {
 		List<Arbeit> arbeiten = new ArrayList<>();
 		Connection con = null;
@@ -582,6 +751,12 @@ public class Datenbankabfrage {
 		return arbeiten;
 	}
 
+	/**
+	 * Ruft einen Arbeitseintrag anhand seiner ID aus der Datenbank ab.
+	 * 
+	 * @param idArbeit Die ID des Arbeitseintrags, der abgerufen werden soll.
+	 * @return Den Arbeitseintrag mit der gegebenen ID. Gibt null zurück, wenn kein Arbeitseintrag mit der gegebenen ID gefunden wurde.
+	 */
 	public Arbeit getArbeitByID(int idArbeit) {
 		List<Arbeit> a = getAllArbeiten();
 		for (Arbeit arbeit : a) {
@@ -592,6 +767,12 @@ public class Datenbankabfrage {
 		return null;
 	}
 
+	/**
+	 * Führt ein Update-Statement in der Datenbank aus.
+	 * 
+	 * @param query Das SQL-Update-Statement, das ausgeführt werden soll.
+	 * @return Gibt true zurück, wenn das Update erfolgreich war, sonst false.
+	 */
 	private boolean update(String query) {
 		try (Connection conn = DriverManager.getConnection(url + dbName, userName, pw);
 				PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -604,6 +785,12 @@ public class Datenbankabfrage {
 		}
 	}
 
+	/**
+	 * Speichert eine Datei in der Datenbank.
+	 * 
+	 * @param selectedFile Die zu speichernde Datei.
+	 * @param username Der Benutzername des Benutzers, der die Datei speichert.
+	 */
 	public void saveFileToDatabase(File selectedFile, String username) {
 		try {
 			FileInputStream input = new FileInputStream(selectedFile);
@@ -619,6 +806,13 @@ public class Datenbankabfrage {
 		}
 	}
 	
+	/**
+	 * Speichert eine Datei in der Datenbank und verknüpft sie mit einem bestimmten Studenten.
+	 * 
+	 * @param selectedFile Die zu speichernde Datei.
+	 * @param username Der Benutzername des Benutzers, der die Datei speichert.
+	 * @param studentUsername Der Benutzername des Studenten, mit dem die Datei verknüpft werden soll.
+	 */
 	public void saveFileToDatabase(File selectedFile, String username, String studentUsername) {
 		try {
 			FileInputStream input = new FileInputStream(selectedFile);
@@ -635,6 +829,12 @@ public class Datenbankabfrage {
 		}
 	}
 
+	/**
+	 * Ruft eine Datei anhand ihrer ID aus der Datenbank ab und speichert sie an einem gegebenen Ort.
+	 * 
+	 * @param id Die ID der abzurufenden Datei.
+	 * @param outputFilePath Der Pfad, an dem die abgerufene Datei gespeichert werden soll.
+	 */
 	public void saveFileFromDatabaseById(int id, String outputFilePath) {
 		try {
 			Connection con = DriverManager.getConnection(url + dbName, userName, pw);
@@ -652,6 +852,11 @@ public class Datenbankabfrage {
 		}
 	}
 
+	/**
+	 * Lädt eine Datei aus der Datenbank als InputStream.
+	 * @param filename der Name der Datei, die aus der Datenbank geladen werden soll.
+	 * @return Ein InputStream, der die Daten der Datei enthält, oder null, wenn die Datei nicht gefunden wurde.
+	 */
 	public InputStream getFileFromDatabase(String filename) {
 		InputStream input = null;
 
@@ -671,6 +876,11 @@ public class Datenbankabfrage {
 		return input;
 	}
 
+	/**
+	 * Liefert eine Liste der Einreichungen eines Benutzers.
+	 * @param username der Benutzername, für den die Einreichungen gefunden werden sollen.
+	 * @return Eine Liste der Dateinamen der Einreichungen des Benutzers.
+	 */
 	public List<String> getSubmissions(String username) {
 		System.out.println("Abfragen der Studentenabgaben für Benutzer: " + username);
 		List<String> filenames = new ArrayList<>();
@@ -700,6 +910,12 @@ public class Datenbankabfrage {
 		return filenames;
 	}
 	
+	/**
+	 * Liefert eine Liste der Einreichungen eines bestimmten Studenten für einen bestimmten Betreuer.
+	 * @param betreuerUsername der Benutzername des Betreuers, für den die Einreichungen gefunden werden sollen.
+	 * @param studentUsername der Benutzername des Studenten, dessen Einreichungen gefunden werden sollen.
+	 * @return Eine Liste der Dateinamen der Einreichungen des Studenten für den Betreuer.
+	 */
 	public List<String> getSubmissionsFromBetreuerWithStudent(String betreuerUsername, String studentUsername) {
 		System.out.println("Abfragen der Studentenabgaben für Benutzer: " + betreuerUsername);
 		List<String> filenames = new ArrayList<>();
@@ -730,6 +946,12 @@ public class Datenbankabfrage {
 		return filenames;
 	}
 	
+	/**
+	 * Liefert eine Liste der Einreichungen eines bestimmten Studenten für einen bestimmten Betreuer.
+	 * @param betreuerUsername der Benutzername des Betreuers, für den die Einreichungen gefunden werden sollen.
+	 * @param studentUsername der Benutzername des Studenten, dessen Einreichungen gefunden werden sollen.
+	 * @return Eine Liste der Dateinamen der Einreichungen des Studenten für den Betreuer.
+	 */
 	public List<String> getSubmissionsForBetreuerFromStudent(String betreuerUsername, String studentUsername) {
 		List<String> filenames = new ArrayList<>();
 		Connection con = null;

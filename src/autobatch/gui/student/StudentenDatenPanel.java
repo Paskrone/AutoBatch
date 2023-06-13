@@ -20,17 +20,58 @@ import autobatch.session.SessionManager;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
+/**
+ * Die Klasse StudentenDatenPanel stellt ein JPanel dar, in dem die Daten eines Studenten angezeigt und bearbeitet werden können.
+ */
 public class StudentenDatenPanel extends JPanel {
 
-	private PanelSwitcher panelSwitcher;
-	private Student student;
-	private JTextField tf_ort;
-	private JTextField tf_telefon;
-	private JTextField tf_postleizahl;
-	private JTextField tf_strasse;
-	private JTextField tf_Semester;
-	private JTextField tf_passwort;
+	/**
+     * Hilft beim Wechseln zwischen verschiedenen Panels.
+     */
+    private PanelSwitcher panelSwitcher;
 
+    /**
+     * Der aktuelle Student, dessen Daten angezeigt und bearbeitet werden.
+     */
+    private Student student;
+
+    /**
+     * Textfeld für den Ort des Studenten.
+     */
+    private JTextField tf_ort;
+
+    /**
+     * Textfeld für die Telefonnummer des Studenten.
+     */
+    private JTextField tf_telefon;
+
+    /**
+     * Textfeld für die Postleitzahl des Studenten.
+     */
+    private JTextField tf_postleizahl;
+
+    /**
+     * Textfeld für die Straße des Studenten.
+     */
+    private JTextField tf_strasse;
+
+    /**
+     * Textfeld für das Semester des Studenten.
+     */
+    private JTextField tf_Semester;
+
+    /**
+     * Textfeld für das Passwort des Studenten.
+     */
+    private JTextField tf_passwort;
+
+	/**
+     * Erstellt ein neues Panel, in dem die Daten eines Studenten angezeigt und bearbeitet werden können.
+     *
+     * @param panelManager Der Manager, der die Navigation zwischen den Panels verwaltet.
+     * @param panelSwitcher Ein Helfer zum Wechseln zwischen verschiedenen Panels.
+     * @param student Der aktuelle Student, dessen Daten angezeigt und bearbeitet werden.
+     */
 	public StudentenDatenPanel(PanelManager panelManager, PanelSwitcher panelSwitcher, Student student) {
 
 		this.panelSwitcher = panelSwitcher;

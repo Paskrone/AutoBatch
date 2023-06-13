@@ -24,17 +24,43 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * Eine JPanel-Klasse, die das Panel zur Darstellung der Betreueranfragen implementiert.
+ */
 public class BetreuerAnfragen_1Panel extends JPanel {
 
+	/**
+	 * Verwaltet die Navigation zwischen den Panels.
+	 */
 	private PanelSwitcher panelSwitcher;
+	
+	/**
+	 * Verwaltet die Anzeige der Panels.
+	 */
 	private PanelManager panelManager;
-
+	
+	/**
+	 * Der Student, für den die Anfragen dargestellt werden sollen.
+	 */
 	private Student student;
 
+	/**
+	 * Die Arbeit, für die die Anfragen dargestellt werden sollen.
+	 */
 	private Arbeit arbeit;
 
+	/**
+	 * Der Betreuer, der die Anfragen einsehen kann.
+	 */
 	private Betreuer betreuer;
 
+	/**
+	 * Erzeugt ein neues BetreuerAnfragen_1Panel, das die Anfragen eines bestimmten Betreuers anzeigt.
+	 *
+	 * @param panelSwitcher der PanelSwitcher, der zur Navigation zwischen den Panels verwendet wird.
+	 * @param panelManager der PanelManager, der zur Anzeige der Panels verwendet wird.
+	 * @param betreuer der Betreuer, der die Anfragen einsehen kann.
+	 */
 	public BetreuerAnfragen_1Panel(PanelSwitcher panelSwitcher, PanelManager panelManager, Betreuer betreuer) {
 		this.panelSwitcher = panelSwitcher;
 
